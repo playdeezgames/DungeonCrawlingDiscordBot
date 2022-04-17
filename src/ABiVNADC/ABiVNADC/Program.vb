@@ -11,7 +11,7 @@ Module Program
         Dim client As New DiscordSocketClient
         AddHandler client.Log, AddressOf Log
         AddHandler client.MessageReceived, AddressOf MessageReceived
-        Dim token = System.Environment.GetEnvironmentVariable(DISCORD_TOKEN_ENVVAR)
+        Dim token = Environment.GetEnvironmentVariable(DISCORD_TOKEN_ENVVAR)
 
         Await client.LoginAsync(TokenType.Bot, token)
         Await client.StartAsync()
@@ -19,8 +19,30 @@ Module Program
         Await Task.Delay(-1)
     End Function
 
-    Private Function MessageReceived(arg As SocketMessage) As Task
-        Return Task.CompletedTask
+    Private Async Function MessageReceived(arg As SocketMessage) As Task
+        If Not arg.Author.IsBot Then
+            If arg.Channel.GetChannelType = ChannelType.DM Then
+                AnsiConsole.MarkupLine($"{arg.Type}")
+                Await arg.Channel.SendMessageAsync("Hi there! What are you wearing? I'm not wearing anything... cuz I'm a bot.")
+                Await arg.Channel.SendMessageAsync("```
+##                            ##
+  ##                        ##
+    ##                    ##
+      ##                ##
+        ################
+        #              #
+        #              #
+        #              #
+        #              #
+        #              #
+        ################
+      ##                ##
+    ##                    ##
+  ##                        ##
+##                            ##
+```")
+            End If
+        End If
     End Function
 
     Private Function Log(msg As LogMessage) As Task
