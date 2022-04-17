@@ -23,23 +23,35 @@ Module Program
         If Not arg.Author.IsBot Then
             If arg.Channel.GetChannelType = ChannelType.DM Then
                 AnsiConsole.MarkupLine($"{arg.Type}")
-                Await arg.Channel.SendMessageAsync("Hi there! What are you wearing? I'm not wearing anything... cuz I'm a bot.")
                 Await arg.Channel.SendMessageAsync("```
-##                            ##
-  ##                        ##
-    ##                    ##
-      ##                ##
-        ################
-        #              #
-        #              #
-        #              #
-        #              #
-        #              #
-        ################
-      ##                ##
-    ##                    ##
-  ##                        ##
-##                            ##
+##                                                    ##
+  ##                                                ##
+    ##                                            ##
+      ##                                        ##
+        ##                                    ##
+          ##                                ##
+            ##                            ##
+              ############################
+              #                          #
+              #                          #
+              #                          #
+              #       ############       #
+              #       #          #       #
+              #       #          #       #
+              #       #          #       #
+              #       #          #       #
+              #       #          #       #
+              #       #          #       #
+              #       #          #       #
+              #       #          #       #
+              ############################
+            ##                            ##
+          ##                                ##
+        ##                                    ##
+      ##                                        ##
+    ##                                            ##
+  ##                                                ##
+##                                                    ##
 ```")
             End If
         End If
