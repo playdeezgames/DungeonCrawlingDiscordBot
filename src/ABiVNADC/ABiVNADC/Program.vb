@@ -1,4 +1,3 @@
-Imports System.IO
 Imports Discord.WebSocket
 Imports Spectre.Console
 
@@ -21,38 +20,11 @@ Module Program
 
     Private Async Function MessageReceived(arg As SocketMessage) As Task
         If Not arg.Author.IsBot Then
-            If arg.Channel.GetChannelType = ChannelType.DM Then
-                AnsiConsole.MarkupLine($"{arg.Type}")
-                Await arg.Channel.SendMessageAsync("```
-##                                                    ##
-  ##                                                ##
-    ##                                            ##
-      ##                                        ##
-        ##                                    ##
-          ##                                ##
-            ##                            ##
-              ############################
-              #                          #
-              #                          #
-              #                          #
-              #       ############       #
-              #       #          #       #
-              #       #          #       #
-              #       #          #       #
-              #       #          #       #
-              #       #          #       #
-              #       #          #       #
-              #       #          #       #
-              #       #          #       #
-              ############################
-            ##                            ##
-          ##                                ##
-        ##                                    ##
-      ##                                        ##
-    ##                                            ##
-  ##                                                ##
-##                                                    ##
-```")
+            If arg.Channel.GetChannelType = ChannelType.DM AndAlso Not String.IsNullOrWhiteSpace(arg.CleanContent) Then
+                Dim response = MainProcessor.Run(New Player(CLng(arg.Author.Id)), arg.CleanContent)
+                If Not String.IsNullOrWhiteSpace(response) Then
+                    Await arg.Channel.SendMessageAsync(response)
+                End If
             End If
         End If
     End Function
