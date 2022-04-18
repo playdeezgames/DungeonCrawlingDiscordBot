@@ -10,8 +10,12 @@ Public Class Player
     End Property
 
     Public Function CreateCharacter(characterName As String) As Boolean
-        Dim characterId = CharacterData.Create(characterName)
-        PlayerCharacterData.Write(Id, characterId)
+        If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
+            Dim characterId = CharacterData.Create(characterName)
+            PlayerCharacterData.Write(Id, characterId)
+            Return True
+        End If
+        Return False
     End Function
 
     ReadOnly Property Characters As IEnumerable(Of Character)

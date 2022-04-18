@@ -13,7 +13,18 @@
     End Sub
 
     Public Function Create(characterName As String) As Long
-        Throw New NotImplementedException
+        Initialize()
+        ExecuteNonQuery(
+            $"INSERT INTO [{TableName}]
+            (
+                [{CharacterNameColumn}]
+            )
+            VALUES
+            (
+                @{CharacterNameColumn}
+            );",
+            MakeParameter($"@{CharacterNameColumn}", characterName))
+        Return LastInsertRowId
     End Function
 
     Public Function ReadName(characterId As Long) As String
