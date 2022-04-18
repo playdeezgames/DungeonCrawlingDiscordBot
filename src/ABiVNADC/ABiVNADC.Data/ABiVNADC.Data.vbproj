@@ -20,4 +20,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SPLORR.Data\SPLORR.Data.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="SPLORR.Data" />
+  </ItemGroup>
+
 </Project>

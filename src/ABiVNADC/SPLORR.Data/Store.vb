@@ -113,4 +113,16 @@ Public Module Store
             Function(reader) CLng(reader($"{idColumnName}")),
             $"SELECT [{idColumnName}] FROM [{tableName}]")
     End Function
+    Function ReadIdsWithColumnValue(Of TColumn)(initializer As Action, tableName As String, idColumnName As String, forColumnName As String, forColumnValue As TColumn) As List(Of Long)
+        initializer()
+        Return ExecuteReader(
+            Function(reader) CLng(reader(idColumnName)),
+            $"SELECT [{idColumnName}] FROM [{tableName}] WHERE [{forColumnName}]=@{forColumnName};",
+            MakeParameter($"@{forColumnName}", forColumnValue))
+    End Function
+
+    Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnName As String, columnValue As TColumn)
+        initializer()
+        ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnName}]=@{columnName};", MakeParameter($"@{columnName}", columnValue))
+    End Sub
 End Module

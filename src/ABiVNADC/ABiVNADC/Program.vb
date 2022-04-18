@@ -3,6 +3,7 @@ Imports Spectre.Console
 
 Module Program
     Private Const DISCORD_TOKEN_ENVVAR = "DISCORD_TOKEN"
+    Private Const DATABASE_FILE_NAME = "local.db"
     Sub Main(args As String())
         AnsiConsole.MarkupLine("[green]Starting...[/]")
         MainAsync().Wait()
@@ -13,13 +14,14 @@ Module Program
             AddHandler client.Log, AddressOf Log
             AddHandler client.MessageReceived, AddressOf MessageReceived
             Dim token = Environment.GetEnvironmentVariable(DISCORD_TOKEN_ENVVAR)
-
+            Store.Load(DATABASE_FILE_NAME)
             Await client.LoginAsync(TokenType.Bot, token)
             Await client.StartAsync()
 
             Console.ReadLine()
 
             Await client.StopAsync()
+            Store.Save(DATABASE_FILE_NAME)
         End Using
     End Function
 

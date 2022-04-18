@@ -18,4 +18,13 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ABiVNADC.Data\ABiVNADC.Data.vbproj" />
+    <ProjectReference Include="..\SPLORR.Game\SPLORR.Game.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="ABiVNADC.Data" />
+  </ItemGroup>
+
 </Project>

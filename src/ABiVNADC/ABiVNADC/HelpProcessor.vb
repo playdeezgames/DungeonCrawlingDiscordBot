@@ -4,7 +4,8 @@
             Return "I don't know how to help that."
         Else
             Return "Commands: 
-- help (you are here)"
+- help : you are here
+- status : shows current status"
         End If
     End Function
 End Module

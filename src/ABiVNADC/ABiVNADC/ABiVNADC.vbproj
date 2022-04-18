@@ -29,6 +29,8 @@
     <Import Include="ABiVNADC.Game" />
     <Import Include="Discord" />
     <Import Include="Discord.API" />
+    <Import Include="SPLORR.Data" />
+    <Import Include="System.Text" />
   </ItemGroup>
 
   <ItemGroup>
