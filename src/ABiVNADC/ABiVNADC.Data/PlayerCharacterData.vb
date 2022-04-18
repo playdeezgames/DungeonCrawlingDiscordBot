@@ -15,6 +15,11 @@
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
+
+    Public Sub Write(playerId As Long, characterId As Long)
+        Throw New NotImplementedException()
+    End Sub
+
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, PlayerIdColumn, playerId)
     End Function

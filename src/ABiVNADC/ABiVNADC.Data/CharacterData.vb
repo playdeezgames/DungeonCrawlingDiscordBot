@@ -12,6 +12,10 @@
             );")
     End Sub
 
+    Public Function Create(characterName As String) As Long
+        Throw New NotImplementedException
+    End Function
+
     Public Function ReadName(characterId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
     End Function
