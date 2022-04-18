@@ -4,18 +4,23 @@ Imports Spectre.Console
 Module Program
     Private Const DISCORD_TOKEN_ENVVAR = "DISCORD_TOKEN"
     Sub Main(args As String())
-        MainAsync.Wait()
+        AnsiConsole.MarkupLine("[green]Starting...[/]")
+        MainAsync().Wait()
+        AnsiConsole.MarkupLine("[green]Stopping...[/]")
     End Sub
     Async Function MainAsync() As Task
-        Dim client As New DiscordSocketClient
-        AddHandler client.Log, AddressOf Log
-        AddHandler client.MessageReceived, AddressOf MessageReceived
-        Dim token = Environment.GetEnvironmentVariable(DISCORD_TOKEN_ENVVAR)
+        Using client As New DiscordSocketClient
+            AddHandler client.Log, AddressOf Log
+            AddHandler client.MessageReceived, AddressOf MessageReceived
+            Dim token = Environment.GetEnvironmentVariable(DISCORD_TOKEN_ENVVAR)
 
-        Await client.LoginAsync(TokenType.Bot, token)
-        Await client.StartAsync()
+            Await client.LoginAsync(TokenType.Bot, token)
+            Await client.StartAsync()
 
-        Await Task.Delay(-1)
+            Console.ReadLine()
+
+            Await client.StopAsync()
+        End Using
     End Function
 
     Private Async Function MessageReceived(arg As SocketMessage) As Task
