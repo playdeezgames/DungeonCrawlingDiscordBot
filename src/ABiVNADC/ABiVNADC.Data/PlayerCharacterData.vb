@@ -23,6 +23,23 @@
             MakeParameter($"@{CharacterIdColumn}", characterId))
     End Sub
 
+    Public Function ReadForPlayerAndCharacterName(playerId As Long, characterName As String) As List(Of Long)
+        Initialize()
+        Return ExecuteReader(
+            Function(reader) CLng(reader(CharacterIdColumn)),
+            $"SELECT 
+                pc.[{CharacterIdColumn}]
+            FROM 
+                [{TableName}] pc 
+                JOIN [{CharacterData.TableName}] c ON 
+                    pc.[{CharacterIdColumn}]=c.[{CharacterData.CharacterIdColumn}] 
+            WHERE 
+                pc.[{PlayerIdColumn}]=@{PlayerIdColumn} 
+                AND c.[{CharacterData.CharacterNameColumn}]=@{CharacterData.CharacterNameColumn};",
+            MakeParameter($"@{PlayerIdColumn}", playerId),
+            MakeParameter($"@{CharacterData.CharacterNameColumn}", characterName))
+    End Function
+
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, PlayerIdColumn, playerId)
     End Function

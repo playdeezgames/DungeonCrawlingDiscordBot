@@ -18,6 +18,15 @@ Public Class Player
         Return False
     End Function
 
+    Public Function SwitchCharacter(characterName As String) As Boolean
+        Dim characterIds = PlayerCharacterData.ReadForPlayerAndCharacterName(Id, characterName)
+        If characterIds.Any Then
+            PlayerData.Write(Id, characterIds.First)
+            Return True
+        End If
+        Return False
+    End Function
+
     ReadOnly Property Characters As IEnumerable(Of Character)
         Get
             Return PlayerCharacterData.ReadForPlayer(Id).Select(Function(id) Character.FromId(id))

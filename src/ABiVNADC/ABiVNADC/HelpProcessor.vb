@@ -11,10 +11,11 @@
             End Select
         Else
             Return "Commands: 
+- characters : shows list of characters
+- create : creates something(use `help create` for more)
 - help : you are here
 - status : shows current status
-- characters : shows list of characters
-- create : creates something(use `help create` for more)"
+- switch character (name) : switches yer active character"
         End If
     End Function
 End Module

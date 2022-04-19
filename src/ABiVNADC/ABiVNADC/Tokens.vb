@@ -4,4 +4,5 @@
     Friend Const CreateText = "create"
     Friend Const HelpText = "help"
     Friend Const StatusText = "status"
+    Friend Const SwitchText = "switch"
 End Module

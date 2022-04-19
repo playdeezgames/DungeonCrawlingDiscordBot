@@ -15,4 +15,21 @@ Public Module PlayerData
     Public Function ReadCharacter(playerId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, PlayerIdColumn, playerId, CharacterIdColumn)
     End Function
+
+    Public Sub Write(playerId As Long, characterId As Long)
+        Initialize()
+        ExecuteNonQuery(
+            $"REPLACE INTO [{TableName}]
+            (
+                [{PlayerIdColumn}],
+                [{CharacterIdColumn}]
+            ) 
+            VALUES
+            (
+                @{PlayerIdColumn},
+                @{CharacterIdColumn}
+            );",
+            MakeParameter($"@{PlayerIdColumn}", playerId),
+            MakeParameter($"@{CharacterIdColumn}", characterId))
+    End Sub
 End Module

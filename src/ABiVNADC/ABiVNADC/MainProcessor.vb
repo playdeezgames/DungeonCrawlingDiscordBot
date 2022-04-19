@@ -10,6 +10,8 @@
                 Return CharactersProcessor.Run(player, tokens.Skip(1))
             Case CreateText
                 Return CreateProcessor.Run(player, tokens.Skip(1))
+            Case SwitchText
+                Return SwitchProcessor.Run(player, tokens.Skip(1))
             Case Else
                 Return "Dunno what you mean. Mebbe you need to try `help`?"
         End Select

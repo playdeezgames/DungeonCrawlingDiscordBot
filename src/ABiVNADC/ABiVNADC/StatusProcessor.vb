@@ -5,10 +5,11 @@
         Else
             Dim builder As New StringBuilder
             builder.AppendLine("Status:")
-            If player.Character Is Nothing Then
-                builder.AppendLine("You don't have a character!")
+            Dim character = player.Character
+            If character Is Nothing Then
+                builder.AppendLine("You don't have a currently selected character!")
             Else
-                builder.AppendLine("You have a character!")
+                builder.AppendLine($"Currently selected character: {character.Name}")
             End If
             Return builder.ToString
         End If

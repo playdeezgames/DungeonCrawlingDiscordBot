@@ -18,7 +18,17 @@ Module Program
             Await client.LoginAsync(TokenType.Bot, token)
             Await client.StartAsync()
 
-            Console.ReadLine()
+            Dim done = False
+            While Not done
+                Select Case Console.ReadLine()
+                    Case "quit"
+                        done = True
+                    Case "save"
+                        Store.Save(DATABASE_FILE_NAME)
+                    Case Else
+                        AnsiConsole.MarkupLine("I only know [olive]quit[/] and [olive]save[/].")
+                End Select
+            End While
 
             Await client.StopAsync()
             Store.Save(DATABASE_FILE_NAME)
@@ -37,7 +47,7 @@ Module Program
     End Function
 
     Private Function Log(msg As LogMessage) As Task
-        AnsiConsole.MarkupLine($"Log: [red]{msg}[/]")
+        AnsiConsole.MarkupLine($"Log: [red]{msg.ToString().EscapeMarkup}[/]")
         Return Task.CompletedTask
     End Function
 End Module
