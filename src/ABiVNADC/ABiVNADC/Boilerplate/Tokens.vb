@@ -2,6 +2,8 @@
     Friend Const CharacterText = "character"
     Friend Const CharactersText = "characters"
     Friend Const CreateText = "create"
+    Friend Const DungeonText = "dungeon"
+    Friend Const DungeonsText = "dungeons"
     Friend Const HelpText = "help"
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"

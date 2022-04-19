@@ -32,4 +32,9 @@ Public Class Player
             Return PlayerCharacterData.ReadForPlayer(Id).Select(Function(id) Character.FromId(id))
         End Get
     End Property
+    ReadOnly Property Dungeons As IEnumerable(Of Dungeon)
+        Get
+            Return DungeonData.ReadForPlayer(Id).Select(Function(id) Dungeon.FromId(id))
+        End Get
+    End Property
 End Class
