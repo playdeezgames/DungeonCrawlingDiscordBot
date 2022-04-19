@@ -4,6 +4,8 @@
             Select Case tokens.First
                 Case CharacterText
                     Return CreateCharacterProcessor.Run(player, tokens.Skip(1))
+                Case DungeonText
+                    Return CreateDungeonProcessor.Run(player, tokens.Skip(1))
             End Select
         End If
         Return $"Create what? CREATE *WHAT*?!?"

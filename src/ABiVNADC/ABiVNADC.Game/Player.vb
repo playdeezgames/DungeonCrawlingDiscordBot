@@ -9,6 +9,14 @@ Public Class Player
         End Get
     End Property
 
+    Public Function CreateDungeon(dungeonName As String) As Boolean
+        If DungeonData.ReadCountForPlayerAndDungeonName(Id, dungeonName) = 0 Then
+            DungeonData.Create(Id, dungeonName)
+            Return True
+        End If
+        Return False
+    End Function
+
     Public Function CreateCharacter(characterName As String) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = CharacterData.Create(characterName)

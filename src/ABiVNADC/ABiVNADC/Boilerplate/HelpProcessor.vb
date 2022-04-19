@@ -5,7 +5,8 @@
             Select Case topic
                 Case $"{CreateText}"
                     Return $"Create Command:
-- create character (name) : creates a character with that name. no duplicates"
+- create character (name) : creates a character with that name. no duplicates
+- create dungeon (name) : creates a dungeon with that name. no duplicates"
                 Case Else
                     Return "I don't know how to help that."
             End Select

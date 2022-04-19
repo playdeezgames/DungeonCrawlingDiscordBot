@@ -9,9 +9,36 @@
             (
                 [{DungeonIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
                 [{DungeonNameColumn}] TEXT NOT NULL,
-                [{PlayerIdColumn}] INT NOT NULL
+                [{PlayerIdColumn}] INT NOT NULL,
+                UNIQUE([{PlayerIdColumn}],[{DungeonNameColumn}])
             );")
     End Sub
+
+    Public Function Create(playerId As Long, dungeonName As String) As Long
+        Initialize()
+        ExecuteNonQuery(
+            $"INSERT INTO [{TableName}]
+            (
+                [{PlayerIdColumn}],
+                [{DungeonNameColumn}]
+            ) 
+            VALUES
+            (
+                @{PlayerIdColumn},
+                @{DungeonNameColumn}
+            );",
+            MakeParameter($"@{PlayerIdColumn}", playerId),
+            MakeParameter($"@{DungeonNameColumn}", dungeonName))
+        Return LastInsertRowId
+    End Function
+
+    Public Function ReadCountForPlayerAndDungeonName(playerId As Long, dungeonName As String) As Long
+        Initialize()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT COUNT(1) FROM [{TableName}] WHERE [{PlayerIdColumn}]=@{PlayerIdColumn} AND [{DungeonNameColumn}]=@{DungeonNameColumn};",
+            MakeParameter($"@{PlayerIdColumn}", playerId),
+            MakeParameter($"@{DungeonNameColumn}", dungeonName)).Value
+    End Function
 
     Public Function ReadName(dungeonId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, DungeonNameColumn)
