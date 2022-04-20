@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Import Include="ABiVNADC.Data" />
+    <Import Include="SPLORR.Game" />
   </ItemGroup>
 
 </Project>

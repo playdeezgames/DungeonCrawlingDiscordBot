@@ -10,8 +10,13 @@ Public Class Player
     End Property
 
     Public Function CreateDungeon(dungeonName As String) As Boolean
+        Const MazeColumn = 4
+        Const MazeRows = 4
         If DungeonData.ReadCountForPlayerAndDungeonName(Id, dungeonName) = 0 Then
             DungeonData.Create(Id, dungeonName)
+            Dim maze As New Maze(Of Direction)(MazeColumn, MazeRows, DirectionWalker)
+            maze.Generate()
+            'TODO: generate a dungeon
             Return True
         End If
         Return False
@@ -21,6 +26,9 @@ Public Class Player
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = CharacterData.Create(characterName)
             PlayerCharacterData.Write(Id, characterId)
+            If Character Is Nothing Then
+                SwitchCharacter(characterName)
+            End If
             Return True
         End If
         Return False
