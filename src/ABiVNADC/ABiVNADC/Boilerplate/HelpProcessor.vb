@@ -13,6 +13,7 @@
         Else
             Return "Commands: 
 - characters : shows list of characters
+- dungeons : shows list of dungeons
 - create : creates something(use `help create` for more)
 - help : you are here
 - status : shows current status
