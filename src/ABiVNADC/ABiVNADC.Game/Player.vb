@@ -17,7 +17,6 @@ Public Class Player
             Dim maze As New Maze(Of Direction)(MazeColumn, MazeRows, DirectionWalker)
             maze.Generate()
             'TODO: generate a dungeon
-            Throw New NotImplementedException
             Return True
         End If
         Return False
@@ -27,6 +26,9 @@ Public Class Player
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = CharacterData.Create(characterName)
             PlayerCharacterData.Write(Id, characterId)
+            If Character Is Nothing Then
+                SwitchCharacter(characterName)
+            End If
             Return True
         End If
         Return False
