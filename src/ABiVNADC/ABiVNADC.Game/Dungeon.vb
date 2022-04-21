@@ -11,4 +11,9 @@
             Return DungeonData.ReadName(Id)
         End Get
     End Property
+    ReadOnly Property StartingLocation As Location
+        Get
+            Return New Location(DungeonData.ReadLocation(Id).Value)
+        End Get
+    End Property
 End Class

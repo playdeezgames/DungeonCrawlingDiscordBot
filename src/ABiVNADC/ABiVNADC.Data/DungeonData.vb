@@ -17,6 +17,10 @@
             );")
     End Sub
 
+    Public Function ReadLocation(dungeonId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, StartingLocationIdColumn)
+    End Function
+
     Public Function Create(playerId As Long, dungeonName As String, startingLocationId As Long) As Long
         Initialize()
         ExecuteNonQuery(

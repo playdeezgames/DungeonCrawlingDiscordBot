@@ -4,6 +4,7 @@
     Friend Const CreateText = "create"
     Friend Const DungeonText = "dungeon"
     Friend Const DungeonsText = "dungeons"
+    Friend Const EnterText = "enter"
     Friend Const HelpText = "help"
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"
