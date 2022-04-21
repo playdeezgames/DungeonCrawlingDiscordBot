@@ -5,6 +5,13 @@
     West
 End Enum
 Module DirectionExtensions
+    Friend ReadOnly AllDirections As New List(Of Direction) From
+        {
+            Direction.North,
+            Direction.East,
+            Direction.South,
+            Direction.West
+        }
     Friend ReadOnly DirectionWalker As New Dictionary(Of Direction, MazeDirection(Of Direction)) From
         {
             {Direction.North, New MazeDirection(Of Direction)(Direction.South, 0, -1)},
