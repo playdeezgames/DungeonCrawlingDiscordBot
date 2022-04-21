@@ -1,3 +1,4 @@
+Imports System.Threading
 Imports Discord
 Imports Discord.WebSocket
 Imports Spectre.Console
@@ -18,19 +19,15 @@ Module Program
             Store.Load(DATABASE_FILE_NAME)
             Await client.LoginAsync(TokenType.Bot, token)
             Await client.StartAsync()
-
-            Dim done = False
-
+            Dim canceller As New CancellationTokenSource()
             AddHandler Console.CancelKeyPress, Sub(sender As Object, e As ConsoleCancelEventArgs)
-                                                   Store.Save(DATABASE_FILE_NAME)
-                                                   done = True
+                                                   canceller.Cancel()
                                                End Sub
-
-            While Not done
-                Await Task.Delay(1000)
+            While Not canceller.IsCancellationRequested
+                Await Task.Delay(60000, canceller.Token)
+                AnsiConsole.MarkupLine("Updating local.db!")
+                Store.Save(DATABASE_FILE_NAME)
             End While
-
-            Await client.StopAsync()
         End Using
     End Function
 
