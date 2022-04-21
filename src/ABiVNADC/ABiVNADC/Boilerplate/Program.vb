@@ -19,19 +19,17 @@ Module Program
             Await client.StartAsync()
 
             Dim done = False
+
+            AddHandler Console.CancelKeyPress, Sub(sender As Object, e As ConsoleCancelEventArgs)
+                                                   Store.Save(DATABASE_FILE_NAME)
+                                                   done = True
+                                               End Sub
+
             While Not done
-                Select Case Console.ReadLine()
-                    Case "quit"
-                        done = True
-                    Case "save"
-                        Store.Save(DATABASE_FILE_NAME)
-                    Case Else
-                        AnsiConsole.MarkupLine("I only know [olive]quit[/] and [olive]save[/].")
-                End Select
+                Await Task.Delay(1000)
             End While
 
             Await client.StopAsync()
-            Store.Save(DATABASE_FILE_NAME)
         End Using
     End Function
 

@@ -1,0 +1,1 @@
+docker build -t dungeon-crawling-bot -f Dockerfile .
