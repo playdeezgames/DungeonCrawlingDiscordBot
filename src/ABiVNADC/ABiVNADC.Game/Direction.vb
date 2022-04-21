@@ -1,4 +1,6 @@
-﻿Public Enum Direction
+﻿Imports System.Runtime.CompilerServices
+
+Public Enum Direction
     North
     East
     South
@@ -19,4 +21,34 @@ Module DirectionExtensions
             {Direction.South, New MazeDirection(Of Direction)(Direction.North, 0, 1)},
             {Direction.West, New MazeDirection(Of Direction)(Direction.East, -1, 0)}
         }
+    <Extension()>
+    Function LeftDirection(direction As Direction) As Direction
+        Select Case direction
+            Case Direction.North
+                Return Direction.West
+            Case Direction.East
+                Return Direction.North
+            Case Direction.South
+                Return Direction.East
+            Case Direction.West
+                Return Direction.South
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+    <Extension()>
+    Function RightDirection(direction As Direction) As Direction
+        Select Case direction
+            Case Direction.North
+                Return Direction.East
+            Case Direction.East
+                Return Direction.South
+            Case Direction.South
+                Return Direction.West
+            Case Direction.West
+                Return Direction.North
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Module

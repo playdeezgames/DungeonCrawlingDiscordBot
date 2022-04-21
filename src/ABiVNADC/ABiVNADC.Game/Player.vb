@@ -44,7 +44,7 @@ Public Class Player
     Public Function CreateCharacter(characterName As String) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = CharacterData.Create(characterName)
-            PlayerCharacterData.Write(Id, characterId)
+            PlayerCharacterData.Write(Id, characterId, RNG.FromList(AllDirections))
             If Character Is Nothing Then
                 SwitchCharacter(characterName)
             End If

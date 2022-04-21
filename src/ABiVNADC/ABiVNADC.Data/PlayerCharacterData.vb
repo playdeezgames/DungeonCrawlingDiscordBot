@@ -2,6 +2,7 @@
     Friend Const TableName = "PlayerCharacters"
     Friend Const PlayerIdColumn = PlayerData.PlayerIdColumn
     Friend Const CharacterIdColumn = CharacterData.CharacterIdColumn
+    Friend Const DirectionColumn = "Direction"
     Friend Sub Initialize()
         PlayerData.Initialize()
         CharacterData.Initialize()
@@ -10,17 +11,30 @@
             (
                 [{PlayerIdColumn}] INT NOT NULL,
                 [{CharacterIdColumn}] INT NOT NULL UNIQUE,
+                [{DirectionColumn}] INT NOT NULL,
                 UNIQUE([{PlayerIdColumn}],[{CharacterIdColumn}]),
                 FOREIGN KEY ([{CharacterIdColumn}]) REFERENCES [{CharacterData.TableName}]([{CharacterData.CharacterIdColumn}])
             );")
     End Sub
 
-    Public Sub Write(playerId As Long, characterId As Long)
+    Public Sub Write(playerId As Long, characterId As Long, direction As Long)
         Initialize()
         ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]([{PlayerIdColumn}],[{CharacterIdColumn}]) VALUES(@{PlayerIdColumn},@{CharacterIdColumn});",
+            $"REPLACE INTO [{TableName}]
+            (
+                [{PlayerIdColumn}],
+                [{CharacterIdColumn}],
+                [{DirectionColumn}]
+            ) 
+            VALUES
+            (
+                @{PlayerIdColumn},
+                @{CharacterIdColumn},
+                @{DirectionColumn}
+            );",
             MakeParameter($"@{PlayerIdColumn}", playerId),
-            MakeParameter($"@{CharacterIdColumn}", characterId))
+            MakeParameter($"@{CharacterIdColumn}", characterId),
+            MakeParameter($"@{DirectionColumn}", direction))
     End Sub
 
     Public Function ReadForPlayerAndCharacterName(playerId As Long, characterName As String) As List(Of Long)
