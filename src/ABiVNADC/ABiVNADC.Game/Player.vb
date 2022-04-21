@@ -35,7 +35,7 @@ Public Class Player
                     Next
                 Next
             Next
-            DungeonData.Create(Id, dungeonName)
+            DungeonData.Create(Id, dungeonName, locationIds(0))
             Return True
         End If
         Return False
