@@ -1,3 +1,4 @@
+Imports Discord
 Imports Discord.WebSocket
 Imports Spectre.Console
 

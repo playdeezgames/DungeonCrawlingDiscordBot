@@ -1,4 +1,4 @@
-﻿Module MainProcessor
+﻿Public Module MainProcessor
     Function Run(player As Player, command As String) As String
         Dim tokens = command.Split(" "c)
         Select Case tokens.First.ToLower
