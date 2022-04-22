@@ -8,9 +8,13 @@
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, RouteIdColumn, routeId, DirectionColumn)
     End Function
 
+    Public Function ReadToLocation(routeId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, RouteIdColumn, routeId, ToLocationIdColumn)
+    End Function
+
     Friend Const DirectionColumn = "Direction"
 
-    Public Function ReadForLocation(forLocationId As Long) As List(Of Long)
+    Public Function ReadForForLocation(forLocationId As Long) As List(Of Long)
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, RouteIdColumn, FromLocationIdColumn, forLocationId)
     End Function
 

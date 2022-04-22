@@ -14,6 +14,8 @@
                 Return HelpProcessor.Run(player, tokens.Skip(1))
             Case LeftText
                 Return LeftProcessor.Run(player, tokens.Skip(1))
+            Case MoveText
+                Return MoveProcessor.Run(player, tokens.Skip(1))
             Case RightText
                 Return RightProcessor.Run(player, tokens.Skip(1))
             Case StatusText

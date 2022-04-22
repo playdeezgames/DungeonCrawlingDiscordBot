@@ -41,6 +41,18 @@ Public Class Player
         Return False
     End Function
 
+    Public Sub Move()
+        Dim myCharacter = Character
+        If myCharacter IsNot Nothing Then
+            Dim location = myCharacter.Location
+            Dim direction = AheadDirection
+            Dim route As Route = Nothing
+            If location.Routes.TryGetValue(AheadDirection.Value, route) Then
+                myCharacter.Location = route.ToLocation
+            End If
+        End If
+    End Sub
+
     Public Sub SetDirection(newDirection As Direction)
         PlayerCharacterData.WriteDirectionForPlayer(Id, newDirection)
     End Sub
