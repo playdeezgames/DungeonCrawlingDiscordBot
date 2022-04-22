@@ -8,6 +8,11 @@
             Return CharacterData.ReadName(Id)
         End Get
     End Property
+    ReadOnly Property HasLocation As Boolean
+        Get
+            Return Location IsNot Nothing
+        End Get
+    End Property
     Shared Function FromId(characterId As Long?) As Character
         If characterId.HasValue Then
             Return New Character(characterId.Value)

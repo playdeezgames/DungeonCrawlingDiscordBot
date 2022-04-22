@@ -9,6 +9,24 @@ Public Class Player
         End Get
     End Property
 
+    Public Sub TurnAround()
+        If CanTurn Then
+            SetDirection(AheadDirection.Value.OppositeDirection)
+        End If
+    End Sub
+
+    Public Sub TurnLeft()
+        If CanTurn Then
+            SetDirection(AheadDirection.Value.LeftDirection)
+        End If
+    End Sub
+
+    Public Sub TurnRight()
+        If CanTurn Then
+            SetDirection(AheadDirection.Value.RightDirection)
+        End If
+    End Sub
+
     Public Function CreateDungeon(dungeonName As String) As Boolean
         Const MazeColumns = 4
         Const MazeRows = 4
@@ -78,6 +96,12 @@ Public Class Player
         Return False
     End Function
 
+    ReadOnly Property HasCharacter As Boolean
+        Get
+            Return Character IsNot Nothing
+        End Get
+    End Property
+
     ReadOnly Property Characters As IEnumerable(Of Character)
         Get
             Return PlayerCharacterData.ReadForPlayer(Id).Select(Function(id) Character.FromId(id))
@@ -96,6 +120,16 @@ Public Class Player
                 Return CType(result.Value, Direction)
             End If
             Return Nothing
+        End Get
+    End Property
+    ReadOnly Property CanTurn As Boolean
+        Get
+            Return AheadDirection.HasValue
+        End Get
+    End Property
+    ReadOnly Property CanMove As Boolean
+        Get
+            Return CanTurn
         End Get
     End Property
 End Class
