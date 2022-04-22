@@ -2,6 +2,8 @@
     Function Run(player As Player, command As String) As String
         Dim tokens = command.Split(" "c)
         Select Case tokens.First.ToLower
+            Case AroundText
+                Return AroundProcessor.Run(player, tokens.Skip(1))
             Case CharactersText
                 Return CharactersProcessor.Run(player, tokens.Skip(1))
             Case CreateText
