@@ -54,6 +54,10 @@
             MakeParameter($"@{CharacterData.CharacterNameColumn}", characterName))
     End Function
 
+    Public Sub WriteDirectionForPlayer(playerId As Long, direction As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, PlayerIdColumn, playerId, DirectionColumn, direction)
+    End Sub
+
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, PlayerIdColumn, playerId)
     End Function

@@ -41,6 +41,10 @@ Public Class Player
         Return False
     End Function
 
+    Public Sub SetDirection(newDirection As Direction)
+        PlayerCharacterData.WriteDirectionForPlayer(Id, newDirection)
+    End Sub
+
     Public Function CreateCharacter(characterName As String) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = CharacterData.Create(characterName)

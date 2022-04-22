@@ -12,6 +12,10 @@
                 Return EnterProcessor.Run(player, tokens.Skip(1))
             Case HelpText
                 Return HelpProcessor.Run(player, tokens.Skip(1))
+            Case LeftText
+                Return LeftProcessor.Run(player, tokens.Skip(1))
+            Case RightText
+                Return RightProcessor.Run(player, tokens.Skip(1))
             Case StatusText
                 Return StatusProcessor.Run(player, tokens.Skip(1))
             Case SwitchText

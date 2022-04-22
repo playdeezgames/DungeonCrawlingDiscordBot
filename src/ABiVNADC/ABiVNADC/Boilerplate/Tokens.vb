@@ -8,4 +8,6 @@
     Friend Const HelpText = "help"
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"
+    Friend Const LeftText = "left"
+    Friend Const RightText = "right"
 End Module

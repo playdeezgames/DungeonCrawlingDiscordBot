@@ -16,6 +16,8 @@
 - dungeons : shows list of dungeons
 - create : creates something(use `help create` for more)
 - help : you are here
+- left : turn left
+- right : turn right
 - status : shows current status
 - switch character (name) : switches yer active character"
         End If
