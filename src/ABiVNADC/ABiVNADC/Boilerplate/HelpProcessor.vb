@@ -12,10 +12,11 @@
             End Select
         Else
             Return "Commands: 
+- around : turn around
 - characters : shows list of characters
 - dungeons : shows list of dungeons
 - create : creates something(use `help create` for more)
-- help : you are here
+- help : <== you are here
 - left : turn left
 - move : move ahead
 - right : turn right
