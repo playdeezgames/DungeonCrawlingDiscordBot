@@ -72,4 +72,14 @@ Public Class Player
             Return DungeonData.ReadForPlayer(Id).Select(Function(id) Dungeon.FromId(id))
         End Get
     End Property
+
+    ReadOnly Property AheadDirection As Direction?
+        Get
+            Dim result As Long? = PlayerCharacterData.ReadDirection(Id)
+            If result IsNot Nothing Then
+                Return CType(result.Value, Direction)
+            End If
+            Return Nothing
+        End Get
+    End Property
 End Class

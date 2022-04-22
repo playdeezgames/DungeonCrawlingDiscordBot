@@ -6,7 +6,7 @@ Public Enum Direction
     South
     West
 End Enum
-Module DirectionExtensions
+Public Module DirectionExtensions
     Friend ReadOnly AllDirections As New List(Of Direction) From
         {
             Direction.North,
@@ -22,7 +22,7 @@ Module DirectionExtensions
             {Direction.West, New MazeDirection(Of Direction)(Direction.East, -1, 0)}
         }
     <Extension()>
-    Function LeftDirection(direction As Direction) As Direction
+    Public Function LeftDirection(direction As Direction) As Direction
         Select Case direction
             Case Direction.North
                 Return Direction.West
@@ -37,7 +37,7 @@ Module DirectionExtensions
         End Select
     End Function
     <Extension()>
-    Function RightDirection(direction As Direction) As Direction
+    Public Function RightDirection(direction As Direction) As Direction
         Select Case direction
             Case Direction.North
                 Return Direction.East

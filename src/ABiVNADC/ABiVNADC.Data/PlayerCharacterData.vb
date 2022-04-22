@@ -73,4 +73,8 @@
             MakeParameter($"@{PlayerIdColumn}", playerId),
             MakeParameter($"@{CharacterData.CharacterNameColumn}", characterName)).Value
     End Function
+
+    Public Function ReadDirection(playerId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, PlayerIdColumn, playerId, DirectionColumn)
+    End Function
 End Module
