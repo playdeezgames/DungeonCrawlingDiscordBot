@@ -14,6 +14,18 @@
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub
+
+    Public Function ReadCountForInventory(inventoryId As Long) As Long
+        Initialize()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT 
+                COUNT(1) 
+            FROM [{TableName}] 
+            WHERE 
+                [{InventoryIdColumn}]=@{InventoryIdColumn};",
+            MakeParameter($"@{InventoryIdColumn}", inventoryId)).Value
+    End Function
+
     Public Sub Write(inventoryId As Long, itemId As Long)
         Initialize()
         ExecuteNonQuery(

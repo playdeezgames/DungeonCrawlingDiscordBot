@@ -23,6 +23,9 @@
                 Dim canvas As TextCanvas = DrawPOV(player)
                 builder.AppendLine($"```
 {canvas.Output}```")
+                If Not player.Character.Location.Inventory.IsEmpty Then
+                    builder.AppendLine("There is stuff on the ground.")
+                End If
             End If
         End If
         Return builder.ToString
