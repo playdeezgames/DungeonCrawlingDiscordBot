@@ -37,6 +37,10 @@
             MakeParameter($"@{DirectionColumn}", direction))
     End Sub
 
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+    End Sub
+
     Public Function ReadForPlayerAndCharacterName(playerId As Long, characterName As String) As List(Of Long)
         Initialize()
         Return ExecuteReader(

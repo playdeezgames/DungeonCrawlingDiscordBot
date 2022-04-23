@@ -32,6 +32,10 @@
             MakeParameter($"@{InventoryIdColumn}", inventoryId))
     End Sub
 
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+    End Sub
+
     Public Function ReadForCharacter(CharacterId As Long) As Long?
         Initialize()
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, CharacterId, InventoryIdColumn)

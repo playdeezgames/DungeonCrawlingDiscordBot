@@ -4,6 +4,7 @@
             {AroundText, AddressOf AroundProcessor.Run},
             {CharactersText, AddressOf CharactersProcessor.Run},
             {CreateText, AddressOf CreateProcessor.Run},
+            {DeleteText, AddressOf DeleteProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
             {DungeonsText, AddressOf DungeonsProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},

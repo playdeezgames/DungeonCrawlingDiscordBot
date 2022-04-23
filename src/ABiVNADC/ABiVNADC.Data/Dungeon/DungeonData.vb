@@ -17,6 +17,11 @@
             );")
     End Sub
 
+    Public Sub Clear(dungeonId As Long)
+        DungeonLocationData.ClearForDungeon(dungeonId)
+        ClearForColumnValue(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId)
+    End Sub
+
     Public Function ReadLocation(dungeonId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, StartingLocationIdColumn)
     End Function

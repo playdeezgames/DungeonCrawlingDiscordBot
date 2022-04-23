@@ -7,6 +7,10 @@
                     Return $"Create Command:
 - create character (name) : creates a character with that name. no duplicates
 - create dungeon (name) : creates a dungeon with that name. no duplicates"
+                Case $"{DeleteTExt}"
+                    Return $"Create Command:
+- delete character (name) : creates a character with that name. no duplicates
+- delete dungeon (name) : creates a dungeon with that name. no duplicates"
                 Case Else
                     Return "I don't know how to help that."
             End Select
@@ -14,9 +18,10 @@
             Return "Commands: 
 - around : turn around
 - characters : shows list of characters
+- create : creates something(use `help create` for more)
+- delete : deletest something(use `help delete` for more)
 - drop (item name) : drops an item from yer current charactor to the ground
 - dungeons : shows list of dungeons
-- create : creates something(use `help create` for more)
 - enter (dungeon name) : causes yer current character to enter the dungeon
 - ground : lists items (if any) on the ground near you
 - help : <== you are here

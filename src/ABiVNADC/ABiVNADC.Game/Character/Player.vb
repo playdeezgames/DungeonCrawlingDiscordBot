@@ -9,6 +9,24 @@ Public Class Player
         End Get
     End Property
 
+    Public Function DeleteDungeon(dungeonName As String) As Boolean
+        Dim dungeon = Dungeons.FirstOrDefault(Function(x) x.Name = dungeonName)
+        If dungeon IsNot Nothing Then
+            DungeonData.Clear(dungeon.Id)
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public Function DeleteCharacter(characterName As String) As Boolean
+        Dim character = Characters.FirstOrDefault(Function(x) x.Name = characterName)
+        If character IsNot Nothing Then
+            CharacterData.Clear(character.Id)
+            Return True
+        End If
+        Return False
+    End Function
+
     Public Sub TurnAround()
         If CanTurn Then
             SetDirection(AheadDirection.Value.OppositeDirection)

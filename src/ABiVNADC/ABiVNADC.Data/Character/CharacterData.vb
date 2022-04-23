@@ -27,6 +27,14 @@
         Return LastInsertRowId
     End Function
 
+    Public Sub Clear(characterId As Long)
+        CharacterInventoryData.ClearForCharacter(characterId)
+        CharacterLocationData.Clear(characterId)
+        PlayerCharacterData.ClearForCharacter(characterId)
+        PlayerData.ClearForCharacter(characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+    End Sub
+
     Public Function ReadName(characterId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
     End Function
