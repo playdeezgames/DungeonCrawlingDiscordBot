@@ -16,6 +16,8 @@
 - characters : shows list of characters
 - dungeons : shows list of dungeons
 - create : creates something(use `help create` for more)
+- enter (dungeon name) : causes yer current character to enter the dungeon
+- ground : lists items (if any) on the ground near you
 - help : <== you are here
 - left : turn left
 - move : move ahead

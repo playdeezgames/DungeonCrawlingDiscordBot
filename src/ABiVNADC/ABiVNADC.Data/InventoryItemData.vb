@@ -15,6 +15,10 @@
             );")
     End Sub
 
+    Public Function ReadForInventory(inventoryId As Long) As IEnumerable(Of Long)
+        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, ItemIdColumn, InventoryIdColumn, inventoryId)
+    End Function
+
     Public Function ReadCountForInventory(inventoryId As Long) As Long
         Initialize()
         Return ExecuteScalar(Of Long)(

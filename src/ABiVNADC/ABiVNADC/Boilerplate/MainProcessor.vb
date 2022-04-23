@@ -12,6 +12,8 @@
                 Return DungeonsProcessor.Run(player, tokens.Skip(1))
             Case EnterText
                 Return EnterProcessor.Run(player, tokens.Skip(1))
+            Case GroundText
+                Return GroundProcessor.Run(player, tokens.Skip(1))
             Case HelpText
                 Return HelpProcessor.Run(player, tokens.Skip(1))
             Case LeftText

@@ -10,6 +10,11 @@
                 [{ItemTypeColumn}] INT NOT NULL
             );")
     End Sub
+
+    Public Function ReadItemType(itemId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, ItemIdColumn, itemId, ItemTypeColumn)
+    End Function
+
     Public Function Create(itemType As Long) As Long
         Initialize()
         ExecuteNonQuery(

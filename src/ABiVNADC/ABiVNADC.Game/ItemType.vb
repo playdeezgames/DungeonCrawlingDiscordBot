@@ -14,4 +14,13 @@ Public Module ItemTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+    <Extension()>
+    Function Name(itemType As ItemType) As String
+        Select Case itemType
+            Case ItemType.LeaveStone
+                Return "leave stone"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Module

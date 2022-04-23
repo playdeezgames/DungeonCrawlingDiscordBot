@@ -6,6 +6,7 @@
     Friend Const DungeonText = "dungeon"
     Friend Const DungeonsText = "dungeons"
     Friend Const EnterText = "enter"
+    Friend Const GroundText = "ground"
     Friend Const HelpText = "help"
     Friend Const LeftText = "left"
     Friend Const MoveText = "move"

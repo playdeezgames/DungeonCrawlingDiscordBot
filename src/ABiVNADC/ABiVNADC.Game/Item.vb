@@ -6,4 +6,10 @@
     Shared Function Create(itemType As ItemType) As Item
         Return New Item(ItemData.Create(itemType))
     End Function
+
+    ReadOnly Property ItemType As ItemType
+        Get
+            Return CType(ItemData.ReadItemType(Id).Value, ItemType)
+        End Get
+    End Property
 End Class
