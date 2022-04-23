@@ -24,7 +24,9 @@
     Function Run(player As Player, command As String) As String
         Dim tokens = command.Split(" "c)
         Dim processor As Func(Of Player, IEnumerable(Of String), String) = AddressOf UnknownCommand
-        processorTable.TryGetValue(tokens.First.ToLower, processor)
+        If Not processorTable.TryGetValue(tokens.First.ToLower, processor) Then
+            processor = AddressOf UnknownCommand
+        End If
         Return processor(player, tokens.Skip(1))
     End Function
 End Module
