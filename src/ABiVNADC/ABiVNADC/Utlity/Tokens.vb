@@ -13,4 +13,5 @@
     Friend Const RightText = "right"
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"
+    Friend Const TakeText = "take"
 End Module

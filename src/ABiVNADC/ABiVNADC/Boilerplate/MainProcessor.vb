@@ -26,6 +26,8 @@
                 Return StatusProcessor.Run(player, tokens.Skip(1))
             Case SwitchText
                 Return SwitchProcessor.Run(player, tokens.Skip(1))
+            Case TakeText
+                Return TakeProcessor.Run(player, tokens.Skip(1))
             Case Else
                 Return "Dunno what you mean. Mebbe you need to try `help`?"
         End Select

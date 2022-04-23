@@ -1,10 +1,11 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Public Enum ItemType
+    None
     LeaveStone
 End Enum
 Public Module ItemTypeExtensions
-    Friend ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone}
+    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone}
     <Extension()>
     Function SpawnCount(itemType As ItemType) As String
         Select Case itemType
