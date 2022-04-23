@@ -12,4 +12,15 @@
             Return result
         End Get
     End Property
+
+    ReadOnly Property Inventory As Inventory
+        Get
+            Dim inventoryId As Long? = LocationInventoryData.ReadForLocation(Id)
+            If Not inventoryId.HasValue Then
+                inventoryId = InventoryData.Create()
+                LocationInventoryData.Write(Id, inventoryId.Value)
+            End If
+            Return New Inventory(inventoryId.Value)
+        End Get
+    End Property
 End Class

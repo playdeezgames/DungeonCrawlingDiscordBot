@@ -43,5 +43,13 @@
         For Each locationId In locationIds
             DungeonLocationData.Write(dungeonId, locationId)
         Next
+        For Each itemType In AllItemTypes
+            Dim spawnCount = RNG.RollDice(itemType.SpawnCount)
+            While spawnCount > 0
+                Dim location = New Location(RNG.FromList(locationIds))
+                location.Inventory.Add(Item.Create(itemType))
+                spawnCount -= 1
+            End While
+        Next
     End Sub
 End Class
