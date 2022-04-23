@@ -16,6 +16,8 @@
                 Return GroundProcessor.Run(player, tokens.Skip(1))
             Case HelpText
                 Return HelpProcessor.Run(player, tokens.Skip(1))
+            Case InventoryText
+                Return InventoryProcessor.Run(player, tokens.Skip(1))
             Case LeftText
                 Return LeftProcessor.Run(player, tokens.Skip(1))
             Case MoveText

@@ -19,11 +19,13 @@
 - enter (dungeon name) : causes yer current character to enter the dungeon
 - ground : lists items (if any) on the ground near you
 - help : <== you are here
+- inventory : lists items in yer current character's inventory
 - left : turn left
 - move : move ahead
 - right : turn right
 - status : shows current status
-- switch character (name) : switches yer active character"
+- switch character (name) : switches yer active character
+- take (item name) : picks up an item from the ground"
         End If
     End Function
 End Module

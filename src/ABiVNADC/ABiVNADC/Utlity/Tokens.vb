@@ -8,6 +8,7 @@
     Friend Const EnterText = "enter"
     Friend Const GroundText = "ground"
     Friend Const HelpText = "help"
+    Friend Const InventoryText = "inventory"
     Friend Const LeftText = "left"
     Friend Const MoveText = "move"
     Friend Const RightText = "right"
