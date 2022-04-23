@@ -3,6 +3,7 @@
     Friend Const CharacterText = "character"
     Friend Const CharactersText = "characters"
     Friend Const CreateText = "create"
+    Friend Const DropText = "drop"
     Friend Const DungeonText = "dungeon"
     Friend Const DungeonsText = "dungeons"
     Friend Const EnterText = "enter"

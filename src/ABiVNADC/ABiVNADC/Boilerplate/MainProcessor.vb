@@ -8,6 +8,8 @@
                 Return CharactersProcessor.Run(player, tokens.Skip(1))
             Case CreateText
                 Return CreateProcessor.Run(player, tokens.Skip(1))
+            Case DropText
+                Return DropProcessor.Run(player, tokens.Skip(1))
             Case DungeonsText
                 Return DungeonsProcessor.Run(player, tokens.Skip(1))
             Case EnterText

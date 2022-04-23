@@ -14,6 +14,7 @@
             Return "Commands: 
 - around : turn around
 - characters : shows list of characters
+- drop (item name) : drops an item from yer current charactor to the ground
 - dungeons : shows list of dungeons
 - create : creates something(use `help create` for more)
 - enter (dungeon name) : causes yer current character to enter the dungeon
@@ -25,7 +26,7 @@
 - right : turn right
 - status : shows current status
 - switch character (name) : switches yer active character
-- take (item name) : picks up an item from the ground"
+- take (item name) : yer current character picks up an item from the ground"
         End If
     End Function
 End Module
