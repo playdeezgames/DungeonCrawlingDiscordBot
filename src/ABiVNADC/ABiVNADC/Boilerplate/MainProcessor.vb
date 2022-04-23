@@ -1,39 +1,29 @@
 ﻿Public Module MainProcessor
+    Private processorTable As New Dictionary(Of String, Func(Of Player, IEnumerable(Of String), String)) From
+        {
+            {AroundText, AddressOf AroundProcessor.Run},
+            {CharactersText, AddressOf CharactersProcessor.Run},
+            {CreateText, AddressOf CreateProcessor.Run},
+            {DropText, AddressOf DropProcessor.Run},
+            {DungeonsText, AddressOf DungeonsProcessor.Run},
+            {EnterText, AddressOf EnterProcessor.Run},
+            {GroundText, AddressOf GroundProcessor.Run},
+            {HelpText, AddressOf HelpProcessor.Run},
+            {InventoryText, AddressOf InventoryProcessor.Run},
+            {LeftText, AddressOf LeftProcessor.Run},
+            {MoveText, AddressOf MoveProcessor.Run},
+            {RightText, AddressOf RightProcessor.Run},
+            {StatusText, AddressOf StatusProcessor.Run},
+            {SwitchText, AddressOf SwitchProcessor.Run},
+            {TakeText, AddressOf TakeProcessor.Run}
+        }
+    Private Function UnknownCommand(player As Player, tokens As IEnumerable(Of String)) As String
+        Return "Dunno what you mean. Mebbe you need to try `help`?"
+    End Function
     Function Run(player As Player, command As String) As String
         Dim tokens = command.Split(" "c)
-        Select Case tokens.First.ToLower
-            Case AroundText
-                Return AroundProcessor.Run(player, tokens.Skip(1))
-            Case CharactersText
-                Return CharactersProcessor.Run(player, tokens.Skip(1))
-            Case CreateText
-                Return CreateProcessor.Run(player, tokens.Skip(1))
-            Case DropText
-                Return DropProcessor.Run(player, tokens.Skip(1))
-            Case DungeonsText
-                Return DungeonsProcessor.Run(player, tokens.Skip(1))
-            Case EnterText
-                Return EnterProcessor.Run(player, tokens.Skip(1))
-            Case GroundText
-                Return GroundProcessor.Run(player, tokens.Skip(1))
-            Case HelpText
-                Return HelpProcessor.Run(player, tokens.Skip(1))
-            Case InventoryText
-                Return InventoryProcessor.Run(player, tokens.Skip(1))
-            Case LeftText
-                Return LeftProcessor.Run(player, tokens.Skip(1))
-            Case MoveText
-                Return MoveProcessor.Run(player, tokens.Skip(1))
-            Case RightText
-                Return RightProcessor.Run(player, tokens.Skip(1))
-            Case StatusText
-                Return StatusProcessor.Run(player, tokens.Skip(1))
-            Case SwitchText
-                Return SwitchProcessor.Run(player, tokens.Skip(1))
-            Case TakeText
-                Return TakeProcessor.Run(player, tokens.Skip(1))
-            Case Else
-                Return "Dunno what you mean. Mebbe you need to try `help`?"
-        End Select
+        Dim processor As Func(Of Player, IEnumerable(Of String), String) = AddressOf UnknownCommand
+        processorTable.TryGetValue(tokens.First.ToLower, processor)
+        Return processor(player, tokens.Skip(1))
     End Function
 End Module
