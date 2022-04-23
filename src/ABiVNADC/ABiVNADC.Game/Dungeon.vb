@@ -16,4 +16,32 @@
             Return New Location(DungeonData.ReadLocation(Id).Value)
         End Get
     End Property
+    Shared Sub Create(player As Player, dungeonName As String, mazeColumns As Long, mazeRows As Long)
+        Dim maze As New Maze(Of Direction)(mazeColumns, mazeRows, DirectionWalker)
+        maze.Generate()
+        Dim locationIds As New List(Of Long)
+        While locationIds.Count < mazeColumns * mazeRows
+            locationIds.Add(LocationData.Create())
+        End While
+        For column = 0 To maze.Columns - 1
+            For row = 0 To maze.Rows - 1
+                Dim cell = maze.GetCell(column, row)
+                Dim locationId = locationIds(CInt(row * maze.Columns + column))
+                For Each direction In AllDirections
+                    Dim door = cell.GetDoor(direction)
+                    If door IsNot Nothing AndAlso door.Open Then
+                        Dim walkStep = DirectionWalker(direction)
+                        Dim nextColumn = column + walkStep.DeltaX
+                        Dim nextRow = row + walkStep.DeltaY
+                        Dim nextLocationId = locationIds(CInt(nextRow * maze.Columns + nextColumn))
+                        RouteData.Create(locationId, direction, nextLocationId)
+                    End If
+                Next
+            Next
+        Next
+        Dim dungeonId = DungeonData.Create(player.Id, dungeonName, locationIds(0))
+        For Each locationId In locationIds
+            DungeonLocationData.Write(dungeonId, locationId)
+        Next
+    End Sub
 End Class

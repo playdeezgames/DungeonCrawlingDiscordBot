@@ -28,32 +28,10 @@ Public Class Player
     End Sub
 
     Public Function CreateDungeon(dungeonName As String) As Boolean
-        Const MazeColumns = 4
-        Const MazeRows = 4
+        Const MazeColumns As Long = 4
+        Const MazeRows As Long = 4
         If DungeonData.ReadCountForPlayerAndDungeonName(Id, dungeonName) = 0 Then
-            Dim maze As New Maze(Of Direction)(MazeColumns, MazeRows, DirectionWalker)
-            maze.Generate()
-            Dim locationIds As New List(Of Long)
-            While locationIds.Count < MazeColumns * MazeRows
-                locationIds.Add(LocationData.Create())
-            End While
-            For column = 0 To maze.Columns - 1
-                For row = 0 To maze.Rows - 1
-                    Dim cell = maze.GetCell(column, row)
-                    Dim locationId = locationIds(CInt(row * maze.Columns + column))
-                    For Each direction In AllDirections
-                        Dim door = cell.GetDoor(direction)
-                        If door IsNot Nothing AndAlso door.Open Then
-                            Dim walkStep = DirectionWalker(direction)
-                            Dim nextColumn = column + walkStep.DeltaX
-                            Dim nextRow = row + walkStep.DeltaY
-                            Dim nextLocationId = locationIds(CInt(nextRow * maze.Columns + nextColumn))
-                            RouteData.Create(locationId, direction, nextLocationId)
-                        End If
-                    Next
-                Next
-            Next
-            DungeonData.Create(Id, dungeonName, locationIds(0))
+            Dungeon.Create(Me, dungeonName, MazeColumns, MazeRows)
             Return True
         End If
         Return False
