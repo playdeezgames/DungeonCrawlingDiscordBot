@@ -1,4 +1,19 @@
 ﻿Module Images
+    Friend ReadOnly Chest As New TextCanvas(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                "............",
+                                                "..@|@@@@@|@.",
+                                                ".@@|@@@@@|@@",
+                                                ".@@|@@@@@|@@",
+                                                ".@@@@@@@@@@@",
+                                                ".-----------",
+                                                ".@@@@@@@@@@@",
+                                                ".@@@@   @@@@",
+                                                ".@@@@@ @@@@@",
+                                                ".@@@@@@@@@@@"
+                                            })
     Friend ReadOnly LeftWall As New TextCanvas(New List(Of String) From
         {
             "XX            ",

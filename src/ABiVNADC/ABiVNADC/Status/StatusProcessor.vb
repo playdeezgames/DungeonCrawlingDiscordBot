@@ -36,7 +36,8 @@
         Dim leftDirection = direction.LeftDirection
         Dim rightDirection = direction.RightDirection
         Dim canvas As New TextCanvas(OutputColumns, OutputRows, "@"c)
-        Dim routes = player.Character.Location.Routes
+        Dim location = player.Character.Location
+        Dim routes = location.Routes
         If routes.ContainsKey(leftDirection) Then
             canvas.Render(0, 0, LeftDoor)
         Else
@@ -52,7 +53,9 @@
         Else
             canvas.Render(42, 0, RightWall)
         End If
-
+        If Not location.Inventory.IsEmpty Then
+            canvas.Render(22, 13, Chest, "."c)
+        End If
         Return canvas
     End Function
 End Module

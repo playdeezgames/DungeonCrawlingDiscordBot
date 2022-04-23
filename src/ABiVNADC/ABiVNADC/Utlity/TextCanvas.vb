@@ -31,10 +31,13 @@
         Return builder.ToString
     End Function
 
-    Friend Sub Render(destinationColumn As Integer, destinationRow As Integer, source As TextCanvas)
+    Friend Sub Render(destinationColumn As Integer, destinationRow As Integer, source As TextCanvas, Optional transparent As Char = ChrW(0))
         For column = 0 To source.Columns - 1
             For row = 0 To source.Rows - 1
-                SetCell(destinationColumn + column, destinationRow + row, source.GetCell(column, row))
+                Dim character = source.GetCell(column, row)
+                If character.HasValue AndAlso character.Value <> transparent Then
+                    SetCell(destinationColumn + column, destinationRow + row, source.GetCell(column, row))
+                End If
             Next
         Next
     End Sub
