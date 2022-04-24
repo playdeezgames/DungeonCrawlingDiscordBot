@@ -5,6 +5,11 @@ Public Class Character
     Sub New(characterId As Long)
         Id = characterId
     End Sub
+    ReadOnly Property FullName As String
+        Get
+            Return $"{Name} the {CharacterType.Name}"
+        End Get
+    End Property
     ReadOnly Property Name As String
         Get
             Return Data.CharacterData.ReadName(Id)
@@ -143,19 +148,19 @@ Public Class Character
         Dim fatigue = CharacterType.FightEnergyCost
         AddFatigue(fatigue)
         Dim attackRoll = RollAttack()
-        builder.AppendLine($"{Name} rolls an attack of {attackRoll}!")
+        builder.AppendLine($"{FullName} rolls an attack of {attackRoll}!")
         Dim defendRoll = defender.RollDefend
-        builder.AppendLine($"{defender.Name} rolls a defend of {defendRoll}!")
+        builder.AppendLine($"{defender.FullName} rolls a defend of {defendRoll}!")
         Dim damageRoll = If(attackRoll > defendRoll, attackRoll - defendRoll, 0)
         If damageRoll > 0 Then
             defender.AddWounds(damageRoll)
-            builder.AppendLine($"{Name} hits!")
-            builder.AppendLine($"{defender.Name} takes {damageRoll} damage!")
+            builder.AppendLine($"{FullName} hits!")
+            builder.AppendLine($"{defender.FullName} takes {damageRoll} damage!")
         Else
-            builder.AppendLine($"{Name} misses!")
+            builder.AppendLine($"{FullName} misses!")
         End If
         If defender.IsDead Then
-            builder.AppendLine($"{Name} kills {defender.Name} (they had a family, you know!)")
+            builder.AppendLine($"{FullName} kills {defender.FullName}")
             defender.Destroy()
         End If
         Return builder.ToString
