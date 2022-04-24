@@ -1,0 +1,37 @@
+﻿Friend Module Names
+    Friend ReadOnly Goblin As New List(Of String) From
+        {
+            "Gug",
+            "Flarg",
+            "Febs",
+            "Hobs",
+            "Pris",
+            "Xerk",
+            "Biq",
+            "Slorkiank",
+            "Friesiel",
+            "Crilorm",
+            "Pliagnubs",
+            "Catar",
+            "Gnyq",
+            "Sraard",
+            "Prirm",
+            "Urt",
+            "Bryc",
+            "Xirzerx",
+            "Villalk",
+            "Cluigtets",
+            "Slykloz",
+            "Gnovnyrm",
+            "Polk",
+            "Ilm",
+            "Thrilx",
+            "Ohai",
+            "Tinai",
+            "Woimvil",
+            "Alrialmi",
+            "Blyrsohx",
+            "Gnabneah",
+            "Brapsyft"
+        }
+End Module
