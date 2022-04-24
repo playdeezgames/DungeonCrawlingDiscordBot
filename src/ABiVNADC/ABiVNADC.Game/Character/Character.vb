@@ -1,4 +1,6 @@
-﻿Public Class Character
+﻿Imports System.Text
+
+Public Class Character
     ReadOnly Property Id As Long
     Sub New(characterId As Long)
         Id = characterId
@@ -110,4 +112,24 @@
             Return CharacterType.MaximumEnergy(Level)
         End Get
     End Property
+    Function Attack(defender As Character) As String
+        Dim builder As New StringBuilder
+        Dim attackRoll = RollAttack()
+        builder.AppendLine($"{Name} rolls an attack of {attackRoll}!")
+        Dim defendRoll = defender.RollDefend
+        builder.AppendLine($"{defender.Name} rolls a defend of {defendRoll}!")
+        Dim damageRoll = If(attackRoll > defendRoll, attackRoll - defendRoll, 0)
+        If damageRoll > 0 Then
+            defender.AddWounds(damageRoll)
+            builder.AppendLine($"{Name} hits!")
+            builder.AppendLine($"{defender.Name} takes {damageRoll} damage!")
+        Else
+            builder.AppendLine($"{Name} misses!")
+        End If
+        If defender.IsDead Then
+            builder.AppendLine($"{Name} kills {defender.Name} (they had a family, you know!)")
+            defender.Destroy()
+        End If
+        Return builder.ToString
+    End Function
 End Class
