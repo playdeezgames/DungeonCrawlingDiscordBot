@@ -16,6 +16,51 @@ Module CharacterImages
                                                 "......@.@...",
                                                 ".....@@..@.."
                                             }))
+    Private ReadOnly Orc As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                "............",
+                                                "....@@@.@...",
+                                                ".... @ @....",
+                                                "....@@@.....",
+                                                ".......@@...",
+                                                ".....@@@.@..",
+                                                "...@.@@@.@..",
+                                                ".....@@@....",
+                                                ".....@.@....",
+                                                "....@@.@...."
+                                            }))
+    Private ReadOnly Zombie As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                "....@@@@....",
+                                                ".... @  @...",
+                                                "....@@@@@...",
+                                                "....@.@.....",
+                                                "........@...",
+                                                ".....@@@.@..",
+                                                "...@.@@@.@..",
+                                                ".....@@@....",
+                                                ".....@.@....",
+                                                "....@@.@...."
+                                            }))
+    Private ReadOnly Skeleton As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                ".....@@@....",
+                                                "....@@@@@...",
+                                                ".... @ @@...",
+                                                "....@@@@....",
+                                                "....@.@.....",
+                                                "........@...",
+                                                ".....@@@.@..",
+                                                "...@..@..@..",
+                                                ".....@@@....",
+                                                ".....@.@....",
+                                                "....@@.@...."
+                                            }))
     Private Function Enhance(lines As List(Of String)) As List(Of String)
         Dim result As New List(Of String)
         For Each line In lines
@@ -39,6 +84,12 @@ Module CharacterImages
         Select Case characterType
             Case CharacterType.Goblin
                 Return Goblin
+            Case CharacterType.Orc
+                Return Orc
+            Case CharacterType.Skeleton
+                Return Skeleton
+            Case CharacterType.Zombie
+                Return Zombie
             Case Else
                 Throw New NotImplementedException
         End Select
