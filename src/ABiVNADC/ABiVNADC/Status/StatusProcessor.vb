@@ -17,6 +17,7 @@
             builder.AppendLine($"Currently selected character: {character.Name}")
             builder.AppendLine($"Class: {character.CharacterType.Name}(level {character.Level})")
             builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
+            builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
 
             If Not character.HasLocation Then
                 builder.AppendLine($"{character.Name} is not currently in a dungeon.")

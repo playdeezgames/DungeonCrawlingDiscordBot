@@ -31,6 +31,18 @@ Public Module CharacterTypeExtensions
         End Select
     End Function
 
+    <Extension>
+    Function MaximumEnergy(characterType As CharacterType, level As Long) As Long
+        Select Case characterType
+            Case CharacterType.N00b
+                Return 7
+            Case CharacterType.Goblin
+                Return 10
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
     Public ReadOnly AllCharacterTypes As New List(Of CharacterType) From
         {
             CharacterType.N00b,

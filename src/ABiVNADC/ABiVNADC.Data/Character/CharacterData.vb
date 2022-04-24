@@ -5,6 +5,7 @@
     Friend Const CharacterTypeColumn = "CharacterType"
     Friend Const CharacterLevelColumn = "CharacterLevel"
     Friend Const WoundsColumn = "Wounds"
+    Friend Const FatigueColumn = "Fatigue"
 
     Friend Sub Initialize()
         ExecuteNonQuery(
@@ -14,7 +15,8 @@
                 [{CharacterNameColumn}] TEXT NOT NULL,
                 [{CharacterTypeColumn}] INT NOT NULL,
                 [{CharacterLevelColumn}] INT NOT NULL,
-                [{WoundsColumn}] INT NOT NULL DEFAULT (0)
+                [{WoundsColumn}] INT NOT NULL DEFAULT (0),
+                [{FatigueColumn}] INT NOT NULL DEFAULT (0)
             );")
     End Sub
 
@@ -65,5 +67,9 @@
 
     Public Function ReadName(characterId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
+    End Function
+
+    Public Function ReadFatigue(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FatigueColumn)
     End Function
 End Module

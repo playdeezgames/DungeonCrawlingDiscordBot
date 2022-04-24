@@ -82,12 +82,17 @@
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(Data.ReadCharacterType(Id).Value, CharacterType)
+            Return CType(ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
     ReadOnly Property Health As Long
         Get
-            Return MaximumHealth - Data.ReadWounds(Id).Value
+            Return MaximumHealth - ReadWounds(Id).Value
+        End Get
+    End Property
+    ReadOnly Property Energy As Long
+        Get
+            Return MaximumEnergy - CharacterData.ReadFatigue(Id).Value
         End Get
     End Property
     ReadOnly Property Level As Long
@@ -98,6 +103,11 @@
     ReadOnly Property MaximumHealth As Long
         Get
             Return CharacterType.MaximumHealth(Level)
+        End Get
+    End Property
+    ReadOnly Property MaximumEnergy As Long
+        Get
+            Return CharacterType.MaximumEnergy(Level)
         End Get
     End Property
 End Class
