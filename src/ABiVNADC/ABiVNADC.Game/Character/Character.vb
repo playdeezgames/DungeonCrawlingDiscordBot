@@ -87,6 +87,11 @@ Public Class Character
             Return CType(ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
+    ReadOnly Property CanFight As Boolean
+        Get
+            Return If(Location?.HasEnemies, False) AndAlso Energy >= CharacterType.FightEnergyCost
+        End Get
+    End Property
     ReadOnly Property Health As Long
         Get
             Return MaximumHealth - ReadWounds(Id).Value

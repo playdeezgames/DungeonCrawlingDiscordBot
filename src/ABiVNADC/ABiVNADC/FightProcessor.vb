@@ -4,6 +4,14 @@
             Return "You cannot do that now!"
         End If
         Dim character = player.Character
-        Return character.Attack(character.Location.Enemy)
+        Dim builder As New StringBuilder
+        builder.Append(character.Attack(character.Location.Enemy))
+        For Each enemy In character.Location.Enemies
+            If player.HasCharacter Then
+                builder.AppendLine("---")
+                builder.Append(enemy.Attack(character))
+            End If
+        Next
+        Return builder.ToString
     End Function
 End Module

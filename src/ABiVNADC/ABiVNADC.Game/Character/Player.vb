@@ -6,10 +6,9 @@ Public Class Player
 
     ReadOnly Property CanFight As Boolean
         Get
-            Return If(Character?.Location?.HasEnemies, False)
+            Return If(Character?.CanFight, False)
         End Get
     End Property
-
 
     ReadOnly Property Character As Character
         Get

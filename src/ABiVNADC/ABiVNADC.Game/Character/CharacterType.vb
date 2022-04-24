@@ -101,4 +101,15 @@ Public Module CharacterTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+    <Extension>
+    Public Function FightEnergyCost(characterType As CharacterType) As Long
+        Select Case characterType
+            Case CharacterType.N00b
+                Return 4
+            Case CharacterType.Goblin
+                Return 6
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Module
