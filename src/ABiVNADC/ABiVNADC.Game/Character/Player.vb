@@ -134,7 +134,10 @@ Public Class Player
     End Property
     ReadOnly Property CanTurn As Boolean
         Get
-            Return AheadDirection.HasValue
+            If Not AheadDirection.HasValue OrElse Character.Location.HasEnemies Then
+                Return False
+            End If
+            Return True
         End Get
     End Property
     ReadOnly Property CanMove As Boolean
