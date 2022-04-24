@@ -33,6 +33,20 @@ Public Class Player
         End If
     End Sub
 
+    Public Sub UseItem(item As Item)
+        Select Case item.ItemType
+            Case ItemType.LeaveStone
+                UseLeaveStone(item)
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Sub
+
+    Private Sub UseLeaveStone(item As Item)
+        Character.Location.Inventory.Add(item)
+        Character.Location = Nothing
+    End Sub
+
     Public Sub TurnLeft()
         If CanTurn Then
             SetDirection(AheadDirection.Value.LeftDirection)

@@ -32,7 +32,8 @@
 - right : turn right
 - status : shows current character's status
 - switch character (name) : switches yer active character
-- take (item name) : yer current character picks up an item from the ground"
+- take (item name) : yer current character picks up an item from the ground
+- use (item name) : yer current character uses an item"
         End If
     End Function
 End Module

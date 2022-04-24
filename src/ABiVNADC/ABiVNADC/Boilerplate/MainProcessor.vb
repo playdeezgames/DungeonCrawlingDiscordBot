@@ -17,7 +17,8 @@
             {RightText, AddressOf RightProcessor.Run},
             {StatusText, AddressOf StatusProcessor.Run},
             {SwitchText, AddressOf SwitchProcessor.Run},
-            {TakeText, AddressOf TakeProcessor.Run}
+            {TakeText, AddressOf TakeProcessor.Run},
+            {UseText, AddressOf UseProcessor.Run}
         }
     Private Function UnknownCommand(player As Player, tokens As IEnumerable(Of String)) As String
         Return "Dunno what you mean. Mebbe you need to try `help`?"
