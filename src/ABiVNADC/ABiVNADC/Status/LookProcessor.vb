@@ -23,7 +23,8 @@
         Dim leftDirection = direction.LeftDirection
         Dim rightDirection = direction.RightDirection
         Dim canvas As New TextCanvas(OutputColumns, OutputRows, "@"c)
-        Dim location = player.Character.Location
+        Dim character = player.Character
+        Dim location = character.Location
         Dim routes = location.Routes
         If routes.ContainsKey(leftDirection) Then
             canvas.Render(0, 0, LeftDoor)
@@ -40,7 +41,7 @@
         Else
             canvas.Render(42, 0, RightWall)
         End If
-        Dim enemy = location.Enemy
+        Dim enemy = location.Enemy(character)
         If enemy IsNot Nothing Then
             canvas.Render(16, 2, enemy.CharacterType.Image, "."c)
         ElseIf Not location.Inventory.IsEmpty Then

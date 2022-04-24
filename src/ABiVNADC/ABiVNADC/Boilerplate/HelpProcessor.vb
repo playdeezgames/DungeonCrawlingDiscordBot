@@ -29,6 +29,7 @@
 - left : turn left
 - look : shows the current POV for the current character
 - move : move ahead
+- rest : recover energy
 - right : turn right
 - status : shows current character's status
 - switch character (name) : switches yer active character

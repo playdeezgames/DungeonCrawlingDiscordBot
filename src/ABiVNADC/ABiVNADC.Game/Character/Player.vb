@@ -4,6 +4,12 @@ Public Class Player
         Id = playerId
     End Sub
 
+    ReadOnly Property InCombat As Boolean
+        Get
+            Return If(Character?.InCombat, False)
+        End Get
+    End Property
+
     ReadOnly Property CanFight As Boolean
         Get
             Return If(Character?.CanFight, False)
@@ -141,7 +147,7 @@ Public Class Player
     End Property
     ReadOnly Property CanTurn As Boolean
         Get
-            If Not AheadDirection.HasValue OrElse Character.Location.HasEnemies Then
+            If Not AheadDirection.HasValue OrElse Character.Location.HasEnemies(Character) Then
                 Return False
             End If
             Return True

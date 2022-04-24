@@ -24,11 +24,22 @@ Public Class Character
         Return RNG.RollDice(CharacterType.DefendDice)
     End Function
 
+    Public Sub NonCombatRest()
+        AddFatigue(Energy - MaximumEnergy)
+    End Sub
+
     ReadOnly Property IsEnemy As Boolean
         Get
             Return CharacterType.IsEnemy
         End Get
     End Property
+
+    Public Function CombatRest() As Long
+        Dim maximumRest = MaximumEnergy - Energy
+        Dim restRoll = Math.Min(RNG.RollDice(CharacterType.CombatRestRoll), maximumRest)
+        AddFatigue(-restRoll)
+        Return restRoll
+    End Function
 
     Public Sub AddWounds(damage As Long)
         CharacterData.WriteWounds(Id, Data.ReadWounds(Id).Value + damage)
@@ -84,12 +95,22 @@ Public Class Character
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(ReadCharacterType(Id).Value, CharacterType)
+            Dim result = ReadCharacterType(Id)
+            If Not result.HasValue Then
+                Return CharacterType.None
+            End If
+            Return CType(result.Value, CharacterType)
+        End Get
+    End Property
+
+    ReadOnly Property InCombat As Boolean
+        Get
+            Return If(Location?.HasEnemies(Me), False)
         End Get
     End Property
     ReadOnly Property CanFight As Boolean
         Get
-            Return If(Location?.HasEnemies, False) AndAlso Energy >= CharacterType.FightEnergyCost
+            Return InCombat AndAlso Energy >= CharacterType.FightEnergyCost
         End Get
     End Property
     ReadOnly Property Health As Long
@@ -140,7 +161,7 @@ Public Class Character
         Return builder.ToString
     End Function
 
-    Private Sub AddFatigue(fatigue As Long)
+    Public Sub AddFatigue(fatigue As Long)
         CharacterData.WriteFatigue(Id, CharacterData.ReadFatigue(Id).Value + fatigue)
     End Sub
 End Class

@@ -30,21 +30,15 @@
         End Get
     End Property
 
-    ReadOnly Property Enemies As IEnumerable(Of Character)
-        Get
-            Return Characters.Where(Function(x) x.IsEnemy)
-        End Get
-    End Property
+    Function Enemies(forCharacter As Character) As IEnumerable(Of Character)
+        Return Characters.Where(Function(x) x.IsEnemy <> forCharacter.IsEnemy)
+    End Function
 
-    ReadOnly Property Enemy As Character
-        Get
-            Return Enemies.FirstOrDefault
-        End Get
-    End Property
+    Function Enemy(forCharacter As Character) As Character
+        Return Enemies(forCharacter).FirstOrDefault
+    End Function
 
-    ReadOnly Property HasEnemies As Boolean
-        Get
-            Return Enemies.Any
-        End Get
-    End Property
+    Function HasEnemies(forCharacter As Character) As Boolean
+        Return Enemies(forCharacter).Any
+    End Function
 End Class

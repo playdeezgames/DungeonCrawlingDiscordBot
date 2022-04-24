@@ -15,6 +15,7 @@
             {LeftText, AddressOf LeftProcessor.Run},
             {LookText, AddressOf LookProcessor.Run},
             {MoveText, AddressOf MoveProcessor.Run},
+            {RestText, AddressOf RestProcessor.Run},
             {RightText, AddressOf RightProcessor.Run},
             {StatusText, AddressOf StatusProcessor.Run},
             {SwitchText, AddressOf SwitchProcessor.Run},

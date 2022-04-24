@@ -107,7 +107,18 @@ Public Module CharacterTypeExtensions
             Case CharacterType.N00b
                 Return 4
             Case CharacterType.Goblin
-                Return 6
+                Return 5
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+    <Extension>
+    Public Function CombatRestRoll(characterType As CharacterType) As String
+        Select Case characterType
+            Case CharacterType.N00b
+                Return "1d2/2+1d2/2+1d2/2+1d2/2"
+            Case CharacterType.Goblin
+                Return "1d2/2+1d2/2+1d2/2+1d2/2+1d2/2"
             Case Else
                 Throw New NotImplementedException
         End Select

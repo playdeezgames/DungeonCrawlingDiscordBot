@@ -15,6 +15,7 @@
     Friend Const LeftText = "left"
     Friend Const LookText = "look"
     Friend Const MoveText = "move"
+    Friend Const RestText = "rest"
     Friend Const RightText = "right"
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"
