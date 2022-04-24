@@ -39,6 +39,10 @@
         Return LastInsertRowId
     End Function
 
+    Public Sub WriteWounds(characterId As Long, wounds As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, WoundsColumn, wounds)
+    End Sub
+
     Public Sub Clear(characterId As Long)
         CharacterInventoryData.ClearForCharacter(characterId)
         CharacterLocationData.Clear(characterId)

@@ -3,6 +3,14 @@ Public Class Player
     Sub New(playerId As Long)
         Id = playerId
     End Sub
+
+    ReadOnly Property CanFight As Boolean
+        Get
+            Return If(Character?.Location?.HasEnemies, False)
+        End Get
+    End Property
+
+
     ReadOnly Property Character As Character
         Get
             Return Character.FromId(PlayerData.ReadCharacter(Id))
@@ -21,7 +29,7 @@ Public Class Player
     Public Function DeleteCharacter(characterName As String) As Boolean
         Dim character = Characters.FirstOrDefault(Function(x) x.Name = characterName)
         If character IsNot Nothing Then
-            CharacterData.Clear(character.Id)
+            Data.CharacterData.Clear(character.Id)
             Return True
         End If
         Return False
@@ -87,7 +95,7 @@ Public Class Player
 
     Public Function CreateCharacter(characterName As String) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
-            Dim characterId = CharacterData.Create(characterName, CharacterType.N00b, 0)
+            Dim characterId = Data.CharacterData.Create(characterName, CharacterType.N00b, 0)
             PlayerCharacterData.Write(Id, characterId, RNG.FromList(AllDirections))
             If Character Is Nothing Then
                 SwitchCharacter(characterName)

@@ -29,7 +29,7 @@
         For Each characterType In AllCharacterTypes
             Dim spawnCount = characterType.SpawnCount(locationIds.LongCount)
             While spawnCount > 0
-                Dim characterId = CharacterData.Create(characterType.RandomName, characterType, 0)
+                Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0)
                 CharacterLocationData.Write(characterId, RNG.FromList(locationIds))
                 spawnCount -= 1
             End While

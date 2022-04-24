@@ -8,6 +8,7 @@
             {DropText, AddressOf DropProcessor.Run},
             {DungeonsText, AddressOf DungeonsProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},
+            {FightText, AddressOf FightProcessor.Run},
             {GroundText, AddressOf GroundProcessor.Run},
             {HelpText, AddressOf HelpProcessor.Run},
             {InventoryText, AddressOf InventoryProcessor.Run},

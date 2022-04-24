@@ -5,7 +5,7 @@
     End Sub
     ReadOnly Property Name As String
         Get
-            Return CharacterData.ReadName(Id)
+            Return Data.CharacterData.ReadName(Id)
         End Get
     End Property
     ReadOnly Property HasLocation As Boolean
@@ -13,17 +13,47 @@
             Return Location IsNot Nothing
         End Get
     End Property
+
+    Public Function RollAttack() As Long
+        Return RNG.RollDice(CharacterType.AttackDice)
+    End Function
+
+    Public Function RollDefend() As Long
+        Return RNG.RollDice(CharacterType.DefendDice)
+    End Function
+
     ReadOnly Property IsEnemy As Boolean
         Get
             Return CharacterType.IsEnemy
         End Get
     End Property
+
+    Public Sub AddWounds(damage As Long)
+        CharacterData.WriteWounds(Id, Data.ReadWounds(Id).Value + damage)
+    End Sub
+
     Shared Function FromId(characterId As Long?) As Character
         If characterId.HasValue Then
             Return New Character(characterId.Value)
         End If
         Return Nothing
     End Function
+
+    Public ReadOnly Property IsDead() As Boolean
+        Get
+            Return Health <= 0
+        End Get
+    End Property
+
+    Public Sub Destroy()
+        If HasLocation Then
+            For Each item In Inventory.Items
+                Location.Inventory.Add(item)
+            Next
+        End If
+        CharacterData.Clear(Id)
+    End Sub
+
     Property Location As Location
         Get
             Dim locationId As Long? = CharacterLocationData.Read(Id)
@@ -52,17 +82,17 @@
     End Property
     ReadOnly Property CharacterType As CharacterType
         Get
-            Return CType(CharacterData.ReadCharacterType(Id).Value, CharacterType)
+            Return CType(Data.ReadCharacterType(Id).Value, CharacterType)
         End Get
     End Property
     ReadOnly Property Health As Long
         Get
-            Return MaximumHealth - CharacterData.ReadWounds(Id).Value
+            Return MaximumHealth - Data.ReadWounds(Id).Value
         End Get
     End Property
     ReadOnly Property Level As Long
         Get
-            Return CharacterData.ReadLevel(Id).Value
+            Return Data.ReadLevel(Id).Value
         End Get
     End Property
     ReadOnly Property MaximumHealth As Long

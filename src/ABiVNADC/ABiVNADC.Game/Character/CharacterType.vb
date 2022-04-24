@@ -65,4 +65,28 @@ Public Module CharacterTypeExtensions
                 Return False
         End Select
     End Function
+
+    <Extension>
+    Public Function AttackDice(characterType As CharacterType) As String
+        Select Case characterType
+            Case CharacterType.N00b
+                Return "1d3/3"
+            Case CharacterType.Goblin
+                Return "1d3/3+1d3/3"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+
+    <Extension>
+    Public Function DefendDice(characterType As CharacterType) As String
+        Select Case characterType
+            Case CharacterType.N00b
+                Return "1d3/3+1d3/3"
+            Case CharacterType.Goblin
+                Return "1d6/6"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Module
