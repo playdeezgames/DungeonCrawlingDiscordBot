@@ -17,12 +17,12 @@
         Else
             Dim character = player.Character
             builder.AppendLine($"Currently selected character: {character.Name}")
+            builder.AppendLine($"Class: {character.CharacterType.Name}(level {character.Level})")
+            builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
+
             If Not character.HasLocation Then
                 builder.AppendLine($"{character.Name} is not currently in a dungeon.")
             Else
-                Dim canvas As TextCanvas = DrawPOV(player)
-                builder.AppendLine($"```
-{canvas.Output}```")
                 If Not player.Character.Location.Inventory.IsEmpty Then
                     builder.AppendLine("There is stuff on the ground.")
                 End If

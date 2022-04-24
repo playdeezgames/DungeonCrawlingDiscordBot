@@ -2,28 +2,40 @@
     Friend Const TableName = "Characters"
     Friend Const CharacterIdColumn = "CharacterId"
     Friend Const CharacterNameColumn = "CharacterName"
+    Friend Const CharacterTypeColumn = "CharacterType"
+    Friend Const CharacterLevelColumn = "CharacterLevel"
+    Friend Const WoundsColumn = "Wounds"
 
     Friend Sub Initialize()
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [{CharacterNameColumn}] TEXT NOT NULL
+                [{CharacterNameColumn}] TEXT NOT NULL,
+                [{CharacterTypeColumn}] INT NOT NULL,
+                [{CharacterLevelColumn}] INT NOT NULL,
+                [{WoundsColumn}] INT NOT NULL DEFAULT (0)
             );")
     End Sub
 
-    Public Function Create(characterName As String) As Long
+    Public Function Create(characterName As String, characterType As Long, characterLevel As Long) As Long
         Initialize()
         ExecuteNonQuery(
             $"INSERT INTO [{TableName}]
             (
-                [{CharacterNameColumn}]
+                [{CharacterNameColumn}],
+                [{CharacterTypeColumn}],
+                [{CharacterLevelColumn}]
             )
             VALUES
             (
-                @{CharacterNameColumn}
+                @{CharacterNameColumn},
+                @{CharacterTypeColumn},
+                @{CharacterLevelColumn}
             );",
-            MakeParameter($"@{CharacterNameColumn}", characterName))
+            MakeParameter($"@{CharacterNameColumn}", characterName),
+            MakeParameter($"@{CharacterTypeColumn}", characterType),
+            MakeParameter($"@{CharacterLevelColumn}", characterLevel))
         Return LastInsertRowId
     End Function
 
@@ -34,6 +46,18 @@
         PlayerData.ClearForCharacter(characterId)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
+
+    Public Function ReadWounds(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, WoundsColumn)
+    End Function
+
+    Public Function ReadCharacterType(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterTypeColumn)
+    End Function
+
+    Public Function ReadLevel(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn)
+    End Function
 
     Public Function ReadName(characterId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
