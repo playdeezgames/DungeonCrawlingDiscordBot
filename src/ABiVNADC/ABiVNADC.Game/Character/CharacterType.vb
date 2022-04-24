@@ -55,4 +55,14 @@ Public Module CharacterTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+
+    <Extension>
+    Public Function IsEnemy(characterType As CharacterType) As Boolean
+        Select Case characterType
+            Case CharacterType.Goblin
+                Return True
+            Case Else
+                Return False
+        End Select
+    End Function
 End Module

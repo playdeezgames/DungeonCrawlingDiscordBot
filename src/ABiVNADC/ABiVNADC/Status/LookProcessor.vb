@@ -40,10 +40,10 @@
         Else
             canvas.Render(42, 0, RightWall)
         End If
-        'If location.HasEnemies Then
-        '    'canvas.Render(16, 2, Goblin, "."c)
-        'End If
-        If Not location.Inventory.IsEmpty Then
+        Dim enemy = location.Enemy
+        If enemy IsNot Nothing Then
+            canvas.Render(16, 2, enemy.CharacterType.Image, "."c)
+        ElseIf Not location.Inventory.IsEmpty Then
             canvas.Render(22, 13, Chest, "."c)
         End If
         Return canvas

@@ -1,7 +1,7 @@
 ﻿Imports System.Runtime.CompilerServices
 
 Module CharacterImages
-    Friend ReadOnly Goblin As New TextCanvas(Enhance(New List(Of String) From
+    Private ReadOnly Goblin As New TextCanvas(Enhance(New List(Of String) From
                                             {
                                                 "............",
                                                 "............",

@@ -22,6 +22,10 @@
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
 
+    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
+        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, LocationIdColumn, locationId)
+    End Function
+
     Public Sub Write(characterId As Long, locationId As Long)
         Initialize()
         ExecuteNonQuery(

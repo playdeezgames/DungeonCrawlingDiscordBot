@@ -23,4 +23,28 @@
             Return New Inventory(inventoryId.Value)
         End Get
     End Property
+
+    ReadOnly Property Characters As IEnumerable(Of Character)
+        Get
+            Return CharacterLocationData.ReadForLocation(Id).Select(Function(id) New Character(id))
+        End Get
+    End Property
+
+    ReadOnly Property Enemies As IEnumerable(Of Character)
+        Get
+            Return Characters.Where(Function(x) x.IsEnemy)
+        End Get
+    End Property
+
+    ReadOnly Property Enemy As Character
+        Get
+            Return Enemies.FirstOrDefault
+        End Get
+    End Property
+
+    ReadOnly Property HasEnemies As Boolean
+        Get
+            Return Enemies.Any
+        End Get
+    End Property
 End Class
