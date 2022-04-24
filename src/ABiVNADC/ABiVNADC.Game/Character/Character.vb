@@ -119,6 +119,8 @@ Public Class Character
     End Property
     Function Attack(defender As Character) As String
         Dim builder As New StringBuilder
+        Dim fatigue = CharacterType.FightEnergyCost
+        AddFatigue(fatigue)
         Dim attackRoll = RollAttack()
         builder.AppendLine($"{Name} rolls an attack of {attackRoll}!")
         Dim defendRoll = defender.RollDefend
@@ -137,4 +139,8 @@ Public Class Character
         End If
         Return builder.ToString
     End Function
+
+    Private Sub AddFatigue(fatigue As Long)
+        CharacterData.WriteFatigue(Id, CharacterData.ReadFatigue(Id).Value + fatigue)
+    End Sub
 End Class

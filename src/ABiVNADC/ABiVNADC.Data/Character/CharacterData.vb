@@ -72,4 +72,8 @@
     Public Function ReadFatigue(characterId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FatigueColumn)
     End Function
+
+    Public Sub WriteFatigue(characterId As Long, fatigue As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FatigueColumn, fatigue)
+    End Sub
 End Module
