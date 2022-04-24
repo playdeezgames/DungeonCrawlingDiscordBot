@@ -12,6 +12,7 @@
             {HelpText, AddressOf HelpProcessor.Run},
             {InventoryText, AddressOf InventoryProcessor.Run},
             {LeftText, AddressOf LeftProcessor.Run},
+            {LookText, AddressOf LookProcessor.Run},
             {MoveText, AddressOf MoveProcessor.Run},
             {RightText, AddressOf RightProcessor.Run},
             {StatusText, AddressOf StatusProcessor.Run},

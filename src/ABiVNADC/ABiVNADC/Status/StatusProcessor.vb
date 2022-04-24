@@ -31,7 +31,7 @@
         Return builder.ToString
     End Function
 
-    Private Function DrawPOV(player As Player) As TextCanvas
+    Friend Function DrawPOV(player As Player) As TextCanvas
         Dim direction = player.AheadDirection.Value
         Dim leftDirection = direction.LeftDirection
         Dim rightDirection = direction.RightDirection

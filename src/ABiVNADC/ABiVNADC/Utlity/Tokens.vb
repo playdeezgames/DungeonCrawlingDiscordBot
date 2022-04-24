@@ -12,6 +12,7 @@
     Friend Const HelpText = "help"
     Friend Const InventoryText = "inventory"
     Friend Const LeftText = "left"
+    Friend Const LookText = "look"
     Friend Const MoveText = "move"
     Friend Const RightText = "right"
     Friend Const StatusText = "status"

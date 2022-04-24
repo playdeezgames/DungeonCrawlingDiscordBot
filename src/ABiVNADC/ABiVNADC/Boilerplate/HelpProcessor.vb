@@ -27,9 +27,10 @@
 - help : <== you are here
 - inventory : lists items in yer current character's inventory
 - left : turn left
+- look : shows the current POV for the current character
 - move : move ahead
 - right : turn right
-- status : shows current status
+- status : shows current character's status
 - switch character (name) : switches yer active character
 - take (item name) : yer current character picks up an item from the ground"
         End If
