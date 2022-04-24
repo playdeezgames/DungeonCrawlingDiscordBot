@@ -5,7 +5,9 @@
         End If
         If player.CanTurn Then
             player.TurnRight()
-            Return StatusProcessor.ShowStatus(player)
+            Dim canvas = DrawPOV(player)
+            Return $"```
+{canvas.Output}```"
         End If
         Return "You cannot do that now!"
     End Function
