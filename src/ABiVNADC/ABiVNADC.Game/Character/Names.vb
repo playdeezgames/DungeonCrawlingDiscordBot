@@ -98,6 +98,7 @@
 "Ann",
 "Susan",
 "Faith",
-"Zoey"
+"Zoey",
+"Fritz"
         }
 End Module
