@@ -167,7 +167,7 @@ Public Module CharacterTypeExtensions
     Public Function CombatRestRoll(characterType As CharacterType) As String
         Select Case characterType
             Case CharacterType.N00b
-                Return "1d2/2+1d2/2"
+                Return "1d1+1d2/2"
             Case CharacterType.Goblin
                 Return "1d2/2+1d2/2+1d2/2+1d2/2"
             Case CharacterType.Orc

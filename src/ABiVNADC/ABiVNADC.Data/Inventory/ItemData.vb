@@ -15,6 +15,11 @@
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, ItemIdColumn, itemId, ItemTypeColumn)
     End Function
 
+    Public Sub Clear(itemId As Long)
+        InventoryItemData.ClearForItem(itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+    End Sub
+
     Public Function Create(itemType As Long) As Long
         Initialize()
         ExecuteNonQuery(

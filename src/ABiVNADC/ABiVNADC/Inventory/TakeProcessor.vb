@@ -22,6 +22,9 @@
         End If
         Dim item = itemStacks(itemType).First
         character.Inventory.Add(item)
-        Return $"{character.Name} picks up {itemType.Name}"
+        Dim builder As New StringBuilder
+        builder.AppendLine($"{character.Name} picks up {itemType.Name}")
+        DoCounterAttacks(player, character, builder)
+        Return builder.ToString
     End Function
 End Module

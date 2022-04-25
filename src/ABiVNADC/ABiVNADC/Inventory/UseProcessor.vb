@@ -20,7 +20,12 @@
             Return $"{character.Name} doesn't have any `{itemTypeName}`."
         End If
         Dim item = itemStacks(itemType).First
-        Return player.UseItem(item)
+        Dim builder As New StringBuilder
+        builder.AppendLine(player.UseItem(item))
+        If character.HasLocation Then
+            DoCounterAttacks(player, character, builder)
+        End If
+        Return builder.ToString
     End Function
 
 End Module

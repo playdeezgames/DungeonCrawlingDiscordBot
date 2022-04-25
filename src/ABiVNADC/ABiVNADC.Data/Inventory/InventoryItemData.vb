@@ -15,6 +15,10 @@
             );")
     End Sub
 
+    Friend Sub ClearForItem(itemId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+    End Sub
+
     Public Function ReadForInventory(inventoryId As Long) As IEnumerable(Of Long)
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, ItemIdColumn, InventoryIdColumn, inventoryId)
     End Function

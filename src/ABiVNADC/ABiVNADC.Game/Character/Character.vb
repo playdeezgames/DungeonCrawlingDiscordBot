@@ -47,7 +47,8 @@ Public Class Character
     End Function
 
     Public Sub AddWounds(damage As Long)
-        CharacterData.WriteWounds(Id, Data.ReadWounds(Id).Value + damage)
+        Dim newWounds = Math.Max(0, Math.Min(CharacterData.ReadWounds(Id).Value + damage, MaximumHealth))
+        CharacterData.WriteWounds(Id, newWounds)
     End Sub
 
     Shared Function FromId(characterId As Long?) As Character

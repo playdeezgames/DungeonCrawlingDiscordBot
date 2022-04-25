@@ -12,4 +12,8 @@
             Return CType(ItemData.ReadItemType(Id).Value, ItemType)
         End Get
     End Property
+
+    Friend Sub Destroy()
+        ItemData.Clear(Id)
+    End Sub
 End Class

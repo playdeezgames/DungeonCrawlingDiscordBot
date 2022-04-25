@@ -54,24 +54,37 @@ Public Class Player
                 Return UseLeaveStone(item)
             Case ItemType.Food
                 Return UseFood(item)
+            Case ItemType.Potion
+                Return UsePotion(item)
             Case Else
                 Throw New NotImplementedException
         End Select
     End Function
 
+    Private Function UsePotion(item As Item) As String
+        Const PotionWoundRecovery As Long = 4
+        Dim builder As New StringBuilder
+        builder.AppendLine(ItemType.Potion.UseMessage(Character.FullName))
+        Character.AddWounds(-PotionWoundRecovery)
+        builder.Append($"{Character.FullName} now has {Character.Health} health.")
+        item.Destroy()
+        Return builder.ToString
+    End Function
+
     Private Function UseFood(item As Item) As String
         Const FoodFatigueRecovery As Long = 4
         Dim builder As New StringBuilder
-        builder.AppendLine(ItemType.Food.UseMessage)
+        builder.AppendLine(ItemType.Food.UseMessage(Character.FullName))
         Character.AddFatigue(-FoodFatigueRecovery)
-        builder.AppendLine($"{Character.FullName} now has {Character.Energy} energy.")
+        builder.Append($"{Character.FullName} now has {Character.Energy} energy.")
+        item.Destroy()
         Return builder.ToString
     End Function
 
     Private Function UseLeaveStone(item As Item) As String
         Character.Location.Inventory.Add(item)
         Character.Location = Nothing
-        Return ItemType.LeaveStone.UseMessage
+        Return ItemType.LeaveStone.UseMessage(Character.FullName)
     End Function
 
     Public Sub TurnLeft()

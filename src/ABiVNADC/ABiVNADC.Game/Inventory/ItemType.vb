@@ -4,16 +4,19 @@ Public Enum ItemType
     None
     LeaveStone
     Food
+    Potion
 End Enum
 Public Module ItemTypeExtensions
-    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food}
+    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food, ItemType.Potion}
     <Extension>
     Function SpawnCount(itemType As ItemType, locationCount As Long) As String
         Select Case itemType
             Case ItemType.LeaveStone
                 Return "1d1"
             Case ItemType.Food
-                Return $"{locationCount \ 2}d1"
+                Return $"{locationCount * 3 \ 4}d1"
+            Case ItemType.Potion
+                Return $"{locationCount \ 3}d1"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -25,6 +28,8 @@ Public Module ItemTypeExtensions
                 Return "leave stone"
             Case ItemType.Food
                 Return "food"
+            Case ItemType.Potion
+                Return "potion"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -32,19 +37,22 @@ Public Module ItemTypeExtensions
     Private ReadOnly UsableItemTypes As New HashSet(Of ItemType) From
         {
             ItemType.LeaveStone,
-            ItemType.Food
+            ItemType.Food,
+            ItemType.Potion
         }
     <Extension>
     Function CanUse(itemType As ItemType) As Boolean
         Return UsableItemTypes.Contains(itemType)
     End Function
     <Extension>
-    Function UseMessage(itemType As ItemType) As String
+    Function UseMessage(itemType As ItemType, characterName As String) As String
         Select Case itemType
             Case ItemType.LeaveStone
-                Return "You use the leave stone to leave the dungeon."
+                Return $"{characterName} uses the leave stone to leave the dungeon."
             Case ItemType.Food
-                Return "You eat the food."
+                Return $"{characterName} eats food."
+            Case ItemType.Potion
+                Return $"{characterName} drinks a potion."
             Case Else
                 Throw New NotImplementedException
         End Select
