@@ -162,6 +162,8 @@ Public Class Character
         If defender.IsDead Then
             builder.AppendLine($"{FullName} kills {defender.FullName}")
             defender.Destroy()
+        Else
+            builder.AppendLine($"{defender.FullName} has {defender.Health} health left.")
         End If
         Return builder.ToString
     End Function
