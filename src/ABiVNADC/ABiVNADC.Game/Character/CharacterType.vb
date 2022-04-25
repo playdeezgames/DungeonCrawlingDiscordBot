@@ -53,9 +53,9 @@ Public Module CharacterTypeExtensions
             Case CharacterType.Orc
                 Return 8
             Case CharacterType.Skeleton
-                Return 6
+                Return 1
             Case CharacterType.Zombie
-                Return 5
+                Return 1
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -150,15 +150,15 @@ Public Module CharacterTypeExtensions
     Public Function FightEnergyCost(characterType As CharacterType) As Long
         Select Case characterType
             Case CharacterType.N00b
-                Return 4
+                Return 1
             Case CharacterType.Goblin
-                Return 5
+                Return 1
             Case CharacterType.Orc
-                Return 4
+                Return 1
             Case CharacterType.Skeleton
-                Return 3
+                Return 0
             Case CharacterType.Zombie
-                Return 3
+                Return 0
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -167,15 +167,15 @@ Public Module CharacterTypeExtensions
     Public Function CombatRestRoll(characterType As CharacterType) As String
         Select Case characterType
             Case CharacterType.N00b
-                Return "1d2/2+1d2/2+1d2/2+1d2/2"
+                Return "1d2/2+1d2/2"
             Case CharacterType.Goblin
-                Return "1d2/2+1d2/2+1d2/2+1d2/2+1d2/2"
+                Return "1d2/2+1d2/2+1d2/2+1d2/2"
             Case CharacterType.Orc
-                Return "1d2/2+1d2/2+1d2/2+1d2/2"
-            Case CharacterType.Skeleton
                 Return "1d2/2+1d2/2+1d2/2"
+            Case CharacterType.Skeleton
+                Return "0d1"
             Case CharacterType.Zombie
-                Return "1d2/2+1d2/2+1d2/2+1d2/2"
+                Return "0d1"
             Case Else
                 Throw New NotImplementedException
         End Select
