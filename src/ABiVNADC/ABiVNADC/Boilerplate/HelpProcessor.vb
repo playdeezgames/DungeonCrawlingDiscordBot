@@ -22,6 +22,7 @@
 - delete : deletest something(use `help delete` for more)
 - drop (item name) : drops an item from yer current charactor to the ground
 - dungeons : shows list of dungeons
+- enemies : shows a list of enemies faced by the current character
 - enter (dungeon name) : causes yer current character to enter the dungeon
 - ground : lists items (if any) on the ground near you
 - help : <== you are here

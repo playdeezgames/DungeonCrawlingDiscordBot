@@ -7,6 +7,7 @@
             {DeleteText, AddressOf DeleteProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
             {DungeonsText, AddressOf DungeonsProcessor.Run},
+            {EnemiesText, AddressOf EnemiesProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},
             {FightText, AddressOf FightProcessor.Run},
             {GroundText, AddressOf GroundProcessor.Run},
