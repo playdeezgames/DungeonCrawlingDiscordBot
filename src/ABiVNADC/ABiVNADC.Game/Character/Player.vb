@@ -1,3 +1,5 @@
+Imports System.Text
+
 Public Class Player
     ReadOnly Property Id As Long
     Sub New(playerId As Long)
@@ -46,19 +48,31 @@ Public Class Player
         End If
     End Sub
 
-    Public Sub UseItem(item As Item)
+    Public Function UseItem(item As Item) As String
         Select Case item.ItemType
             Case ItemType.LeaveStone
-                UseLeaveStone(item)
+                Return UseLeaveStone(item)
+            Case ItemType.Food
+                Return UseFood(item)
             Case Else
                 Throw New NotImplementedException
         End Select
-    End Sub
+    End Function
 
-    Private Sub UseLeaveStone(item As Item)
+    Private Function UseFood(item As Item) As String
+        Const FoodFatigueRecovery As Long = 4
+        Dim builder As New StringBuilder
+        builder.AppendLine(ItemType.Food.UseMessage)
+        Character.AddFatigue(-FoodFatigueRecovery)
+        builder.AppendLine($"{Character.FullName} now has {Character.Energy} energy.")
+        Return builder.ToString
+    End Function
+
+    Private Function UseLeaveStone(item As Item) As String
         Character.Location.Inventory.Add(item)
         Character.Location = Nothing
-    End Sub
+        Return ItemType.LeaveStone.UseMessage
+    End Function
 
     Public Sub TurnLeft()
         If CanTurn Then

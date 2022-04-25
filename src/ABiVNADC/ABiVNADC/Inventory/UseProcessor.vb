@@ -20,8 +20,7 @@
             Return $"{character.Name} doesn't have any `{itemTypeName}`."
         End If
         Dim item = itemStacks(itemType).First
-        player.UseItem(item)
-        Return itemType.UseMessage
+        Return player.UseItem(item)
     End Function
 
 End Module

@@ -6,7 +6,7 @@ Public Enum ItemType
     Food
 End Enum
 Public Module ItemTypeExtensions
-    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone}
+    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food}
     <Extension>
     Function SpawnCount(itemType As ItemType, locationCount As Long) As String
         Select Case itemType
