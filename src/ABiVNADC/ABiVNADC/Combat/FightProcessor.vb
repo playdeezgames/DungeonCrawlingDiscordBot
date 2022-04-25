@@ -1,7 +1,13 @@
 ﻿Module FightProcessor
     Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+        If Not player.HasCharacter Then
+            Return "You have no current character."
+        End If
+        If Not player.InCombat Then
+            Return $"{player.Character.FullName} is not in combat."
+        End If
         If Not player.CanFight Then
-            Return "You cannot do that now(you may need to `rest`)!"
+            Return $"{player.Character.FullName} needs to recover energy."
         End If
         Dim character = player.Character
         Dim builder As New StringBuilder
