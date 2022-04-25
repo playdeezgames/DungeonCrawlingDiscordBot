@@ -38,7 +38,7 @@
 
     Private Shared Sub PopulateItems(locationIds As List(Of Long))
         For Each itemType In AllItemTypes
-            Dim spawnCount = RNG.RollDice(itemType.SpawnCount)
+            Dim spawnCount = RNG.RollDice(itemType.SpawnCount(locationIds.LongCount))
             While spawnCount > 0
                 Dim location = New Location(RNG.FromList(locationIds))
                 location.Inventory.Add(Item.Create(itemType))
