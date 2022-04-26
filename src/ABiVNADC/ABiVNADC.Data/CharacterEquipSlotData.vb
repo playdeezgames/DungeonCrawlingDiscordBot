@@ -7,7 +7,7 @@
         CharacterData.Initialize()
         ItemData.Initialize()
         ExecuteNonQuery(
-            $"CREATE TABLE IF NOT EXIST [{TableName}]
+            $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INT NOT NULL,
                 [{EquipSlotColumn}] INT NOT NULL,
@@ -24,13 +24,17 @@
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long)
         Initialize()
         ExecuteNonQuery(
-            $"REPLACE INTO []([],[],[]) VALUES(@,@,@);",
-            MakeParameter($"", characterId),
-            MakeParameter($"", characterId),
-            MakeParameter($"", characterId))
+            $"REPLACE INTO [{TableName}]([{CharacterIdColumn}],[{EquipSlotColumn}],[{ItemIdColumn}]) VALUES(@{CharacterIdColumn},@{EquipSlotColumn},@{ItemIdColumn});",
+            MakeParameter($"@{CharacterIdColumn}", characterId),
+            MakeParameter($"@{EquipSlotColumn}", equipSlot),
+            MakeParameter($"@{ItemIdColumn}", itemId))
     End Sub
 
     Public Function Read(characterId As Long, equipSlot As Long) As Long?
-        Throw New NotImplementedException()
+        Initialize()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT [{ItemIdColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn} AND [{EquipSlotColumn}]=@{EquipSlotColumn};",
+            MakeParameter($"@{CharacterIdColumn}", characterId),
+            MakeParameter($"@{EquipSlotColumn}", equipSlot))
     End Function
 End Module

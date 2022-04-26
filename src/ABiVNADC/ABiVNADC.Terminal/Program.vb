@@ -11,6 +11,12 @@ Module Program
             Select Case command
                 Case "!quit"
                     done = True
+                Case "!reset"
+                    Store.Reset()
+                Case "!save"
+                    Store.Save(DATABASE_FILE_NAME)
+                Case "!load"
+                    Store.Load(DATABASE_FILE_NAME)
                 Case Else
                     AnsiConsole.WriteLine()
                     AnsiConsole.WriteLine(MainProcessor.Run(player, command))
