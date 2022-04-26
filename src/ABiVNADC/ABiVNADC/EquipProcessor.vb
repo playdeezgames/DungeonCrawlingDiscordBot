@@ -11,6 +11,7 @@
         If itemType = ItemType.None Then
             Return $"I don't know what a `{itemTypeName}` is."
         End If
-        Return player.Character.Equip(itemType)
+        Dim output = player.Character.Equip(itemType)
+        Return DoCounterAttacks(player, output)
     End Function
 End Module

@@ -10,13 +10,17 @@
             Return $"{player.Character.FullName} needs to recover energy."
         End If
         Dim character = player.Character
+        Return DoCounterAttacks(player, character.Attack(character.Location.Enemy(character)))
+    End Function
+
+    Friend Function DoCounterAttacks(player As Player, output As String) As String
         Dim builder As New StringBuilder
-        builder.Append(character.Attack(character.Location.Enemy(character)))
-        DoCounterAttacks(player, character, builder)
+        builder.Append(output)
+        FightProcessor.PerformCounterAttacks(player, player.Character, builder)
         Return builder.ToString
     End Function
 
-    Friend Sub DoCounterAttacks(player As Player, character As Character, builder As StringBuilder)
+    Friend Sub PerformCounterAttacks(player As Player, character As Character, builder As StringBuilder)
         If Not character.HasLocation Then
             Return
         End If
@@ -24,7 +28,6 @@
             If Not player.HasCharacter Then
                 Continue For
             End If
-
             PerformCounterAttack(character, builder, enemy)
         Next
     End Sub

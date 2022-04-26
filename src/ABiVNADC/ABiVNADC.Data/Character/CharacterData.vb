@@ -46,6 +46,7 @@
     End Sub
 
     Public Sub Clear(characterId As Long)
+        CharacterEquipSlotData.ClearForCharacter(characterId)
         CharacterInventoryData.ClearForCharacter(characterId)
         CharacterLocationData.Clear(characterId)
         PlayerCharacterData.ClearForCharacter(characterId)

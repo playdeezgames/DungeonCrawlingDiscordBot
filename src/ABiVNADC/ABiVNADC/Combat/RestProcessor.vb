@@ -21,9 +21,6 @@
     Private Function HandleCombatRest(player As Player) As String
         Dim character = player.Character
         Dim restAmount = character.CombatRest()
-        Dim builder As New StringBuilder
-        builder.AppendLine($"{character.Name} recovers {restAmount} energy.")
-        FightProcessor.DoCounterAttacks(player, character, builder)
-        Return builder.ToString
+        Return FightProcessor.DoCounterAttacks(player, $"{character.Name} recovers {restAmount} energy.")
     End Function
 End Module

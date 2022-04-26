@@ -25,10 +25,7 @@
         End If
         Dim item = itemStacks(itemType).First
         character.Inventory.Add(item)
-        Dim builder As New StringBuilder
-        builder.AppendLine($"{character.FullName} picks up {itemType.Name}")
-        DoCounterAttacks(player, character, builder)
-        Return builder.ToString
+        Return DoCounterAttacks(player, $"{character.FullName} picks up {itemType.Name}")
     End Function
 
     Private Function HandleTakeAll(player As Player, character As Character, location As Location) As String
@@ -38,9 +35,6 @@
         For Each item In location.Inventory.Items
             character.Inventory.Add(item)
         Next
-        Dim builder As New StringBuilder
-        builder.AppendLine($"{character.FullName} takes everything.")
-        DoCounterAttacks(player, character, builder)
-        Return builder.ToString
+        Return DoCounterAttacks(player, $"{character.FullName} takes everything.")
     End Function
 End Module

@@ -20,6 +20,16 @@ Public Class Character
             Return Location IsNot Nothing
         End Get
     End Property
+    ReadOnly Property Equipment As Dictionary(Of EquipSlot, Item)
+        Get
+            Dim equippedItemIds As Dictionary(Of Long, Long) = CharacterEquipSlotData.ReadForCharacter(Id)
+            Dim result As New Dictionary(Of EquipSlot, Item)
+            For Each entry In equippedItemIds
+                result(CType(entry.Key, EquipSlot)) = New Item(entry.Value)
+            Next
+            Return result
+        End Get
+    End Property
 
     Public Function RollAttack() As Long
         Return RNG.RollDice(CharacterType.AttackDice)
@@ -91,6 +101,9 @@ Public Class Character
 
     Public Sub Destroy()
         If HasLocation Then
+            For Each entry In Equipment.Values
+                Location.Inventory.Add(entry)
+            Next
             For Each item In Inventory.Items
                 Location.Inventory.Add(item)
             Next

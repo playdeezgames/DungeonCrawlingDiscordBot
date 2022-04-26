@@ -17,6 +17,19 @@
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub
+
+    Public Function ReadForCharacter(characterId As Long) As Dictionary(Of Long, Long)
+        Initialize()
+        Dim result As New Dictionary(Of Long, Long)
+        For Each entry In ExecuteReader(
+            Function(reader) New Tuple(Of Long, Long)(CLng(reader(EquipSlotColumn)), CLng(reader(ItemIdColumn))),
+            $"SELECT [{EquipSlotColumn}], [{ItemIdColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn};",
+            MakeParameter($"@{CharacterIdColumn}", characterId))
+            result(entry.Item1) = entry.Item2
+        Next
+        Return result
+    End Function
+
     Public Sub ClearForItem(itemId As Long)
         ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
     End Sub
@@ -28,6 +41,10 @@
             MakeParameter($"@{CharacterIdColumn}", characterId),
             MakeParameter($"@{EquipSlotColumn}", equipSlot),
             MakeParameter($"@{ItemIdColumn}", itemId))
+    End Sub
+
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
 
     Public Function Read(characterId As Long, equipSlot As Long) As Long?
