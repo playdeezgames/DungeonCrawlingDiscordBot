@@ -27,5 +27,4 @@
         End If
         Return builder.ToString
     End Function
-
 End Module
