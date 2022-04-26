@@ -1,13 +1,12 @@
 ﻿Module CreateCharacterProcessor
     Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
-        If tokens.Any Then
-            Dim characterName = String.Join(" "c, tokens)
-            If player.CreateCharacter(characterName) Then
-                Return $"You create {characterName}."
-            Else
-                Return $"Failed to create {characterName}!"
-            End If
+        If Not tokens.Any Then
+            Return $"The syntax is: `create character (name)`"
         End If
-        Return $"The syntax is: `create character (name)`"
+        Dim characterName = String.Join(" "c, tokens)
+        If player.CreateCharacter(characterName) Then
+            Return $"You create {characterName}."
+        End If
+        Return $"Failed to create {characterName}!"
     End Function
 End Module

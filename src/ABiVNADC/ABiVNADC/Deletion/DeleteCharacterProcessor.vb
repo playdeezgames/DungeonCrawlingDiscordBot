@@ -1,13 +1,12 @@
 ﻿Module DeleteCharacterProcessor
     Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
-        If tokens.Any Then
-            Dim characterName = String.Join(" "c, tokens)
-            If player.DeleteCharacter(characterName) Then
-                Return $"You delete {characterName}."
-            Else
-                Return $"Failed to delete {characterName}!"
-            End If
+        If Not tokens.Any Then
+            Return $"The syntax is: `delete character (name)`"
         End If
-        Return $"The syntax is: `delete character (name)`"
+        Dim characterName = String.Join(" "c, tokens)
+        If player.DeleteCharacter(characterName) Then
+            Return $"You delete {characterName}."
+        End If
+        Return $"Failed to delete {characterName}!"
     End Function
 End Module

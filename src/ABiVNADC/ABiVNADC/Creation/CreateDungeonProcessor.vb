@@ -1,13 +1,12 @@
 ﻿Module CreateDungeonProcessor
     Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
-        If tokens.Any Then
-            Dim dungeonName = String.Join(" "c, tokens)
-            If player.CreateDungeon(dungeonName) Then
-                Return $"You create {dungeonName}."
-            Else
-                Return $"Failed to create {dungeonName}!"
-            End If
+        If Not tokens.Any Then
+            Return $"The syntax is: `create dungeon (name)`"
         End If
-        Return $"The syntax is: `create dungeon (name)`"
+        Dim dungeonName = String.Join(" "c, tokens)
+        If player.CreateDungeon(dungeonName) Then
+            Return $"You create {dungeonName}."
+        End If
+        Return $"Failed to create {dungeonName}!"
     End Function
 End Module
