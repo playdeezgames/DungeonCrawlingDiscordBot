@@ -2,9 +2,8 @@
     Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then
             Return "Round here, we only respond to a raw `status` commmand!"
-        Else
-            Return ShowStatus(player)
         End If
+        Return ShowStatus(player)
     End Function
 
     Friend Function ShowStatus(player As Player) As String

@@ -3,12 +3,12 @@
         If tokens.Any Then
             Return "It's just `move` and nothing else!"
         End If
-        If player.CanMove Then
-            player.Move()
-            Dim canvas = DrawPOV(player)
-            Return $"```
-{canvas.Output}```"
+        If Not player.CanMove Then
+            Return "You cannot do that now!"
         End If
-        Return "You cannot do that now!"
+        player.Move()
+        Dim canvas = DrawPOV(player)
+        Return $"```
+{canvas.Output}```"
     End Function
 End Module

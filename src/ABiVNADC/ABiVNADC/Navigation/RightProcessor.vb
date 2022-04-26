@@ -4,11 +4,11 @@
             Return "It's just `right` and nothing else!"
         End If
         If player.CanTurn Then
-            player.TurnRight()
-            Dim canvas = DrawPOV(player)
-            Return $"```
-{canvas.Output}```"
+            Return "You cannot do that now!"
         End If
-        Return "You cannot do that now!"
+        player.TurnRight()
+        Dim canvas = DrawPOV(player)
+        Return $"```
+{canvas.Output}```"
     End Function
 End Module

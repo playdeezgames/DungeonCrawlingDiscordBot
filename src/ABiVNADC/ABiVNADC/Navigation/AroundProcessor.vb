@@ -3,12 +3,12 @@
         If tokens.Any Then
             Return "It's just `around` and nothing else!"
         End If
-        If player.CanTurn Then
-            player.TurnAround()
-            Dim canvas = DrawPOV(player)
-            Return $"```
-{canvas.Output}```"
+        If Not player.CanTurn Then
+            Return "You cannot do that now!"
         End If
-        Return "You cannot do that now!"
+        player.TurnAround()
+        Dim canvas = DrawPOV(player)
+        Return $"```
+{canvas.Output}```"
     End Function
 End Module
