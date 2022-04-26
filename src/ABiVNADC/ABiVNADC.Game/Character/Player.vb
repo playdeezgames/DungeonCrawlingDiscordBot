@@ -56,9 +56,17 @@ Public Class Player
                 Return UseFood(item)
             Case ItemType.Potion
                 Return UsePotion(item)
+            Case ItemType.Dagger
+                Return UseDagger()
             Case Else
                 Throw New NotImplementedException
         End Select
+    End Function
+
+    Private Function UseDagger() As String
+        Dim result = ItemType.Dagger.UseMessage(Character.FullName)
+        Character.Destroy()
+        Return result
     End Function
 
     Private Function UsePotion(item As Item) As String

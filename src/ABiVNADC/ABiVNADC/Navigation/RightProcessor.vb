@@ -3,7 +3,7 @@
         If tokens.Any Then
             Return "It's just `right` and nothing else!"
         End If
-        If player.CanTurn Then
+        If Not player.CanTurn Then
             Return "You cannot do that now!"
         End If
         player.TurnRight()

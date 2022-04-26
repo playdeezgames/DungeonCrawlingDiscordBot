@@ -5,9 +5,10 @@ Public Enum ItemType
     LeaveStone
     Food
     Potion
+    Dagger
 End Enum
 Public Module ItemTypeExtensions
-    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food, ItemType.Potion}
+    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food, ItemType.Potion, ItemType.Dagger}
     <Extension>
     Function SpawnCount(itemType As ItemType, locationCount As Long) As String
         Select Case itemType
@@ -17,6 +18,8 @@ Public Module ItemTypeExtensions
                 Return $"{locationCount * 3 \ 4}d1"
             Case ItemType.Potion
                 Return $"{locationCount \ 3}d1"
+            Case ItemType.Dagger
+                Return $"{locationCount \ 6}d1"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -30,6 +33,8 @@ Public Module ItemTypeExtensions
                 Return "food"
             Case ItemType.Potion
                 Return "potion"
+            Case ItemType.Dagger
+                Return "dagger"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -38,7 +43,8 @@ Public Module ItemTypeExtensions
         {
             ItemType.LeaveStone,
             ItemType.Food,
-            ItemType.Potion
+            ItemType.Potion,
+            ItemType.Dagger
         }
     <Extension>
     Function CanUse(itemType As ItemType) As Boolean
@@ -53,6 +59,8 @@ Public Module ItemTypeExtensions
                 Return $"{characterName} eats food."
             Case ItemType.Potion
                 Return $"{characterName} drinks a potion."
+            Case ItemType.Dagger
+                Return $"{characterName} commits seppuku."
             Case Else
                 Throw New NotImplementedException
         End Select
