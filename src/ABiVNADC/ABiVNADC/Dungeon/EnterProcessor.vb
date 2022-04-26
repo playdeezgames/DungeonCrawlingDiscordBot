@@ -9,7 +9,7 @@
         End If
         Dim dungeonName = String.Join(" "c, tokens)
         Dim dungeon = player.Dungeons.SingleOrDefault(Function(x) x.Name = dungeonName)
-        If dungeon IsNot Nothing Then
+        If dungeon Is Nothing Then
             Return $"{dungeonName} doesn't exist!"
         End If
         character.Location = dungeon.StartingLocation
