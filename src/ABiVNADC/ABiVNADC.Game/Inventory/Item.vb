@@ -16,4 +16,8 @@
     Friend Sub Destroy()
         ItemData.Clear(Id)
     End Sub
+
+    Friend Shared Function FromId(itemId As Long?) As Item
+        Return If(itemId.HasValue, New Item(itemId.Value), Nothing)
+    End Function
 End Class

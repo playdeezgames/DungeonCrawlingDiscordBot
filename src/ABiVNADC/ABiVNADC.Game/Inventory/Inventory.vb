@@ -28,4 +28,8 @@
             Return result
         End Get
     End Property
+
+    Friend Sub Remove(item As Item)
+        InventoryItemData.ClearForItem(item.Id)
+    End Sub
 End Class

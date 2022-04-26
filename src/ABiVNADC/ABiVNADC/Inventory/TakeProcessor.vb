@@ -15,7 +15,7 @@
         If itemTypeName = AllText Then
             Return HandleTakeAll(player, character, location)
         End If
-        Dim itemType = AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
+        Dim itemType = ParseItemType(itemTypeName)
         If itemType = ItemType.None Then
             Return $"I don't know what a `{itemTypeName}` is."
         End If

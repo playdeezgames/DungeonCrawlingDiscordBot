@@ -9,6 +9,7 @@
             {DungeonsText, AddressOf DungeonsProcessor.Run},
             {EnemiesText, AddressOf EnemiesProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},
+            {EquipText, AddressOf EquipProcessor.Run},
             {FightText, AddressOf FightProcessor.Run},
             {GroundText, AddressOf GroundProcessor.Run},
             {HelpText, AddressOf HelpProcessor.Run},

@@ -25,6 +25,31 @@ Public Class Character
         Return RNG.RollDice(CharacterType.AttackDice)
     End Function
 
+    Public Function Equip(itemType As ItemType) As String
+        Dim itemStacks = Inventory.StackedItems
+        If Not itemStacks.ContainsKey(itemType) Then
+            Return $"{FullName} does not have any `{itemType.Name}` in their inventory."
+        End If
+        If Not itemType.CanEquip Then
+            Return $"I don't know where you would equip that, and I don't think I wanna know where you'd try!"
+        End If
+        Dim item = itemStacks(itemType).First
+        Dim equipSlot = itemType.EquipSlot
+        Dim equippedItem As Item = GetEquippedItem(equipSlot)
+        If equippedItem IsNot Nothing Then
+            CharacterEquipSlotData.ClearForItem(equippedItem.Id)
+            Inventory.Add(equippedItem)
+        End If
+        Inventory.Remove(item)
+        CharacterEquipSlotData.Write(Id, equipSlot, item.Id)
+        Return $"{FullName} equips {itemType.Name}."
+    End Function
+
+    Private Function GetEquippedItem(equipSlot As EquipSlot) As Item
+        Dim itemId As Long? = CharacterEquipSlotData.Read(Id, equipSlot)
+        Return Item.FromId(itemId)
+    End Function
+
     Public Function RollDefend() As Long
         Return RNG.RollDice(CharacterType.DefendDice)
     End Function

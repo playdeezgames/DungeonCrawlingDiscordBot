@@ -4,10 +4,12 @@
             Return "Drop what?"
         End If
         Dim itemTypeName = String.Join(" "c, tokens)
-        Dim itemType = AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
+
+        Dim itemType = ParseItemType(itemTypeName)
         If itemType = ItemType.None Then
             Return $"I don't know what a `{itemTypeName}` is."
         End If
+
         Dim character = player.Character
         If character Is Nothing Then
             Return "You have no current character."

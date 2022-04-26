@@ -51,6 +51,10 @@ Public Module ItemTypeExtensions
         Return UsableItemTypes.Contains(itemType)
     End Function
     <Extension>
+    Function CanEquip(itemType As ItemType) As Boolean
+        Return itemType.EquipSlot <> Game.EquipSlot.None
+    End Function
+    <Extension>
     Function UseMessage(itemType As ItemType, characterName As String) As String
         Select Case itemType
             Case ItemType.LeaveStone
@@ -63,6 +67,18 @@ Public Module ItemTypeExtensions
                 Return $"{characterName} commits seppuku."
             Case Else
                 Throw New NotImplementedException
+        End Select
+    End Function
+    Function ParseItemType(itemTypeName As String) As ItemType
+        Return AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
+    End Function
+    <Extension>
+    Function EquipSlot(itemType As ItemType) As EquipSlot
+        Select Case itemType
+            Case ItemType.Dagger
+                Return EquipSlot.Weapon
+            Case Else
+                Return EquipSlot.None
         End Select
     End Function
 End Module

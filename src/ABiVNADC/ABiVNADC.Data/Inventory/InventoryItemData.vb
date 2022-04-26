@@ -15,7 +15,7 @@
             );")
     End Sub
 
-    Friend Sub ClearForItem(itemId As Long)
+    Public Sub ClearForItem(itemId As Long)
         ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
     End Sub
 
