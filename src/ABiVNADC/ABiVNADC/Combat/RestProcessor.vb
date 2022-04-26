@@ -8,9 +8,8 @@
         End If
         If player.InCombat Then
             Return HandleCombatRest(player)
-        Else
-            Return HandleNonCombatRest(player)
         End If
+        Return HandleNonCombatRest(player)
     End Function
 
     Private Function HandleNonCombatRest(player As Player) As String

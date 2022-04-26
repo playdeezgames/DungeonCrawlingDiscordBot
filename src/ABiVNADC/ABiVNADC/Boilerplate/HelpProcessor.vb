@@ -1,19 +1,7 @@
 ﻿Module HelpProcessor
     Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then
-            Dim topic = String.Join(" "c, tokens)
-            Select Case topic
-                Case $"{CreateText}"
-                    Return $"Create Command:
-- create character (name) : creates a character with that name. no duplicates
-- create dungeon (name) : creates a dungeon with that name. no duplicates"
-                Case $"{DeleteTExt}"
-                    Return $"Create Command:
-- delete character (name) : creates a character with that name. no duplicates
-- delete dungeon (name) : creates a dungeon with that name. no duplicates"
-                Case Else
-                    Return "I don't know how to help that."
-            End Select
+            Return TopicalHelp(String.Join(" "c, tokens))
         Else
             Return "Commands: 
 - around : turn around
@@ -38,5 +26,20 @@
 - take (item name) : yer current character picks up an item from the ground
 - use (item name) : yer current character uses an item"
         End If
+    End Function
+
+    Private Function TopicalHelp(topic As String) As String
+        Select Case topic
+            Case $"{CreateText}"
+                Return $"Create Command:
+- create character (name) : creates a character with that name. no duplicates
+- create dungeon (name) : creates a dungeon with that name. no duplicates"
+            Case $"{DeleteText}"
+                Return $"Create Command:
+- delete character (name) : creates a character with that name. no duplicates
+- delete dungeon (name) : creates a dungeon with that name. no duplicates"
+            Case Else
+                Return "I don't know how to help that."
+        End Select
     End Function
 End Module

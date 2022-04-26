@@ -17,18 +17,25 @@
     End Function
 
     Friend Sub DoCounterAttacks(player As Player, character As Character, builder As StringBuilder)
-        If character.HasLocation Then
-            For Each enemy In character.Location.Enemies(character)
-                If player.HasCharacter Then
-                    builder.AppendLine("---")
-                    If enemy.CanFight Then
-                        builder.Append(enemy.Attack(character))
-                    Else
-                        Dim restAmount = enemy.CombatRest
-                        builder.AppendLine($"{enemy.Name} recovers {restAmount} energy.")
-                    End If
-                End If
-            Next
+        If Not character.HasLocation Then
+            Return
+        End If
+        For Each enemy In character.Location.Enemies(character)
+            If Not player.HasCharacter Then
+                Continue For
+            End If
+
+            PerformCounterAttack(character, builder, enemy)
+        Next
+    End Sub
+
+    Private Sub PerformCounterAttack(character As Character, builder As StringBuilder, enemy As Character)
+        builder.AppendLine("---")
+        If enemy.CanFight Then
+            builder.Append(enemy.Attack(character))
+        Else
+            Dim restAmount = enemy.CombatRest
+            builder.AppendLine($"{enemy.Name} recovers {restAmount} energy.")
         End If
     End Sub
 End Module
