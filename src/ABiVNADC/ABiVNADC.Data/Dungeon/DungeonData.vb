@@ -64,6 +64,10 @@
         Return ReadColumnString(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, DungeonNameColumn)
     End Function
 
+    Public Function ReadDifficulty(dungeonId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, DifficultyColumn)
+    End Function
+
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, DungeonIdColumn, PlayerIdColumn, playerId)
     End Function

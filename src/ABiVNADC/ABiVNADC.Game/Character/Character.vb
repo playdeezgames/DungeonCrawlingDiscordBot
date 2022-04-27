@@ -64,9 +64,17 @@ Public Class Character
         Return RNG.RollDice(CharacterType.DefendDice)
     End Function
 
-    Public Sub NonCombatRest()
-        AddFatigue(Energy - MaximumEnergy)
-    End Sub
+    Public Function NonCombatRest() As String
+        Dim characterType As CharacterType = Location.Dungeon.GenerateWanderingMonster()
+        If characterType <> CharacterType.None Then
+            Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0)
+            CharacterLocationData.Write(characterId, Location.Id)
+            Return $"Suddenly, {Character.FromId(characterId).FullName} appears!"
+        Else
+            AddFatigue(Energy - MaximumEnergy)
+            Return $"{FullName} rests fully."
+        End If
+    End Function
 
     ReadOnly Property IsEnemy As Boolean
         Get

@@ -13,6 +13,12 @@
         End Get
     End Property
 
+    ReadOnly Property Dungeon As Dungeon
+        Get
+            Return Dungeon.FromId(DungeonLocationData.ReadForLocation(Id))
+        End Get
+    End Property
+
     ReadOnly Property Inventory As Inventory
         Get
             Dim inventoryId As Long? = LocationInventoryData.ReadForLocation(Id)

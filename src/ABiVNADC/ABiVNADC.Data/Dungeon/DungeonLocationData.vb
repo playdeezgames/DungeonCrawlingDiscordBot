@@ -14,6 +14,11 @@
                 FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
     End Sub
+
+    Public Function ReadForLocation(locationId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, DungeonIdColumn)
+    End Function
+
     Public Sub Write(dungeonId As Long, locationId As Long)
         Initialize()
         ExecuteNonQuery(

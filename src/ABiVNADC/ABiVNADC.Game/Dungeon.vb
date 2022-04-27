@@ -3,8 +3,11 @@
     Sub New(dungeonId As Long)
         Id = dungeonId
     End Sub
-    Shared Function FromId(dungeonId As Long) As Dungeon
-        Return New Dungeon(dungeonId)
+    Shared Function FromId(dungeonId As Long?) As Dungeon
+        If dungeonId.HasValue Then
+            Return New Dungeon(dungeonId.Value)
+        End If
+        Return Nothing
     End Function
     ReadOnly Property Name As String
         Get
@@ -53,6 +56,16 @@
             DungeonLocationData.Write(dungeonId, locationId)
         Next
     End Sub
+
+    Friend Function GenerateWanderingMonster() As CharacterType
+        Return RNG.FromGenerator(Difficulty.WanderingMonsterTable)
+    End Function
+
+    ReadOnly Property Difficulty As Difficulty
+        Get
+            Return CType(DungeonData.ReadDifficulty(Id).Value, Difficulty)
+        End Get
+    End Property
 
     Private Shared Sub PopulateDoors(maze As Maze(Of Direction), locationIds As List(Of Long))
         For column = 0 To maze.Columns - 1

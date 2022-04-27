@@ -37,4 +37,58 @@ Public Module DifficultyExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+
+    Private ReadOnly WanderingMonsterTables As New Dictionary(Of Difficulty, Dictionary(Of CharacterType, Integer)) From
+        {
+            {
+                Difficulty.Yermom,
+                New Dictionary(Of CharacterType, Integer) From
+                {
+                    {CharacterType.None, 1}
+                }
+            },
+            {
+                Difficulty.Easy,
+                New Dictionary(Of CharacterType, Integer) From
+                {
+                    {CharacterType.None, 9},
+                    {CharacterType.Goblin, 1}
+                }
+            },
+            {
+                Difficulty.Normal,
+                New Dictionary(Of CharacterType, Integer) From
+                {
+                    {CharacterType.None, 6},
+                    {CharacterType.Goblin, 1},
+                    {CharacterType.Skeleton, 1}
+                }
+            },
+            {
+                Difficulty.Difficult,
+                New Dictionary(Of CharacterType, Integer) From
+                {
+                    {CharacterType.None, 5},
+                    {CharacterType.Goblin, 2},
+                    {CharacterType.Skeleton, 2},
+                    {CharacterType.Orc, 1}
+                }
+            },
+            {
+                Difficulty.Too,
+                New Dictionary(Of CharacterType, Integer) From
+                {
+                    {CharacterType.None, 3},
+                    {CharacterType.Goblin, 2},
+                    {CharacterType.Skeleton, 2},
+                    {CharacterType.Orc, 1},
+                    {CharacterType.Zombie, 1}
+                }
+            }
+        }
+
+    <Extension>
+    Public Function WanderingMonsterTable(difficulty As Difficulty) As Dictionary(Of CharacterType, Integer)
+        Return WanderingMonsterTables(difficulty)
+    End Function
 End Module

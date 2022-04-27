@@ -16,6 +16,21 @@ Module CharacterImages
                                                 "......@.@...",
                                                 ".....@@..@.."
                                             }))
+    Private ReadOnly Fish1 As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "....@@@.....",
+                                                ".....@@@....",
+                                                ".....@@@@...",
+                                                "@...@@@@@@..",
+                                                "@..@@@@@@@@.",
+                                                "@@@@@@@@@ @@",
+                                                "@@@@@@@@@@@@",
+                                                "@..@@@@@@@@.",
+                                                "@...@@@@@@..",
+                                                ".....@@@@...",
+                                                ".....@@@....",
+                                                "....@@@....."
+                                            }))
     Private ReadOnly Orc As New TextCanvas(Enhance(New List(Of String) From
                                             {
                                                 "............",

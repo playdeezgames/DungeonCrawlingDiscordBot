@@ -14,8 +14,7 @@
 
     Private Function HandleNonCombatRest(player As Player) As String
         Dim character = player.Character
-        character.NonCombatRest()
-        Return $"{character.Name} rests fully."
+        Return character.NonCombatRest()
     End Function
 
     Private Function HandleCombatRest(player As Player) As String
