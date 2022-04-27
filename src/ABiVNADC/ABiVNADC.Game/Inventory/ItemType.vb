@@ -9,21 +9,65 @@ Public Enum ItemType
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food, ItemType.Potion, ItemType.Dagger}
+    Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of ItemType, Func(Of Long, String))) From
+        {
+            {
+                Difficulty.Yermom,
+                New Dictionary(Of ItemType, Func(Of Long, String)) From
+                {
+                    {ItemType.LeaveStone, Function(locationCount) "1d1"},
+                    {ItemType.Food, Function(locationCount) $"{locationCount * 3 \ 2}d1"},
+                    {ItemType.Potion, Function(locationCount) $"{locationCount * 2 \ 3}d1"},
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 2}d1"}
+                }
+            },
+            {
+                Difficulty.Easy,
+                New Dictionary(Of ItemType, Func(Of Long, String)) From
+                {
+                    {ItemType.LeaveStone, Function(locationCount) "1d1"},
+                    {ItemType.Food, Function(locationCount) $"{locationCount}d1"},
+                    {ItemType.Potion, Function(locationCount) $"{locationCount \ 2}d1"},
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 4}d1"}
+                }
+            },
+            {
+                Difficulty.Normal,
+                New Dictionary(Of ItemType, Func(Of Long, String)) From
+                {
+                    {ItemType.LeaveStone, Function(locationCount) "1d1"},
+                    {ItemType.Food, Function(locationCount) $"{locationCount * 3 \ 4}d1"},
+                    {ItemType.Potion, Function(locationCount) $"{locationCount \ 3}d1"},
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 6}d1"}
+                }
+            },
+            {
+                Difficulty.Difficult,
+                New Dictionary(Of ItemType, Func(Of Long, String)) From
+                {
+                    {ItemType.LeaveStone, Function(locationCount) "1d1"},
+                    {ItemType.Food, Function(locationCount) $"{locationCount * 2 \ 3}d1"},
+                    {ItemType.Potion, Function(locationCount) $"{locationCount \ 4}d1"},
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 8}d1"}
+                }
+            },
+            {
+                Difficulty.Too,
+                New Dictionary(Of ItemType, Func(Of Long, String)) From
+                {
+                    {ItemType.LeaveStone, Function(locationCount) "1d1"},
+                    {ItemType.Food, Function(locationCount) $"{locationCount * 1 \ 2}d1"},
+                    {ItemType.Potion, Function(locationCount) $"{locationCount \ 6}d1"},
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 12}d1"}
+                }
+            }
+        }
+
     <Extension>
-    Function SpawnCount(itemType As ItemType, locationCount As Long) As String
-        Select Case itemType
-            Case ItemType.LeaveStone
-                Return "1d1"
-            Case ItemType.Food
-                Return $"{locationCount * 3 \ 4}d1"
-            Case ItemType.Potion
-                Return $"{locationCount \ 3}d1"
-            Case ItemType.Dagger
-                Return $"{locationCount \ 6}d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+    Function SpawnCount(itemType As ItemType, locationCount As Long, difficulty As Difficulty) As String
+        Return SpawnerTable(difficulty)(itemType)(locationCount)
     End Function
+
     <Extension>
     Function Name(itemType As ItemType) As String
         Select Case itemType

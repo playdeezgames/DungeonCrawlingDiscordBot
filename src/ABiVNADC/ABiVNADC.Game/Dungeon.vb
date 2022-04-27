@@ -27,7 +27,7 @@
 
     Private Shared Sub PopulateCreatures(locationIds As List(Of Long), difficulty As Difficulty)
         For Each characterType In AllCharacterTypes
-            Dim spawnCount = characterType.SpawnCount(locationIds.LongCount)
+            Dim spawnCount = characterType.SpawnCount(locationIds.LongCount, difficulty)
             While spawnCount > 0
                 Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0)
                 CharacterLocationData.Write(characterId, RNG.FromList(locationIds))
@@ -38,7 +38,7 @@
 
     Private Shared Sub PopulateItems(locationIds As List(Of Long), difficulty As Difficulty)
         For Each itemType In AllItemTypes
-            Dim spawnCount = RNG.RollDice(itemType.SpawnCount(locationIds.LongCount))
+            Dim spawnCount = RNG.RollDice(itemType.SpawnCount(locationIds.LongCount, difficulty))
             While spawnCount > 0
                 Dim location = New Location(RNG.FromList(locationIds))
                 location.Inventory.Add(Item.Create(itemType))

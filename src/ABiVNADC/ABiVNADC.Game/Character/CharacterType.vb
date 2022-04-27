@@ -71,7 +71,7 @@ Public Module CharacterTypeExtensions
         }
 
     <Extension>
-    Public Function SpawnCount(characterType As CharacterType, locationCount As Long) As Long
+    Public Function SpawnCount(characterType As CharacterType, locationCount As Long, difficulty As Difficulty) As Long
         Select Case characterType
             Case CharacterType.Goblin
                 Return locationCount \ 2
