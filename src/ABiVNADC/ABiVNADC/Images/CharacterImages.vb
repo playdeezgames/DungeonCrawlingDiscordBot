@@ -16,7 +16,7 @@ Module CharacterImages
                                                 "......@.@...",
                                                 ".....@@..@.."
                                             }))
-    Private ReadOnly Fish1 As New TextCanvas(Enhance(New List(Of String) From
+    Private ReadOnly BossFish As New TextCanvas(Enhance(New List(Of String) From
                                             {
                                                 "....@@@.....",
                                                 ".....@@@....",
@@ -30,6 +30,21 @@ Module CharacterImages
                                                 ".....@@@@...",
                                                 ".....@@@....",
                                                 "....@@@....."
+                                            }))
+    Private ReadOnly MinionFish As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                "............",
+                                                ".....@@.....",
+                                                "......@@....",
+                                                "..@..@@ @...",
+                                                "...@@@@@@...",
+                                                "..@...@@....",
+                                                ".....@@.....",
+                                                "............",
+                                                "............",
+                                                "............"
                                             }))
     Private ReadOnly Orc As New TextCanvas(Enhance(New List(Of String) From
                                             {
@@ -105,6 +120,10 @@ Module CharacterImages
                 Return Skeleton
             Case CharacterType.Zombie
                 Return Zombie
+            Case CharacterType.MinionFish
+                Return MinionFish
+            Case CharacterType.BossFish
+                Return BossFish
             Case Else
                 Throw New NotImplementedException
         End Select

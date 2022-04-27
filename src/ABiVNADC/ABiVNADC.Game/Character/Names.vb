@@ -101,4 +101,37 @@
 "Zoey",
 "Fritz"
         }
+    Friend ReadOnly Fish As New List(Of String) From
+        {
+            "Thazzi",
+            "Thiksukh",
+            "Xessucketh",
+            "Ecicoss",
+            "Odjizha",
+            "Lula",
+            "Ada",
+            "Chirkettra",
+            "Midaya",
+            "Chishtrashthashma",
+            "Critsher",
+            "Roshet",
+            "Yicirge",
+            "Szussiezhoth",
+            "Oxhizsa",
+            "Handha",
+            "Vobha",
+            "Mihutha",
+            "Krashputtu",
+            "Umvrupavya",
+            "Seexaix",
+            "Darga",
+            "Artolhis",
+            "Croskieciz",
+            "Aathizsi",
+            "Amat",
+            "Dhrasras",
+            "Hrishoylu",
+            "Kavyadma",
+            "Tabhavosa"
+        }
 End Module

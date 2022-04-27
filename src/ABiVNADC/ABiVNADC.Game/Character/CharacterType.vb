@@ -7,6 +7,8 @@ Public Enum CharacterType
     Orc
     Skeleton
     Zombie
+    MinionFish
+    BossFish
 End Enum
 Public Module CharacterTypeExtensions
     Private ReadOnly nameTable As New Dictionary(Of CharacterType, String) From
@@ -15,7 +17,9 @@ Public Module CharacterTypeExtensions
             {CharacterType.Goblin, "goblin"},
             {CharacterType.Orc, "orc"},
             {CharacterType.Skeleton, "skeleton"},
-            {CharacterType.Zombie, "zombie"}
+            {CharacterType.Zombie, "zombie"},
+            {CharacterType.MinionFish, "minion fish"},
+            {CharacterType.BossFish, "boss fish"}
         }
 
     <Extension>
@@ -38,6 +42,10 @@ Public Module CharacterTypeExtensions
                 Return 1
             Case CharacterType.Zombie
                 Return 1
+            Case CharacterType.MinionFish
+                Return 1
+            Case CharacterType.BossFish
+                Return 5
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -56,6 +64,10 @@ Public Module CharacterTypeExtensions
                 Return 1
             Case CharacterType.Zombie
                 Return 1
+            Case CharacterType.MinionFish
+                Return 8
+            Case CharacterType.BossFish
+                Return 12
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -63,11 +75,13 @@ Public Module CharacterTypeExtensions
 
     Public ReadOnly AllCharacterTypes As New List(Of CharacterType) From
         {
-            CharacterType.N00b,
-            CharacterType.Goblin,
+            CharacterType.BossFish,
+            CharacterType.MinionFish,
+            CharacterType.Zombie,
             CharacterType.Orc,
+            CharacterType.Goblin,
             CharacterType.Skeleton,
-            CharacterType.Zombie
+            CharacterType.N00b
         }
     Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of CharacterType, Func(Of Long, Long))) From
         {
@@ -75,55 +89,65 @@ Public Module CharacterTypeExtensions
                 Difficulty.Yermom,
                 New Dictionary(Of CharacterType, Func(Of Long, Long)) From
                 {
-                    {CharacterType.Goblin, Function(locationCount) locationCount \ 4},
-                    {CharacterType.Orc, Function(locationCount) locationCount \ 6},
-                    {CharacterType.Skeleton, Function(locationCount) locationCount \ 3},
-                    {CharacterType.Zombie, Function(locationCount) locationCount \ 6},
-                    {CharacterType.N00b, Function(x) 0}
+                    {CharacterType.Goblin, Function(x) x \ 4},
+                    {CharacterType.Orc, Function(x) x \ 6},
+                    {CharacterType.Skeleton, Function(x) x \ 3},
+                    {CharacterType.Zombie, Function(x) x \ 6},
+                    {CharacterType.N00b, Function(x) 0},
+                    {CharacterType.MinionFish, Function(x) x \ 6},
+                    {CharacterType.BossFish, Function(x) 0}
                 }
             },
             {
                 Difficulty.Easy,
                 New Dictionary(Of CharacterType, Func(Of Long, Long)) From
                 {
-                    {CharacterType.Goblin, Function(locationCount) locationCount \ 3},
-                    {CharacterType.Orc, Function(locationCount) locationCount \ 4},
-                    {CharacterType.Skeleton, Function(locationCount) locationCount \ 2},
-                    {CharacterType.Zombie, Function(locationCount) locationCount \ 4},
-                    {CharacterType.N00b, Function(x) 0}
+                    {CharacterType.Goblin, Function(x) x \ 3},
+                    {CharacterType.Orc, Function(x) x \ 4},
+                    {CharacterType.Skeleton, Function(x) x \ 2},
+                    {CharacterType.Zombie, Function(x) x \ 4},
+                    {CharacterType.N00b, Function(x) 0},
+                    {CharacterType.MinionFish, Function(x) x \ 4},
+                    {CharacterType.BossFish, Function(x) 0}
                 }
             },
             {
                 Difficulty.Normal,
                 New Dictionary(Of CharacterType, Func(Of Long, Long)) From
                 {
-                    {CharacterType.Goblin, Function(locationCount) locationCount \ 2},
-                    {CharacterType.Orc, Function(locationCount) locationCount \ 3},
-                    {CharacterType.Skeleton, Function(locationCount) locationCount * 2 \ 3},
-                    {CharacterType.Zombie, Function(locationCount) locationCount \ 3},
-                    {CharacterType.N00b, Function(x) 0}
+                    {CharacterType.Goblin, Function(x) x \ 2},
+                    {CharacterType.Orc, Function(x) x \ 3},
+                    {CharacterType.Skeleton, Function(x) x * 2 \ 3},
+                    {CharacterType.Zombie, Function(x) x \ 3},
+                    {CharacterType.N00b, Function(x) 0},
+                    {CharacterType.MinionFish, Function(x) x \ 3},
+                    {CharacterType.BossFish, Function(x) 1}
                 }
             },
             {
                 Difficulty.Difficult,
                 New Dictionary(Of CharacterType, Func(Of Long, Long)) From
                 {
-                    {CharacterType.Goblin, Function(locationCount) locationCount * 2 \ 3},
-                    {CharacterType.Orc, Function(locationCount) locationCount \ 2},
-                    {CharacterType.Skeleton, Function(locationCount) locationCount * 3 \ 4},
-                    {CharacterType.Zombie, Function(locationCount) locationCount \ 2},
-                    {CharacterType.N00b, Function(x) 0}
+                    {CharacterType.Goblin, Function(x) x * 2 \ 3},
+                    {CharacterType.Orc, Function(x) x \ 2},
+                    {CharacterType.Skeleton, Function(x) x * 3 \ 4},
+                    {CharacterType.Zombie, Function(x) x \ 2},
+                    {CharacterType.N00b, Function(x) 0},
+                    {CharacterType.MinionFish, Function(x) x \ 2},
+                    {CharacterType.BossFish, Function(x) 2}
                 }
             },
             {
                 Difficulty.Too,
                 New Dictionary(Of CharacterType, Func(Of Long, Long)) From
                 {
-                    {CharacterType.Goblin, Function(locationCount) locationCount * 3 \ 4},
-                    {CharacterType.Orc, Function(locationCount) locationCount * 2 \ 3},
-                    {CharacterType.Skeleton, Function(locationCount) locationCount},
-                    {CharacterType.Zombie, Function(locationCount) locationCount \ 2},
-                    {CharacterType.N00b, Function(x) 0}
+                    {CharacterType.Goblin, Function(x) x * 3 \ 4},
+                    {CharacterType.Orc, Function(x) x * 2 \ 3},
+                    {CharacterType.Skeleton, Function(x) x},
+                    {CharacterType.Zombie, Function(x) x * 2 \ 3},
+                    {CharacterType.N00b, Function(x) 0},
+                    {CharacterType.MinionFish, Function(x) x * 2 \ 3},
+                    {CharacterType.BossFish, Function(x) 4}
                 }
             }
         }
@@ -143,6 +167,8 @@ Public Module CharacterTypeExtensions
                 Return RNG.FromList(Names.Human)
             Case CharacterType.Zombie
                 Return RNG.FromList(Names.Human)
+            Case CharacterType.BossFish, CharacterType.MinionFish
+                Return RNG.FromList(Names.Fish)
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -151,7 +177,7 @@ Public Module CharacterTypeExtensions
     <Extension>
     Public Function IsEnemy(characterType As CharacterType) As Boolean
         Select Case characterType
-            Case CharacterType.Goblin, CharacterType.Orc, CharacterType.Skeleton, CharacterType.Zombie
+            Case CharacterType.Goblin, CharacterType.Orc, CharacterType.Skeleton, CharacterType.Zombie, CharacterType.MinionFish, CharacterType.BossFish
                 Return True
             Case Else
                 Return False
@@ -171,6 +197,10 @@ Public Module CharacterTypeExtensions
                 Return "1d3/3+1d3/3"
             Case CharacterType.Zombie
                 Return "1d3/3+1d3/3"
+            Case CharacterType.MinionFish
+                Return "1d3/3+1d3/3"
+            Case CharacterType.BossFish
+                Return "1d3/3+1d3/3+1d3/3+1d3/3"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -189,6 +219,10 @@ Public Module CharacterTypeExtensions
                 Return "1d6/6+1d6/6"
             Case CharacterType.Zombie
                 Return "1d6/6+1d6/6+1d6/6"
+            Case CharacterType.MinionFish
+                Return "1d6/6+1d6/6+1d6/6"
+            Case CharacterType.BossFish
+                Return "1d6/6+1d6/6+1d6/6+1d6/6+1d6/6"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -201,6 +235,10 @@ Public Module CharacterTypeExtensions
             Case CharacterType.Goblin
                 Return 1
             Case CharacterType.Orc
+                Return 1
+            Case CharacterType.MinionFish
+                Return 1
+            Case CharacterType.BossFish
                 Return 1
             Case CharacterType.Skeleton
                 Return 0
@@ -219,6 +257,10 @@ Public Module CharacterTypeExtensions
                 Return "1d2/2+1d2/2+1d2/2+1d2/2"
             Case CharacterType.Orc
                 Return "1d2/2+1d2/2+1d2/2"
+            Case CharacterType.MinionFish
+                Return "1d2/2+1d2/2+1d2/2"
+            Case CharacterType.BossFish
+                Return "2d1+1d2/2+1d2/2+1d2/2"
             Case CharacterType.Skeleton
                 Return "0d1"
             Case CharacterType.Zombie
