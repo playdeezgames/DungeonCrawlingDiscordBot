@@ -1,6 +1,7 @@
 ﻿Public Module MainProcessor
     Private processorTable As New Dictionary(Of String, Func(Of Player, IEnumerable(Of String), String)) From
         {
+            {AboutText, AddressOf AboutProcessor.Run},
             {AroundText, AddressOf AroundProcessor.Run},
             {CharactersText, AddressOf CharactersProcessor.Run},
             {CreateText, AddressOf CreateProcessor.Run},

@@ -4,6 +4,7 @@
             Return TopicalHelp(String.Join(" "c, tokens))
         Else
             Return "Commands: 
+- about : tells you about this game
 - around : turn around
 - characters : shows list of characters
 - create : creates something(use `help create` for more)

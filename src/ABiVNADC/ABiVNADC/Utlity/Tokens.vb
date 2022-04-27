@@ -1,4 +1,5 @@
 ﻿Module Tokens
+    Friend Const AboutText = "about"
     Friend Const AllText = "all"
     Friend Const AroundText = "around"
     Friend Const CharacterText = "character"
