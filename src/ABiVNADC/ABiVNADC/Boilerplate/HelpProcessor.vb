@@ -14,6 +14,7 @@
 - enemies : shows a list of enemies faced by the current character
 - enter (dungeon name) : causes yer current character to enter the dungeon
 - equip (item) : causes yer current 
+- fight : fights yer enemies!
 - ground : lists items (if any) on the ground near you
 - help : <== you are here
 - inventory : lists items in yer current character's inventory
