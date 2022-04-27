@@ -69,20 +69,67 @@ Public Module CharacterTypeExtensions
             CharacterType.Skeleton,
             CharacterType.Zombie
         }
-
+    Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of CharacterType, Func(Of Long, Long))) From
+        {
+            {
+                Difficulty.Yermom,
+                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
+                {
+                    {CharacterType.Goblin, Function(locationCount) locationCount \ 4},
+                    {CharacterType.Orc, Function(locationCount) locationCount \ 6},
+                    {CharacterType.Skeleton, Function(locationCount) locationCount \ 3},
+                    {CharacterType.Zombie, Function(locationCount) locationCount \ 6},
+                    {CharacterType.N00b, Function(x) 0}
+                }
+            },
+            {
+                Difficulty.Easy,
+                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
+                {
+                    {CharacterType.Goblin, Function(locationCount) locationCount \ 3},
+                    {CharacterType.Orc, Function(locationCount) locationCount \ 4},
+                    {CharacterType.Skeleton, Function(locationCount) locationCount \ 2},
+                    {CharacterType.Zombie, Function(locationCount) locationCount \ 4},
+                    {CharacterType.N00b, Function(x) 0}
+                }
+            },
+            {
+                Difficulty.Normal,
+                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
+                {
+                    {CharacterType.Goblin, Function(locationCount) locationCount \ 2},
+                    {CharacterType.Orc, Function(locationCount) locationCount \ 3},
+                    {CharacterType.Skeleton, Function(locationCount) locationCount * 2 \ 3},
+                    {CharacterType.Zombie, Function(locationCount) locationCount \ 3},
+                    {CharacterType.N00b, Function(x) 0}
+                }
+            },
+            {
+                Difficulty.Difficult,
+                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
+                {
+                    {CharacterType.Goblin, Function(locationCount) locationCount * 2 \ 3},
+                    {CharacterType.Orc, Function(locationCount) locationCount \ 2},
+                    {CharacterType.Skeleton, Function(locationCount) locationCount * 3 \ 4},
+                    {CharacterType.Zombie, Function(locationCount) locationCount \ 2},
+                    {CharacterType.N00b, Function(x) 0}
+                }
+            },
+            {
+                Difficulty.Too,
+                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
+                {
+                    {CharacterType.Goblin, Function(locationCount) locationCount * 3 \ 4},
+                    {CharacterType.Orc, Function(locationCount) locationCount * 2 \ 3},
+                    {CharacterType.Skeleton, Function(locationCount) locationCount},
+                    {CharacterType.Zombie, Function(locationCount) locationCount \ 2},
+                    {CharacterType.N00b, Function(x) 0}
+                }
+            }
+        }
     <Extension>
     Public Function SpawnCount(characterType As CharacterType, locationCount As Long, difficulty As Difficulty) As Long
-        Select Case characterType
-            Case CharacterType.Goblin
-                Return locationCount \ 2
-            Case CharacterType.Orc
-                Return locationCount \ 3
-            Case CharacterType.Skeleton
-                Return locationCount * 2 \ 3
-            Case CharacterType.Zombie
-                Return locationCount \ 3
-        End Select
-        Return 0
+        Return SpawnerTable(difficulty)(characterType)(locationCount)
     End Function
 
     <Extension>
