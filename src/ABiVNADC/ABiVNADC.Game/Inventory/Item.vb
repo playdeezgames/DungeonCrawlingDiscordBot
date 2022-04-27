@@ -20,4 +20,16 @@
     Friend Shared Function FromId(itemId As Long?) As Item
         Return If(itemId.HasValue, New Item(itemId.Value), Nothing)
     End Function
+
+    ReadOnly Property HasAttackDice As Boolean
+        Get
+            Return ItemType.HasAttackDice
+        End Get
+    End Property
+
+    ReadOnly Property AttackDice As String
+        Get
+            Return ItemType.AttackDice
+        End Get
+    End Property
 End Class

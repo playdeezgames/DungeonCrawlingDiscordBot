@@ -32,7 +32,13 @@ Public Class Character
     End Property
 
     Public Function RollAttack() As Long
-        Return RNG.RollDice(CharacterType.AttackDice)
+        'TODO: equipped items with attack roles? USE THAT!
+        Dim attackItems = Equipment.Values.Where(Function(x) x.HasAttackDice)
+        If attackItems.Any Then
+            Return RNG.RollDice(String.Join("+"c, attackItems.Select(Function(x) x.AttackDice)))
+        Else
+            Return RNG.RollDice(CharacterType.AttackDice)
+        End If
     End Function
 
     Public Function Equip(itemType As ItemType) As String

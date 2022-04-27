@@ -3,31 +3,8 @@
         If tokens.Any Then
             Return TopicalHelp(String.Join(" "c, tokens))
         Else
-            Return "Commands: 
-- about : tells you about this game
-- around : turn around
-- characters : shows list of characters
-- create : creates something(use `help create` for more)
-- delete : deletes something(use `help delete` for more)
-- drop (item name) : drops an item from yer current charactor to the ground
-- dungeons : shows list of dungeons
-- enemies : shows a list of enemies faced by the current character
-- enter (dungeon name) : causes yer current character to enter the dungeon
-- equip (item) : causes yer current 
-- fight : fights yer enemies!
-- ground : lists items (if any) on the ground near you
-- help : <== you are here
-- inventory : lists items in yer current character's inventory
-- left : turn left
-- look : shows the current POV for the current character
-- move : move ahead
-- rest : recover energy
-- right : turn right
-- status : shows current character's status
-- switch character (name) : switches yer active character
-- take all : yer current character picks up all of the items from the ground
-- take (item name) : yer current character picks up an item from the ground
-- use (item name) : yer current character uses an item"
+            Return "Check out the GitHub Wiki!
+https://github.com/playdeezgames/DungeonCrawlingDiscordBot/wiki"
         End If
     End Function
 

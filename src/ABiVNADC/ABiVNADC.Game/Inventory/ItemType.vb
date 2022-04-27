@@ -116,6 +116,7 @@ Public Module ItemTypeExtensions
     Public Function ParseItemType(itemTypeName As String) As ItemType
         Return AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
     End Function
+
     <Extension>
     Function EquipSlot(itemType As ItemType) As EquipSlot
         Select Case itemType
@@ -124,5 +125,18 @@ Public Module ItemTypeExtensions
             Case Else
                 Return EquipSlot.None
         End Select
+    End Function
+
+    <Extension>
+    Function AttackDice(itemType As ItemType) As String
+        Select Case itemType
+            Case Else
+                Return "0d1"
+        End Select
+    End Function
+
+    <Extension>
+    Function HasAttackDice(itemType As ItemType) As Boolean
+        Return itemType.AttackDice <> "0d1"
     End Function
 End Module
