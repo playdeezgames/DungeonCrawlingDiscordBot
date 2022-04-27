@@ -20,6 +20,7 @@
     Private Function HandleCombatRest(player As Player) As String
         Dim character = player.Character
         Dim restAmount = character.CombatRest()
-        Return FightProcessor.DoCounterAttacks(player, $"{character.Name} recovers {restAmount} energy.")
+        Return FightProcessor.DoCounterAttacks(player, $"{character.Name} recovers {restAmount} energy.
+")
     End Function
 End Module

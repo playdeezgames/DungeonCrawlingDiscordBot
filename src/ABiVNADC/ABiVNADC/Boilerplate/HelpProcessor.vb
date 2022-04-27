@@ -8,7 +8,7 @@
 - around : turn around
 - characters : shows list of characters
 - create : creates something(use `help create` for more)
-- delete : deletest something(use `help delete` for more)
+- delete : deletes something(use `help delete` for more)
 - drop (item name) : drops an item from yer current charactor to the ground
 - dungeons : shows list of dungeons
 - enemies : shows a list of enemies faced by the current character
