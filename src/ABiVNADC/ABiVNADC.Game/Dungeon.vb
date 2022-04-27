@@ -16,16 +16,16 @@
             Return New Location(DungeonData.ReadLocation(Id).Value)
         End Get
     End Property
-    Shared Sub Create(player As Player, dungeonName As String, mazeColumns As Long, mazeRows As Long)
+    Shared Sub Create(player As Player, dungeonName As String, mazeColumns As Long, mazeRows As Long, difficulty As Difficulty)
         Dim maze As Maze(Of Direction) = CreateMaze(mazeColumns, mazeRows)
         Dim locationIds As List(Of Long) = CreateLocations(maze)
         PopulateDoors(maze, locationIds)
-        PopulateItems(locationIds)
-        PopulateCreatures(locationIds)
-        CreateDungeon(player, dungeonName, locationIds)
+        PopulateItems(locationIds, difficulty)
+        PopulateCreatures(locationIds, difficulty)
+        CreateDungeon(player, dungeonName, locationIds, difficulty)
     End Sub
 
-    Private Shared Sub PopulateCreatures(locationIds As List(Of Long))
+    Private Shared Sub PopulateCreatures(locationIds As List(Of Long), difficulty As Difficulty)
         For Each characterType In AllCharacterTypes
             Dim spawnCount = characterType.SpawnCount(locationIds.LongCount)
             While spawnCount > 0
@@ -36,7 +36,7 @@
         Next
     End Sub
 
-    Private Shared Sub PopulateItems(locationIds As List(Of Long))
+    Private Shared Sub PopulateItems(locationIds As List(Of Long), difficulty As Difficulty)
         For Each itemType In AllItemTypes
             Dim spawnCount = RNG.RollDice(itemType.SpawnCount(locationIds.LongCount))
             While spawnCount > 0
@@ -47,8 +47,8 @@
         Next
     End Sub
 
-    Private Shared Sub CreateDungeon(player As Player, dungeonName As String, locationIds As List(Of Long))
-        Dim dungeonId = DungeonData.Create(player.Id, dungeonName, locationIds(0))
+    Private Shared Sub CreateDungeon(player As Player, dungeonName As String, locationIds As List(Of Long), difficulty As Difficulty)
+        Dim dungeonId = DungeonData.Create(player.Id, dungeonName, locationIds(0), difficulty)
         For Each locationId In locationIds
             DungeonLocationData.Write(dungeonId, locationId)
         Next

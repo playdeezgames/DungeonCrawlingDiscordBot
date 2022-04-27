@@ -107,11 +107,11 @@ Public Class Player
         End If
     End Sub
 
-    Public Function CreateDungeon(dungeonName As String) As Boolean
+    Public Function CreateDungeon(dungeonName As String, difficulty As Difficulty) As Boolean
         Const MazeColumns As Long = 4
         Const MazeRows As Long = 4
         If DungeonData.ReadCountForPlayerAndDungeonName(Id, dungeonName) = 0 Then
-            Dungeon.Create(Me, dungeonName, MazeColumns, MazeRows)
+            Dungeon.Create(Me, dungeonName, MazeColumns, MazeRows, difficulty)
             Return True
         End If
         Return False

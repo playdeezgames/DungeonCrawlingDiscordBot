@@ -4,6 +4,7 @@
     Friend Const DungeonNameColumn = "DungeonName"
     Friend Const StartingLocationIdColumn = "StartingLocationId"
     Friend Const PlayerIdColumn = PlayerData.PlayerIdColumn
+    Friend Const DifficultyColumn = "Difficulty"
     Friend Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery(
@@ -13,6 +14,7 @@
                 [{DungeonNameColumn}] TEXT NOT NULL,
                 [{PlayerIdColumn}] INT NOT NULL,
                 [{StartingLocationIdColumn}] INT NOT NULL,
+                [{DifficultyColumn}] INT NOT NULL,
                 UNIQUE([{PlayerIdColumn}],[{DungeonNameColumn}])
             );")
     End Sub
@@ -26,23 +28,26 @@
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, StartingLocationIdColumn)
     End Function
 
-    Public Function Create(playerId As Long, dungeonName As String, startingLocationId As Long) As Long
+    Public Function Create(playerId As Long, dungeonName As String, startingLocationId As Long, difficulty As Long) As Long
         Initialize()
         ExecuteNonQuery(
             $"INSERT INTO [{TableName}]
             (
                 [{PlayerIdColumn}],
                 [{DungeonNameColumn}],
-                [{StartingLocationIdColumn}]
+                [{StartingLocationIdColumn}],
+                [{DifficultyColumn}]
             ) 
             VALUES
             (
                 @{PlayerIdColumn},
                 @{DungeonNameColumn},
-                @{StartingLocationIdColumn}
+                @{StartingLocationIdColumn},
+                @{DifficultyColumn}
             );",
             MakeParameter($"@{PlayerIdColumn}", playerId),
             MakeParameter($"@{DungeonNameColumn}", dungeonName),
+            MakeParameter($"@{DifficultyColumn}", difficulty),
             MakeParameter($"@{StartingLocationIdColumn}", startingLocationId))
         Return LastInsertRowId
     End Function

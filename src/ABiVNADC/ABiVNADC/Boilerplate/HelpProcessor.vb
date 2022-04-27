@@ -34,7 +34,8 @@
             Case $"{CreateText}"
                 Return $"Create Command:
 - create character (name) : creates a character with that name. no duplicates
-- create dungeon (name) : creates a dungeon with that name. no duplicates"
+- create dungeon (difficulty) (name) : creates a dungeon with that name. no duplicates
+    difficulty levels: yermom, easy, normal, difficult, too"
             Case $"{DeleteText}"
                 Return $"Create Command:
 - delete character (name) : creates a character with that name. no duplicates

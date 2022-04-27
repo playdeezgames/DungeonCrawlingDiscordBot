@@ -69,7 +69,7 @@ Public Module ItemTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
-    Function ParseItemType(itemTypeName As String) As ItemType
+    Public Function ParseItemType(itemTypeName As String) As ItemType
         Return AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
     End Function
     <Extension>
