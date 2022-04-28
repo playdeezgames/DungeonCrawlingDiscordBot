@@ -224,8 +224,14 @@ Public Class Character
         AddFatigue(fatigue)
         Dim attackRoll = RollAttack()
         builder.AppendLine($"{FullName} rolls an attack of {attackRoll}!")
+        For Each weaponType In ReduceWeaponDurability(attackRoll)
+            builder.AppendLine($"{FullName}'s {weaponType.Name} breaks!")
+        Next
         Dim defendRoll = defender.RollDefend
         builder.AppendLine($"{defender.FullName} rolls a defend of {defendRoll}!")
+        For Each armorType In defender.ReduceArmorDurability(defendRoll)
+            builder.AppendLine($"{defender.FullName}'s {armorType.Name} breaks!")
+        Next
         Dim damageRoll = If(attackRoll > defendRoll, attackRoll - defendRoll, 0)
         If damageRoll > 0 Then
             defender.AddWounds(damageRoll)
@@ -241,6 +247,38 @@ Public Class Character
             builder.AppendLine($"{defender.FullName} has {defender.Health} health left.")
         End If
         Return builder.ToString
+    End Function
+
+    Private Function ReduceArmorDurability(defendRoll As Long) As IEnumerable(Of ItemType)
+        Dim result As New List(Of ItemType)
+        While defendRoll > 0
+            Dim items = Equipment.Values.Where(Function(x) x.HasArmorDurability).ToList
+            If items.Any Then
+                Dim item = RNG.FromList(items)
+                Dim itemType = item.ItemType
+                If item.ReduceArmorDurability(1) Then
+                    result.Add(itemType)
+                End If
+            End If
+            defendRoll -= 1
+        End While
+        Return result
+    End Function
+
+    Private Function ReduceWeaponDurability(attackRoll As Long) As IEnumerable(Of ItemType)
+        Dim result As New List(Of ItemType)
+        While attackRoll > 0
+            Dim items = Equipment.Values.Where(Function(x) x.HasWeaponDurability).ToList
+            If items.Any Then
+                Dim item = RNG.FromList(items)
+                Dim itemType = item.ItemType
+                If item.ReduceWeaponDurability(1) Then
+                    result.Add(itemType)
+                End If
+            End If
+            attackRoll -= 1
+        End While
+        Return result
     End Function
 
     Public Sub AddFatigue(fatigue As Long)

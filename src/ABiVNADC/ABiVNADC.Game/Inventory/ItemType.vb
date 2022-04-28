@@ -244,4 +244,46 @@ Public Module ItemTypeExtensions
     Function HasDefendDice(itemType As ItemType) As Boolean
         Return itemType.DefendDice <> "0d1"
     End Function
+
+    <Extension>
+    Function HasArmorDurability(itemType As ItemType) As Boolean
+        Return itemType.ArmorDurability > 0
+    End Function
+
+    <Extension>
+    Function ArmorDurability(itemType As ItemType) As Long
+        Select Case itemType
+            Case ItemType.ChainMail
+                Return 20
+            Case ItemType.Helmet
+                Return 5
+            Case ItemType.PlateMail
+                Return 35
+            Case ItemType.Trousers
+                Return 1
+            Case ItemType.Shield
+                Return 10
+            Case Else
+                Return 0
+        End Select
+    End Function
+
+    <Extension>
+    Function HasWeaponDurability(itemType As ItemType) As Boolean
+        Return itemType.WeaponDurability > 0
+    End Function
+
+    <Extension>
+    Function WeaponDurability(itemType As ItemType) As Long
+        Select Case itemType
+            Case ItemType.Dagger
+                Return 5
+            Case ItemType.ShortSword
+                Return 10
+            Case ItemType.LongSword
+                Return 20
+            Case Else
+                Return 0
+        End Select
+    End Function
 End Module

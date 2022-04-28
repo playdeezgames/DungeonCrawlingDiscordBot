@@ -16,6 +16,7 @@
     End Function
 
     Public Sub Clear(itemId As Long)
+        ItemDepletionData.Clear(itemId)
         InventoryItemData.ClearForItem(itemId)
         ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
     End Sub
