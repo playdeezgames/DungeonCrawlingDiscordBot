@@ -1,0 +1,1 @@
+docker cp sad_roentgen:/app/local.db ./export.db
