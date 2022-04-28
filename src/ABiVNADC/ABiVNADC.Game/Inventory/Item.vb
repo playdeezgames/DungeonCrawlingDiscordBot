@@ -32,4 +32,16 @@
             Return ItemType.AttackDice
         End Get
     End Property
+
+    ReadOnly Property HasDefendDice As Boolean
+        Get
+            Return ItemType.HasDefendDice
+        End Get
+    End Property
+
+    ReadOnly Property DefendDice As String
+        Get
+            Return ItemType.DefendDice
+        End Get
+    End Property
 End Class

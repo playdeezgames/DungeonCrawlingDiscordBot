@@ -71,8 +71,19 @@ Public Class Character
         Return Item.FromId(itemId)
     End Function
 
+    ReadOnly Property DefendDice As String
+        Get
+            Dim defendItems = Equipment.Values.Where(Function(x) x.HasDefendDice)
+            If defendItems.Any Then
+                Return $"{CharacterType.DefendDice}+{String.Join("+"c, defendItems.Select(Function(x) x.DefendDice))}"
+            Else
+                Return CharacterType.DefendDice
+            End If
+        End Get
+    End Property
+
     Public Function RollDefend() As Long
-        Return RNG.RollDice(CharacterType.DefendDice)
+        Return RNG.RollDice(DefendDice)
     End Function
 
     Public Function NonCombatRest() As String

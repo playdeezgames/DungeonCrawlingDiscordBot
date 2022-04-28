@@ -8,6 +8,11 @@ Public Enum ItemType
     Dagger
     ShortSword
     LongSword
+    Trousers
+    Helmet
+    Shield
+    ChainMail
+    PlateMail
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From
@@ -17,7 +22,12 @@ Public Module ItemTypeExtensions
             ItemType.Potion,
             ItemType.Dagger,
             ItemType.ShortSword,
-            ItemType.LongSword
+            ItemType.LongSword,
+            ItemType.Shield,
+            ItemType.ChainMail,
+            ItemType.PlateMail,
+            ItemType.Helmet,
+            ItemType.Trousers
         }
     Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of ItemType, Func(Of Long, String))) From
         {
@@ -30,7 +40,12 @@ Public Module ItemTypeExtensions
                     {ItemType.Potion, Function(locationCount) $"{locationCount * 2 \ 3}d1"},
                     {ItemType.Dagger, Function(locationCount) $"{locationCount \ 2}d1"},
                     {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 3}d1"},
-                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 6}d1"}
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 6}d1"},
+                    {ItemType.Shield, Function(locationCount) $"4d2/2"},
+                    {ItemType.Helmet, Function(locationCount) $"4d2/2"},
+                    {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
+                    {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
+                    {ItemType.Trousers, Function(locationCount) $"1d1"}
                 }
             },
             {
@@ -42,7 +57,12 @@ Public Module ItemTypeExtensions
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 2}d1"},
                     {ItemType.Dagger, Function(locationCount) $"{locationCount \ 4}d1"},
                     {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 6}d1"},
-                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 8}d1"}
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 8}d1"},
+                    {ItemType.Shield, Function(locationCount) $"4d2/2"},
+                    {ItemType.Helmet, Function(locationCount) $"4d2/2"},
+                    {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
+                    {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
+                    {ItemType.Trousers, Function(locationCount) $"1d1"}
                 }
             },
             {
@@ -54,7 +74,12 @@ Public Module ItemTypeExtensions
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 3}d1"},
                     {ItemType.Dagger, Function(locationCount) $"{locationCount \ 6}d1"},
                     {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 8}d1"},
-                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 12}d1"}
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 12}d1"},
+                    {ItemType.Shield, Function(locationCount) $"4d2/2"},
+                    {ItemType.Helmet, Function(locationCount) $"4d2/2"},
+                    {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
+                    {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
+                    {ItemType.Trousers, Function(locationCount) $"1d1"}
                 }
             },
             {
@@ -66,7 +91,12 @@ Public Module ItemTypeExtensions
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 4}d1"},
                     {ItemType.Dagger, Function(locationCount) $"{locationCount \ 8}d1"},
                     {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 12}d1"},
-                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 6}d2/2"}
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 6}d2/2"},
+                    {ItemType.Shield, Function(locationCount) $"4d2/2"},
+                    {ItemType.Helmet, Function(locationCount) $"4d2/2"},
+                    {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
+                    {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
+                    {ItemType.Trousers, Function(locationCount) $"1d1"}
                 }
             },
             {
@@ -78,7 +108,12 @@ Public Module ItemTypeExtensions
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 6}d1"},
                     {ItemType.Dagger, Function(locationCount) $"{locationCount \ 12}d1"},
                     {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 6}d2/2"},
-                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 8}d2/2"}
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 8}d2/2"},
+                    {ItemType.Shield, Function(locationCount) $"4d2/2"},
+                    {ItemType.Helmet, Function(locationCount) $"4d2/2"},
+                    {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
+                    {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
+                    {ItemType.Trousers, Function(locationCount) $"1d1"}
                 }
             }
         }
@@ -103,6 +138,16 @@ Public Module ItemTypeExtensions
                 Return "short sword"
             Case ItemType.LongSword
                 Return "long sword"
+            Case ItemType.Trousers
+                Return "trousers"
+            Case ItemType.Helmet
+                Return "helmet"
+            Case ItemType.Shield
+                Return "shield"
+            Case ItemType.ChainMail
+                Return "chain mail"
+            Case ItemType.PlateMail
+                Return "plate mail"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -146,6 +191,14 @@ Public Module ItemTypeExtensions
         Select Case itemType
             Case ItemType.Dagger, ItemType.ShortSword, ItemType.LongSword
                 Return EquipSlot.Weapon
+            Case ItemType.Trousers
+                Return EquipSlot.Legs
+            Case ItemType.Helmet
+                Return EquipSlot.Head
+            Case ItemType.ChainMail, ItemType.PlateMail
+                Return EquipSlot.Body
+            Case ItemType.Shield
+                Return EquipSlot.Shield
             Case Else
                 Return EquipSlot.None
         End Select
@@ -168,5 +221,27 @@ Public Module ItemTypeExtensions
     <Extension>
     Function HasAttackDice(itemType As ItemType) As Boolean
         Return itemType.AttackDice <> "0d1"
+    End Function
+
+
+    <Extension>
+    Function DefendDice(itemType As ItemType) As String
+        Select Case itemType
+            Case ItemType.Helmet
+                Return "1d3/3"
+            Case ItemType.Shield
+                Return "1d3/3"
+            Case ItemType.ChainMail
+                Return "1d3/3"
+            Case ItemType.PlateMail
+                Return "1d3/3+1d3/3"
+            Case Else
+                Return "0d1"
+        End Select
+    End Function
+
+    <Extension>
+    Function HasDefendDice(itemType As ItemType) As Boolean
+        Return itemType.DefendDice <> "0d1"
     End Function
 End Module
