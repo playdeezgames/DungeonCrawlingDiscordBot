@@ -6,9 +6,19 @@ Public Enum ItemType
     Food
     Potion
     Dagger
+    ShortSword
+    LongSword
 End Enum
 Public Module ItemTypeExtensions
-    Public ReadOnly AllItemTypes As New List(Of ItemType) From {ItemType.LeaveStone, ItemType.Food, ItemType.Potion, ItemType.Dagger}
+    Public ReadOnly AllItemTypes As New List(Of ItemType) From
+        {
+            ItemType.LeaveStone,
+            ItemType.Food,
+            ItemType.Potion,
+            ItemType.Dagger,
+            ItemType.ShortSword,
+            ItemType.LongSword
+        }
     Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of ItemType, Func(Of Long, String))) From
         {
             {
@@ -18,7 +28,9 @@ Public Module ItemTypeExtensions
                     {ItemType.LeaveStone, Function(locationCount) "1d1"},
                     {ItemType.Food, Function(locationCount) $"{locationCount * 3 \ 2}d1"},
                     {ItemType.Potion, Function(locationCount) $"{locationCount * 2 \ 3}d1"},
-                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 2}d1"}
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 2}d1"},
+                    {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 3}d1"},
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 6}d1"}
                 }
             },
             {
@@ -28,7 +40,9 @@ Public Module ItemTypeExtensions
                     {ItemType.LeaveStone, Function(locationCount) "1d1"},
                     {ItemType.Food, Function(locationCount) $"{locationCount}d1"},
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 2}d1"},
-                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 4}d1"}
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 4}d1"},
+                    {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 6}d1"},
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 8}d1"}
                 }
             },
             {
@@ -38,7 +52,9 @@ Public Module ItemTypeExtensions
                     {ItemType.LeaveStone, Function(locationCount) "1d1"},
                     {ItemType.Food, Function(locationCount) $"{locationCount * 3 \ 4}d1"},
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 3}d1"},
-                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 6}d1"}
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 6}d1"},
+                    {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 8}d1"},
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 12}d1"}
                 }
             },
             {
@@ -48,7 +64,9 @@ Public Module ItemTypeExtensions
                     {ItemType.LeaveStone, Function(locationCount) "1d1"},
                     {ItemType.Food, Function(locationCount) $"{locationCount * 2 \ 3}d1"},
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 4}d1"},
-                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 8}d1"}
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 8}d1"},
+                    {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 12}d1"},
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 6}d2/2"}
                 }
             },
             {
@@ -58,7 +76,9 @@ Public Module ItemTypeExtensions
                     {ItemType.LeaveStone, Function(locationCount) "1d1"},
                     {ItemType.Food, Function(locationCount) $"{locationCount * 1 \ 2}d1"},
                     {ItemType.Potion, Function(locationCount) $"{locationCount \ 6}d1"},
-                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 12}d1"}
+                    {ItemType.Dagger, Function(locationCount) $"{locationCount \ 12}d1"},
+                    {ItemType.ShortSword, Function(locationCount) $"{locationCount \ 6}d2/2"},
+                    {ItemType.LongSword, Function(locationCount) $"{locationCount \ 8}d2/2"}
                 }
             }
         }
@@ -79,6 +99,10 @@ Public Module ItemTypeExtensions
                 Return "potion"
             Case ItemType.Dagger
                 Return "dagger"
+            Case ItemType.ShortSword
+                Return "short sword"
+            Case ItemType.LongSword
+                Return "long sword"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -120,7 +144,7 @@ Public Module ItemTypeExtensions
     <Extension>
     Function EquipSlot(itemType As ItemType) As EquipSlot
         Select Case itemType
-            Case ItemType.Dagger
+            Case ItemType.Dagger, ItemType.ShortSword, ItemType.LongSword
                 Return EquipSlot.Weapon
             Case Else
                 Return EquipSlot.None
@@ -130,6 +154,12 @@ Public Module ItemTypeExtensions
     <Extension>
     Function AttackDice(itemType As ItemType) As String
         Select Case itemType
+            Case ItemType.Dagger
+                Return "1d2/2"
+            Case ItemType.ShortSword
+                Return "1d2/2+1d2/2"
+            Case ItemType.LongSword
+                Return "1d2/2+1d2/2+1d2/2"
             Case Else
                 Return "0d1"
         End Select

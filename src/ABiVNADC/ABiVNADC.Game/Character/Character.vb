@@ -31,14 +31,19 @@ Public Class Character
         End Get
     End Property
 
+    ReadOnly Property AttackDice As String
+        Get
+            Dim attackItems = Equipment.Values.Where(Function(x) x.HasAttackDice)
+            If attackItems.Any Then
+                Return String.Join("+"c, attackItems.Select(Function(x) x.AttackDice))
+            Else
+                Return CharacterType.AttackDice
+            End If
+        End Get
+    End Property
+
     Public Function RollAttack() As Long
-        'TODO: equipped items with attack roles? USE THAT!
-        Dim attackItems = Equipment.Values.Where(Function(x) x.HasAttackDice)
-        If attackItems.Any Then
-            Return RNG.RollDice(String.Join("+"c, attackItems.Select(Function(x) x.AttackDice)))
-        Else
-            Return RNG.RollDice(CharacterType.AttackDice)
-        End If
+        Return RNG.RollDice(AttackDice)
     End Function
 
     Public Function Equip(itemType As ItemType) As String

@@ -35,6 +35,7 @@
         For Each item In location.Inventory.Items
             character.Inventory.Add(item)
         Next
-        Return DoCounterAttacks(player, $"{character.FullName} takes everything.")
+        Return DoCounterAttacks(player, $"{character.FullName} takes everything.
+")
     End Function
 End Module
