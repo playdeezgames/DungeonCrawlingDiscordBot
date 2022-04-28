@@ -125,4 +125,41 @@ Public Module Store
         initializer()
         ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnName}]=@{columnName};", MakeParameter($"@{columnName}", columnValue))
     End Sub
+
+    Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
+        initializer()
+        ExecuteNonQuery(
+            $"REPLACE INTO [{tableName}]
+            (
+                [{firstColumnName}],
+                [{secondColumnName}]
+            ) 
+            VALUES
+            (
+                @{firstColumnName},
+                @{secondColumnName}
+            );",
+            MakeParameter($"@{firstColumnName}", firstColumnValue),
+            MakeParameter($"@{secondColumnName}", secondColumnValue))
+    End Sub
+
+    Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn)
+        initializer()
+        ExecuteNonQuery(
+            $"REPLACE INTO [{tableName}]
+            (
+                [{firstColumnName}],
+                [{secondColumnName}],
+                [{thirdColumnName}]
+            ) 
+            VALUES
+            (
+                @{firstColumnName},
+                @{secondColumnName},
+                @{thirdColumnName}
+            );",
+            MakeParameter($"@{firstColumnName}", firstColumnValue),
+            MakeParameter($"@{secondColumnName}", secondColumnValue),
+            MakeParameter($"@{thirdColumnName}", thirdColumnValue))
+    End Sub
 End Module

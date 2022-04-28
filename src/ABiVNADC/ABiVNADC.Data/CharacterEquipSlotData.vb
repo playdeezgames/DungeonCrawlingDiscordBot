@@ -35,12 +35,7 @@
     End Sub
 
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long)
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]([{CharacterIdColumn}],[{EquipSlotColumn}],[{ItemIdColumn}]) VALUES(@{CharacterIdColumn},@{EquipSlotColumn},@{ItemIdColumn});",
-            MakeParameter($"@{CharacterIdColumn}", characterId),
-            MakeParameter($"@{EquipSlotColumn}", equipSlot),
-            MakeParameter($"@{ItemIdColumn}", itemId))
+        ReplaceRecord(AddressOf Initialize, TableName, CharacterIdColumn, characterId, EquipSlotColumn, equipSlot, ItemIdColumn, itemId)
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
