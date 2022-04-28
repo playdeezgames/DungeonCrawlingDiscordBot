@@ -13,6 +13,8 @@
             Return $"{dungeonName} doesn't exist!"
         End If
         character.Location = dungeon.StartingLocation
-        Return $"{character.Name} enters {dungeonName}."
+        Dim canvas = DrawPOV(player)
+        Return $"{character.FullName} enters {dungeonName}.
+```{canvas.Output}```"
     End Function
 End Module
