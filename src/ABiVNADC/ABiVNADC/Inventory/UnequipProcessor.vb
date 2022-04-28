@@ -4,17 +4,13 @@
         If character Is Nothing Then
             Return "You don't have a current character."
         End If
-        Dim equipSlotName = StitchTokens(tokens)
-        Dim equipSlot = ParseEquipSlot(equipSlotName)
-        If equipSlot = EquipSlot.None Then
-            Return $"I don't know where yer `{equipSlotName}` is."
+        Dim itemTypeName = StitchTokens(tokens)
+        Dim itemType = ParseItemType(itemTypeName)
+        Dim equipSlots = character.Equipment.Where(Function(x) x.Value.ItemType = itemType)
+        If Not equipSlots.Any Then
+            Return $"You don't have any `{itemTypeName}` equipped."
         End If
-        Dim equipment = character.Equipment
-        If Not equipment.ContainsKey(equipSlot) Then
-            Return "You don't have anything equipped there."
-        End If
-        Dim item = equipment(equipSlot)
-        Dim output As String = character.Unequip(item)
+        Dim output As String = character.Unequip(equipSlots.First.Value)
         Return DoCounterAttacks(player, output)
     End Function
 End Module
