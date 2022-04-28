@@ -1,4 +1,6 @@
-﻿Public Enum EquipSlot
+﻿Imports System.Runtime.CompilerServices
+
+Public Enum EquipSlot
     None
     Weapon
     Shield
@@ -15,4 +17,21 @@ Public Module EquipSlotExtensions
             EquipSlot.Body,
             EquipSlot.Legs
         }
+    <Extension>
+    Function Name(equipSlot As EquipSlot) As String
+        Select Case equipSlot
+            Case EquipSlot.Body
+                Return "body"
+            Case EquipSlot.Head
+                Return "head"
+            Case EquipSlot.Legs
+                Return "legs"
+            Case EquipSlot.Shield
+                Return "shield"
+            Case EquipSlot.Weapon
+                Return "weapon"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
 End Module

@@ -44,4 +44,10 @@
             Return ItemType.DefendDice
         End Get
     End Property
+
+    ReadOnly Property Name As String
+        Get
+            Return ItemType.Name
+        End Get
+    End Property
 End Class
