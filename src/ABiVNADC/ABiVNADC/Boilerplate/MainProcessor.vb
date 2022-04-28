@@ -23,6 +23,7 @@
             {StatusText, AddressOf StatusProcessor.Run},
             {SwitchText, AddressOf SwitchProcessor.Run},
             {TakeText, AddressOf TakeProcessor.Run},
+            {UnequipText, AddressOf UnequipProcessor.Run},
             {UseText, AddressOf UseProcessor.Run}
         }
 

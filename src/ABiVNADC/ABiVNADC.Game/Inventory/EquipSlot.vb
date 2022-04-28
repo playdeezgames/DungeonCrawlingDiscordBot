@@ -34,4 +34,8 @@ Public Module EquipSlotExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+
+    Public Function ParseEquipSlot(equipSlotName As String) As EquipSlot
+        Return AllEquipSlots.SingleOrDefault(Function(x) x.Name = equipSlotName)
+    End Function
 End Module

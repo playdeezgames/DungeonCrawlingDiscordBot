@@ -31,6 +31,12 @@ Public Class Character
         End Get
     End Property
 
+    Public Function Unequip(item As Item) As String
+        CharacterEquipSlotData.ClearForItem(item.Id)
+        Inventory.Add(item)
+        Return $"{FullName} unequips {item.Name}"
+    End Function
+
     ReadOnly Property AttackDice As String
         Get
             Dim attackItems = Equipment.Values.Where(Function(x) x.HasAttackDice)

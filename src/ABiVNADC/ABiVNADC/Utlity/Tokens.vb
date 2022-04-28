@@ -24,5 +24,9 @@
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"
     Friend Const TakeText = "take"
+    Friend Const UnequipText = "unequip"
     Friend Const UseText = "use"
+    Function StitchTokens(tokens As IEnumerable(Of String)) As String
+        Return String.Join(" "c, tokens)
+    End Function
 End Module
