@@ -6,6 +6,7 @@
     Friend Const CharacterLevelColumn = "CharacterLevel"
     Friend Const WoundsColumn = "Wounds"
     Friend Const FatigueColumn = "Fatigue"
+    Friend Const ExperienceColumn = "Experience"
 
     Friend Sub Initialize()
         ExecuteNonQuery(
@@ -16,7 +17,8 @@
                 [{CharacterTypeColumn}] INT NOT NULL,
                 [{CharacterLevelColumn}] INT NOT NULL,
                 [{WoundsColumn}] INT NOT NULL DEFAULT (0),
-                [{FatigueColumn}] INT NOT NULL DEFAULT (0)
+                [{FatigueColumn}] INT NOT NULL DEFAULT (0),
+                [{ExperienceColumn}] INT NOT NULL DEFAULT (0)
             );")
     End Sub
 
@@ -77,4 +79,20 @@
     Public Sub WriteFatigue(characterId As Long, fatigue As Long)
         WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FatigueColumn, fatigue)
     End Sub
+
+    Public Function ReadExperience(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, ExperienceColumn)
+    End Function
+
+    Public Sub WriteExperience(characterId As Long, experience As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, ExperienceColumn, experience)
+    End Sub
+
+    Public Sub WriteCharacterLevel(characterId As Long, level As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn, level)
+    End Sub
+
+    Public Function ReadCharacterLevel(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn)
+    End Function
 End Module

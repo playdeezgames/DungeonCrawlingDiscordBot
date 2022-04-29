@@ -33,19 +33,19 @@ Public Module CharacterTypeExtensions
     Function MaximumHealth(characterType As CharacterType, level As Long) As Long
         Select Case characterType
             Case CharacterType.N00b
-                Return 5
+                Return 5 + level
             Case CharacterType.Goblin
-                Return 1
+                Return 1 + level
             Case CharacterType.Orc
-                Return 1
+                Return 1 + level
             Case CharacterType.Skeleton
-                Return 1
+                Return 1 + level
             Case CharacterType.Zombie
-                Return 1
+                Return 1 + level
             Case CharacterType.MinionFish
-                Return 1
+                Return 1 + level
             Case CharacterType.BossFish
-                Return 5
+                Return 5 + level
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -55,19 +55,19 @@ Public Module CharacterTypeExtensions
     Function MaximumEnergy(characterType As CharacterType, level As Long) As Long
         Select Case characterType
             Case CharacterType.N00b
-                Return 7
+                Return 7 + level
             Case CharacterType.Goblin
-                Return 10
+                Return 10 + level
             Case CharacterType.Orc
-                Return 8
+                Return 8 + level
             Case CharacterType.Skeleton
-                Return 1
+                Return 1 + level
             Case CharacterType.Zombie
-                Return 1
+                Return 1 + level
             Case CharacterType.MinionFish
-                Return 8
+                Return 8 + level
             Case CharacterType.BossFish
-                Return 12
+                Return 12 + level
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -325,5 +325,47 @@ Public Module CharacterTypeExtensions
             Return drops
         End If
         Return New Dictionary(Of ItemType, String)
+    End Function
+    <Extension>
+    Function ExperiencePointValue(characterType As CharacterType, level As Long) As Long
+        Select Case characterType
+            Case CharacterType.N00b
+                Return 5
+            Case CharacterType.Goblin
+                Return 1
+            Case CharacterType.Orc
+                Return 1
+            Case CharacterType.Skeleton
+                Return 1
+            Case CharacterType.Zombie
+                Return 1
+            Case CharacterType.MinionFish
+                Return 1
+            Case CharacterType.BossFish
+                Return 5
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
+    <Extension>
+    Function ExperienceGoal(characterType As CharacterType, level As Long) As Long
+        Select Case characterType
+            Case CharacterType.N00b
+                Return 10 * (level + 1)
+            Case CharacterType.Goblin
+                Return 10 * (level + 1)
+            Case CharacterType.Orc
+                Return 10 * (level + 1)
+            Case CharacterType.Skeleton
+                Return 10 * (level + 1)
+            Case CharacterType.Zombie
+                Return 10 * (level + 1)
+            Case CharacterType.MinionFish
+                Return 10 * (level + 1)
+            Case CharacterType.BossFish
+                Return 10 * (level + 1)
+            Case Else
+                Throw New NotImplementedException
+        End Select
     End Function
 End Module

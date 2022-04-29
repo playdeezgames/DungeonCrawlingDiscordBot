@@ -264,12 +264,51 @@ Public Class Character
         End If
         If defender.IsDead Then
             builder.AppendLine($"{FullName} kills {defender.FullName}")
+            If AddExperience(defender.ExperiencePointValue) Then
+                builder.AppendLine($"{FullName} is now level {ExperienceLevel}!")
+            End If
             defender.Destroy()
         Else
             builder.AppendLine($"{defender.FullName} has {defender.Health} health left.")
         End If
         Return builder.ToString
     End Function
+
+    Private Function AddExperience(experiencePoints As Long) As Boolean
+        Dim result = False
+        Dim newExperience = ReadExperience(Id).Value + experiencePoints
+        While newExperience >= ExperienceGoal
+            newExperience -= ExperienceGoal
+            LevelUp()
+            result = True
+        End While
+        CharacterData.WriteExperience(Id, newExperience)
+        Return result
+    End Function
+
+    Private Sub LevelUp()
+        CharacterData.WriteCharacterLevel(Id, ExperienceLevel + 1)
+        AddWounds(Health - MaximumHealth)
+        AddFatigue(Energy - MaximumEnergy)
+    End Sub
+
+    ReadOnly Property ExperiencePointValue As Long
+        Get
+            Return CharacterType.ExperiencePointValue(ExperienceLevel)
+        End Get
+    End Property
+
+    ReadOnly Property ExperienceLevel As Long
+        Get
+            Return CharacterData.ReadCharacterLevel(Id).value
+        End Get
+    End Property
+
+    ReadOnly Property ExperienceGoal As Long
+        Get
+            Return CharacterType.ExperienceGoal(ExperienceLevel)
+        End Get
+    End Property
 
     Private Function ReduceArmorDurability(defendRoll As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
