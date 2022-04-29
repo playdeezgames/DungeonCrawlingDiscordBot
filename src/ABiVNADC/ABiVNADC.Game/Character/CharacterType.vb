@@ -269,4 +269,29 @@ Public Module CharacterTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+    Private ReadOnly LootDropTable As New Dictionary(Of CharacterType, Dictionary(Of ItemType, String)) From
+        {
+            {
+                CharacterType.Goblin,
+                New Dictionary(Of ItemType, String) From
+                {
+                    {ItemType.Food, "1d4/4"}
+                }
+            },
+            {
+                CharacterType.Orc,
+                New Dictionary(Of ItemType, String) From
+                {
+                    {ItemType.Food, "1d2/2"}
+                }
+            }
+        }
+    <Extension>
+    Function LootDrops(characterType As CharacterType) As Dictionary(Of ItemType, String)
+        Dim drops As New Dictionary(Of ItemType, String)
+        If LootDropTable.TryGetValue(characterType, drops) Then
+            Return drops
+        End If
+        Return New Dictionary(Of ItemType, String)
+    End Function
 End Module

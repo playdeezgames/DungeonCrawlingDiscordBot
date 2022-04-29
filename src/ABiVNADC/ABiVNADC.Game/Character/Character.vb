@@ -138,14 +138,35 @@ Public Class Character
 
     Public Sub Destroy()
         If HasLocation Then
-            For Each entry In Equipment.Values
-                Location.Inventory.Add(entry)
-            Next
-            For Each item In Inventory.Items
-                Location.Inventory.Add(item)
-            Next
+            DropEquipment()
+            DropInventory()
+            DropLoot()
         End If
         CharacterData.Clear(Id)
+    End Sub
+
+    Private Sub DropLoot()
+        Dim lootDrops = CharacterType.LootDrops
+        Dim inventory = Location.Inventory
+        For Each entry In lootDrops
+            Dim counter = RNG.RollDice(entry.Value)
+            While counter > 0
+                counter -= 1
+                inventory.Add(Item.Create(entry.Key))
+            End While
+        Next
+    End Sub
+
+    Private Sub DropInventory()
+        For Each item In Inventory.Items
+            Location.Inventory.Add(item)
+        Next
+    End Sub
+
+    Private Sub DropEquipment()
+        For Each item In Equipment.Values
+            Location.Inventory.Add(item)
+        Next
     End Sub
 
     Property Location As Location
