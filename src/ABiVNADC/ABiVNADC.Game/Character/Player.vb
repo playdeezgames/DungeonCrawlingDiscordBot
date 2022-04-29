@@ -24,6 +24,16 @@ Public Class Player
         End Get
     End Property
 
+    Public Function Run() As Boolean
+        If Not InCombat Then
+            Return False
+        End If
+        SetDirection(RNG.FromList(AllDirections))
+        Dim currentLocationId = Character.Location.Id
+        Move()
+        Return currentLocationId <> Character.Location.Id
+    End Function
+
     Public Function DeleteDungeon(dungeonName As String) As Boolean
         Dim dungeon = Dungeons.FirstOrDefault(Function(x) x.Name = dungeonName)
         If dungeon IsNot Nothing Then

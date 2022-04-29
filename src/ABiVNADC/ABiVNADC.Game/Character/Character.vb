@@ -20,6 +20,7 @@ Public Class Character
             Return Location IsNot Nothing
         End Get
     End Property
+
     ReadOnly Property Equipment As Dictionary(Of EquipSlot, Item)
         Get
             Dim equippedItemIds As Dictionary(Of Long, Long) = CharacterEquipSlotData.ReadForCharacter(Id)

@@ -20,6 +20,7 @@
             {MoveText, AddressOf MoveProcessor.Run},
             {RestText, AddressOf RestProcessor.Run},
             {RightText, AddressOf RightProcessor.Run},
+            {RunText, AddressOf RunProcessor.Run},
             {StatusText, AddressOf StatusProcessor.Run},
             {SwitchText, AddressOf SwitchProcessor.Run},
             {TakeText, AddressOf TakeProcessor.Run},
