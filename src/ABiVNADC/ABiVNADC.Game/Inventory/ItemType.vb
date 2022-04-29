@@ -13,6 +13,13 @@ Public Enum ItemType
     Shield
     ChainMail
     PlateMail
+    GoblinEar
+    OrcTooth
+    SkullFragment
+    ZombieTaint
+    FishScale
+    FishFin
+    Jools
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From
@@ -27,7 +34,14 @@ Public Module ItemTypeExtensions
             ItemType.ChainMail,
             ItemType.PlateMail,
             ItemType.Helmet,
-            ItemType.Trousers
+            ItemType.Trousers,
+            ItemType.GoblinEar,
+            ItemType.OrcTooth,
+            ItemType.SkullFragment,
+            ItemType.ZombieTaint,
+            ItemType.FishFin,
+            ItemType.FishScale,
+            ItemType.Jools
         }
     Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of ItemType, Func(Of Long, String))) From
         {
@@ -45,7 +59,14 @@ Public Module ItemTypeExtensions
                     {ItemType.Helmet, Function(locationCount) $"4d2/2"},
                     {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
                     {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
-                    {ItemType.Trousers, Function(locationCount) $"1d1"}
+                    {ItemType.Trousers, Function(locationCount) $"1d1"},
+                    {ItemType.GoblinEar, Function(x) "0d1"},
+                    {ItemType.OrcTooth, Function(x) "0d1"},
+                    {ItemType.SkullFragment, Function(x) "0d1"},
+                    {ItemType.ZombieTaint, Function(x) "0d1"},
+                    {ItemType.FishScale, Function(x) "0d1"},
+                    {ItemType.FishFin, Function(x) "0d1"},
+                    {ItemType.Jools, Function(x) "0d1"}
                 }
             },
             {
@@ -62,7 +83,14 @@ Public Module ItemTypeExtensions
                     {ItemType.Helmet, Function(locationCount) $"4d2/2"},
                     {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
                     {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
-                    {ItemType.Trousers, Function(locationCount) $"1d1"}
+                    {ItemType.Trousers, Function(locationCount) $"1d1"},
+                    {ItemType.GoblinEar, Function(x) "0d1"},
+                    {ItemType.OrcTooth, Function(x) "0d1"},
+                    {ItemType.SkullFragment, Function(x) "0d1"},
+                    {ItemType.ZombieTaint, Function(x) "0d1"},
+                    {ItemType.FishScale, Function(x) "0d1"},
+                    {ItemType.FishFin, Function(x) "0d1"},
+                    {ItemType.Jools, Function(x) "0d1"}
                 }
             },
             {
@@ -79,7 +107,14 @@ Public Module ItemTypeExtensions
                     {ItemType.Helmet, Function(locationCount) $"4d2/2"},
                     {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
                     {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
-                    {ItemType.Trousers, Function(locationCount) $"1d1"}
+                    {ItemType.Trousers, Function(locationCount) $"1d1"},
+                    {ItemType.GoblinEar, Function(x) "0d1"},
+                    {ItemType.OrcTooth, Function(x) "0d1"},
+                    {ItemType.SkullFragment, Function(x) "0d1"},
+                    {ItemType.ZombieTaint, Function(x) "0d1"},
+                    {ItemType.FishScale, Function(x) "0d1"},
+                    {ItemType.FishFin, Function(x) "0d1"},
+                    {ItemType.Jools, Function(x) "0d1"}
                 }
             },
             {
@@ -96,7 +131,14 @@ Public Module ItemTypeExtensions
                     {ItemType.Helmet, Function(locationCount) $"4d2/2"},
                     {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
                     {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
-                    {ItemType.Trousers, Function(locationCount) $"1d1"}
+                    {ItemType.Trousers, Function(locationCount) $"1d1"},
+                    {ItemType.GoblinEar, Function(x) "0d1"},
+                    {ItemType.OrcTooth, Function(x) "0d1"},
+                    {ItemType.SkullFragment, Function(x) "0d1"},
+                    {ItemType.ZombieTaint, Function(x) "0d1"},
+                    {ItemType.FishScale, Function(x) "0d1"},
+                    {ItemType.FishFin, Function(x) "0d1"},
+                    {ItemType.Jools, Function(x) "0d1"}
                 }
             },
             {
@@ -113,7 +155,14 @@ Public Module ItemTypeExtensions
                     {ItemType.Helmet, Function(locationCount) $"4d2/2"},
                     {ItemType.ChainMail, Function(locationCount) $"2d2/2"},
                     {ItemType.PlateMail, Function(locationCount) $"1d2/2"},
-                    {ItemType.Trousers, Function(locationCount) $"1d1"}
+                    {ItemType.Trousers, Function(locationCount) $"1d1"},
+                    {ItemType.GoblinEar, Function(x) "0d1"},
+                    {ItemType.OrcTooth, Function(x) "0d1"},
+                    {ItemType.SkullFragment, Function(x) "0d1"},
+                    {ItemType.ZombieTaint, Function(x) "0d1"},
+                    {ItemType.FishScale, Function(x) "0d1"},
+                    {ItemType.FishFin, Function(x) "0d1"},
+                    {ItemType.Jools, Function(x) "0d1"}
                 }
             }
         }
@@ -148,6 +197,20 @@ Public Module ItemTypeExtensions
                 Return "chain mail"
             Case ItemType.PlateMail
                 Return "plate mail"
+            Case ItemType.GoblinEar
+                Return "goblin ear"
+            Case ItemType.OrcTooth
+                Return "orc tooth"
+            Case ItemType.SkullFragment
+                Return "skull fragment"
+            Case ItemType.ZombieTaint
+                Return "zombie taint"
+            Case ItemType.FishFin
+                Return "fish fin"
+            Case ItemType.FishScale
+                Return "fish scale"
+            Case ItemType.Jools
+                Return "jools"
             Case Else
                 Throw New NotImplementedException
         End Select

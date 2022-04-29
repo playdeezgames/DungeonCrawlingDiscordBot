@@ -275,14 +275,46 @@ Public Module CharacterTypeExtensions
                 CharacterType.Goblin,
                 New Dictionary(Of ItemType, String) From
                 {
-                    {ItemType.Food, "1d4/4"}
+                    {ItemType.Food, "1d4/4"},
+                    {ItemType.GoblinEar, "1d2/2"}
+                }
+            },
+            {
+                CharacterType.Skeleton,
+                New Dictionary(Of ItemType, String) From
+                {
+                    {ItemType.SkullFragment, "1d4/4"}
+                }
+            },
+            {
+                CharacterType.Zombie,
+                New Dictionary(Of ItemType, String) From
+                {
+                    {ItemType.ZombieTaint, "1d6/6"}
+                }
+            },
+            {
+                CharacterType.MinionFish,
+                New Dictionary(Of ItemType, String) From
+                {
+                    {ItemType.FishScale, "2d2"}
+                }
+            },
+            {
+                CharacterType.BossFish,
+                New Dictionary(Of ItemType, String) From
+                {
+                    {ItemType.FishScale, "3d3"},
+                    {ItemType.FishFin, "1d2/2"},
+                    {ItemType.Jools, "1d1"}
                 }
             },
             {
                 CharacterType.Orc,
                 New Dictionary(Of ItemType, String) From
                 {
-                    {ItemType.Food, "1d2/2"}
+                    {ItemType.Food, "1d2/2"},
+                    {ItemType.OrcTooth, "1d3/3"}
                 }
             }
         }
