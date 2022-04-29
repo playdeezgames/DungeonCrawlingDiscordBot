@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /src/ABiVNADC/ABiVNADC/My Project/launchSettings.json
 /src/ABiVNADC/run.sh
+/src/ABiVNADC/export.db

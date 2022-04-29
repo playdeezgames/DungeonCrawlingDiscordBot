@@ -1,1 +1,1 @@
-docker cp sad_roentgen:/app/local.db ./export.db
+docker cp yermom:/app/local.db ./export.db
