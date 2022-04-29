@@ -15,6 +15,7 @@
             Dim character = player.Character
             builder.AppendLine($"Name: {character.Name}")
             builder.AppendLine($"Class: {character.CharacterType.Name}(level {character.Level})")
+            builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
             builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
             builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
             Dim equipment = character.Equipment

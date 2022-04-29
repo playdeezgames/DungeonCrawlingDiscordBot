@@ -95,7 +95,7 @@
     Private Shared Function CreateLocations(maze As Maze(Of Direction)) As List(Of Long)
         Dim locationIds As New List(Of Long)
         While locationIds.Count < maze.Columns * maze.Rows
-            locationIds.Add(LocationData.Create())
+            locationIds.Add(LocationData.Create(LocationType.Dungeon))
         End While
 
         Return locationIds

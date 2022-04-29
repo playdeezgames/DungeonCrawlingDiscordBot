@@ -274,9 +274,15 @@ Public Class Character
         Return builder.ToString
     End Function
 
+    ReadOnly Property Experience As Long
+        Get
+            Return ReadExperience(Id).Value
+        End Get
+    End Property
+
     Private Function AddExperience(experiencePoints As Long) As Boolean
         Dim result = False
-        Dim newExperience = ReadExperience(Id).Value + experiencePoints
+        Dim newExperience = Experience + experiencePoints
         While newExperience >= ExperienceGoal
             newExperience -= ExperienceGoal
             LevelUp()
