@@ -43,9 +43,9 @@
         End If
         Dim enemy = location.Enemy(character)
         If enemy IsNot Nothing Then
-            canvas.Render(16, 2, enemy.CharacterType.Image, "."c)
+            enemy.CharacterType.Sprite.Render(canvas)
         ElseIf location.HasFeatures Then
-            canvas.Render(22, 2, location.Features.First.FeatureType.Image, "."c)
+            location.Features.First.FeatureType.Sprite.Render(canvas)
         ElseIf Not location.Inventory.IsEmpty Then
             canvas.Render(22, 13, Chest, "."c)
         End If

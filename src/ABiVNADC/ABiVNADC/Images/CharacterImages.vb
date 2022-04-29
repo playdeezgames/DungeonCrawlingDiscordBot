@@ -91,6 +91,13 @@ Module CharacterImages
                                                 ".....@.@....",
                                                 "....@@.@...."
                                             }))
+
+    Private ReadOnly GoblinSprite As New Sprite(Goblin, 16, 2, "."c)
+    Private ReadOnly OrcSprite As New Sprite(Orc, 16, 2, "."c)
+    Private ReadOnly SkeletonSprite As New Sprite(Skeleton, 16, 2, "."c)
+    Private ReadOnly ZombieSprite As New Sprite(Zombie, 16, 2, "."c)
+    Private ReadOnly MinionFishSprite As New Sprite(MinionFish, 16, 2, "."c)
+    Private ReadOnly BossFishSprite As New Sprite(BossFish, 16, 2, "."c)
     Private Function Enhance(lines As List(Of String)) As List(Of String)
         Dim result As New List(Of String)
         For Each line In lines
@@ -110,20 +117,20 @@ Module CharacterImages
         Return builder.ToString
     End Function
     <Extension>
-    Function Image(characterType As CharacterType) As TextCanvas
+    Function Sprite(characterType As CharacterType) As Sprite
         Select Case characterType
             Case CharacterType.Goblin
-                Return Goblin
+                Return GoblinSprite
             Case CharacterType.Orc
-                Return Orc
+                Return OrcSprite
             Case CharacterType.Skeleton
-                Return Skeleton
+                Return SkeletonSprite
             Case CharacterType.Zombie
-                Return Zombie
+                Return ZombieSprite
             Case CharacterType.MinionFish
-                Return MinionFish
+                Return MinionFishSprite
             Case CharacterType.BossFish
-                Return BossFish
+                Return BossFishSprite
             Case Else
                 Throw New NotImplementedException
         End Select
