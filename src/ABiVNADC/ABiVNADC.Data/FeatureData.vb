@@ -16,6 +16,21 @@
             );")
     End Sub
 
+    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
+        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, LocationIdColumn, locationId)
+    End Function
+
+    Public Function ReadCountForLocation(locationId As Long) As Long
+        Initialize()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT 
+                COUNT(1) 
+            FROM [{TableName}] 
+            WHERE 
+                [{LocationIdColumn}]=@{LocationIdColumn};",
+            MakeParameter($"@{LocationIdColumn}", locationId)).Value
+    End Function
+
     Public Function ReadFeatureType(featureId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, FeatureTypeColumn)
     End Function

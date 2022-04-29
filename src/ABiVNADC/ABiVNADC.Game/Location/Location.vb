@@ -21,7 +21,13 @@
 
     ReadOnly Property Features As IEnumerable(Of Feature)
         Get
-            Throw New NotImplementedException
+            Return FeatureData.ReadForLocation(Id).Select(Function(id) New Feature(id))
+        End Get
+    End Property
+
+    ReadOnly Property HasFeatures As Boolean
+        Get
+            Return FeatureData.ReadCountForLocation(Id) > 0
         End Get
     End Property
 
