@@ -19,6 +19,12 @@
         End Get
     End Property
 
+    ReadOnly Property Features As IEnumerable(Of Feature)
+        Get
+            Throw New NotImplementedException
+        End Get
+    End Property
+
     ReadOnly Property Inventory As Inventory
         Get
             Dim inventoryId As Long? = LocationInventoryData.ReadForLocation(Id)

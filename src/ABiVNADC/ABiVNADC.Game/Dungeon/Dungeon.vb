@@ -25,7 +25,20 @@
         PopulateDoors(maze, locationIds)
         PopulateItems(locationIds, difficulty)
         PopulateCreatures(locationIds, difficulty)
+        PopulateFeatures(locationIds, difficulty)
         CreateDungeon(player, dungeonName, locationIds, difficulty)
+    End Sub
+
+    Private Shared Sub PopulateFeatures(locationIds As List(Of Long), difficulty As Difficulty)
+        For Each featureType In AllFeatureTypes
+            Dim spawnCount = RNG.RollDice(featureType.SpawnCount(locationIds.LongCount, difficulty))
+            While spawnCount > 0
+                Dim location = New Location(RNG.FromList(locationIds))
+                'TODO: what if the feature type already exists at a given location?
+                Feature.Create(location, featureType)
+                spawnCount -= 1
+            End While
+        Next
     End Sub
 
     Private Shared Sub PopulateCreatures(locationIds As List(Of Long), difficulty As Difficulty)
@@ -97,7 +110,6 @@
         While locationIds.Count < maze.Columns * maze.Rows
             locationIds.Add(LocationData.Create(LocationType.Dungeon))
         End While
-
         Return locationIds
     End Function
 End Class

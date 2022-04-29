@@ -12,6 +12,7 @@
     Friend Const EnemiesText = "enemies"
     Friend Const EnterText = "enter"
     Friend Const EquipText = "equip"
+    Friend Const FeaturesText = "features"
     Friend Const FightText = "fight"
     Friend Const GroundText = "ground"
     Friend Const HelpText = "help"
