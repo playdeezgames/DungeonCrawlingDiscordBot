@@ -21,6 +21,10 @@ Public Class Character
         End Get
     End Property
 
+    Public Function Create(characterType As CharacterType, level As Long) As Character
+        Return New Character(CharacterData.Create(characterType.RandomName, characterType, level))
+    End Function
+
     ReadOnly Property Equipment As Dictionary(Of EquipSlot, Item)
         Get
             Dim equippedItemIds As Dictionary(Of Long, Long) = CharacterEquipSlotData.ReadForCharacter(Id)
@@ -31,6 +35,21 @@ Public Class Character
             Return result
         End Get
     End Property
+
+    Public Function BribeEnemy(enemy As Character, itemType As ItemType) As String
+        Dim item = Inventory.Items.FirstOrDefault(Function(x) x.ItemType = itemType)
+        If item Is Nothing OrElse Not enemy.TakesBribe(itemType) Then
+            Return $"{FullName} fails to bribe {enemy.FullName}."
+        End If
+        Dim result = $"{FullName} successfully bribes {enemy.FullName}."
+        item.Destroy()
+        enemy.Destroy()
+        Return result
+    End Function
+
+    Public Function TakesBribe(itemType As ItemType) As Boolean
+        Return CharacterType.TakesBribe(itemType)
+    End Function
 
     Public Function Unequip(item As Item) As String
         CharacterEquipSlotData.ClearForItem(item.Id)

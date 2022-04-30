@@ -368,4 +368,18 @@ Public Module CharacterTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
+    Private ReadOnly ValidBribes As New HashSet(Of Tuple(Of CharacterType, ItemType)) From
+        {
+            New Tuple(Of CharacterType, ItemType)(CharacterType.Goblin, ItemType.Food),
+            New Tuple(Of CharacterType, ItemType)(CharacterType.Goblin, ItemType.Potion),
+            New Tuple(Of CharacterType, ItemType)(CharacterType.Goblin, ItemType.Jools),
+            New Tuple(Of CharacterType, ItemType)(CharacterType.Orc, ItemType.Food),
+            New Tuple(Of CharacterType, ItemType)(CharacterType.Orc, ItemType.Potion),
+            New Tuple(Of CharacterType, ItemType)(CharacterType.Orc, ItemType.Jools),
+            New Tuple(Of CharacterType, ItemType)(CharacterType.MinionFish, ItemType.Food)
+        }
+    <Extension>
+    Function TakesBribe(characterType As CharacterType, itemType As ItemType) As Boolean
+        Return ValidBribes.Any(Function(x) x.Item1 = characterType AndAlso x.Item2 = itemType)
+    End Function
 End Module

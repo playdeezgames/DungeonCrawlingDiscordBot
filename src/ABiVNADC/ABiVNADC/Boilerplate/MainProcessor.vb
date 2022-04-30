@@ -3,6 +3,7 @@
         {
             {AboutText, AddressOf AboutProcessor.Run},
             {AroundText, AddressOf AroundProcessor.Run},
+            {BribeText, AddressOf BribeProcessor.Run},
             {CharactersText, AddressOf CharactersProcessor.Run},
             {CreateText, AddressOf CreateProcessor.Run},
             {DeleteText, AddressOf DeleteProcessor.Run},

@@ -2,6 +2,7 @@
     Friend Const AboutText = "about"
     Friend Const AllText = "all"
     Friend Const AroundText = "around"
+    Friend Const BribeText = "bribe"
     Friend Const CharacterText = "character"
     Friend Const CharactersText = "characters"
     Friend Const CreateText = "create"
