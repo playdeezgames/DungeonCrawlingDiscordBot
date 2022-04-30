@@ -1,5 +1,5 @@
 ﻿<Collection("One Big Collection")>
-Public Class InventoryManipulationTests
+Public Class TakeCommandTests
     Public Sub New()
         Store.Reset()
         MainProcessor.Run(DummyPlayer, "create character test")
