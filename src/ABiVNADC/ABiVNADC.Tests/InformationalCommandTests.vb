@@ -1,26 +1,14 @@
 <Collection("One Big Collection")>
-Public Class UnknownCommandTests
-    <Fact>
-    Sub ShouldReturnAMessageAndNotExplode()
+Public Class InformationalCommandTests
+    <Theory>
+    <InlineData("eat melba toast")>
+    <InlineData("about")>
+    <InlineData("help")>
+    <InlineData("characters")>
+    <InlineData("dungeons")>
+    Sub ShouldReturnAMessageAndNotExplode(command As String)
         Store.Reset()
-        Dim actual = MainProcessor.Run(DummyPlayer, "eat melba toast")
+        Dim actual = MainProcessor.Run(DummyPlayer, command)
         actual.ShouldNotBeEmpty()
     End Sub
 End Class
-Public Class AboutCommandTests
-    <Fact>
-    Sub ShouldReturnAMessageAndNotExplode()
-        Store.Reset()
-        Dim actual = MainProcessor.Run(DummyPlayer, "about")
-        actual.ShouldNotBeEmpty()
-    End Sub
-End Class
-Public Class HelpCommandTests
-    <Fact>
-    Sub ShouldReturnAMessageAndNotExplode()
-        Store.Reset()
-        Dim actual = MainProcessor.Run(DummyPlayer, "help")
-        actual.ShouldNotBeEmpty()
-    End Sub
-End Class
-
