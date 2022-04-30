@@ -60,8 +60,6 @@ Public Class Player
 
     Public Function UseItem(item As Item) As String
         Select Case item.ItemType
-            Case ItemType.LeaveStone
-                Return UseLeaveStone(item)
             Case ItemType.Food
                 Return UseFood(item)
             Case ItemType.Potion
@@ -97,12 +95,6 @@ Public Class Player
         builder.Append($"{Character.FullName} now has {Character.Energy} energy.")
         item.Destroy()
         Return builder.ToString
-    End Function
-
-    Private Function UseLeaveStone(item As Item) As String
-        Character.Location.Inventory.Add(item)
-        Character.Location = Nothing
-        Return ItemType.LeaveStone.UseMessage(Character.FullName)
     End Function
 
     Public Sub TurnLeft()
