@@ -18,7 +18,7 @@ Public Class NavigationNonCombatInPlayTests
         MainProcessor.Run(DummyPlayer, command).ShouldNotBeEmpty
     End Sub
     <Fact>
-    Public Sub ShouldAllowMoving(command As String)
+    Public Sub ShouldAllowMoving()
         DummyPlayer.SetDirection(DummyPlayer.Character.Location.Routes.Keys.First)
         MainProcessor.Run(DummyPlayer, "move").ShouldNotBeEmpty
     End Sub
