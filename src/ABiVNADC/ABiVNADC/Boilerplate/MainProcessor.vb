@@ -1,5 +1,5 @@
 ﻿Public Module MainProcessor
-    Private processorTable As New Dictionary(Of String, Func(Of Player, IEnumerable(Of String), String)) From
+    Private ProcessorTable As New Dictionary(Of String, Func(Of Player, IEnumerable(Of String), String)) From
         {
             {AboutText, AddressOf AboutProcessor.Run},
             {AroundText, AddressOf AroundProcessor.Run},
@@ -30,22 +30,13 @@
             {UseText, AddressOf UseProcessor.Run}
         }
 
-    Public Property ProcessorTable1 As Dictionary(Of String, Func(Of Player, IEnumerable(Of String), String))
-        Get
-            Return processorTable
-        End Get
-        Set(value As Dictionary(Of String, Func(Of Player, IEnumerable(Of String), String)))
-            processorTable = value
-        End Set
-    End Property
-
     Private Function UnknownCommand(player As Player, tokens As IEnumerable(Of String)) As String
         Return "Dunno what you mean. Mebbe you need to try `help`?"
     End Function
     Function Run(player As Player, command As String) As String
         Dim tokens = command.Split(" "c)
         Dim processor As Func(Of Player, IEnumerable(Of String), String) = AddressOf UnknownCommand
-        If Not ProcessorTable1.TryGetValue(tokens.First.ToLower, processor) Then
+        If Not ProcessorTable.TryGetValue(tokens.First.ToLower, processor) Then
             processor = AddressOf UnknownCommand
         End If
         Return processor(player, tokens.Skip(1))
