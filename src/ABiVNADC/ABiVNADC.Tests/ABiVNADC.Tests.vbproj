@@ -44,6 +44,7 @@
 	  <Import Include="ABiVNADC.Game" />
 	  <Import Include="Shouldly" />
 	  <Import Include="SPLORR.Data" />
+	  <Import Include="Xunit" />
   </ItemGroup>
 
 </Project>
