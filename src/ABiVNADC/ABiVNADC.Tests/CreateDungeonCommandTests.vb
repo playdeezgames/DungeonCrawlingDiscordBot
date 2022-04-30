@@ -1,4 +1,5 @@
-﻿Public Class CreateDungeonCommandTests
+﻿<Collection("One Big Collection")>
+Public Class CreateDungeonCommandTests
     <Theory>
     <InlineData("yermom")>
     <InlineData("easy")>
@@ -8,13 +9,13 @@
     Public Sub ShouldCreateADungeon(size As String)
         Store.Reset()
         MainProcessor.Run(DummyPlayer, $"create dungeon {size} test")
-        Store.ExecuteScalar(Of Long)("SELECT COUNT(1) FROM [Dungeons];").ShouldBe(1)
+        DummyPlayer.Dungeons.Count.ShouldBe(1)
     End Sub
     <Fact>
     Public Sub ShouldPreventDuplicateNamedDungeons()
         Store.Reset()
         MainProcessor.Run(DummyPlayer, $"create dungeon yermom test")
         MainProcessor.Run(DummyPlayer, $"create dungeon yermom test")
-        Store.ExecuteScalar(Of Long)("SELECT COUNT(1) FROM [Dungeons];").ShouldBe(1)
+        DummyPlayer.Dungeons.Count.ShouldBe(1)
     End Sub
 End Class

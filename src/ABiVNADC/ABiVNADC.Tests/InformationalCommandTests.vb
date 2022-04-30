@@ -1,3 +1,4 @@
+<Collection("One Big Collection")>
 Public Class UnknownCommandTests
     <Fact>
     Sub ShouldReturnAMessageAndNotExplode()
