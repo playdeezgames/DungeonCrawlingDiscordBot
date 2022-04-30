@@ -14,7 +14,12 @@ Public Class NavigationNonCombatInPlayTests
     <InlineData("around")>
     <InlineData("left")>
     <InlineData("right")>
-    Public Sub ShouldAllowNavigation(command As String)
+    Public Sub ShouldAllowTurning(command As String)
         MainProcessor.Run(DummyPlayer, command).ShouldNotBeEmpty
+    End Sub
+    <Fact>
+    Public Sub ShouldAllowMoving(command As String)
+        DummyPlayer.SetDirection(DummyPlayer.Character.Location.Routes.Keys.First)
+        MainProcessor.Run(DummyPlayer, "move").ShouldNotBeEmpty
     End Sub
 End Class
