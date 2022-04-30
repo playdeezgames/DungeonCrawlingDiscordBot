@@ -1,5 +1,5 @@
 ﻿<Collection("One Big Collection")>
-Public Class NavigationInPlayTests
+Public Class NavigationNonCombatInPlayTests
     Public Sub New()
         Store.Reset()
         MainProcessor.Run(DummyPlayer, "create character test")
