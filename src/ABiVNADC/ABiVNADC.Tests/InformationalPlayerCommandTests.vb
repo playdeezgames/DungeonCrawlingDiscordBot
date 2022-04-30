@@ -1,5 +1,5 @@
 <Collection("One Big Collection")>
-Public Class InformationalCommandTests
+Public Class InformationalPlayerCommandTests
     <Theory>
     <InlineData("eat melba toast")>
     <InlineData("about")>
