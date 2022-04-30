@@ -19,7 +19,9 @@ Public Class NavigationNonCombatInPlayTests
     End Sub
     <Fact>
     Public Sub ShouldAllowMoving()
+        Dim originalLocationId = DummyPlayer.Character.Location.Id
         DummyPlayer.SetDirection(DummyPlayer.Character.Location.Routes.Keys.First)
         MainProcessor.Run(DummyPlayer, "move").ShouldNotBeEmpty
+        DummyPlayer.Character.Location.Id.ShouldNotBe(originalLocationId)
     End Sub
 End Class
