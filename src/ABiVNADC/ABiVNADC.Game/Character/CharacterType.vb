@@ -10,67 +10,238 @@ Public Enum CharacterType
     MinionFish
     BossFish
 End Enum
+Friend Structure CharacterTypeDescriptor
+    Friend Name As String
+    Friend MaximumHealth As Func(Of Long, Long)
+    Friend MaximumEnergy As Func(Of Long, Long)
+    Friend NameTable As List(Of String)
+    Friend IsEnemy As Boolean
+    Friend AttackDice As String
+    Friend DefendDice As String
+    Friend FightEnergyCost As Long
+    Friend CombatRestRoll As String
+    Friend SpawnCount As Func(Of Difficulty, Func(Of Long, Long))
+End Structure
 Public Module CharacterTypeExtensions
-    Private ReadOnly nameTable As New Dictionary(Of CharacterType, String) From
+    Private ReadOnly Descriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
-            {CharacterType.N00b, "n00b"},
-            {CharacterType.Goblin, "goblin"},
-            {CharacterType.Orc, "orc"},
-            {CharacterType.Skeleton, "skeleton"},
-            {CharacterType.Zombie, "zombie"},
-            {CharacterType.MinionFish, "minion fish"},
-            {CharacterType.BossFish, "boss fish"}
+            {
+                CharacterType.N00b,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "n00b",
+                    .MaximumHealth = Function(l) l + 5,
+                    .MaximumEnergy = Function(l) l + 7,
+                    .NameTable = Names.Human,
+                    .IsEnemy = False,
+                    .AttackDice = "1d3/3",
+                    .DefendDice = "1d3/3+1d3/3",
+                    .FightEnergyCost = 1,
+                    .CombatRestRoll = "1d1+1d2/2",
+                    .SpawnCount = Function(difficulty) Function(x) 0
+                }
+            },
+            {
+                CharacterType.Goblin,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "goblin",
+                    .MaximumHealth = Function(l) l + 1,
+                    .MaximumEnergy = Function(l) l + 10,
+                    .NameTable = Names.Goblin,
+                    .IsEnemy = True,
+                    .AttackDice = "1d3/3+1d3/3",
+                    .DefendDice = "1d6/6",
+                    .FightEnergyCost = 1,
+                    .CombatRestRoll = "1d2/2+1d2/2+1d2/2+1d2/2",
+                    .SpawnCount = Function(difficulty)
+                                      Select Case difficulty
+                                          Case Difficulty.Yermom
+                                              Return Function(x) x * 1 \ 4
+                                          Case Difficulty.Easy
+                                              Return Function(x) x * 1 \ 3
+                                          Case Difficulty.Normal
+                                              Return Function(x) x * 1 \ 2
+                                          Case Difficulty.Difficult
+                                              Return Function(x) x * 2 \ 3
+                                          Case Difficulty.Too
+                                              Return Function(x) x * 3 \ 4
+                                          Case Else
+                                              Throw New NotImplementedException
+                                      End Select
+                                  End Function
+                }
+            },
+            {
+                CharacterType.Orc,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "orc",
+                    .MaximumHealth = Function(l) l + 1,
+                    .MaximumEnergy = Function(l) l + 8,
+                    .NameTable = Names.Orc,
+                    .IsEnemy = True,
+                    .AttackDice = "1d3/3+1d3/3+1d3/3",
+                    .DefendDice = "1d6/6+1d6/6",
+                    .FightEnergyCost = 1,
+                    .CombatRestRoll = "1d2/2+1d2/2+1d2/2",
+                    .SpawnCount = Function(difficulty)
+                                      Select Case difficulty
+                                          Case Difficulty.Yermom
+                                              Return Function(x) x * 1 \ 6
+                                          Case Difficulty.Easy
+                                              Return Function(x) x * 1 \ 4
+                                          Case Difficulty.Normal
+                                              Return Function(x) x * 1 \ 3
+                                          Case Difficulty.Difficult
+                                              Return Function(x) x * 1 \ 2
+                                          Case Difficulty.Too
+                                              Return Function(x) x * 2 \ 3
+                                          Case Else
+                                              Throw New NotImplementedException
+                                      End Select
+                                  End Function
+                }
+            },
+            {
+                CharacterType.Skeleton,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "skeleton",
+                    .MaximumHealth = Function(l) l + 1,
+                    .MaximumEnergy = Function(l) 1,
+                    .NameTable = Names.Human,
+                    .IsEnemy = True,
+                    .AttackDice = "1d3/3+1d3/3",
+                    .DefendDice = "1d6/6+1d6/6",
+                    .FightEnergyCost = 0,
+                    .CombatRestRoll = "0d1",
+                    .SpawnCount = Function(difficulty)
+                                      Select Case difficulty
+                                          Case Difficulty.Yermom
+                                              Return Function(x) x * 1 \ 3
+                                          Case Difficulty.Easy
+                                              Return Function(x) x * 1 \ 2
+                                          Case Difficulty.Normal
+                                              Return Function(x) x * 2 \ 3
+                                          Case Difficulty.Difficult
+                                              Return Function(x) x * 3 \ 4
+                                          Case Difficulty.Too
+                                              Return Function(x) x
+                                          Case Else
+                                              Throw New NotImplementedException
+                                      End Select
+                                  End Function
+                }
+            },
+            {
+                CharacterType.Zombie,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "zombie",
+                    .MaximumHealth = Function(l) l + 1,
+                    .MaximumEnergy = Function(l) 1,
+                    .NameTable = Names.Human,
+                    .IsEnemy = True,
+                    .AttackDice = "1d3/3+1d3/3",
+                    .DefendDice = "1d6/6+1d6/6+1d6/6",
+                    .FightEnergyCost = 0,
+                    .CombatRestRoll = "0d1",
+                    .SpawnCount = Function(difficulty)
+                                      Select Case difficulty
+                                          Case Difficulty.Yermom
+                                              Return Function(x) x * 1 \ 6
+                                          Case Difficulty.Easy
+                                              Return Function(x) x * 1 \ 4
+                                          Case Difficulty.Normal
+                                              Return Function(x) x * 1 \ 3
+                                          Case Difficulty.Difficult
+                                              Return Function(x) x * 1 \ 2
+                                          Case Difficulty.Too
+                                              Return Function(x) x * 2 \ 3
+                                          Case Else
+                                              Throw New NotImplementedException
+                                      End Select
+                                  End Function
+                }
+            },
+            {
+                CharacterType.MinionFish,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "minion fish",
+                    .MaximumHealth = Function(l) l + 1,
+                    .MaximumEnergy = Function(l) l + 8,
+                    .NameTable = Names.Fish,
+                    .IsEnemy = True,
+                    .AttackDice = "1d3/3+1d3/3",
+                    .DefendDice = "1d6/6+1d6/6+1d6/6",
+                    .FightEnergyCost = 1,
+                    .CombatRestRoll = "1d2/2+1d2/2+1d2/2",
+                    .SpawnCount = Function(difficulty)
+                                      Select Case difficulty
+                                          Case Difficulty.Yermom
+                                              Return Function(x) x * 1 \ 1
+                                          Case Difficulty.Easy
+                                              Return Function(x) x * 1 \ 1
+                                          Case Difficulty.Normal
+                                              Return Function(x) x * 1 \ 1
+                                          Case Difficulty.Difficult
+                                              Return Function(x) x * 1 \ 1
+                                          Case Difficulty.Too
+                                              Return Function(x) x * 1 \ 1
+                                          Case Else
+                                              Throw New NotImplementedException
+                                      End Select
+                                  End Function
+                }
+            },
+            {
+                CharacterType.BossFish,
+                New CharacterTypeDescriptor With
+                {
+                    .Name = "boss fish",
+                    .MaximumHealth = Function(l) l + 5,
+                    .MaximumEnergy = Function(l) l + 4,
+                    .NameTable = Names.Fish,
+                    .IsEnemy = True,
+                    .AttackDice = "1d3/3+1d3/3+1d3/3+1d3/3+1d3/3",
+                    .DefendDice = "1d6/6+1d6/6+1d6/6+1d6/6+1d6/6",
+                    .FightEnergyCost = 1,
+                    .CombatRestRoll = "1d2/2+1d2/2+1d2/2+1d2/2",
+                    .SpawnCount = Function(difficulty)
+                                      Select Case difficulty
+                                          Case Difficulty.Yermom
+                                              Return Function(x) 0
+                                          Case Difficulty.Easy
+                                              Return Function(x) 0
+                                          Case Difficulty.Normal
+                                              Return Function(x) 1
+                                          Case Difficulty.Difficult
+                                              Return Function(x) 2
+                                          Case Difficulty.Too
+                                              Return Function(x) 4
+                                          Case Else
+                                              Throw New NotImplementedException
+                                      End Select
+                                  End Function
+                }
+            }
         }
 
     <Extension>
     Function Name(characterType As CharacterType) As String
-        Dim result As String = Nothing
-        nameTable.TryGetValue(characterType, result)
-        Return result
+        Return Descriptors(characterType).Name
     End Function
 
     <Extension>
     Function MaximumHealth(characterType As CharacterType, level As Long) As Long
-        Select Case characterType
-            Case CharacterType.N00b
-                Return 5 + level
-            Case CharacterType.Goblin
-                Return 1 + level
-            Case CharacterType.Orc
-                Return 1 + level
-            Case CharacterType.Skeleton
-                Return 1 + level
-            Case CharacterType.Zombie
-                Return 1 + level
-            Case CharacterType.MinionFish
-                Return 1 + level
-            Case CharacterType.BossFish
-                Return 5 + level
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).MaximumHealth(level)
     End Function
 
     <Extension>
     Function MaximumEnergy(characterType As CharacterType, level As Long) As Long
-        Select Case characterType
-            Case CharacterType.N00b
-                Return 7 + level
-            Case CharacterType.Goblin
-                Return 10 + level
-            Case CharacterType.Orc
-                Return 8 + level
-            Case CharacterType.Skeleton
-                Return 1 + level
-            Case CharacterType.Zombie
-                Return 1 + level
-            Case CharacterType.MinionFish
-                Return 8 + level
-            Case CharacterType.BossFish
-                Return 12 + level
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).MaximumEnergy(level)
     End Function
 
     Public ReadOnly AllCharacterTypes As New List(Of CharacterType) From
@@ -83,192 +254,41 @@ Public Module CharacterTypeExtensions
             CharacterType.Skeleton,
             CharacterType.N00b
         }
-    Private ReadOnly SpawnerTable As New Dictionary(Of Difficulty, Dictionary(Of CharacterType, Func(Of Long, Long))) From
-        {
-            {
-                Difficulty.Yermom,
-                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
-                {
-                    {CharacterType.Goblin, Function(x) x \ 4},
-                    {CharacterType.Orc, Function(x) x \ 6},
-                    {CharacterType.Skeleton, Function(x) x \ 3},
-                    {CharacterType.Zombie, Function(x) x \ 6},
-                    {CharacterType.N00b, Function(x) 0},
-                    {CharacterType.MinionFish, Function(x) x \ 6},
-                    {CharacterType.BossFish, Function(x) 0}
-                }
-            },
-            {
-                Difficulty.Easy,
-                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
-                {
-                    {CharacterType.Goblin, Function(x) x \ 3},
-                    {CharacterType.Orc, Function(x) x \ 4},
-                    {CharacterType.Skeleton, Function(x) x \ 2},
-                    {CharacterType.Zombie, Function(x) x \ 4},
-                    {CharacterType.N00b, Function(x) 0},
-                    {CharacterType.MinionFish, Function(x) x \ 4},
-                    {CharacterType.BossFish, Function(x) 0}
-                }
-            },
-            {
-                Difficulty.Normal,
-                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
-                {
-                    {CharacterType.Goblin, Function(x) x \ 2},
-                    {CharacterType.Orc, Function(x) x \ 3},
-                    {CharacterType.Skeleton, Function(x) x * 2 \ 3},
-                    {CharacterType.Zombie, Function(x) x \ 3},
-                    {CharacterType.N00b, Function(x) 0},
-                    {CharacterType.MinionFish, Function(x) x \ 3},
-                    {CharacterType.BossFish, Function(x) 1}
-                }
-            },
-            {
-                Difficulty.Difficult,
-                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
-                {
-                    {CharacterType.Goblin, Function(x) x * 2 \ 3},
-                    {CharacterType.Orc, Function(x) x \ 2},
-                    {CharacterType.Skeleton, Function(x) x * 3 \ 4},
-                    {CharacterType.Zombie, Function(x) x \ 2},
-                    {CharacterType.N00b, Function(x) 0},
-                    {CharacterType.MinionFish, Function(x) x \ 2},
-                    {CharacterType.BossFish, Function(x) 2}
-                }
-            },
-            {
-                Difficulty.Too,
-                New Dictionary(Of CharacterType, Func(Of Long, Long)) From
-                {
-                    {CharacterType.Goblin, Function(x) x * 3 \ 4},
-                    {CharacterType.Orc, Function(x) x * 2 \ 3},
-                    {CharacterType.Skeleton, Function(x) x},
-                    {CharacterType.Zombie, Function(x) x * 2 \ 3},
-                    {CharacterType.N00b, Function(x) 0},
-                    {CharacterType.MinionFish, Function(x) x * 2 \ 3},
-                    {CharacterType.BossFish, Function(x) 4}
-                }
-            }
-        }
     <Extension>
     Public Function SpawnCount(characterType As CharacterType, locationCount As Long, difficulty As Difficulty) As Long
-        Return SpawnerTable(difficulty)(characterType)(locationCount)
+        Return Descriptors(characterType).SpawnCount(difficulty)(locationCount)
     End Function
 
     <Extension>
     Public Function RandomName(characterType As CharacterType) As String
-        Select Case characterType
-            Case CharacterType.Goblin
-                Return RNG.FromList(Names.Goblin)
-            Case CharacterType.Orc
-                Return RNG.FromList(Names.Orc)
-            Case CharacterType.Skeleton
-                Return RNG.FromList(Names.Human)
-            Case CharacterType.Zombie
-                Return RNG.FromList(Names.Human)
-            Case CharacterType.BossFish, CharacterType.MinionFish
-                Return RNG.FromList(Names.Fish)
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return RNG.FromList(Descriptors(characterType).NameTable)
     End Function
 
     <Extension>
     Public Function IsEnemy(characterType As CharacterType) As Boolean
-        Select Case characterType
-            Case CharacterType.Goblin, CharacterType.Orc, CharacterType.Skeleton, CharacterType.Zombie, CharacterType.MinionFish, CharacterType.BossFish
-                Return True
-            Case Else
-                Return False
-        End Select
+        Return Descriptors(characterType).IsEnemy
     End Function
 
     <Extension>
     Public Function AttackDice(characterType As CharacterType) As String
-        Select Case characterType
-            Case CharacterType.N00b
-                Return "1d3/3"
-            Case CharacterType.Goblin
-                Return "1d3/3+1d3/3"
-            Case CharacterType.Orc
-                Return "1d3/3+1d3/3+1d3/3"
-            Case CharacterType.Skeleton
-                Return "1d3/3+1d3/3"
-            Case CharacterType.Zombie
-                Return "1d3/3+1d3/3"
-            Case CharacterType.MinionFish
-                Return "1d3/3+1d3/3"
-            Case CharacterType.BossFish
-                Return "1d3/3+1d3/3+1d3/3+1d3/3"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).AttackDice
     End Function
 
     <Extension>
     Public Function DefendDice(characterType As CharacterType) As String
-        Select Case characterType
-            Case CharacterType.N00b
-                Return "1d3/3+1d3/3"
-            Case CharacterType.Goblin
-                Return "1d6/6"
-            Case CharacterType.Orc
-                Return "1d6/6+1d6/6"
-            Case CharacterType.Skeleton
-                Return "1d6/6+1d6/6"
-            Case CharacterType.Zombie
-                Return "1d6/6+1d6/6+1d6/6"
-            Case CharacterType.MinionFish
-                Return "1d6/6+1d6/6+1d6/6"
-            Case CharacterType.BossFish
-                Return "1d6/6+1d6/6+1d6/6+1d6/6+1d6/6"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).DefendDice
     End Function
+
     <Extension>
     Public Function FightEnergyCost(characterType As CharacterType) As Long
-        Select Case characterType
-            Case CharacterType.N00b
-                Return 1
-            Case CharacterType.Goblin
-                Return 1
-            Case CharacterType.Orc
-                Return 1
-            Case CharacterType.MinionFish
-                Return 1
-            Case CharacterType.BossFish
-                Return 1
-            Case CharacterType.Skeleton
-                Return 0
-            Case CharacterType.Zombie
-                Return 0
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).FightEnergyCost
     End Function
+
     <Extension>
     Public Function CombatRestRoll(characterType As CharacterType) As String
-        Select Case characterType
-            Case CharacterType.N00b
-                Return "1d1+1d2/2"
-            Case CharacterType.Goblin
-                Return "1d2/2+1d2/2+1d2/2+1d2/2"
-            Case CharacterType.Orc
-                Return "1d2/2+1d2/2+1d2/2"
-            Case CharacterType.MinionFish
-                Return "1d2/2+1d2/2+1d2/2"
-            Case CharacterType.BossFish
-                Return "2d1+1d2/2+1d2/2+1d2/2"
-            Case CharacterType.Skeleton
-                Return "0d1"
-            Case CharacterType.Zombie
-                Return "0d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).CombatRestRoll
     End Function
+
     Private ReadOnly LootDropTable As New Dictionary(Of CharacterType, Dictionary(Of ItemType, String)) From
         {
             {
@@ -368,15 +388,15 @@ Public Module CharacterTypeExtensions
                 Throw New NotImplementedException
         End Select
     End Function
-    Private ReadOnly ValidBribes As New HashSet(Of Tuple(Of CharacterType, ItemType)) From
+    Private ReadOnly ValidBribes As New HashSet(Of (CharacterType, ItemType)) From
         {
-            New Tuple(Of CharacterType, ItemType)(CharacterType.Goblin, ItemType.Food),
-            New Tuple(Of CharacterType, ItemType)(CharacterType.Goblin, ItemType.Potion),
-            New Tuple(Of CharacterType, ItemType)(CharacterType.Goblin, ItemType.Jools),
-            New Tuple(Of CharacterType, ItemType)(CharacterType.Orc, ItemType.Food),
-            New Tuple(Of CharacterType, ItemType)(CharacterType.Orc, ItemType.Potion),
-            New Tuple(Of CharacterType, ItemType)(CharacterType.Orc, ItemType.Jools),
-            New Tuple(Of CharacterType, ItemType)(CharacterType.MinionFish, ItemType.Food)
+            (CharacterType.Goblin, ItemType.Food),
+            (CharacterType.Goblin, ItemType.Potion),
+            (CharacterType.Goblin, ItemType.Jools),
+            (CharacterType.Orc, ItemType.Food),
+            (CharacterType.Orc, ItemType.Potion),
+            (CharacterType.Orc, ItemType.Jools),
+            (CharacterType.MinionFish, ItemType.Food)
         }
     <Extension>
     Function TakesBribe(characterType As CharacterType, itemType As ItemType) As Boolean
