@@ -23,6 +23,8 @@ Friend Structure CharacterTypeDescriptor
     Friend SpawnCount As Func(Of Difficulty, Func(Of Long, Long))
     Friend LootDrops As Dictionary(Of ItemType, String)
     Friend ExperiencePointValue As Long
+    Friend ExperiencePointGoal As Func(Of Long, Long)
+    Friend ValidBribes As HashSet(Of ItemType)
 End Structure
 Public Module CharacterTypeExtensions
     Private ReadOnly Descriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
@@ -42,7 +44,9 @@ Public Module CharacterTypeExtensions
                     .CombatRestRoll = "1d1+1d2/2",
                     .SpawnCount = Function(difficulty) Function(x) 0,
                     .LootDrops = New Dictionary(Of ItemType, String),
-                    .ExperiencePointValue = 5
+                    .ExperiencePointValue = 5,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType)
                 }
             },
             {
@@ -79,7 +83,9 @@ Public Module CharacterTypeExtensions
                         {ItemType.Food, "1d4/4"},
                         {ItemType.GoblinEar, "1d2/2"}
                     },
-                    .ExperiencePointValue = 1
+                    .ExperiencePointValue = 1,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
                 }
             },
             {
@@ -116,7 +122,9 @@ Public Module CharacterTypeExtensions
                             {ItemType.Food, "1d2/2"},
                             {ItemType.OrcTooth, "1d3/3"}
                         },
-                    .ExperiencePointValue = 1
+                    .ExperiencePointValue = 1,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
                 }
             },
             {
@@ -152,7 +160,9 @@ Public Module CharacterTypeExtensions
                         {
                             {ItemType.SkullFragment, "1d4/4"}
                         },
-                    .ExperiencePointValue = 1
+                    .ExperiencePointValue = 1,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType)
                 }
             },
             {
@@ -188,7 +198,9 @@ Public Module CharacterTypeExtensions
                         {
                             {ItemType.ZombieTaint, "1d6/6"}
                         },
-                    .ExperiencePointValue = 1
+                    .ExperiencePointValue = 1,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType)
                 }
             },
             {
@@ -224,7 +236,9 @@ Public Module CharacterTypeExtensions
                         {
                             {ItemType.FishScale, "2d2"}
                         },
-                    .ExperiencePointValue = 1
+                    .ExperiencePointValue = 1,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
                 }
             },
             {
@@ -262,7 +276,9 @@ Public Module CharacterTypeExtensions
                             {ItemType.FishFin, "1d2/2"},
                             {ItemType.Jools, "1d1"}
                         },
-                    .ExperiencePointValue = 5
+                    .ExperiencePointValue = 5,
+                    .ExperiencePointGoal = Function(x) 10 * (x + 1),
+                    .ValidBribes = New HashSet(Of ItemType)
                 }
             }
         }
@@ -336,39 +352,14 @@ Public Module CharacterTypeExtensions
     Function ExperiencePointValue(characterType As CharacterType, level As Long) As Long
         Return Descriptors(characterType).ExperiencePointValue
     End Function
+
     <Extension>
     Function ExperienceGoal(characterType As CharacterType, level As Long) As Long
-        Select Case characterType
-            Case CharacterType.N00b
-                Return 10 * (level + 1)
-            Case CharacterType.Goblin
-                Return 10 * (level + 1)
-            Case CharacterType.Orc
-                Return 10 * (level + 1)
-            Case CharacterType.Skeleton
-                Return 10 * (level + 1)
-            Case CharacterType.Zombie
-                Return 10 * (level + 1)
-            Case CharacterType.MinionFish
-                Return 10 * (level + 1)
-            Case CharacterType.BossFish
-                Return 10 * (level + 1)
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).ExperiencePointGoal(level)
     End Function
-    Private ReadOnly ValidBribes As New HashSet(Of (CharacterType, ItemType)) From
-        {
-            (CharacterType.Goblin, ItemType.Food),
-            (CharacterType.Goblin, ItemType.Potion),
-            (CharacterType.Goblin, ItemType.Jools),
-            (CharacterType.Orc, ItemType.Food),
-            (CharacterType.Orc, ItemType.Potion),
-            (CharacterType.Orc, ItemType.Jools),
-            (CharacterType.MinionFish, ItemType.Food)
-        }
+
     <Extension>
     Function TakesBribe(characterType As CharacterType, itemType As ItemType) As Boolean
-        Return ValidBribes.Any(Function(x) x.Item1 = characterType AndAlso x.Item2 = itemType)
+        Return Descriptors(characterType).ValidBribes.Contains(itemType)
     End Function
 End Module
