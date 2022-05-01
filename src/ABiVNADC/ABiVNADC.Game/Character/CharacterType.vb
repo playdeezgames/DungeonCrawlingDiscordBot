@@ -21,6 +21,8 @@ Friend Structure CharacterTypeDescriptor
     Friend FightEnergyCost As Long
     Friend CombatRestRoll As String
     Friend SpawnCount As Func(Of Difficulty, Func(Of Long, Long))
+    Friend LootDrops As Dictionary(Of ItemType, String)
+    Friend ExperiencePointValue As Long
 End Structure
 Public Module CharacterTypeExtensions
     Private ReadOnly Descriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
@@ -38,7 +40,9 @@ Public Module CharacterTypeExtensions
                     .DefendDice = "1d3/3+1d3/3",
                     .FightEnergyCost = 1,
                     .CombatRestRoll = "1d1+1d2/2",
-                    .SpawnCount = Function(difficulty) Function(x) 0
+                    .SpawnCount = Function(difficulty) Function(x) 0,
+                    .LootDrops = New Dictionary(Of ItemType, String),
+                    .ExperiencePointValue = 5
                 }
             },
             {
@@ -69,7 +73,13 @@ Public Module CharacterTypeExtensions
                                           Case Else
                                               Throw New NotImplementedException
                                       End Select
-                                  End Function
+                                  End Function,
+                    .LootDrops = New Dictionary(Of ItemType, String) From
+                    {
+                        {ItemType.Food, "1d4/4"},
+                        {ItemType.GoblinEar, "1d2/2"}
+                    },
+                    .ExperiencePointValue = 1
                 }
             },
             {
@@ -100,7 +110,13 @@ Public Module CharacterTypeExtensions
                                           Case Else
                                               Throw New NotImplementedException
                                       End Select
-                                  End Function
+                                  End Function,
+                    .LootDrops = New Dictionary(Of ItemType, String) From
+                        {
+                            {ItemType.Food, "1d2/2"},
+                            {ItemType.OrcTooth, "1d3/3"}
+                        },
+                    .ExperiencePointValue = 1
                 }
             },
             {
@@ -131,7 +147,12 @@ Public Module CharacterTypeExtensions
                                           Case Else
                                               Throw New NotImplementedException
                                       End Select
-                                  End Function
+                                  End Function,
+                    .LootDrops = New Dictionary(Of ItemType, String) From
+                        {
+                            {ItemType.SkullFragment, "1d4/4"}
+                        },
+                    .ExperiencePointValue = 1
                 }
             },
             {
@@ -162,7 +183,12 @@ Public Module CharacterTypeExtensions
                                           Case Else
                                               Throw New NotImplementedException
                                       End Select
-                                  End Function
+                                  End Function,
+                    .LootDrops = New Dictionary(Of ItemType, String) From
+                        {
+                            {ItemType.ZombieTaint, "1d6/6"}
+                        },
+                    .ExperiencePointValue = 1
                 }
             },
             {
@@ -193,7 +219,12 @@ Public Module CharacterTypeExtensions
                                           Case Else
                                               Throw New NotImplementedException
                                       End Select
-                                  End Function
+                                  End Function,
+                    .LootDrops = New Dictionary(Of ItemType, String) From
+                        {
+                            {ItemType.FishScale, "2d2"}
+                        },
+                    .ExperiencePointValue = 1
                 }
             },
             {
@@ -224,7 +255,14 @@ Public Module CharacterTypeExtensions
                                           Case Else
                                               Throw New NotImplementedException
                                       End Select
-                                  End Function
+                                  End Function,
+                    .LootDrops = New Dictionary(Of ItemType, String) From
+                        {
+                            {ItemType.FishScale, "3d3"},
+                            {ItemType.FishFin, "1d2/2"},
+                            {ItemType.Jools, "1d1"}
+                        },
+                    .ExperiencePointValue = 5
                 }
             }
         }
@@ -289,83 +327,14 @@ Public Module CharacterTypeExtensions
         Return Descriptors(characterType).CombatRestRoll
     End Function
 
-    Private ReadOnly LootDropTable As New Dictionary(Of CharacterType, Dictionary(Of ItemType, String)) From
-        {
-            {
-                CharacterType.Goblin,
-                New Dictionary(Of ItemType, String) From
-                {
-                    {ItemType.Food, "1d4/4"},
-                    {ItemType.GoblinEar, "1d2/2"}
-                }
-            },
-            {
-                CharacterType.Skeleton,
-                New Dictionary(Of ItemType, String) From
-                {
-                    {ItemType.SkullFragment, "1d4/4"}
-                }
-            },
-            {
-                CharacterType.Zombie,
-                New Dictionary(Of ItemType, String) From
-                {
-                    {ItemType.ZombieTaint, "1d6/6"}
-                }
-            },
-            {
-                CharacterType.MinionFish,
-                New Dictionary(Of ItemType, String) From
-                {
-                    {ItemType.FishScale, "2d2"}
-                }
-            },
-            {
-                CharacterType.BossFish,
-                New Dictionary(Of ItemType, String) From
-                {
-                    {ItemType.FishScale, "3d3"},
-                    {ItemType.FishFin, "1d2/2"},
-                    {ItemType.Jools, "1d1"}
-                }
-            },
-            {
-                CharacterType.Orc,
-                New Dictionary(Of ItemType, String) From
-                {
-                    {ItemType.Food, "1d2/2"},
-                    {ItemType.OrcTooth, "1d3/3"}
-                }
-            }
-        }
     <Extension>
     Function LootDrops(characterType As CharacterType) As Dictionary(Of ItemType, String)
-        Dim drops As New Dictionary(Of ItemType, String)
-        If LootDropTable.TryGetValue(characterType, drops) Then
-            Return drops
-        End If
-        Return New Dictionary(Of ItemType, String)
+        Return Descriptors(characterType).LootDrops
     End Function
+
     <Extension>
     Function ExperiencePointValue(characterType As CharacterType, level As Long) As Long
-        Select Case characterType
-            Case CharacterType.N00b
-                Return 5
-            Case CharacterType.Goblin
-                Return 1
-            Case CharacterType.Orc
-                Return 1
-            Case CharacterType.Skeleton
-                Return 1
-            Case CharacterType.Zombie
-                Return 1
-            Case CharacterType.MinionFish
-                Return 1
-            Case CharacterType.BossFish
-                Return 5
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return Descriptors(characterType).ExperiencePointValue
     End Function
     <Extension>
     Function ExperienceGoal(characterType As CharacterType, level As Long) As Long
