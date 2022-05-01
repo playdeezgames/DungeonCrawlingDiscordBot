@@ -42,8 +42,8 @@ Public Class Character
             Return $"{FullName} fails to bribe {enemy.FullName}."
         End If
         Dim result = $"{FullName} successfully bribes {enemy.FullName}."
-        item.Destroy()
-        enemy.Destroy()
+        enemy.Inventory.Add(item)
+        CharacterLocationData.Clear(enemy.Id)
         Return result
     End Function
 
