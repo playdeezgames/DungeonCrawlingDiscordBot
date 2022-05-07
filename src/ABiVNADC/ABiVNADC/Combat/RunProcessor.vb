@@ -15,7 +15,7 @@
             Return $"{character.FullName} runs!
 ```{canvas.Output}```"
         End If
-        Return DoCounterAttacks(player, $"{character.FullName} could not get away.
+        Return DoCounterAttacks(character, $"{character.FullName} could not get away.
 ")
     End Function
 End Module

@@ -25,7 +25,7 @@
         End If
         Dim item = itemStacks(itemType).First
         character.Inventory.Add(item)
-        Return DoCounterAttacks(player, $"{character.FullName} picks up {itemType.Name}")
+        Return DoCounterAttacks(character, $"{character.FullName} picks up {itemType.Name}")
     End Function
 
     Private Function HandleTakeAll(player As Player, character As Character, location As Location) As String
@@ -35,7 +35,7 @@
         For Each item In location.Inventory.Items
             character.Inventory.Add(item)
         Next
-        Return DoCounterAttacks(player, $"{character.FullName} takes everything.
+        Return DoCounterAttacks(character, $"{character.FullName} takes everything.
 ")
     End Function
 End Module

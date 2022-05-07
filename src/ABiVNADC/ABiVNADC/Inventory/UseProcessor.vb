@@ -23,7 +23,7 @@
         Dim builder As New StringBuilder
         builder.AppendLine(player.UseItem(item))
         If character.HasLocation Then
-            PerformCounterAttacks(player, character, builder)
+            PerformCounterAttacks(character, builder)
         End If
         Return builder.ToString
     End Function

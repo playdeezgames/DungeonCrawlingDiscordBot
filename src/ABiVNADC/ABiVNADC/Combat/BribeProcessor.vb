@@ -21,7 +21,7 @@
                 If enemy Is Nothing Then
                     Return $"No enemy in this location will take that."
                 End If
-                Return DoCounterAttacks(player, character.BribeEnemy(enemy, itemType))
+                Return DoCounterAttacks(character, character.BribeEnemy(enemy, itemType))
             End Function)
     End Function
 End Module

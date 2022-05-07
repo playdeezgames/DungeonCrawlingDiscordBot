@@ -22,6 +22,10 @@
             );")
     End Sub
 
+    Public Function Exists(characterId As Long) As Boolean
+        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, CharacterIdColumn, characterId).Any
+    End Function
+
     Public Function Create(characterName As String, characterType As Long, characterLevel As Long) As Long
         Initialize()
         ExecuteNonQuery(

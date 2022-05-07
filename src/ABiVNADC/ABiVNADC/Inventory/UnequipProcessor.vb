@@ -11,6 +11,6 @@
             Return $"You don't have any `{itemTypeName}` equipped."
         End If
         Dim output As String = character.Unequip(equipSlots.First.Value)
-        Return DoCounterAttacks(player, output)
+        Return DoCounterAttacks(character, output)
     End Function
 End Module

@@ -5,6 +5,12 @@ Public Class Character
     Sub New(characterId As Long)
         Id = characterId
     End Sub
+
+    ReadOnly Property Exists As Boolean
+        Get
+            Return CharacterData.Exists(Id)
+        End Get
+    End Property
     ReadOnly Property FullName As String
         Get
             Return $"{Name} the {CharacterType.Name}"

@@ -12,6 +12,6 @@
             Return $"I don't know what a `{itemTypeName}` is."
         End If
         Dim output = player.Character.Equip(itemType)
-        Return DoCounterAttacks(player, output)
+        Return DoCounterAttacks(player.Character, output)
     End Function
 End Module
