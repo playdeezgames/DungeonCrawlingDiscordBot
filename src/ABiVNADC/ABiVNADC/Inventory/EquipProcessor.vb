@@ -4,16 +4,18 @@
             builder.AppendLine("The command is `equip (item)`.")
             Return
         End If
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
-            Function(character)
+            builder,
+            Sub(character)
                 Dim itemTypeName = String.Join(" "c, tokens)
                 Dim itemType = ParseItemType(itemTypeName)
                 If itemType = ItemType.None Then
-                    Return $"I don't know what a `{itemTypeName}` is."
+                    builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
+                    Return
                 End If
                 Dim output = character.Equip(itemType)
-                Return DoCounterAttacks(character, output)
-            End Function))
+                builder.AppendLine(DoCounterAttacks(character, output))
+            End Sub)
     End Sub
 End Module

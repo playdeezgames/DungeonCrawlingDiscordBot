@@ -4,15 +4,15 @@
             builder.AppendLine("Round here, we only respond to a raw `status` commmand!")
             Return
         End If
-        builder.AppendLine(ShowStatus(player))
+        ShowStatus(player, builder)
     End Sub
 
-    Friend Function ShowStatus(player As Player) As String
-        Dim builder As New StringBuilder
+    Friend Sub ShowStatus(player As Player, builder As StringBuilder)
         builder.AppendLine("Status:")
-        Return RequireCharacter(
+        RequireCharacter(
             player,
-            Function(character)
+            builder,
+            Sub(character)
                 builder.AppendLine($"Name: {character.Name}")
                 builder.AppendLine($"Class: {character.CharacterType.Name}(level {character.Level})")
                 builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
@@ -32,7 +32,6 @@
                         builder.AppendLine("There is stuff on the ground.")
                     End If
                 End If
-                Return builder.ToString
-            End Function)
-    End Function
+            End Sub)
+    End Sub
 End Module

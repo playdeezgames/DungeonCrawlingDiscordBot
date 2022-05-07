@@ -4,14 +4,15 @@
             builder.AppendLine("The command is just `rest`.")
             Return
         End If
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
+            builder,
             Function(character)
                 If player.InCombat Then
                     Return HandleCombatRest(player)
                 End If
                 Return HandleNonCombatRest(player)
-            End Function))
+            End Function)
     End Sub
 
     Private Function HandleNonCombatRest(player As Player) As String

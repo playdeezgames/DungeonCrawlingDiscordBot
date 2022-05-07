@@ -1,15 +1,16 @@
 ﻿Module Utility
-    Function RequireCharacter(player As Player, handler As Func(Of Character, String)) As String
+    Sub RequireCharacter(player As Player, builder As StringBuilder, handler As Action(Of Character))
         If Not player.HasCharacter Then
-            Return "You have no current character."
+            builder.AppendLine("You have no current character.")
+            Return
         End If
-        Return handler(player.Character)
-    End Function
+        handler(player.Character)
+    End Sub
 
-    Function RequireLocation(character As Character, handler As Func(Of Location, String)) As String
+    Sub RequireLocation(character As Character, builder As StringBuilder, handler As Action(Of Location))
         If Not character.HasLocation Then
-            Return $"{character.FullName} is not in a dungeon!"
+            builder.AppendLine($"{character.FullName} is not in a dungeon!")
         End If
-        Return handler(character.Location)
-    End Function
+        handler(character.Location)
+    End Sub
 End Module

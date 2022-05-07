@@ -4,11 +4,13 @@
             builder.AppendLine("The command is just `exit`.")
             Return
         End If
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
-            Function(character)
-                Return RequireLocation(
+            builder,
+            Sub(character)
+                RequireLocation(
                     character,
+                    builder,
                     Function(location)
                         If character.InCombat Then
                             Return $"{character.FullName} cannot exit while in combat!"
@@ -19,6 +21,6 @@
                         character.Location = Nothing
                         Return $"{character.FullName} leaves the dungeon."
                     End Function)
-            End Function))
+            End Sub)
     End Sub
 End Module

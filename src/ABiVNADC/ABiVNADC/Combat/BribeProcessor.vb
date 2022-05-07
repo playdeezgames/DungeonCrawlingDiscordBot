@@ -10,21 +10,25 @@
             builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
             Return
         End If
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
-            Function(character)
-                Return RequireLocation(
+            builder,
+            Sub(character)
+                RequireLocation(
                     character,
-                    Function(location)
+                    builder,
+                    Sub(location)
                         If Not character.Inventory.StackedItems.Keys.Contains(itemType) Then
-                            Return $"{character.FullName} doesn't have any {itemType.Name}."
+                            builder.AppendLine($"{character.FullName} doesn't have any {itemType.Name}.")
+                            Return
                         End If
                         Dim enemy As Character = character.Location.Enemies(character).FirstOrDefault(Function(x) x.TakesBribe(itemType))
                         If enemy Is Nothing Then
-                            Return $"No enemy in this location will take that."
+                            builder.AppendLine($"No enemy in this location will take that.")
+                            Return
                         End If
-                        Return DoCounterAttacks(character, character.BribeEnemy(enemy, itemType))
-                    End Function)
-            End Function))
+                        builder.AppendLine(DoCounterAttacks(character, character.BribeEnemy(enemy, itemType)))
+                    End Sub)
+            End Sub)
     End Sub
 End Module

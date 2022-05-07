@@ -1,7 +1,8 @@
 ﻿Module FightProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
+            builder,
             Function(character)
                 If Not character.InCombat Then
                     Return $"{character.FullName} is not in combat."
@@ -10,7 +11,7 @@
                     Return $"{character.FullName} needs to recover energy."
                 End If
                 Return DoCounterAttacks(character, character.Attack(character.Location.Enemy(character)))
-            End Function))
+            End Function)
     End Sub
 
     Friend Function DoCounterAttacks(character As Character, output As String) As String

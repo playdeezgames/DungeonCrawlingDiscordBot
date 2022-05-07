@@ -4,11 +4,13 @@
             builder.AppendLine("The command is just `features`.")
             Return
         End If
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
-            Function(character)
-                Return RequireLocation(
+            builder,
+            Sub(character)
+                RequireLocation(
                     character,
+                    builder,
                     Function(location)
                         Dim features = location.Features
                         If Not features.Any Then
@@ -16,6 +18,6 @@
                         End If
                         Return $"Features present: {String.Join(", ", features.Select(Function(x) x.Name))}"
                     End Function)
-            End Function))
+            End Sub)
     End Sub
 End Module

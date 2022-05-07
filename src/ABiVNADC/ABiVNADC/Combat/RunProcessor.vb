@@ -4,8 +4,9 @@
             builder.AppendLine("The command is just `run`.")
             Return
         End If
-        builder.AppendLine(RequireCharacter(
+        RequireCharacter(
             player,
+            builder,
             Function(character)
                 If Not character.InCombat Then
                     Return $"{character.FullName} is not in combat."
@@ -17,6 +18,6 @@
                 End If
                 Return DoCounterAttacks(character, $"{character.FullName} could not get away.
 ")
-            End Function))
+            End Function)
     End Sub
 End Module
