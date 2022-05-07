@@ -22,9 +22,7 @@
         Dim item = itemStacks(itemType).First
         Dim builder As New StringBuilder
         builder.AppendLine(player.UseItem(item))
-        If character.HasLocation Then
-            PerformCounterAttacks(character, builder)
-        End If
+        PerformCounterAttacks(character, builder)
         Return builder.ToString
     End Function
 End Module

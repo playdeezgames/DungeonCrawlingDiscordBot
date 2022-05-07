@@ -6,14 +6,15 @@
         Return RequireCharacter(
             player,
             Function(character)
-                If Not character.HasLocation Then
-                    Return $"{character.FullName} is not in a dungeon."
-                End If
-                Dim features = character.Location.Features
-                If Not features.Any Then
-                    Return $"There are no features here."
-                End If
-                Return $"Features present: {String.Join(", ", features.Select(Function(x) x.Name))}"
+                Return RequireLocation(
+                    character,
+                    Function(location)
+                        Dim features = location.Features
+                        If Not features.Any Then
+                            Return $"There are no features here."
+                        End If
+                        Return $"Features present: {String.Join(", ", features.Select(Function(x) x.Name))}"
+                    End Function)
             End Function)
     End Function
 End Module

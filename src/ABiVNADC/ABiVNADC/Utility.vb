@@ -5,4 +5,11 @@
         End If
         Return handler(player.Character)
     End Function
+
+    Function RequireLocation(character As Character, handler As Func(Of Location, String)) As String
+        If Not character.HasLocation Then
+            Return $"{character.FullName} is not in a dungeon!"
+        End If
+        Return handler(character.Location)
+    End Function
 End Module

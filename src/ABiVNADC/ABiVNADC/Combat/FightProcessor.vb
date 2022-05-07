@@ -21,15 +21,14 @@
     End Function
 
     Friend Sub PerformCounterAttacks(character As Character, builder As StringBuilder)
-        If Not character.HasLocation Then
-            Return
+        If character.InCombat Then
+            For Each enemy In character.Location.Enemies(character)
+                If Not character.Exists Then
+                    Continue For
+                End If
+                PerformCounterAttack(character, builder, enemy)
+            Next
         End If
-        For Each enemy In character.Location.Enemies(character)
-            If Not character.Exists Then
-                Continue For
-            End If
-            PerformCounterAttack(character, builder, enemy)
-        Next
     End Sub
 
     Private Sub PerformCounterAttack(character As Character, builder As StringBuilder, enemy As Character)
