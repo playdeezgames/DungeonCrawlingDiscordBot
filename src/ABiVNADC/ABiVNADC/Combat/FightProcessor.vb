@@ -3,15 +3,16 @@
         RequireCharacter(
             player,
             builder,
-            Function(character)
+            Sub(character)
                 If Not character.InCombat Then
-                    Return $"{character.FullName} is not in combat."
+                    builder.AppendLine($"{character.FullName} is not in combat.")
+                    Return
                 End If
                 If Not character.CanFight Then
-                    Return $"{character.FullName} needs to recover energy."
+                    builder.AppendLine($"{character.FullName} needs to recover energy.")
                 End If
-                Return DoCounterAttacks(character, character.Attack(character.Location.Enemy(character)))
-            End Function)
+                builder.AppendLine(DoCounterAttacks(character, character.Attack(character.Location.Enemy(character))))
+            End Sub)
     End Sub
 
     Friend Function DoCounterAttacks(character As Character, output As String) As String

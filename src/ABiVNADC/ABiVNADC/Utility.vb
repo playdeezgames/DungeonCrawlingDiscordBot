@@ -39,4 +39,12 @@
         End If
         handler(itemType)
     End Sub
+
+    Sub RequireInCombat(character As Character, builder As StringBuilder, handler As Action)
+        If Not character.InCombat Then
+            builder.AppendLine($"{character.FullName} is not in combat.")
+            Return
+        End If
+        handler()
+    End Sub
 End Module
