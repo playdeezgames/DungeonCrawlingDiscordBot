@@ -3,19 +3,19 @@
         If tokens.Any Then
             Return "The command is just `run`."
         End If
-        If Not player.HasCharacter Then
-            Return "You have no current charcter."
-        End If
-        Dim character = player.Character
-        If Not character.InCombat Then
-            Return $"{character.FullName} is not in combat."
-        End If
-        If player.Run() Then
-            Dim canvas = DrawPOV(player)
-            Return $"{character.FullName} runs!
+        Return RequireCharacter(
+            player,
+            Function(character)
+                If Not character.InCombat Then
+                    Return $"{character.FullName} is not in combat."
+                End If
+                If player.Run() Then
+                    Dim canvas = DrawPOV(player)
+                    Return $"{character.FullName} runs!
 ```{canvas.Output}```"
-        End If
-        Return DoCounterAttacks(character, $"{character.FullName} could not get away.
+                End If
+                Return DoCounterAttacks(character, $"{character.FullName} could not get away.
 ")
+            End Function)
     End Function
 End Module
