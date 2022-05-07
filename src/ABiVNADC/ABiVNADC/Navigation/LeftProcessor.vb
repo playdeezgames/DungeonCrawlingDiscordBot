@@ -1,14 +1,16 @@
 ﻿Module LeftProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "It's just `left` and nothing else!"
+            builder.AppendLine("It's just `left` and nothing else!")
+            Return
         End If
         If Not player.CanTurn Then
-            Return "You cannot do that now!"
+            builder.AppendLine("You cannot do that now!")
+            Return
         End If
         player.TurnLeft()
         Dim canvas = DrawPOV(player)
-        Return $"```
-{canvas.Output}```"
-    End Function
+        builder.AppendLine($"```
+{canvas.Output}```")
+    End Sub
 End Module

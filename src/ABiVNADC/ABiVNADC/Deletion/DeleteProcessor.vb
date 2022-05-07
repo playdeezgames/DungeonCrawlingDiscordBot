@@ -1,13 +1,15 @@
 ﻿Module DeleteProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
             Select Case tokens.First
                 Case CharacterText
-                    Return DeleteCharacterProcessor.Run(player, tokens.Skip(1))
+                    DeleteCharacterProcessor.Run(player, builder, tokens.Skip(1))
+                    Return
                 Case DungeonText
-                    Return DeleteDungeonProcessor.Run(player, tokens.Skip(1))
+                    DeleteDungeonProcessor.Run(player, builder, tokens.Skip(1))
+                    Return
             End Select
         End If
-        Return $"Delete what? DELETE *WHAT*?!?"
-    End Function
+        builder.AppendLine($"Delete what? DELETE *WHAT*?!?")
+    End Sub
 End Module

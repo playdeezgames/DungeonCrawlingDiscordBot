@@ -1,14 +1,16 @@
 ﻿Module MoveProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "It's just `move` and nothing else!"
+            builder.AppendLine("It's just `move` and nothing else!")
+            Return
         End If
         If Not player.CanMove Then
-            Return "You cannot do that now!"
+            builder.AppendLine("You cannot do that now!")
+            Return
         End If
         player.Move()
         Dim canvas = DrawPOV(player)
-        Return $"```
-{canvas.Output}```"
-    End Function
+        builder.AppendLine($"```
+{canvas.Output}```")
+    End Sub
 End Module

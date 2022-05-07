@@ -1,10 +1,11 @@
 ﻿Module StatusProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "Round here, we only respond to a raw `status` commmand!"
+            builder.AppendLine("Round here, we only respond to a raw `status` commmand!")
+            Return
         End If
-        Return ShowStatus(player)
-    End Function
+        builder.AppendLine(ShowStatus(player))
+    End Sub
 
     Friend Function ShowStatus(player As Player) As String
         Dim builder As New StringBuilder

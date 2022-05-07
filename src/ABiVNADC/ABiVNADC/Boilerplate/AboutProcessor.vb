@@ -1,7 +1,7 @@
 ﻿Module AboutProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
-        Return "About `A Bot in VB.NET About Dungeon Crawling`:
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        builder.AppendLine("About `A Bot in VB.NET About Dungeon Crawling`:
 Developed by: TheGrumpyGameDev (https://www.twitch.tv/thegrumpygamedev)
-Fish By: SgtChaos (https://itch.io/profile/sgtchaos)"
-    End Function
+Fish By: SgtChaos (https://itch.io/profile/sgtchaos)")
+    End Sub
 End Module

@@ -1,9 +1,10 @@
 ﻿Module EnemiesProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "The command is simpley `enemies`."
+            builder.AppendLine("The command is simpley `enemies`.")
+            Return
         End If
-        Return RequireCharacter(
+        builder.AppendLine(RequireCharacter(
             player,
             Function(character)
                 If Not character.InCombat Then
@@ -14,6 +15,6 @@
                     builder.AppendLine($"{enemy.FullName} (health:{enemy.Health}/{enemy.MaximumHealth})")
                 Next
                 Return builder.ToString
-            End Function)
-    End Function
+            End Function))
+    End Sub
 End Module

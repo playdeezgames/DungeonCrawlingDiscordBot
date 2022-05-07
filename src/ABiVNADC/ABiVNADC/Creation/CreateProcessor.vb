@@ -1,13 +1,15 @@
 ﻿Module CreateProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
             Select Case tokens.First
                 Case CharacterText
-                    Return CreateCharacterProcessor.Run(player, tokens.Skip(1))
+                    CreateCharacterProcessor.Run(player, builder, tokens.Skip(1))
+                    Return
                 Case DungeonText
-                    Return CreateDungeonProcessor.Run(player, tokens.Skip(1))
+                    CreateDungeonProcessor.Run(player, builder, tokens.Skip(1))
+                    Return
             End Select
         End If
-        Return $"Create what? CREATE *WHAT*?!?"
-    End Function
+        builder.AppendLine($"Create what? CREATE *WHAT*?!?")
+    End Sub
 End Module

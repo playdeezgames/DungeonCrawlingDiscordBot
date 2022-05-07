@@ -1,9 +1,10 @@
 ﻿Module FeaturesProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "The command is just `features`."
+            builder.AppendLine("The command is just `features`.")
+            Return
         End If
-        Return RequireCharacter(
+        builder.AppendLine(RequireCharacter(
             player,
             Function(character)
                 Return RequireLocation(
@@ -15,6 +16,6 @@
                         End If
                         Return $"Features present: {String.Join(", ", features.Select(Function(x) x.Name))}"
                     End Function)
-            End Function)
-    End Function
+            End Function))
+    End Sub
 End Module

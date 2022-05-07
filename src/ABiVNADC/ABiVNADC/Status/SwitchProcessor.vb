@@ -1,13 +1,13 @@
 ﻿Module SwitchProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
             Select Case tokens.First.ToLower
                 Case CharacterText
-                    Return HandleSwitchCharacter(player, tokens.Skip(1))
+                    builder.AppendLine(HandleSwitchCharacter(player, tokens.Skip(1)))
             End Select
         End If
-        Return "I only understand `switch character (name)`."
-    End Function
+        builder.AppendLine("I only understand `switch character (name)`.")
+    End Sub
 
     Private Function HandleSwitchCharacter(player As Player, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then

@@ -1,32 +1,38 @@
 ﻿Module TakeProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If Not tokens.Any Then
-            Return "Take what?"
+            builder.AppendLine("Take what?")
+            Return
         End If
         Dim character = player.Character
         If character Is Nothing Then
-            Return "You have no current character."
+            builder.AppendLine("You have no current character.")
+            Return
         End If
         Dim location = character.Location
         If location Is Nothing Then
-            Return $"{character.Name} is not in a dungeon."
+            builder.AppendLine($"{character.Name} is not in a dungeon.")
+            Return
         End If
         Dim itemTypeName = String.Join(" "c, tokens)
         If itemTypeName = AllText Then
-            Return HandleTakeAll(player, character, location)
+            builder.AppendLine(HandleTakeAll(player, character, location))
+            Return
         End If
         Dim itemType = ParseItemType(itemTypeName)
         If itemType = ItemType.None Then
-            Return $"I don't know what a `{itemTypeName}` is."
+            builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
+            Return
         End If
         Dim itemStacks = location.Inventory.StackedItems
         If Not itemStacks.ContainsKey(itemType) Then
-            Return $"There ain't any `{itemTypeName}` in sight."
+            builder.AppendLine($"There ain't any `{itemTypeName}` in sight.")
+            Return
         End If
         Dim item = itemStacks(itemType).First
         character.Inventory.Add(item)
-        Return DoCounterAttacks(character, $"{character.FullName} picks up {itemType.Name}")
-    End Function
+        builder.AppendLine(DoCounterAttacks(character, $"{character.FullName} picks up {itemType.Name}"))
+    End Sub
 
     Private Function HandleTakeAll(player As Player, character As Character, location As Location) As String
         If location.Inventory.IsEmpty Then

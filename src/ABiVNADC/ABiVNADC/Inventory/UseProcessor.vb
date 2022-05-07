@@ -1,27 +1,31 @@
 ﻿Module UseProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If Not tokens.Any Then
-            Return "Use what?"
+            builder.AppendLine("Use what?")
+            Return
         End If
         Dim itemTypeName = String.Join(" "c, tokens)
         Dim itemType = AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
         If itemType = ItemType.None Then
-            Return $"I don't know what a `{itemTypeName}` is."
+            builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
+            Return
         End If
         If Not itemType.CanUse Then
-            Return $"Cannot use `{itemTypeName}`."
+            builder.AppendLine($"Cannot use `{itemTypeName}`.")
+            Return
         End If
         Dim character = player.Character
         If character Is Nothing Then
-            Return "You have no current character."
+            builder.AppendLine("You have no current character.")
+            Return
         End If
         Dim itemStacks = character.Inventory.StackedItems
         If Not itemStacks.ContainsKey(itemType) Then
-            Return $"{character.Name} doesn't have any `{itemTypeName}`."
+            builder.AppendLine($"{character.Name} doesn't have any `{itemTypeName}`.")
+            Return
         End If
         Dim item = itemStacks(itemType).First
         builder.AppendLine(player.UseItem(item))
         PerformCounterAttacks(character, builder)
-        Return builder.ToString
-    End Function
+    End Sub
 End Module

@@ -1,9 +1,10 @@
 ﻿Module RunProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "The command is just `run`."
+            builder.AppendLine("The command is just `run`.")
+            Return
         End If
-        Return RequireCharacter(
+        builder.AppendLine(RequireCharacter(
             player,
             Function(character)
                 If Not character.InCombat Then
@@ -16,6 +17,6 @@
                 End If
                 Return DoCounterAttacks(character, $"{character.FullName} could not get away.
 ")
-            End Function)
-    End Function
+            End Function))
+    End Sub
 End Module

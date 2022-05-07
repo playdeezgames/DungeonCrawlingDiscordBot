@@ -1,21 +1,25 @@
 ﻿Module GroundProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "Just `ground`, ok?"
+            builder.AppendLine("Just `ground`, ok?")
+            Return
         End If
         Dim character = player.Character
         If character Is Nothing Then
-            Return "You have no current character!"
+            builder.AppendLine("You have no current character!")
+            Return
         End If
         Dim location = character.Location
         If location Is Nothing Then
-            Return "Yer character is not in a dungeon."
+            builder.AppendLine("Yer character is not in a dungeon.")
+            Return
         End If
         Dim inventory = location.Inventory
         If inventory.IsEmpty Then
-            Return "There is nothing on the ground."
+            builder.AppendLine("There is nothing on the ground.")
+            Return
         End If
         Dim itemStacks = inventory.StackedItems
-        Return $"Items on the ground: {String.Join(", ", itemStacks.Select(Function(entry) $"{entry.Key.Name}(x{entry.Value.Count})"))}"
-    End Function
+        builder.AppendLine($"Items on the ground: {String.Join(", ", itemStacks.Select(Function(entry) $"{entry.Key.Name}(x{entry.Value.Count})"))}")
+    End Sub
 End Module

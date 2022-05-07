@@ -1,14 +1,16 @@
 ﻿Module BribeProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If Not tokens.Any Then
-            Return "Bribe with what? Empty handed bribes are rude!"
+            builder.AppendLine("Bribe with what? Empty handed bribes are rude!")
+            Return
         End If
         Dim itemTypeName = StitchTokens(tokens)
         Dim itemType = ParseItemType(itemTypeName)
         If itemType = ItemType.None Then
-            Return $"I don't know what a `{itemTypeName}` is."
+            builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
+            Return
         End If
-        Return RequireCharacter(
+        builder.AppendLine(RequireCharacter(
             player,
             Function(character)
                 Return RequireLocation(
@@ -23,6 +25,6 @@
                         End If
                         Return DoCounterAttacks(character, character.BribeEnemy(enemy, itemType))
                     End Function)
-            End Function)
-    End Function
+            End Function))
+    End Sub
 End Module

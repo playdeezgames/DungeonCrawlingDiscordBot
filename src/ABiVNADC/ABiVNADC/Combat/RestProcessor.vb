@@ -1,17 +1,18 @@
 ﻿Module RestProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "The command is just `rest`."
+            builder.AppendLine("The command is just `rest`.")
+            Return
         End If
-        Return RequireCharacter(
+        builder.AppendLine(RequireCharacter(
             player,
             Function(character)
                 If player.InCombat Then
                     Return HandleCombatRest(player)
                 End If
                 Return HandleNonCombatRest(player)
-            End Function)
-    End Function
+            End Function))
+    End Sub
 
     Private Function HandleNonCombatRest(player As Player) As String
         Dim character = player.Character

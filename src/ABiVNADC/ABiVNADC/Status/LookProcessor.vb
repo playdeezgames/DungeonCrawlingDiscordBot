@@ -2,21 +2,24 @@
     Const OutputColumns = 56
     Const OutputRows = 28
 
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If tokens.Any Then
-            Return "Round here, we only respond to a raw `look` commmand!"
+            builder.AppendLine("Round here, we only respond to a raw `look` commmand!")
+            Return
         End If
         Dim character = player.Character
         If character Is Nothing Then
-            Return "No current character."
+            builder.AppendLine("No current character.")
+            Return
         End If
         If character.Location Is Nothing Then
-            Return $"{character.Name} is not in a dungeon!"
+            builder.AppendLine($"{character.Name} is not in a dungeon!")
+            Return
         End If
         Dim canvas = DrawPOV(player)
-        Return $"```
-{canvas.Output}```"
-    End Function
+        builder.AppendLine($"```
+{canvas.Output}```")
+    End Sub
 
     Friend Function DrawPOV(player As Player) As TextCanvas
         Dim direction = player.AheadDirection.Value

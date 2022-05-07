@@ -1,9 +1,10 @@
 ﻿Module EquipProcessor
-    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If Not tokens.Any Then
-            Return "The command is `equip (item)`."
+            builder.AppendLine("The command is `equip (item)`.")
+            Return
         End If
-        Return RequireCharacter(
+        builder.AppendLine(RequireCharacter(
             player,
             Function(character)
                 Dim itemTypeName = String.Join(" "c, tokens)
@@ -13,6 +14,6 @@
                 End If
                 Dim output = character.Equip(itemType)
                 Return DoCounterAttacks(character, output)
-            End Function)
-    End Function
+            End Function))
+    End Sub
 End Module

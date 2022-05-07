@@ -1,12 +1,15 @@
 ﻿Module DeleteDungeonProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
         If Not tokens.Any Then
-            Return $"The syntax is: `delete dungeon (name)`"
+            builder.AppendLine($"The syntax is: `delete dungeon (name)`")
+            Return
         End If
         Dim dungeonName = String.Join(" "c, tokens)
         If player.DeleteDungeon(dungeonName) Then
-            Return $"You delete {dungeonName}."
+            builder.AppendLine($"You delete {dungeonName}.")
+            Return
         End If
-        Return $"Failed to delete {dungeonName}!"
-    End Function
+        builder.AppendLine($"Failed to delete {dungeonName}!")
+        Return
+    End Sub
 End Module
