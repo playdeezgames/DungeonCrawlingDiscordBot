@@ -13,4 +13,12 @@
         End If
         handler(character.Location)
     End Sub
+
+    Sub RequireNoTokens(tokens As IEnumerable(Of String), commandName As String, builder As StringBuilder, handler As Action)
+        If tokens.Any Then
+            builder.AppendLine($"Round here, just `{commandName}` is the command. I'm picky.")
+            Return
+        End If
+        handler()
+    End Sub
 End Module
