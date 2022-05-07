@@ -21,4 +21,22 @@
         End If
         handler()
     End Sub
+
+    Sub RequireTokens(tokens As IEnumerable(Of String), errorMessage As String, builder As StringBuilder, handler As Action)
+        If Not tokens.Any Then
+            builder.Append(errorMessage)
+            Return
+        End If
+        handler()
+    End Sub
+
+    Sub RequireItemType(tokens As IEnumerable(Of String), builder As StringBuilder, handler As Action(Of ItemType))
+        Dim itemTypeName = StitchTokens(tokens)
+        Dim itemType = ParseItemType(itemTypeName)
+        If itemType = ItemType.None Then
+            builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
+            Return
+        End If
+        handler(itemType)
+    End Sub
 End Module
