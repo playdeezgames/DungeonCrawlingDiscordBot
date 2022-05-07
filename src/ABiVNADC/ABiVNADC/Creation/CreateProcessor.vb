@@ -1,5 +1,6 @@
 ﻿Module CreateProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        'TODO: deprecate me
         If tokens.Any Then
             Select Case tokens.First
                 Case CharacterText

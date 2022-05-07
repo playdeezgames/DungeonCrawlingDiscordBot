@@ -1,5 +1,6 @@
 ﻿Friend Module DungeonsProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        'TODO: deprecate me
         If tokens.Any Then
             builder.AppendLine("Round here, just `dungeons` is the command. I'm picky.")
             Return

@@ -1,5 +1,6 @@
 ﻿Module CreateDungeonProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        'TODO: special refactor... or just wait to deprecate!
         If tokens.Count < 2 Then
             builder.AppendLine($"The syntax is: `create dungeon (difficulty) (name)`")
             Return

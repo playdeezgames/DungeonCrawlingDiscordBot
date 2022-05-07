@@ -1,5 +1,6 @@
 ﻿Module EnterProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        'TODO: deprecate me
         Dim character = player.Character
         If character Is Nothing Then
             builder.AppendLine($"You don't have a currently selected character. You ain't enterin' NOTHING.")

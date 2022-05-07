@@ -1,5 +1,6 @@
 ﻿Module DeleteDungeonProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        'TODO: deprecate me
         If Not tokens.Any Then
             builder.AppendLine($"The syntax is: `delete dungeon (name)`")
             Return
