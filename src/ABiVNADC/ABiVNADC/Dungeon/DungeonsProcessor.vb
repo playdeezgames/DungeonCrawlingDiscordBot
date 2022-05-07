@@ -1,9 +1,8 @@
 ﻿Friend Module DungeonsProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then
             Return "Round here, just `dungeons` is the command. I'm picky."
         End If
-        Dim builder As New StringBuilder
         builder.AppendLine("Dungeons:")
         Dim dungeons = player.Dungeons
         If dungeons.Any Then

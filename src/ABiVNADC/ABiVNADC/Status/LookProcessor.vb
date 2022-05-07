@@ -2,7 +2,7 @@
     Const OutputColumns = 56
     Const OutputRows = 28
 
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then
             Return "Round here, we only respond to a raw `look` commmand!"
         End If

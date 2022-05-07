@@ -1,5 +1,5 @@
 ﻿Module TakeProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If Not tokens.Any Then
             Return "Take what?"
         End If
@@ -19,7 +19,7 @@
         If itemType = ItemType.None Then
             Return $"I don't know what a `{itemTypeName}` is."
         End If
-        Dim itemStacks = Location.Inventory.StackedItems
+        Dim itemStacks = location.Inventory.StackedItems
         If Not itemStacks.ContainsKey(itemType) Then
             Return $"There ain't any `{itemTypeName}` in sight."
         End If

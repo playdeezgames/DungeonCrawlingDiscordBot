@@ -1,5 +1,5 @@
 ﻿Module EquipProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If Not tokens.Any Then
             Return "The command is `equip (item)`."
         End If

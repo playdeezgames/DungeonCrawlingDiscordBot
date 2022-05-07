@@ -1,5 +1,5 @@
 ﻿Module AroundProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then
             Return "It's just `around` and nothing else!"
         End If

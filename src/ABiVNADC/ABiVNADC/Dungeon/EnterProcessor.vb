@@ -1,5 +1,5 @@
 ﻿Module EnterProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         Dim character = player.Character
         If character Is Nothing Then
             Return $"You don't have a currently selected character. You ain't enterin' NOTHING."

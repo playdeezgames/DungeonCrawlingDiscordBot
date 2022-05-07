@@ -1,5 +1,5 @@
 ﻿Module UseProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If Not tokens.Any Then
             Return "Use what?"
         End If
@@ -20,7 +20,6 @@
             Return $"{character.Name} doesn't have any `{itemTypeName}`."
         End If
         Dim item = itemStacks(itemType).First
-        Dim builder As New StringBuilder
         builder.AppendLine(player.UseItem(item))
         PerformCounterAttacks(character, builder)
         Return builder.ToString

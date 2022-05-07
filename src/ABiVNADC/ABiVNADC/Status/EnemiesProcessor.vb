@@ -1,5 +1,5 @@
 ﻿Module EnemiesProcessor
-    Friend Function Run(player As Player, tokens As IEnumerable(Of String)) As String
+    Friend Function Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String)) As String
         If tokens.Any Then
             Return "The command is simpley `enemies`."
         End If
@@ -9,7 +9,6 @@
                 If Not character.InCombat Then
                     Return $"{character.FullName} is not currently in combat."
                 End If
-                Dim builder As New StringBuilder
                 builder.AppendLine($"{character.FullName} currently faces:")
                 For Each enemy In character.Location.Enemies(character)
                     builder.AppendLine($"{enemy.FullName} (health:{enemy.Health}/{enemy.MaximumHealth})")
