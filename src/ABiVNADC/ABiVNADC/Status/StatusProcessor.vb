@@ -1,10 +1,12 @@
 ﻿Module StatusProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
-        If tokens.Any Then
-            builder.AppendLine("Round here, we only respond to a raw `status` commmand!")
-            Return
-        End If
-        ShowStatus(player, builder)
+        RequireNoTokens(
+            tokens,
+            StatusText,
+            builder,
+            Sub()
+                ShowStatus(player, builder)
+            End Sub)
     End Sub
 
     Friend Sub ShowStatus(player As Player, builder As StringBuilder)

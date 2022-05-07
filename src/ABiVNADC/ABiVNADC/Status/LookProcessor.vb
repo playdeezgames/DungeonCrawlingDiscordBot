@@ -3,22 +3,25 @@
     Const OutputRows = 28
 
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
-        If tokens.Any Then
-            builder.AppendLine("Round here, we only respond to a raw `look` commmand!")
-            Return
-        End If
-        Dim character = player.Character
-        If character Is Nothing Then
-            builder.AppendLine("No current character.")
-            Return
-        End If
-        If character.Location Is Nothing Then
-            builder.AppendLine($"{character.Name} is not in a dungeon!")
-            Return
-        End If
-        Dim canvas = DrawPOV(player)
-        builder.AppendLine($"```
+        RequireNoTokens(
+            tokens,
+            LookText,
+            builder,
+            Sub()
+                RequireCharacter(
+                    player,
+                    builder,
+                    Sub(character)
+                        RequireLocation(
+                            character,
+                            builder,
+                            Sub(location)
+                                Dim canvas = DrawPOV(player)
+                                builder.AppendLine($"```
 {canvas.Output}```")
+                            End Sub)
+                    End Sub)
+            End Sub)
     End Sub
 
     Friend Function DrawPOV(player As Player) As TextCanvas

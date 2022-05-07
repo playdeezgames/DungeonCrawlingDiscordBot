@@ -1,5 +1,6 @@
 ﻿Module SwitchProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
+        'TODO: deprecate
         If tokens.Any Then
             Select Case tokens.First.ToLower
                 Case CharacterText
