@@ -122,12 +122,14 @@ Public Class Player
     Public Sub Move()
         Dim myCharacter = Character
         If myCharacter IsNot Nothing Then
-            Dim location = myCharacter.Location
-            Dim direction = AheadDirection
-            Dim route As Route = Nothing
-            If location.Routes.TryGetValue(AheadDirection.Value, route) Then
-                myCharacter.Location = route.ToLocation
-            End If
+            DungeonMove(myCharacter, AheadDirection.Value)
+        End If
+    End Sub
+
+    Private Shared Sub DungeonMove(myCharacter As Character, direction As Direction)
+        Dim route As Route = Nothing
+        If myCharacter.Location.Routes.TryGetValue(direction, route) Then
+            myCharacter.Location = route.ToLocation
         End If
     End Sub
 
