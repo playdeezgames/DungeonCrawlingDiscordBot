@@ -1,7 +1,5 @@
 ﻿Module StartProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
-        builder.AppendLine("Not ready yet! Soon!")
-        Return
         RequireNoTokens(
             tokens,
             StartText,
