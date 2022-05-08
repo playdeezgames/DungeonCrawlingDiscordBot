@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 
 Public Class Character
+    Implements IInventoryHost
     ReadOnly Property Id As Long
     Sub New(characterId As Long)
         Id = characterId
@@ -210,7 +211,7 @@ Public Class Character
             End If
         End Set
     End Property
-    ReadOnly Property Inventory As Inventory
+    ReadOnly Property Inventory As Inventory Implements IInventoryHost.Inventory
         Get
             Dim inventoryId As Long? = CharacterInventoryData.ReadForCharacter(Id)
             If Not inventoryId.HasValue Then
@@ -331,7 +332,7 @@ Public Class Character
 
     ReadOnly Property ExperienceLevel As Long
         Get
-            Return CharacterData.ReadCharacterLevel(Id).value
+            Return CharacterData.ReadCharacterLevel(Id).Value
         End Get
     End Property
 

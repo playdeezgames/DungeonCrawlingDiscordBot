@@ -1,4 +1,5 @@
 ﻿Public Class Location
+    Implements IInventoryHost
     ReadOnly Property Id As Long
     Sub New(locationId As Long)
         Id = locationId
@@ -31,7 +32,7 @@
         End Get
     End Property
 
-    ReadOnly Property Inventory As Inventory
+    ReadOnly Property Inventory As Inventory Implements IInventoryHost.Inventory
         Get
             Dim inventoryId As Long? = LocationInventoryData.ReadForLocation(Id)
             If Not inventoryId.HasValue Then
