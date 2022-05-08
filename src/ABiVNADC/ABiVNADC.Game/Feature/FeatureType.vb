@@ -3,14 +3,15 @@
 Public Enum FeatureType
     None
     DungeonExit
+    DungeonEntrance
 End Enum
 Public Module FeatureTypeExtensions
-    Public ReadOnly AllFeatureTypes As New List(Of FeatureType) From
+    Public ReadOnly AllDungeonFeatureTypes As New List(Of FeatureType) From
         {
             FeatureType.DungeonExit
         }
     <Extension>
-    Function SpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String
+    Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String
         Select Case featureType
             Case FeatureType.DungeonExit
                 Return "1d1"
@@ -23,6 +24,8 @@ Public Module FeatureTypeExtensions
         Select Case featureType
             Case FeatureType.DungeonExit
                 Return "dungeon exit"
+            Case FeatureType.DungeonEntrance
+                Return "dungeon entrance"
             Case Else
                 Throw New NotImplementedException
         End Select
