@@ -17,8 +17,7 @@
             Return
         End If
         character.Location = dungeon.StartingLocation
-        Dim canvas = DrawPOV(player)
-        builder.AppendLine($"{character.FullName} enters {dungeonName}.
-```{canvas.Output}```")
+        builder.AppendLine($"{character.FullName} enters {dungeonName}.")
+        ShowCurrentLocation(player, builder)
     End Sub
 End Module

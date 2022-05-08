@@ -14,9 +14,8 @@
                             builder,
                             Sub()
                                 If player.Run() Then
-                                    Dim canvas = DrawPOV(player)
-                                    builder.AppendLine($"{character.FullName} runs!
-```{canvas.Output}```")
+                                    builder.AppendLine($"{character.FullName} runs!")
+                                    ShowCurrentLocation(player, builder)
                                     Return
                                 End If
                                 builder.AppendLine(DoCounterAttacks(character, $"{character.FullName} could not get away.

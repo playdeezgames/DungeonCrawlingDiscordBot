@@ -48,4 +48,9 @@
         End If
         handler()
     End Sub
+
+    Sub ShowCurrentLocation(player As Player, builder As StringBuilder)
+        Dim canvas = DrawPOV(player)
+        builder.AppendLine($"```{canvas.Output}```")
+    End Sub
 End Module

@@ -10,9 +10,7 @@
                     Return
                 End If
                 player.Move()
-                Dim canvas = DrawPOV(player)
-                builder.AppendLine($"```
-{canvas.Output}```")
+                ShowCurrentLocation(player, builder)
             End Sub)
     End Sub
 End Module
