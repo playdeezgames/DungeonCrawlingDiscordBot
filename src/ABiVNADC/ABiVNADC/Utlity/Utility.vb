@@ -50,7 +50,9 @@
     End Sub
 
     Sub ShowCurrentLocation(player As Player, builder As StringBuilder)
-        Dim canvas = DrawPOV(player)
-        builder.AppendLine($"```{canvas.Output}```")
+        If If(player?.Character?.Location?.IsPOV, False) Then
+            Dim canvas = DrawPOV(player)
+            builder.AppendLine($"```{canvas.Output}```")
+        End If
     End Sub
 End Module

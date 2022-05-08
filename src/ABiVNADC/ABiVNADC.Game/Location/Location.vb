@@ -4,6 +4,19 @@
     Sub New(locationId As Long)
         Id = locationId
     End Sub
+
+    ReadOnly Property IsPOV As Boolean
+        Get
+            Return LocationType.IsPOV
+        End Get
+    End Property
+
+    ReadOnly Property LocationType As LocationType
+        Get
+            Return CType(LocationData.ReadLocationType(Id).Value, LocationType)
+        End Get
+    End Property
+
     ReadOnly Property Routes As Dictionary(Of Direction, Route)
         Get
             Dim result As New Dictionary(Of Direction, Route)
