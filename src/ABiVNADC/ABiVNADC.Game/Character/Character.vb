@@ -132,7 +132,7 @@ Public Class Character
 
     ReadOnly Property IsEnemy As Boolean
         Get
-            Return CharacterType.IsEnemy
+            Return Exists AndAlso CharacterType.IsEnemy
         End Get
     End Property
 

@@ -24,7 +24,8 @@
 
     Friend Sub PerformCounterAttacks(character As Character, builder As StringBuilder)
         If character.InCombat Then
-            For Each enemy In character.Location.Enemies(character)
+            Dim enemies = character.Location.Enemies(character)
+            For Each enemy In enemies
                 If Not character.Exists Then
                     Continue For
                 End If

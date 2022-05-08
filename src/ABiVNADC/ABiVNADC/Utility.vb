@@ -10,6 +10,7 @@
     Sub RequireLocation(character As Character, builder As StringBuilder, handler As Action(Of Location))
         If Not character.HasLocation Then
             builder.AppendLine($"{character.FullName} is not in a dungeon!")
+            Return
         End If
         handler(character.Location)
     End Sub
