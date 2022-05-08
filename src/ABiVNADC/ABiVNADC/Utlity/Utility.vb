@@ -1,4 +1,12 @@
 ﻿Module Utility
+
+    Sub RequireNoCharacter(player As Player, builder As StringBuilder, handler As Action)
+        If player.HasCharacter Then
+            builder.AppendLine("You already have a character.")
+            Return
+        End If
+        handler()
+    End Sub
     Sub RequireCharacter(player As Player, builder As StringBuilder, handler As Action(Of Character))
         If Not player.HasCharacter Then
             builder.AppendLine("You have no current character.")
@@ -50,9 +58,20 @@
     End Sub
 
     Sub ShowCurrentLocation(player As Player, builder As StringBuilder)
-        If If(player?.Character?.Location?.IsPOV, False) Then
-            Dim canvas = DrawPOV(player)
-            builder.AppendLine($"```{canvas.Output}```")
-        End If
+        Select Case If(player?.Character?.Location?.LocationType, LocationType.None)
+            Case LocationType.Dungeon
+                Dim canvas = DrawPOV(player)
+                builder.AppendLine($"```{canvas.Output}```")
+            Case LocationType.Overworld
+                ShowOverworldLocation(player.Character.Location, builder)
+            Case Else
+                builder.AppendLine("Cannot show current location.")
+        End Select
+    End Sub
+
+    Private Sub ShowOverworldLocation(location As Location, builder As StringBuilder)
+        builder.AppendLine("Yer in the overworld.")
+        builder.AppendLine($"X: {location.OverworldX.Value}")
+        builder.AppendLine($"Y: {location.OverworldY.Value}")
     End Sub
 End Module

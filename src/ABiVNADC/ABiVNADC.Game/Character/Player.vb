@@ -135,6 +135,15 @@ Public Class Player
         PlayerCharacterData.WriteDirectionForPlayer(Id, newDirection)
     End Sub
 
+    Public Sub CreateCharacter()
+        If Not HasCharacter Then
+            CreateCharacter(RNG.FromList(Names.Human))
+            Dim x As Long = RNG.FromRange(Short.MinValue, Short.MaxValue)
+            Dim y As Long = RNG.FromRange(Short.MinValue, Short.MaxValue)
+            Character.Location = If(ABiVNADC.Game.Location.FromOverworldXY(x, y), ABiVNADC.Game.Location.CreateOverworld(x, y))
+        End If
+    End Sub
+
     Public Function CreateCharacter(characterName As String) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = Data.CharacterData.Create(characterName, CharacterType.N00b, 0)

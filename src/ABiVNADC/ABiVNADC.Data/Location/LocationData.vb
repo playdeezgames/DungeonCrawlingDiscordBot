@@ -12,7 +12,7 @@
     End Sub
 
     Public Function ReadLocationType(locationId As Long) As Long?
-        ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, LocationTypeColumn)
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, LocationTypeColumn)
     End Function
 
     Public Function Create(locationType As Long) As Long

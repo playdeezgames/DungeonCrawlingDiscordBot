@@ -25,6 +25,7 @@
     Friend Const RestText = "rest"
     Friend Const RightText = "right"
     Friend Const RunText = "run"
+    Friend Const StartText = "start"
     Friend Const StatusText = "status"
     Friend Const SwitchText = "switch"
     Friend Const TakeText = "take"

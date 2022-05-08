@@ -5,6 +5,29 @@
         Id = locationId
     End Sub
 
+    Friend Shared Function CreateOverworld(x As Long, y As Long) As Location
+        Dim locationId = LocationData.Create(LocationType.Overworld)
+        OverworldLocationData.Write(locationId, x, y)
+        Return New Location(locationId)
+    End Function
+
+    ReadOnly Property OverworldX As Long?
+        Get
+            Return OverworldLocationData.ReadX(Id)
+        End Get
+    End Property
+
+    ReadOnly Property OverworldY As Long?
+        Get
+            Return OverworldLocationData.ReadY(Id)
+        End Get
+    End Property
+
+    Friend Shared Function FromOverworldXY(x As Long, y As Long) As Location
+        Dim locationId As Long? = OverworldLocationData.ReadForXY(x, y)
+        Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
+    End Function
+
     ReadOnly Property IsPOV As Boolean
         Get
             Return LocationType.IsPOV
