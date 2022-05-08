@@ -63,15 +63,16 @@
                 Dim canvas = DrawPOV(player)
                 builder.AppendLine($"```{canvas.Output}```")
             Case LocationType.Overworld
-                ShowOverworldLocation(player.Character.Location, builder)
+                ShowOverworldLocation(player, player.Character.Location, builder)
             Case Else
                 builder.AppendLine("Cannot show current location.")
         End Select
     End Sub
 
-    Private Sub ShowOverworldLocation(location As Location, builder As StringBuilder)
+    Private Sub ShowOverworldLocation(player As Player, location As Location, builder As StringBuilder)
         builder.AppendLine("Yer in the overworld.")
         builder.AppendLine($"X: {location.OverworldX.Value}")
         builder.AppendLine($"Y: {location.OverworldY.Value}")
+        builder.AppendLine($"Facing: {player.AheadDirection.Value.Name}")
     End Sub
 End Module

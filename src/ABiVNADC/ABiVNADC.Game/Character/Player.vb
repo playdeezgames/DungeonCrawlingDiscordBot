@@ -120,16 +120,26 @@ Public Class Player
     End Function
 
     Public Sub Move()
-        Dim myCharacter = Character
-        If myCharacter IsNot Nothing Then
-            DungeonMove(myCharacter, AheadDirection.Value)
-        End If
+        Select Case If(Character?.Location?.LocationType, LocationType.None)
+            Case LocationType.Dungeon
+                DungeonMove(Character, AheadDirection.Value)
+            Case LocationType.Overworld
+                OverworldMove(Character, AheadDirection.Value)
+        End Select
     End Sub
 
-    Private Shared Sub DungeonMove(myCharacter As Character, direction As Direction)
+    Private Shared Sub OverworldMove(character As Character, direction As Direction)
+        Dim walker = DirectionWalker(direction)
+        Dim location = character.Location
+        Dim nextX = location.OverworldX.Value + walker.DeltaX
+        Dim nextY = location.OverworldY.Value + walker.DeltaY
+        character.Location = Location.AutogenerateOverworldXY(nextX, nextY)
+    End Sub
+
+    Private Shared Sub DungeonMove(character As Character, direction As Direction)
         Dim route As Route = Nothing
-        If myCharacter.Location.Routes.TryGetValue(direction, route) Then
-            myCharacter.Location = route.ToLocation
+        If character.Location.Routes.TryGetValue(direction, route) Then
+            character.Location = route.ToLocation
         End If
     End Sub
 
@@ -142,7 +152,7 @@ Public Class Player
             CreateCharacter(RNG.FromList(Names.Human))
             Dim x As Long = RNG.FromRange(Short.MinValue, Short.MaxValue)
             Dim y As Long = RNG.FromRange(Short.MinValue, Short.MaxValue)
-            Character.Location = If(ABiVNADC.Game.Location.FromOverworldXY(x, y), ABiVNADC.Game.Location.CreateOverworld(x, y))
+            Character.Location = Game.Location.AutogenerateOverworldXY(x, y)
         End If
     End Sub
 

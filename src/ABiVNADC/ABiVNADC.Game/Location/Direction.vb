@@ -7,6 +7,21 @@ Public Enum Direction
     West
 End Enum
 Public Module DirectionExtensions
+    <Extension>
+    Public Function Name(direction As Direction) As String
+        Select Case direction
+            Case Direction.North
+                Return "north"
+            Case Direction.South
+                Return "south"
+            Case Direction.East
+                Return "east"
+            Case Direction.West
+                Return "west"
+            Case Else
+                Throw New NotImplementedException
+        End Select
+    End Function
     Friend ReadOnly AllDirections As New List(Of Direction) From
         {
             Direction.North,
