@@ -291,12 +291,12 @@ Public Class Character
         Dim attackRoll = RollAttack()
         builder.AppendLine($"{FullName} rolls an attack of {attackRoll}!")
         For Each weaponType In ReduceWeaponDurability(attackRoll)
-            builder.AppendLine($"{FullName}'s {weaponType.Name} breaks!")
+            builder.AppendLine($"! ! ! {FullName}'s {weaponType.Name} breaks ! ! !")
         Next
         Dim defendRoll = defender.RollDefend
         builder.AppendLine($"{defender.FullName} rolls a defend of {defendRoll}!")
         For Each armorType In defender.ReduceArmorDurability(defendRoll)
-            builder.AppendLine($"{defender.FullName}'s {armorType.Name} breaks!")
+            builder.AppendLine($"! ! ! {defender.FullName}'s {armorType.Name} breaks ! ! !")
         Next
         Dim damageRoll = If(attackRoll > defendRoll, attackRoll - defendRoll, 0)
         If damageRoll > 0 Then
