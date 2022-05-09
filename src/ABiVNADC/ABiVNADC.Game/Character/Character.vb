@@ -168,8 +168,24 @@ Public Class Character
             DropInventory()
             DropLoot()
         End If
+        If HasPlayer Then
+            Player.AddRIP(Me)
+        End If
         CharacterData.Clear(Id)
     End Sub
+
+    Private ReadOnly Property HasPlayer As Boolean
+        Get
+            Return Player IsNot Nothing
+        End Get
+    End Property
+
+    Private ReadOnly Property Player As Player
+        Get
+            Dim playerId As Long? = PlayerCharacterData.ReadForCharacter(Id)
+            Return If(playerId.HasValue, New Player(playerId.Value), Nothing)
+        End Get
+    End Property
 
     Private Sub DropLoot()
         Dim lootDrops = CharacterType.LootDrops

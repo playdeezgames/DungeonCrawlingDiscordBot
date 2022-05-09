@@ -18,6 +18,7 @@
     Friend Const MoveText = "move"
     Friend Const RestText = "rest"
     Friend Const RightText = "right"
+    Friend Const RipText = "rip"
     Friend Const RunText = "run"
     Friend Const StartText = "start"
     Friend Const StatusText = "status"

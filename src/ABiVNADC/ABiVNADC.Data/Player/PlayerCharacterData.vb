@@ -85,4 +85,11 @@
     Public Function ReadDirection(playerId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, PlayerIdColumn, playerId, DirectionColumn)
     End Function
+
+    Public Function ReadForCharacter(characterId As Long) As Long?
+        Initialize()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT [{PlayerIdColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn};",
+            MakeParameter($"@{CharacterIdColumn}", characterId))
+    End Function
 End Module

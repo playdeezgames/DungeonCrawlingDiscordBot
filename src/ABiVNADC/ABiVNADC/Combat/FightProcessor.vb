@@ -10,6 +10,7 @@
                 End If
                 If Not character.CanFight Then
                     builder.AppendLine($"{character.FullName} needs to recover energy.")
+                    Return
                 End If
                 builder.AppendLine(DoCounterAttacks(character, character.Attack(character.Location.Enemy(character))))
             End Sub)

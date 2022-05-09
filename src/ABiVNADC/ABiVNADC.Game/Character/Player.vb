@@ -178,6 +178,11 @@ Public Class Player
             Return PlayerCharacterData.ReadForPlayer(Id).Select(Function(id) Character.FromId(id))
         End Get
     End Property
+
+    Friend Sub AddRIP(character As Character)
+        PlayerRIPData.Write(Id, $"{character.FullName}(Level: {character.Level})")
+    End Sub
+
     ReadOnly Property Dungeons As IEnumerable(Of Dungeon)
         Get
             Return DungeonData.ReadForPlayer(Id).Select(Function(id) Dungeon.FromId(id))
@@ -204,6 +209,12 @@ Public Class Player
     ReadOnly Property CanMove As Boolean
         Get
             Return CanTurn
+        End Get
+    End Property
+
+    ReadOnly Property RIPs As IEnumerable(Of String)
+        Get
+            Return PlayerRIPData.ReadTombstoneTexts(Id)
         End Get
     End Property
 End Class
