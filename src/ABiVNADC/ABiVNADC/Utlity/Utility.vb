@@ -81,7 +81,7 @@
         builder.AppendLine("Yer in the overworld.")
         If location.HasFeatures Then
             For Each feature In location.Features
-                builder.AppendLine($"There is a {feature.Name} here.")
+                builder.AppendLine($"There is a {feature.FullName} here.")
             Next
         End If
     End Sub

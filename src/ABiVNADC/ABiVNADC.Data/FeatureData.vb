@@ -20,6 +20,10 @@
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, LocationIdColumn, locationId)
     End Function
 
+    Public Function ReadLocation(featureId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, LocationIdColumn)
+    End Function
+
     Public Function ReadCountForLocation(locationId As Long) As Long
         Initialize()
         Return ExecuteScalar(Of Long)(

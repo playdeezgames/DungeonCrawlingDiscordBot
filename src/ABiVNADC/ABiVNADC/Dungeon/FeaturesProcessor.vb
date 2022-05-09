@@ -17,7 +17,7 @@
                                 If Not features.Any Then
                                     builder.AppendLine($"There are no features here.")
                                 End If
-                                builder.AppendLine($"Features present: {String.Join(", ", features.Select(Function(x) x.Name))}")
+                                builder.AppendLine($"Features present: {String.Join(", ", features.Select(Function(x) x.FullName))}")
                             End Sub)
                     End Sub)
             End Sub)
