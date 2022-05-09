@@ -8,6 +8,7 @@ Public Enum FeatureType
     NorthSouthRoad
     EastWestRoad
     ForSaleSign
+    Corpse
 End Enum
 Public Module FeatureTypeExtensions
     Friend ReadOnly AllDungeonFeatureTypes As New List(Of FeatureType) From

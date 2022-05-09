@@ -24,6 +24,8 @@
                     Dim x = Location.OverworldX.Value
                     Dim y = Location.OverworldY.Value
                     Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
+                Case FeatureType.Corpse
+                    Return $"the corpse of {FeatureTextMetadata.Read(Id, FeatureMetadataType.Name)}"
                 Case Else
                     Return Name
             End Select

@@ -11,6 +11,7 @@
                     Sub(character)
                         If player.InCombat Then
                             builder.AppendLine(HandleCombatRest(player))
+                            Return
                         End If
                         builder.AppendLine(HandleNonCombatRest(player))
                     End Sub)
