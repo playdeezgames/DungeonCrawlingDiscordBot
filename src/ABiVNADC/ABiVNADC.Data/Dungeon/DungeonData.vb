@@ -12,10 +12,9 @@
             (
                 [{DungeonIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
                 [{DungeonNameColumn}] TEXT NOT NULL,
-                [{PlayerIdColumn}] INT NOT NULL,
+                [{PlayerIdColumn}] INT NULL,
                 [{StartingLocationIdColumn}] INT NOT NULL,
-                [{DifficultyColumn}] INT NOT NULL,
-                UNIQUE([{PlayerIdColumn}],[{DungeonNameColumn}])
+                [{DifficultyColumn}] INT NOT NULL
             );")
     End Sub
 
@@ -26,6 +25,28 @@
 
     Public Function ReadLocation(dungeonId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, StartingLocationIdColumn)
+    End Function
+
+
+    Public Function Create(dungeonName As String, startingLocationId As Long, difficulty As Long) As Long
+        Initialize()
+        ExecuteNonQuery(
+            $"INSERT INTO [{TableName}]
+            (
+                [{DungeonNameColumn}],
+                [{StartingLocationIdColumn}],
+                [{DifficultyColumn}]
+            ) 
+            VALUES
+            (
+                @{DungeonNameColumn},
+                @{StartingLocationIdColumn},
+                @{DifficultyColumn}
+            );",
+            MakeParameter($"@{DungeonNameColumn}", dungeonName),
+            MakeParameter($"@{DifficultyColumn}", difficulty),
+            MakeParameter($"@{StartingLocationIdColumn}", startingLocationId))
+        Return LastInsertRowId
     End Function
 
     Public Function Create(playerId As Long, dungeonName As String, startingLocationId As Long, difficulty As Long) As Long

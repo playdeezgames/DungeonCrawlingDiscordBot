@@ -19,15 +19,15 @@
             Return New Location(DungeonData.ReadLocation(Id).Value)
         End Get
     End Property
-    Shared Sub Create(player As Player, dungeonName As String, mazeColumns As Long, mazeRows As Long, difficulty As Difficulty)
+    Shared Function Create(player As Player, dungeonName As String, mazeColumns As Long, mazeRows As Long, difficulty As Difficulty) As Dungeon
         Dim maze As Maze(Of Direction) = CreateMaze(mazeColumns, mazeRows)
         Dim locationIds As List(Of Long) = CreateLocations(maze)
         PopulateDoors(maze, locationIds)
         PopulateItems(locationIds, difficulty)
         PopulateCreatures(locationIds, difficulty)
         PopulateFeatures(locationIds, difficulty)
-        CreateDungeon(player, dungeonName, locationIds, difficulty)
-    End Sub
+        Return CreateDungeon(player, dungeonName, locationIds.Select(Function(id) New Location(id)).ToList, difficulty)
+    End Function
 
     Private Shared Sub PopulateFeatures(locationIds As List(Of Long), difficulty As Difficulty)
         For Each featureType In AllDungeonFeatureTypes
@@ -63,12 +63,17 @@
         Next
     End Sub
 
-    Private Shared Sub CreateDungeon(player As Player, dungeonName As String, locationIds As List(Of Long), difficulty As Difficulty)
-        Dim dungeonId = DungeonData.Create(player.Id, dungeonName, locationIds(0), difficulty)
-        For Each locationId In locationIds
-            DungeonLocationData.Write(dungeonId, locationId)
+    Private Shared Function CreateDungeon(player As Player, dungeonName As String, locations As List(Of Location), difficulty As Difficulty) As Dungeon
+        Dim startingLocation = locations.Single(Function(l) l.Features.Any(Function(f) f.FeatureType = FeatureType.DungeonExit))
+        Dim dungeonId = If(
+            player IsNot Nothing,
+            DungeonData.Create(player.Id, dungeonName, startingLocation.Id, difficulty),
+            DungeonData.Create(dungeonName, startingLocation.Id, difficulty))
+        For Each location In locations
+            DungeonLocationData.Write(dungeonId, location.Id)
         Next
-    End Sub
+        Return New Dungeon(dungeonId)
+    End Function
 
     Friend Function GenerateWanderingMonster() As CharacterType
         Return RNG.FromGenerator(Difficulty.WanderingMonsterTable)

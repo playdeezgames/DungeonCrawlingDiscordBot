@@ -6,9 +6,14 @@ Public Enum FeatureType
     DungeonEntrance
 End Enum
 Public Module FeatureTypeExtensions
-    Public ReadOnly AllDungeonFeatureTypes As New List(Of FeatureType) From
+    Friend ReadOnly AllDungeonFeatureTypes As New List(Of FeatureType) From
         {
             FeatureType.DungeonExit
+        }
+    Friend ReadOnly OverworldFeatureGenerator As New Dictionary(Of FeatureType, Integer) From
+        {
+            {FeatureType.None, 1},
+            {FeatureType.DungeonEntrance, 1}
         }
     <Extension>
     Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String

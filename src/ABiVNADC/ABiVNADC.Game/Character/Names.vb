@@ -134,4 +134,56 @@
             "Kavyadma",
             "Tabhavosa"
         }
+    Friend ReadOnly DungeonNoun As New List(Of String) From
+        {
+            "Dungeon",
+            "Tomb",
+            "Crypt",
+            "Mausoleum",
+            "Vault",
+            "Obliette",
+            "Catacomb",
+            "Sepulcher",
+            "Pit",
+            "Rootcellar",
+            "Stronghold",
+            "Bastion",
+            "Citadel",
+            "Fortress",
+            "Bunker"
+        }
+    Friend ReadOnly DungeonAdjective As New List(Of String) From
+        {
+            "Evil",
+            "Deadly",
+            "Sinister",
+            "Fell",
+            "Cursed",
+            "Corrupt",
+            "Wicked",
+            "Vile",
+            "Malevolent",
+            "Hideous",
+            "Foul",
+            "Villainous",
+            "Mighty"
+        }
+    Friend ReadOnly DungeonOwner As New List(Of String) From
+        {
+            "Necromancer",
+            "Wizard",
+            "Cultist",
+            "Summoner",
+            "Witch",
+            "Warlock",
+            "Occultist",
+            "Sorcerer",
+            "Warlord",
+            "Lemur",
+            "Mutant",
+            "Wyvern"
+        }
+    Friend Function GenerateDungeonName() As String
+        Return $"{RNG.FromList(DungeonNoun)} of the {RNG.FromList(DungeonAdjective)} {RNG.FromList(DungeonOwner)}"
+    End Function
 End Module

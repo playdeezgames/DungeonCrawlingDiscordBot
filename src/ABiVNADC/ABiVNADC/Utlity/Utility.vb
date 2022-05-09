@@ -71,8 +71,10 @@
 
     Private Sub ShowOverworldLocation(player As Player, location As Location, builder As StringBuilder)
         builder.AppendLine("Yer in the overworld.")
-        builder.AppendLine($"X: {location.OverworldX.Value}")
-        builder.AppendLine($"Y: {location.OverworldY.Value}")
-        builder.AppendLine($"Facing: {player.AheadDirection.Value.Name}")
+        If location.HasFeatures Then
+            For Each feature In location.Features
+                builder.AppendLine($"There is a {feature.Name} here.")
+            Next
+        End If
     End Sub
 End Module
