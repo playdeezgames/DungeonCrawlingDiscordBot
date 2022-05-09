@@ -1,0 +1,7 @@
+[[actions]]
+name = "play"
+path = "AbattoirOfSPLORR.exe"
+console = true
+
+[[prereqs]]
+name = "net-runtime-5-x64"

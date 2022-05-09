@@ -7,6 +7,7 @@ Module Program
         Dim player As New Player(AnsiConsole.Ask(Of Long)("[olive]Player Id[/]"))
         Dim done = False
         While Not done
+            AnsiConsole.WriteLine()
             Dim command = AnsiConsole.Ask(Of String)(">")
             Select Case command
                 Case "!quit"
@@ -20,7 +21,6 @@ Module Program
                 Case Else
                     AnsiConsole.WriteLine()
                     AnsiConsole.WriteLine(MainProcessor.Run(player, command))
-                    AnsiConsole.WriteLine()
             End Select
         End While
         Store.Save(DATABASE_FILE_NAME)

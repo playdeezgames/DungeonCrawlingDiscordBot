@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stuff", "Stuff", "{1E96902F
 	ProjectSection(SolutionItems) = preProject
 		..\..\.gitignore = ..\..\.gitignore
 		build.sh = build.sh
+		..\..\butler.sh = ..\..\butler.sh
 		Dockerfile = Dockerfile
 		export.sh = export.sh
 		..\..\README.md = ..\..\README.md
@@ -33,6 +34,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{DAE11B3A-E74B-481C-BA47-208188DC756C}"
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "ABiVNADC.Tests", "ABiVNADC.Tests\ABiVNADC.Tests.vbproj", "{5DA134F9-A7B0-4637-BFC0-C638359A188B}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AbattoirOfSPLORR", "AbattoirOfSPLORR\AbattoirOfSPLORR.vbproj", "{0A1EC17E-885A-420A-8799-DB3F477600F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +75,10 @@ Global
 		{5DA134F9-A7B0-4637-BFC0-C638359A188B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DA134F9-A7B0-4637-BFC0-C638359A188B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DA134F9-A7B0-4637-BFC0-C638359A188B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A1EC17E-885A-420A-8799-DB3F477600F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A1EC17E-885A-420A-8799-DB3F477600F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A1EC17E-885A-420A-8799-DB3F477600F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A1EC17E-885A-420A-8799-DB3F477600F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +92,7 @@ Global
 		{91FA0B89-8288-4610-A72F-DB0CD363F074} = {EB20C4A0-7626-4331-875B-36B44256E6BC}
 		{C153186B-69A9-4E07-93C6-DDB95B882C84} = {EB20C4A0-7626-4331-875B-36B44256E6BC}
 		{5DA134F9-A7B0-4637-BFC0-C638359A188B} = {DAE11B3A-E74B-481C-BA47-208188DC756C}
+		{0A1EC17E-885A-420A-8799-DB3F477600F8} = {EB20C4A0-7626-4331-875B-36B44256E6BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FB8BD717-E075-4A20-A858-60813AB80106}
