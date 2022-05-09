@@ -64,9 +64,28 @@ Public Module FeatureTypeExtensions
         FeatureData.Create(location.Id, FeatureType.Crossroads)
     End Sub
 
+    Private ReadOnly dungeonDifficultyGenerator As New Dictionary(Of Difficulty, Integer) From
+        {
+            {Difficulty.Yermom, 16},
+            {Difficulty.Easy, 8},
+            {Difficulty.Normal, 4},
+            {Difficulty.Difficult, 2},
+            {Difficulty.Too, 1}
+        }
+
+    Private ReadOnly dungeonSizeGenerator As New Dictionary(Of Long, Integer) From
+        {
+            {4, 81},
+            {6, 27},
+            {8, 9},
+            {12, 3},
+            {16, 1}
+        }
+
     Friend Sub GenerateDungeonEntrance(location As Location)
         FeatureData.Create(location.Id, FeatureType.DungeonEntrance)
-        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(location.Id), 4, 4, Difficulty.Yermom)
+        Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
+        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(location.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
         DungeonLocationData.Write(dungeon.Id, location.Id)
     End Sub
 End Module
