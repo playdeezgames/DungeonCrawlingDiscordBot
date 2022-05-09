@@ -1,23 +1,31 @@
 ﻿Module EnterProcessor
     Friend Sub Run(player As Player, builder As StringBuilder, tokens As IEnumerable(Of String))
-        'TODO: deprecate me
-        Dim character = player.Character
-        If character Is Nothing Then
-            builder.AppendLine($"You don't have a currently selected character. You ain't enterin' NOTHING.")
-            Return
-        End If
-        If character.Location IsNot Nothing Then
-            builder.AppendLine($"{character.Name} is already in a dungeon.")
-            Return
-        End If
-        Dim dungeonName = String.Join(" "c, tokens)
-        Dim dungeon = player.Dungeons.SingleOrDefault(Function(x) x.Name = dungeonName)
-        If dungeon Is Nothing Then
-            builder.AppendLine($"{dungeonName} doesn't exist!")
-            Return
-        End If
-        character.Location = dungeon.StartingLocation
-        builder.AppendLine($"{character.FullName} enters {dungeonName}.")
-        ShowCurrentLocation(player, builder)
+        RequireNoTokens(
+            tokens,
+            EnterText,
+            builder,
+            Sub()
+                RequireCharacter(
+                    player,
+                    builder,
+                    Sub(character)
+                        RequireLocation(
+                            character,
+                            builder,
+                            Sub(location)
+                                RequireFeature(
+                                    location,
+                                    FeatureType.DungeonEntrance,
+                                    builder,
+                                    Sub(feature)
+                                        Dim dungeon = location.Dungeon
+                                        character.Location = dungeon.StartingLocation
+                                        builder.AppendLine($"{character.FullName} enters {dungeon.Name}.")
+                                        ShowCurrentLocation(player, builder)
+                                    End Sub)
+                            End Sub)
+                    End Sub)
+            End Sub)
+
     End Sub
 End Module

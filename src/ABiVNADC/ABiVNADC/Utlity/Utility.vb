@@ -23,6 +23,14 @@
         handler(character.Location)
     End Sub
 
+    Sub RequireFeature(location As Location, featureType As FeatureType, builder As StringBuilder, handler As Action(Of Feature))
+        If Not location.HasFeature(featureType) Then
+            builder.AppendLine($"There is no {featureType.Name} here.")
+            Return
+        End If
+        handler(location.Features.First(Function(x) x.FeatureType = featureType))
+    End Sub
+
     Sub RequireNoTokens(tokens As IEnumerable(Of String), commandName As String, builder As StringBuilder, handler As Action)
         If tokens.Any Then
             builder.AppendLine($"Round here, just `{commandName}` is the command. I'm picky.")

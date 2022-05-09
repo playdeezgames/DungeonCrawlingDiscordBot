@@ -14,19 +14,24 @@
             Return DungeonData.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property StartingLocation As Location
+    ReadOnly Property OverworldLocation As Location
         Get
-            Return New Location(DungeonData.ReadLocation(Id).Value)
+            Return New Location(DungeonData.ReadOverworldLocation(Id).Value)
         End Get
     End Property
-    Shared Function Create(player As Player, dungeonName As String, mazeColumns As Long, mazeRows As Long, difficulty As Difficulty) As Dungeon
+    ReadOnly Property StartingLocation As Location
+        Get
+            Return New Location(DungeonData.ReadStartingLocation(Id).Value)
+        End Get
+    End Property
+    Shared Function Create(player As Player, dungeonName As String, overworldLocation As Location, mazeColumns As Long, mazeRows As Long, difficulty As Difficulty) As Dungeon
         Dim maze As Maze(Of Direction) = CreateMaze(mazeColumns, mazeRows)
         Dim locationIds As List(Of Long) = CreateLocations(maze)
         PopulateDoors(maze, locationIds)
         PopulateItems(locationIds, difficulty)
         PopulateCreatures(locationIds, difficulty)
         PopulateFeatures(locationIds, difficulty)
-        Return CreateDungeon(player, dungeonName, locationIds.Select(Function(id) New Location(id)).ToList, difficulty)
+        Return CreateDungeon(player, dungeonName, overworldLocation, locationIds.Select(Function(id) New Location(id)).ToList, difficulty)
     End Function
 
     Private Shared Sub PopulateFeatures(locationIds As List(Of Long), difficulty As Difficulty)
@@ -63,12 +68,12 @@
         Next
     End Sub
 
-    Private Shared Function CreateDungeon(player As Player, dungeonName As String, locations As List(Of Location), difficulty As Difficulty) As Dungeon
+    Private Shared Function CreateDungeon(player As Player, dungeonName As String, overworldLocation As Location, locations As List(Of Location), difficulty As Difficulty) As Dungeon
         Dim startingLocation = locations.Single(Function(l) l.Features.Any(Function(f) f.FeatureType = FeatureType.DungeonExit))
         Dim dungeonId = If(
             player IsNot Nothing,
-            DungeonData.Create(player.Id, dungeonName, startingLocation.Id, difficulty),
-            DungeonData.Create(dungeonName, startingLocation.Id, difficulty))
+            DungeonData.Create(player.Id, dungeonName, overworldLocation.Id, startingLocation.Id, difficulty),
+            DungeonData.Create(dungeonName, overworldLocation.Id, startingLocation.Id, difficulty))
         For Each location In locations
             DungeonLocationData.Write(dungeonId, location.Id)
         Next

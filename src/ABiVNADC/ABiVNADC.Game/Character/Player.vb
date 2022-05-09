@@ -109,16 +109,6 @@ Public Class Player
         End If
     End Sub
 
-    Public Function CreateDungeon(dungeonName As String, difficulty As Difficulty) As Boolean
-        Const MazeColumns As Long = 4
-        Const MazeRows As Long = 4
-        If DungeonData.ReadCountForPlayerAndDungeonName(Id, dungeonName) = 0 Then
-            Dungeon.Create(Me, dungeonName, MazeColumns, MazeRows, difficulty)
-            Return True
-        End If
-        Return False
-    End Function
-
     Public Sub Move()
         Select Case If(Character?.Location?.LocationType, LocationType.None)
             Case LocationType.Dungeon

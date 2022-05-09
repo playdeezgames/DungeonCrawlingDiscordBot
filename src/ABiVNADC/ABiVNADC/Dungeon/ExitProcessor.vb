@@ -11,16 +11,21 @@
                 RequireLocation(
                     character,
                     builder,
-                    Function(location)
+                    Sub(location)
                         If character.InCombat Then
-                            Return $"{character.FullName} cannot exit while in combat!"
+                            builder.AppendLine($"{character.FullName} cannot exit while in combat!")
                         End If
-                        If Not location.Features.Any(Function(x) x.FeatureType = FeatureType.DungeonExit) Then
-                            Return "There is no exit here!"
-                        End If
-                        character.Location = Nothing
-                        Return $"{character.FullName} leaves the dungeon."
-                    End Function)
+                        RequireFeature(
+                            location,
+                            FeatureType.DungeonExit,
+                            builder,
+                            Sub(feature)
+                                Dim dungeon = location.Dungeon
+                                character.Location = dungeon.OverworldLocation
+                                builder.AppendLine($"{character.FullName} leaves the dungeon.")
+                                ShowCurrentLocation(player, builder)
+                            End Sub)
+                    End Sub)
             End Sub)
     End Sub
 End Module

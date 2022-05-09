@@ -2,6 +2,7 @@
     Friend Const TableName = "Dungeons"
     Friend Const DungeonIdColumn = "DungeonId"
     Friend Const DungeonNameColumn = "DungeonName"
+    Friend Const OverworldLocationIdColumn = "OverworldLocationId"
     Friend Const StartingLocationIdColumn = "StartingLocationId"
     Friend Const PlayerIdColumn = PlayerData.PlayerIdColumn
     Friend Const DifficultyColumn = "Difficulty"
@@ -13,8 +14,11 @@
                 [{DungeonIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
                 [{DungeonNameColumn}] TEXT NOT NULL,
                 [{PlayerIdColumn}] INT NULL,
+                [{OverworldLocationIdColumn}] INT NOT NULL,
                 [{StartingLocationIdColumn}] INT NOT NULL,
-                [{DifficultyColumn}] INT NOT NULL
+                [{DifficultyColumn}] INT NOT NULL,
+                FOREIGN KEY ([{StartingLocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}]),
+                FOREIGN KEY ([{OverworldLocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
     End Sub
 
@@ -23,39 +27,46 @@
         ClearForColumnValue(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId)
     End Sub
 
-    Public Function ReadLocation(dungeonId As Long) As Long?
+    Public Function ReadStartingLocation(dungeonId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, StartingLocationIdColumn)
     End Function
 
+    Public Function ReadOverworldLocation(dungeonId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, OverworldLocationIdColumn)
+    End Function
 
-    Public Function Create(dungeonName As String, startingLocationId As Long, difficulty As Long) As Long
+    Public Function Create(dungeonName As String, overworldLocationId As Long, startingLocationId As Long, difficulty As Long) As Long
         Initialize()
         ExecuteNonQuery(
             $"INSERT INTO [{TableName}]
             (
                 [{DungeonNameColumn}],
+                [{OverworldLocationIdColumn}],
                 [{StartingLocationIdColumn}],
                 [{DifficultyColumn}]
             ) 
             VALUES
             (
                 @{DungeonNameColumn},
+                @{OverworldLocationIdColumn},
                 @{StartingLocationIdColumn},
                 @{DifficultyColumn}
             );",
             MakeParameter($"@{DungeonNameColumn}", dungeonName),
             MakeParameter($"@{DifficultyColumn}", difficulty),
-            MakeParameter($"@{StartingLocationIdColumn}", startingLocationId))
+            MakeParameter($"@{StartingLocationIdColumn}", startingLocationId),
+            MakeParameter($"@{OverworldLocationIdColumn}", overworldLocationId))
         Return LastInsertRowId
     End Function
 
-    Public Function Create(playerId As Long, dungeonName As String, startingLocationId As Long, difficulty As Long) As Long
+    Public Function Create(playerId As Long, dungeonName As String, overworldLocationId As Long, startingLocationId As Long, difficulty As Long) As Long
         Initialize()
         ExecuteNonQuery(
             $"INSERT INTO [{TableName}]
             (
                 [{PlayerIdColumn}],
                 [{DungeonNameColumn}],
+                [{OverworldLocationIdColumn}],
                 [{StartingLocationIdColumn}],
                 [{DifficultyColumn}]
             ) 
@@ -63,13 +74,15 @@
             (
                 @{PlayerIdColumn},
                 @{DungeonNameColumn},
+                @{OverworldLocationIdColumn},
                 @{StartingLocationIdColumn},
                 @{DifficultyColumn}
             );",
             MakeParameter($"@{PlayerIdColumn}", playerId),
             MakeParameter($"@{DungeonNameColumn}", dungeonName),
             MakeParameter($"@{DifficultyColumn}", difficulty),
-            MakeParameter($"@{StartingLocationIdColumn}", startingLocationId))
+            MakeParameter($"@{StartingLocationIdColumn}", startingLocationId),
+            MakeParameter($"@{OverworldLocationIdColumn}", overworldLocationId))
         Return LastInsertRowId
     End Function
 

@@ -6,19 +6,19 @@
     End Sub
 
     Private Shared Function CreateOverworld(x As Long, y As Long) As Location
-        Dim locationId = LocationData.Create(LocationType.Overworld)
-        OverworldLocationData.Write(locationId, x, y)
+        Dim location = New Location(LocationData.Create(LocationType.Overworld))
+        OverworldLocationData.Write(location.Id, x, y)
         Select Case RNG.FromGenerator(OverworldFeatureGenerator)
             Case FeatureType.DungeonEntrance
-                GenerateDungeonEntrance(locationId)
+                GenerateDungeonEntrance(location)
         End Select
-        Return New Location(locationId)
+        Return location
     End Function
 
-    Private Shared Sub GenerateDungeonEntrance(locationId As Long)
-        FeatureData.Create(locationId, FeatureType.DungeonEntrance)
-        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, 4, 4, Difficulty.Yermom)
-        DungeonLocationData.Write(dungeon.Id, locationId)
+    Private Shared Sub GenerateDungeonEntrance(location As Location)
+        FeatureData.Create(location.Id, FeatureType.DungeonEntrance)
+        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(location.Id), 4, 4, Difficulty.Yermom)
+        DungeonLocationData.Write(dungeon.Id, location.Id)
     End Sub
 
     ReadOnly Property OverworldX As Long?
@@ -26,6 +26,10 @@
             Return OverworldLocationData.ReadX(Id)
         End Get
     End Property
+
+    Public Function HasFeature(featureType As FeatureType) As Boolean
+        Return Features.Any(Function(x) x.FeatureType = featureType)
+    End Function
 
     ReadOnly Property OverworldY As Long?
         Get
