@@ -11,6 +11,7 @@
                 Else
                     builder.Append("The name(s) of the fallen: ")
                     builder.AppendJoin(", ", rips)
+                    builder.AppendLine()
                 End If
             End Sub)
     End Sub

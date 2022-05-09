@@ -17,7 +17,6 @@ Module Program
         Dim player As New Player(FIXED_PLAYER_ID)
         Dim done = False
         While Not done
-            AnsiConsole.WriteLine()
             Dim command = AnsiConsole.Ask(Of String)(">")
             Select Case command
                 Case "!quit"
@@ -29,8 +28,7 @@ Module Program
                 Case "!load"
                     Store.Load(DATABASE_FILE_NAME)
                 Case Else
-                    AnsiConsole.WriteLine()
-                    AnsiConsole.WriteLine(MainProcessor.Run(player, command))
+                    AnsiConsole.Write(MainProcessor.Run(player, command).Replace("`", ""))
             End Select
         End While
         Store.Save(DATABASE_FILE_NAME)
