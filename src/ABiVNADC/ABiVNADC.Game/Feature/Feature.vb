@@ -20,6 +20,10 @@
                     Return $"the entrance to {Location.Dungeon.Name}"
                 Case FeatureType.DungeonExit
                     Return $"the exit from {Location.Dungeon.Name}"
+                Case FeatureType.ForSaleSign
+                    Dim x = Location.OverworldX.Value
+                    Dim y = Location.OverworldY.Value
+                    Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
                 Case Else
                     Return Name
             End Select

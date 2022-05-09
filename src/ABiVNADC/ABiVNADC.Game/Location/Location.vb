@@ -8,18 +8,22 @@
     Private Shared Function CreateOverworld(x As Long, y As Long) As Location
         Dim location = New Location(LocationData.Create(LocationType.Overworld))
         OverworldLocationData.Write(location.Id, x, y)
-        Select Case RNG.FromGenerator(OverworldFeatureGenerator)
-            Case FeatureType.DungeonEntrance
-                GenerateDungeonEntrance(location)
-        End Select
+        If x = 0 AndAlso y = 0 Then
+            GenerateCrossRoads(location)
+        ElseIf x = 0 Then
+            GenerateNorthSouthRoad(location)
+        ElseIf y = 0 Then
+            GenerateEastWestRoad(location)
+        Else
+            Select Case RNG.FromGenerator(OverworldFeatureGenerator)
+                Case FeatureType.DungeonEntrance
+                    GenerateDungeonEntrance(location)
+                Case FeatureType.ForSaleSign
+                    GenerateForSaleSign(location)
+            End Select
+        End If
         Return location
     End Function
-
-    Private Shared Sub GenerateDungeonEntrance(location As Location)
-        FeatureData.Create(location.Id, FeatureType.DungeonEntrance)
-        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(location.Id), 4, 4, Difficulty.Yermom)
-        DungeonLocationData.Write(dungeon.Id, location.Id)
-    End Sub
 
     ReadOnly Property OverworldX As Long?
         Get
