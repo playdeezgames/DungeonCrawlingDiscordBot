@@ -167,44 +167,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function Name(itemType As ItemType) As String
-        Select Case itemType
-            Case ItemType.Food
-                Return "food"
-            Case ItemType.Potion
-                Return "potion"
-            Case ItemType.Dagger
-                Return "dagger"
-            Case ItemType.ShortSword
-                Return "short sword"
-            Case ItemType.LongSword
-                Return "long sword"
-            Case ItemType.Trousers
-                Return "trousers"
-            Case ItemType.Helmet
-                Return "helmet"
-            Case ItemType.Shield
-                Return "shield"
-            Case ItemType.ChainMail
-                Return "chain mail"
-            Case ItemType.PlateMail
-                Return "plate mail"
-            Case ItemType.GoblinEar
-                Return "goblin ear"
-            Case ItemType.OrcTooth
-                Return "orc tooth"
-            Case ItemType.SkullFragment
-                Return "skull fragment"
-            Case ItemType.ZombieTaint
-                Return "zombie taint"
-            Case ItemType.FishFin
-                Return "fish fin"
-            Case ItemType.FishScale
-                Return "fish scale"
-            Case ItemType.Jools
-                Return "jools"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        Return ItemTypeDescriptors(itemType).Name
     End Function
     Private ReadOnly UsableItemTypes As New HashSet(Of ItemType) From
         {
@@ -336,5 +299,50 @@ Public Module ItemTypeExtensions
             Case Else
                 Return 0
         End Select
+    End Function
+
+    <Extension>
+    Function CanBuyGenerator(itemType As ItemType) As Dictionary(Of Boolean, Integer)
+        Select Case itemType
+            Case ItemType.Food
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.Potion
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.Dagger
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.ShortSword
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.LongSword
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.Trousers
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.Helmet
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.Shield
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.ChainMail
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.PlateMail
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case ItemType.Jools
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}, {True, 1}}
+            Case Else
+                Return New Dictionary(Of Boolean, Integer) From {{False, 1}}
+        End Select
+    End Function
+
+    <Extension>
+    Function BuyPriceDice(itemType As ItemType) As String
+        Return "0d1"
+    End Function
+
+    <Extension>
+    Function CanSellGenerator(itemType As ItemType) As Dictionary(Of Boolean, Integer)
+        Return New Dictionary(Of Boolean, Integer) From {{False, 1}}
+    End Function
+
+    <Extension>
+    Function SellPriceDice(itemType As ItemType) As String
+        Return "0d1"
     End Function
 End Module

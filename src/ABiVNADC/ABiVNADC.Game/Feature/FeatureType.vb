@@ -67,7 +67,11 @@ Public Module FeatureTypeExtensions
         ShoppeLocationData.Write(location.Id, shoppe.Id)
         ShoppeLocationData.Write(insideLocation.Id, shoppe.Id)
         FeatureData.Create(insideLocation.Id, FeatureType.ShoppeExit)
-        'TODO: buying and selling prices for the shoppe
+        For Each itemType In AllItemTypes
+            Dim sellPrice As Long = If(RNG.FromGenerator(itemType.CanSellGenerator), RNG.RollDice(itemType.SellPriceDice), 0)
+            Dim buyPrice As Long = If(RNG.FromGenerator(itemType.CanBuyGenerator), RNG.RollDice(itemType.BuyPriceDice), 0)
+            ShoppePriceData.Write(shoppe.Id, itemType, buyPrice, sellPrice)
+        Next
     End Sub
 
     Friend Sub GenerateEastWestRoad(location As Location)
