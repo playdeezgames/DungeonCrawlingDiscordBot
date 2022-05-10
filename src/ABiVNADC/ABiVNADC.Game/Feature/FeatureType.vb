@@ -9,6 +9,8 @@ Public Enum FeatureType
     EastWestRoad
     ForSaleSign
     Corpse
+    ShoppeEntrance
+    ShoppeExit
 End Enum
 Public Module FeatureTypeExtensions
     Friend ReadOnly AllDungeonFeatureTypes As New List(Of FeatureType) From
@@ -18,7 +20,8 @@ Public Module FeatureTypeExtensions
     Friend ReadOnly OverworldFeatureGenerator As New Dictionary(Of FeatureType, Integer) From
         {
             {FeatureType.ForSaleSign, 1},
-            {FeatureType.DungeonEntrance, 1}
+            {FeatureType.DungeonEntrance, 1},
+            {FeatureType.ShoppeEntrance, 1}
         }
     <Extension>
     Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String
@@ -44,6 +47,10 @@ Public Module FeatureTypeExtensions
                 Return "north-south road"
             Case FeatureType.ForSaleSign
                 Return "for sale sign"
+            Case FeatureType.ShoppeEntrance
+                Return "shoppe entrance"
+            Case FeatureType.ShoppeExit
+                Return "shoppe exit"
             Case Else
                 Throw New NotImplementedException
         End Select
@@ -51,6 +58,16 @@ Public Module FeatureTypeExtensions
 
     Friend Sub GenerateForSaleSign(location As Location)
         FeatureData.Create(location.Id, FeatureType.ForSaleSign)
+    End Sub
+
+    Friend Sub GenerateShoppeEntrance(location As Location)
+        Dim feature = New Feature(FeatureData.Create(location.Id, FeatureType.ShoppeEntrance))
+        Dim insideLocation = New Location(LocationData.Create(LocationType.Shoppe))
+        Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, location.Id, insideLocation.Id))
+        ShoppeLocationData.Write(location.Id, shoppe.Id)
+        ShoppeLocationData.Write(insideLocation.Id, shoppe.Id)
+        FeatureData.Create(insideLocation.Id, FeatureType.ShoppeExit)
+        'TODO: buying and selling prices for the shoppe
     End Sub
 
     Friend Sub GenerateEastWestRoad(location As Location)

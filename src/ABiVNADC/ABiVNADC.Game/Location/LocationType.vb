@@ -4,6 +4,7 @@ Public Enum LocationType As Long
     None
     Dungeon
     Overworld
+    Shoppe
 End Enum
 Module LocationTypeExtensions
     <Extension>

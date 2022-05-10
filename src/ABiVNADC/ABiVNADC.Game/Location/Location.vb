@@ -27,6 +27,8 @@
                     GenerateDungeonEntrance(location)
                 Case FeatureType.ForSaleSign
                     GenerateForSaleSign(location)
+                Case FeatureType.ShoppeEntrance
+                    GenerateShoppeEntrance(location)
             End Select
         End If
         Return location
@@ -85,6 +87,12 @@
         End Get
     End Property
 
+    ReadOnly Property Shoppe As Shoppe
+        Get
+            Return Shoppe.FromId(ShoppeLocationData.ReadForLocation(Id))
+        End Get
+    End Property
+
     ReadOnly Property Features As IEnumerable(Of Feature)
         Get
             Return FeatureData.ReadForLocation(Id).Select(Function(id) New Feature(id))
@@ -124,5 +132,9 @@
 
     Function HasEnemies(forCharacter As Character) As Boolean
         Return Enemies(forCharacter).Any
+    End Function
+
+    Shared Function FromId(locationId As Long?) As Location
+        Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
     End Function
 End Class

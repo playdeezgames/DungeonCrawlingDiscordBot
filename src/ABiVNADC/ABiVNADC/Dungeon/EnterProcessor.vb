@@ -13,16 +13,17 @@
                             character,
                             builder,
                             Sub(location)
-                                RequireFeature(
-                                    location,
-                                    FeatureType.DungeonEntrance,
-                                    builder,
-                                    Sub(feature)
-                                        Dim dungeon = location.Dungeon
-                                        character.Location = dungeon.StartingLocation
-                                        builder.AppendLine($"{character.FullName} enters {dungeon.Name}.")
-                                        ShowCurrentLocation(player, builder)
-                                    End Sub)
+                                If location.HasFeature(FeatureType.DungeonEntrance) Then
+                                    Dim dungeon = location.Dungeon
+                                    character.Location = dungeon.StartingLocation
+                                    builder.AppendLine($"{character.FullName} enters {dungeon.Name}.")
+                                    ShowCurrentLocation(player, builder)
+                                ElseIf location.HasFeature(FeatureType.ShoppeEntrance) Then
+                                    Dim shoppe = location.Shoppe
+                                    character.Location = shoppe.InsideLocation
+                                    builder.AppendLine($"{character.FullName} enters {shoppe.Name}.")
+                                    ShowCurrentLocation(player, builder)
+                                End If
                             End Sub)
                     End Sub)
             End Sub)

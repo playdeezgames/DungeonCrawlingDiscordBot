@@ -188,4 +188,33 @@
     Friend Function GenerateDungeonName() As String
         Return $"{RNG.FromList(DungeonNoun)} of the {RNG.FromList(DungeonAdjective)} {RNG.FromList(DungeonOwner)}"
     End Function
+    Friend ReadOnly ShoppeAdverb As New List(Of String) From
+        {
+            "Uncannily",
+            "Obsequiously",
+            "Woefully"
+        }
+    Friend ReadOnly ShoppeAdjective As New List(Of String) From
+        {
+            "Happy",
+            "Friendly",
+            "Sketchy",
+            "Wholesome",
+            "'Fair'",
+            "Convenience"
+        }
+    Friend ReadOnly ShoppeNoun As New List(Of String) From
+        {
+            "Shoppe",
+            "Boutique",
+            "Emporium",
+            "Market",
+            "Outlet",
+            "Store",
+            "Bazaar",
+            "Mart"
+        }
+    Friend Function GenerateShoppeName() As String
+        Return $"{RNG.FromList(ShoppeAdverb)} {RNG.FromList(ShoppeAdjective)} {RNG.FromList(ShoppeNoun)}"
+    End Function
 End Module
