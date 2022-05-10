@@ -176,4 +176,27 @@ Public Module Store
             MakeParameter($"@{secondColumnName}", secondColumnValue),
             MakeParameter($"@{thirdColumnName}", thirdColumnValue))
     End Sub
+
+    Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn, fourthColumnName As String, fourthColumnValue As TFourthColumn)
+        initializer()
+        ExecuteNonQuery(
+            $"REPLACE INTO [{tableName}]
+            (
+                [{firstColumnName}],
+                [{secondColumnName}],
+                [{thirdColumnName}],
+                [{fourthColumnName}]
+            ) 
+            VALUES
+            (
+                @{firstColumnName},
+                @{secondColumnName},
+                @{thirdColumnName},
+                @{fourthColumnName}
+            );",
+            MakeParameter($"@{firstColumnName}", firstColumnValue),
+            MakeParameter($"@{secondColumnName}", secondColumnValue),
+            MakeParameter($"@{thirdColumnName}", thirdColumnValue),
+            MakeParameter($"@{fourthColumnName}", fourthColumnValue))
+    End Sub
 End Module

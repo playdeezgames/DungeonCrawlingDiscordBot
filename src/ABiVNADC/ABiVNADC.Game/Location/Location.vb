@@ -5,9 +5,16 @@
         Id = locationId
     End Sub
 
-    Private Shared Function CreateOverworld(x As Long, y As Long) As Location
+    ReadOnly Property TerrainType As TerrainType?
+        Get
+            Dim result = OverworldLocationData.ReadTerrainType(Id)
+            Return If(result.HasValue, CType(result.Value, TerrainType), Nothing)
+        End Get
+    End Property
+
+    Private Shared Function CreateOverworld(x As Long, y As Long, terrainType As TerrainType) As Location
         Dim location = New Location(LocationData.Create(LocationType.Overworld))
-        OverworldLocationData.Write(location.Id, x, y)
+        OverworldLocationData.Write(location.Id, x, y, terrainType)
         If x = 0 AndAlso y = 0 Then
             GenerateCrossRoads(location)
         ElseIf x = 0 Then
@@ -47,7 +54,7 @@
     End Function
 
     Friend Shared Function AutogenerateOverworldXY(x As Long, y As Long) As Location
-        Return If(FromExistingOverworldXY(x, y), CreateOverworld(x, y))
+        Return If(FromExistingOverworldXY(x, y), CreateOverworld(x, y, RNG.FromGenerator(TerrainTypeGenerator)))
     End Function
 
     ReadOnly Property IsPOV As Boolean

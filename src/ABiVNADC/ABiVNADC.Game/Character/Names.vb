@@ -150,7 +150,8 @@
             "Bastion",
             "Citadel",
             "Fortress",
-            "Bunker"
+            "Bunker",
+            "Lair"
         }
     Friend ReadOnly DungeonAdjective As New List(Of String) From
         {
@@ -166,7 +167,8 @@
             "Hideous",
             "Foul",
             "Villainous",
-            "Mighty"
+            "Mighty",
+            "Loathsome"
         }
     Friend ReadOnly DungeonOwner As New List(Of String) From
         {

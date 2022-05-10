@@ -3,6 +3,12 @@
     Friend Const LocationIdColumn = LocationData.LocationIdColumn
     Friend Const XColumn = "X"
     Friend Const YColumn = "Y"
+    Friend Const TerrainTypeColumn = "TerrainType"
+
+    Public Function ReadTerrainType(locationId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, TerrainTypeColumn)
+    End Function
+
     Friend Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery(
@@ -11,6 +17,7 @@
                 [{LocationIdColumn}] INT NOT NULL UNIQUE,
                 [{XColumn}] INT NOT NULL,
                 [{YColumn}] INT NOT NULL,
+                [{TerrainTypeColumn}] INT NOT NULL,
                 UNIQUE([{XColumn}],[{YColumn}]),
                 FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
@@ -32,7 +39,7 @@
             MakeParameter($"@{YColumn}", y))
     End Function
 
-    Public Sub Write(locationId As Long, x As Long, y As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, LocationIdColumn, locationId, XColumn, x, YColumn, y)
+    Public Sub Write(locationId As Long, x As Long, y As Long, terrainType As Long)
+        ReplaceRecord(AddressOf Initialize, TableName, LocationIdColumn, locationId, XColumn, x, YColumn, y, TerrainTypeColumn, terrainType)
     End Sub
 End Module
