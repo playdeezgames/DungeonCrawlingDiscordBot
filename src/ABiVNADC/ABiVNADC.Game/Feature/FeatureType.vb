@@ -21,7 +21,7 @@ Public Module FeatureTypeExtensions
         {
             {FeatureType.ForSaleSign, 1},
             {FeatureType.DungeonEntrance, 1},
-            {FeatureType.ShoppeEntrance, 0}'TODO: restore when can exit shoppe
+            {FeatureType.ShoppeEntrance, 1}
         }
     <Extension>
     Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String

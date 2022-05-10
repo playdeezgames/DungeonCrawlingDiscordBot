@@ -16,6 +16,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property OutsideLocation As Location
+        Get
+            Return Location.FromId(ShoppeData.ReadOutsideLocation(Id))
+        End Get
+    End Property
+
     Public Shared Function FromId(shoppeId As Long?) As Shoppe
         If shoppeId.HasValue Then
             Return New Shoppe(shoppeId.Value)

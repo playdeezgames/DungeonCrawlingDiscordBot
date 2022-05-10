@@ -15,16 +15,17 @@
                         If character.InCombat Then
                             builder.AppendLine($"{character.FullName} cannot exit while in combat!")
                         End If
-                        RequireFeature(
-                            location,
-                            FeatureType.DungeonExit,
-                            builder,
-                            Sub(feature)
-                                Dim dungeon = location.Dungeon
-                                character.Location = dungeon.OverworldLocation
-                                builder.AppendLine($"{character.FullName} leaves the dungeon.")
-                                ShowCurrentLocation(player, builder)
-                            End Sub)
+                        If location.HasFeature(FeatureType.DungeonExit) Then
+                            Dim dungeon = location.Dungeon
+                            character.Location = dungeon.OverworldLocation
+                            builder.AppendLine($"{character.FullName} leaves the dungeon.")
+                            ShowCurrentLocation(player, builder)
+                        ElseIf location.HasFeature(FeatureType.ShoppeExit) Then
+                            Dim shoppe = location.Shoppe
+                            character.Location = shoppe.OutsideLocation
+                            builder.AppendLine($"{character.FullName} leaves {shoppe.Name}.")
+                            ShowCurrentLocation(player, builder)
+                        End If
                     End Sub)
             End Sub)
     End Sub

@@ -18,8 +18,12 @@
             Select Case FeatureType
                 Case FeatureType.DungeonEntrance
                     Return $"the entrance to {Location.Dungeon.Name}"
+                Case FeatureType.ShoppeEntrance
+                    Return $"the entrance to {Location.Shoppe.Name}"
                 Case FeatureType.DungeonExit
                     Return $"the exit from {Location.Dungeon.Name}"
+                Case FeatureType.ShoppeExit
+                    Return $"the exit from {Location.Shoppe.Name}"
                 Case FeatureType.ForSaleSign
                     Dim x = Location.OverworldX.Value
                     Dim y = Location.OverworldY.Value
