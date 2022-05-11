@@ -16,6 +16,7 @@
     Friend Const LeftText = "left"
     Friend Const LookText = "look"
     Friend Const MoveText = "move"
+    Friend Const PricesText = "prices"
     Friend Const RestText = "rest"
     Friend Const RightText = "right"
     Friend Const RipText = "rip"

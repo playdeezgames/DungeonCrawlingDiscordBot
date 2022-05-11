@@ -12,6 +12,12 @@
         End Get
     End Property
 
+    ReadOnly Property IsInsideShoppe As Boolean
+        Get
+            Return Id = If(Shoppe?.InsideLocation?.Id, 0)
+        End Get
+    End Property
+
     Private Shared Function CreateOverworld(x As Long, y As Long, terrainType As TerrainType) As Location
         Dim location = New Location(LocationData.Create(LocationType.Overworld))
         OverworldLocationData.Write(location.Id, x, y, terrainType)

@@ -16,6 +16,17 @@
         End Get
     End Property
 
+    Public ReadOnly Property BuyPrices As Dictionary(Of ItemType, Long)
+        Get
+            Dim prices As Dictionary(Of Long, Long) = ShoppePriceData.ReadBuyPrices(Id)
+            Dim result As New Dictionary(Of ItemType, Long)
+            For Each price In prices
+                result(CType(price.Key, ItemType)) = price.Value
+            Next
+            Return result
+        End Get
+    End Property
+
     Public ReadOnly Property OutsideLocation As Location
         Get
             Return Location.FromId(ShoppeData.ReadOutsideLocation(Id))

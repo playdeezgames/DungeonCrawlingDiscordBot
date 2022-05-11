@@ -17,10 +17,18 @@
 
     Sub RequireLocation(character As Character, builder As StringBuilder, handler As Action(Of Location))
         If Not character.HasLocation Then
-            builder.AppendLine($"{character.FullName} is not in a dungeon!")
+            builder.AppendLine($"{character.FullName} does not have a location!")
             Return
         End If
         handler(character.Location)
+    End Sub
+
+    Sub RequireInsideShoppe(character As Character, location As Location, builder As StringBuilder, handler As Action(Of Shoppe))
+        If Not location.IsInsideShoppe Then
+            builder.AppendLine($"{character.FullName} is not in a shoppe!")
+            Return
+        End If
+        handler(location.Shoppe)
     End Sub
 
     Sub RequireFeature(location As Location, featureType As FeatureType, builder As StringBuilder, handler As Action(Of Feature))
