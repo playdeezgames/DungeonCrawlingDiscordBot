@@ -16,6 +16,10 @@
         End Get
     End Property
 
+    Public Function CreditBalance(character As Character) As Long
+        Return If(ShoppeAccountsData.ReadBalance(Id, character.Id), 0)
+    End Function
+
     Public ReadOnly Property BuyPrices As Dictionary(Of ItemType, Long)
         Get
             Dim prices As Dictionary(Of Long, Long) = ShoppePriceData.ReadBuyPrices(Id)

@@ -3,6 +3,7 @@
     Friend Const AllText = "all"
     Friend Const AroundText = "around"
     Friend Const BribeText = "bribe"
+    Friend Const CreditText = "credit"
     Friend Const DropText = "drop"
     Friend Const EnemiesText = "enemies"
     Friend Const EnterText = "enter"

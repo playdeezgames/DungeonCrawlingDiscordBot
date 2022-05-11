@@ -4,6 +4,7 @@
             {AboutText, AddressOf AboutProcessor.Run},
             {AroundText, AddressOf AroundProcessor.Run},
             {BribeText, AddressOf BribeProcessor.Run},
+            {CreditText, AddressOf CreditProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
             {EnemiesText, AddressOf EnemiesProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},
