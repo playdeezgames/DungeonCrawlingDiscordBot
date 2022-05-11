@@ -20,7 +20,7 @@
                                     Sub(shoppe)
                                         builder.AppendLine("Prices:")
                                         For Each buyPrice In shoppe.BuyPrices
-                                            builder.AppendLine($"{buyPrice.Key.Name} : {buyPrice.Value} credits")
+                                            builder.AppendLine($"- {buyPrice.Key.Name} : {buyPrice.Value} credits")
                                         Next
                                     End Sub)
                             End Sub)

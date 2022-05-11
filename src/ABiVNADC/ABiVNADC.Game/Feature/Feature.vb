@@ -9,7 +9,7 @@
 
     ReadOnly Property Name As String
         Get
-            Return FeatureType.Name
+            Return FeatureType.Name(Me)
         End Get
     End Property
 

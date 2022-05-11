@@ -35,12 +35,12 @@
     End Function
 
     Private Shared Sub PopulateFeatures(locationIds As List(Of Long), difficulty As Difficulty)
-        For Each featureType In AllDungeonFeatureTypes
-            Dim spawnCount = RNG.RollDice(featureType.DungeonSpawnCount(locationIds.LongCount, difficulty))
+        For Each descriptor In FeatureTypeDescriptors
+            Dim spawnCount = RNG.RollDice(descriptor.Value.DungeonSpawnDice(difficulty, locationIds.LongCount))
             While spawnCount > 0
                 Dim location = New Location(RNG.FromList(locationIds))
                 'TODO: what if the feature type already exists at a given location?
-                Feature.Create(location, featureType)
+                Feature.Create(location, descriptor.Key)
                 spawnCount -= 1
             End While
         Next

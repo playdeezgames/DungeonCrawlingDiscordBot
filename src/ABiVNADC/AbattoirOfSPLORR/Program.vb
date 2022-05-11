@@ -28,7 +28,7 @@ Module Program
                 Case "!load"
                     Store.Load(DATABASE_FILE_NAME)
                 Case Else
-                    AnsiConsole.Write($"{MainProcessor.Run(player, command).Replace("`", "")}")
+                    AnsiConsole.Markup($"[aqua]{MainProcessor.Run(player, command).Replace("`", "").Replace("[", "[[").Replace("]", "]]")}[/]")
             End Select
         End While
         Store.Save(DATABASE_FILE_NAME)

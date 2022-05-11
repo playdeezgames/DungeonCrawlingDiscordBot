@@ -13,47 +13,19 @@ Public Enum FeatureType
     ShoppeExit
 End Enum
 Public Module FeatureTypeExtensions
-    Friend ReadOnly AllDungeonFeatureTypes As New List(Of FeatureType) From
-        {
-            FeatureType.DungeonExit
-        }
-    Friend ReadOnly OverworldFeatureGenerator As New Dictionary(Of FeatureType, Integer) From
-        {
-            {FeatureType.ForSaleSign, 1},
-            {FeatureType.DungeonEntrance, 1},
-            {FeatureType.ShoppeEntrance, 1}
-        }
+    Friend ReadOnly OverworldFeatureGenerator As Dictionary(Of FeatureType, Integer) =
+        FeatureTypeDescriptors.Where(
+            Function(entry) entry.Value.OverworldGenerationWeight > 0).
+            ToDictionary(
+                Function(x) x.Key,
+                Function(x) x.Value.OverworldGenerationWeight)
     <Extension>
     Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String
-        Select Case featureType
-            Case FeatureType.DungeonExit
-                Return "1d1"
-            Case Else
-                Return "0d1"
-        End Select
+        Return FeatureTypeDescriptors(featureType).DungeonSpawnDice(difficulty, locationCount)
     End Function
     <Extension>
-    Function Name(featureType As FeatureType) As String
-        Select Case featureType
-            Case FeatureType.DungeonExit
-                Return "dungeon exit"
-            Case FeatureType.DungeonEntrance
-                Return "dungeon entrance"
-            Case FeatureType.Crossroads
-                Return "crossroads"
-            Case FeatureType.EastWestRoad
-                Return "east-west road"
-            Case FeatureType.NorthSouthRoad
-                Return "north-south road"
-            Case FeatureType.ForSaleSign
-                Return "for sale sign"
-            Case FeatureType.ShoppeEntrance
-                Return "shoppe entrance"
-            Case FeatureType.ShoppeExit
-                Return "shoppe exit"
-            Case Else
-                Throw New NotImplementedException
-        End Select
+    Function Name(featureType As FeatureType, feature As Feature) As String
+        Return FeatureTypeDescriptors(featureType).FullName(feature)
     End Function
 
     Friend Sub GenerateForSaleSign(location As Location)
