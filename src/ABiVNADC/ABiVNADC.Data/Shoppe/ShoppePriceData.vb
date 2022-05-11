@@ -37,6 +37,25 @@
         Return result
     End Function
 
+    Public Function ReadSellPrices(shoppeId As Long) As Dictionary(Of Long, Long)
+        Initialize()
+        Dim result As New Dictionary(Of Long, Long)
+        For Each entry In ExecuteReader(
+            Function(reader) New Tuple(Of Long, Long)(CLng(reader(ItemTypeColumn)), CLng(reader(SellPriceColumn))),
+            $"SELECT 
+                [{ItemTypeColumn}], 
+                [{SellPriceColumn}] 
+            FROM 
+                [{TableName}] 
+            WHERE 
+                [{ShoppeIdColumn}]=@{ShoppeIdColumn} AND 
+                [{SellPriceColumn}]>0;",
+            MakeParameter($"@{ShoppeIdColumn}", shoppeId))
+            result(entry.Item1) = entry.Item2
+        Next
+        Return result
+    End Function
+
     Public Sub Write(shoppeId As Long, itemType As Long, buyPrice As Long, sellPrice As Long)
         ReplaceRecord(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, ItemTypeColumn, itemType, BuyPriceColumn, buyPrice, SellPriceColumn, sellPrice)
     End Sub

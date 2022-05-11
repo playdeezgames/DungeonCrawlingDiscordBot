@@ -17,6 +17,7 @@
             {LeftText, AddressOf LeftProcessor.Run},
             {LookText, AddressOf LookProcessor.Run},
             {MoveText, AddressOf MoveProcessor.Run},
+            {OffersText, AddressOf OffersProcessor.Run},
             {PricesText, AddressOf PricesProcessor.Run},
             {RestText, AddressOf RestProcessor.Run},
             {RightText, AddressOf RightProcessor.Run},
