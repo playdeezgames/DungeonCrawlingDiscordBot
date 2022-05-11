@@ -295,7 +295,7 @@ Public Class Character
         Next
         Dim defendRoll = defender.RollDefend
         builder.AppendLine($"{defender.FullName} rolls a defend of {defendRoll}!")
-        For Each armorType In defender.ReduceArmorDurability(defendRoll)
+        For Each armorType In defender.ReduceArmorDurability(attackRoll)
             builder.AppendLine($"! ! ! {defender.FullName}'s {armorType.Name} breaks ! ! !")
         Next
         Dim damageRoll = If(attackRoll > defendRoll, attackRoll - defendRoll, 0)
@@ -360,9 +360,9 @@ Public Class Character
         End Get
     End Property
 
-    Private Function ReduceArmorDurability(defendRoll As Long) As IEnumerable(Of ItemType)
+    Private Function ReduceArmorDurability(attackRoll As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
-        While defendRoll > 0
+        While attackRoll > 0
             Dim items = Equipment.Values.Where(Function(x) x.HasArmorDurability).ToList
             If items.Any Then
                 Dim item = RNG.FromList(items)
@@ -371,7 +371,7 @@ Public Class Character
                     result.Add(itemType)
                 End If
             End If
-            defendRoll -= 1
+            attackRoll -= 1
         End While
         Return result
     End Function
