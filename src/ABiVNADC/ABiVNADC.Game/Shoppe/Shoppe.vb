@@ -42,6 +42,24 @@
         End Get
     End Property
 
+    Function Sells(itemType As ItemType) As Boolean
+        Return SellPrices.ContainsKey(itemType)
+    End Function
+
+    Public Function SellItem(character As Character, itemType As ItemType) As Long
+        If Not character.Inventory.HasItem(itemType) Then
+            Return 0
+        End If
+        If Not Sells(itemType) Then
+            Return 0
+        End If
+        Dim item = character.Inventory.StackedItems(itemType).First
+        Dim credit = SellPrices(itemType)
+        item.Destroy()
+        ShoppeAccountsData.Write(Id, character.Id, credit + If(ShoppeAccountsData.ReadBalance(Id, character.Id), 0))
+        Return credit
+    End Function
+
     Public ReadOnly Property OutsideLocation As Location
         Get
             Return Location.FromId(ShoppeData.ReadOutsideLocation(Id))

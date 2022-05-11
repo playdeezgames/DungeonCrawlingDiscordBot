@@ -28,4 +28,8 @@
     Friend Sub ClearForCharacter(characterId As Long)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
+
+    Public Sub Write(shoppeId As Long, characterId As Long, balance As Long)
+        ReplaceRecord(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, CharacterIdColumn, characterId, BalanceColumn, balance)
+    End Sub
 End Module

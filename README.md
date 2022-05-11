@@ -1,7 +1,1 @@
-# DungeonCrawlingDiscordBot
-
-## Game Names
-
-* Discord of SPLORR!!
-* Dungeon Master of SPLORR!!
-* Dungeon Delver of SPLORR!!
+# A Bot in VB.NET About Dungeon Crawling / Abattoir of SPLORR!!

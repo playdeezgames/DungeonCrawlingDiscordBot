@@ -24,6 +24,7 @@
             {RightText, AddressOf RightProcessor.Run},
             {RipText, AddressOf RipProcessor.Run},
             {RunText, AddressOf RunProcessor.Run},
+            {SellText, AddressOf SellProcessor.Run},
             {StartText, AddressOf StartProcessor.Run},
             {StatusText, AddressOf StatusProcessor.Run},
             {TakeText, AddressOf TakeProcessor.Run},

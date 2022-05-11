@@ -23,6 +23,7 @@
     Friend Const RightText = "right"
     Friend Const RipText = "rip"
     Friend Const RunText = "run"
+    Friend Const SellText = "sell"
     Friend Const StartText = "start"
     Friend Const StatusText = "status"
     Friend Const TakeText = "take"

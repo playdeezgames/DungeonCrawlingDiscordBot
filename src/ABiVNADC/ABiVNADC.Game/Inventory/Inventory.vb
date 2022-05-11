@@ -29,6 +29,10 @@
         End Get
     End Property
 
+    Function HasItem(itemType As ItemType) As Boolean
+        Return Items.Any(Function(x) x.ItemType = itemType)
+    End Function
+
     Friend Sub Remove(item As Item)
         InventoryItemData.ClearForItem(item.Id)
     End Sub
