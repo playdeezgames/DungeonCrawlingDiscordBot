@@ -42,15 +42,19 @@
         End Get
     End Property
 
-    Function Sells(itemType As ItemType) As Boolean
+    Function CanSell(itemType As ItemType) As Boolean
         Return SellPrices.ContainsKey(itemType)
+    End Function
+
+    Function CanBuy(itemType As ItemType) As Boolean
+        Return BuyPrices.ContainsKey(itemType)
     End Function
 
     Public Function SellItem(character As Character, itemType As ItemType) As Long
         If Not character.Inventory.HasItem(itemType) Then
             Return 0
         End If
-        If Not Sells(itemType) Then
+        If Not CanSell(itemType) Then
             Return 0
         End If
         Dim item = character.Inventory.StackedItems(itemType).First
@@ -59,6 +63,20 @@
         ShoppeAccountsData.Write(Id, character.Id, credit + If(ShoppeAccountsData.ReadBalance(Id, character.Id), 0))
         Return credit
     End Function
+
+    Public Sub BuyItem(character As Character, itemType As ItemType)
+        If Not CanBuy(itemType) Then
+            Return
+        End If
+        Dim credit = BuyPrices(itemType)
+        Dim balance = If(ShoppeAccountsData.ReadBalance(Id, character.Id), 0)
+        If balance < credit Then
+            Return
+        End If
+        ShoppeAccountsData.Write(Id, character.Id, balance - credit)
+        Dim item = Game.Item.Create(itemType)
+        character.Inventory.Add(item)
+    End Sub
 
     Public ReadOnly Property OutsideLocation As Location
         Get

@@ -3,6 +3,7 @@
         {
             {AboutText, AddressOf AboutProcessor.Run},
             {AroundText, AddressOf AroundProcessor.Run},
+            {BuyText, AddressOf BuyProcessor.Run},
             {BribeText, AddressOf BribeProcessor.Run},
             {CreditText, AddressOf CreditProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
