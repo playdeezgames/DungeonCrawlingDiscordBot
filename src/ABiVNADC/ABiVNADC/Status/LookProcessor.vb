@@ -48,10 +48,13 @@
         Dim enemy = location.Enemy(character)
         If enemy IsNot Nothing Then
             enemy.CharacterType.Sprite.Render(canvas)
-        ElseIf location.HasFeatures Then
-            location.Features.First.FeatureType.Sprite.Render(canvas)
-        ElseIf Not location.Inventory.IsEmpty Then
-            canvas.Render(22, 13, Chest, "."c)
+        Else
+            If location.HasFeatures Then
+                location.Features.First.FeatureType.Sprite.Render(canvas)
+            End If
+            If Not location.Inventory.IsEmpty Then
+                canvas.Render(22, 13, Chest, "."c)
+            End If
         End If
         Return canvas
     End Function

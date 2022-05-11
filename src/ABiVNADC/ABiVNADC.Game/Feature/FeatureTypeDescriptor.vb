@@ -28,7 +28,8 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.DungeonEntrance,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "dungeon entrance"
+                    .FullName = Function(feature) "dungeon entrance",
+                    .OverworldGenerationWeight = 1
                 }
             },
             {
@@ -57,7 +58,8 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.ShoppeEntrance,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "shoppe entrance"
+                    .FullName = Function(feature) "shoppe entrance",
+                    .OverworldGenerationWeight = 1
                 }
             },
             {
@@ -71,7 +73,8 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.ForSaleSign,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "for sale sign"
+                    .FullName = Function(feature) "for sale sign",
+                    .OverworldGenerationWeight = 1
                 }
             }
         }
