@@ -19,6 +19,13 @@ Public Module RNG
         Next
         Return FromGenerator(table)
     End Function
+    Function MakeBooleanGenerator(falseWeight As Integer, trueWeight As Integer) As Dictionary(Of Boolean, Integer)
+        Return New Dictionary(Of Boolean, Integer) From
+            {
+                {True, trueWeight},
+                {False, falseWeight}
+            }
+    End Function
     Function FromRange(minimum As Integer, maximum As Integer) As Integer
         Return random.Next(maximum - minimum + 1) + minimum
     End Function
