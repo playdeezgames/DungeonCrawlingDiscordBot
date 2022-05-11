@@ -13,12 +13,17 @@
                             character,
                             builder,
                             Sub(location)
-                                RequireItemType(
+                                RequireItemTypeQuantity(
                                     tokens,
                                     builder,
-                                    Sub(itemType)
+                                    Sub(itemType, quantity)
                                         If Not character.Inventory.HasItem(itemType) Then
                                             builder.AppendLine($"{character.FullName} does not have any {itemType.Name} to sell.")
+                                            Return
+                                        End If
+                                        Dim availableQuantity = character.Inventory.StackedItems(itemType).LongCount
+                                        If availableQuantity < quantity Then
+                                            builder.AppendLine($"{character.FullName} only has {availableQuantity} {itemType.Name} to sell.")
                                             Return
                                         End If
                                         RequireInsideShoppe(
@@ -26,7 +31,7 @@
                                             location,
                                             builder,
                                             Sub(shoppe)
-                                                Dim credit = shoppe.SellItem(character, itemType)
+                                                Dim credit = shoppe.SellItems(character, itemType, quantity)
                                                 If credit > 0 Then
                                                     builder.AppendLine($"{character.FullName} sells {itemType.Name} for {credit} credits.")
                                                 Else

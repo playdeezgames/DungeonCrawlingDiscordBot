@@ -65,6 +65,23 @@
         handler(itemType)
     End Sub
 
+    Sub RequireItemTypeQuantity(tokens As IEnumerable(Of String), builder As StringBuilder, handler As Action(Of ItemType, Long))
+        Dim quantity As Long = 1
+        Dim itemTypeName As String = ""
+        If Long.TryParse(tokens.First, quantity) Then
+            itemTypeName = StitchTokens(tokens.Skip(1))
+        Else
+            itemTypeName = StitchTokens(tokens)
+            quantity = 1
+        End If
+        Dim itemType = ParseItemType(itemTypeName)
+        If itemType = ItemType.None Then
+            builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
+            Return
+        End If
+        handler(itemType, quantity)
+    End Sub
+
     Sub RequireInCombat(character As Character, builder As StringBuilder, handler As Action)
         If Not character.InCombat Then
             builder.AppendLine($"{character.FullName} is not in combat.")

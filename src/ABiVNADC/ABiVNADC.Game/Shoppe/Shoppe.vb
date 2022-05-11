@@ -50,16 +50,20 @@
         Return BuyPrices.ContainsKey(itemType)
     End Function
 
-    Public Function SellItem(character As Character, itemType As ItemType) As Long
+    Public Function SellItems(character As Character, itemType As ItemType, quantity As Long) As Long
         If Not character.Inventory.HasItem(itemType) Then
             Return 0
         End If
         If Not CanSell(itemType) Then
             Return 0
         End If
-        Dim item = character.Inventory.StackedItems(itemType).First
-        Dim credit = SellPrices(itemType)
-        item.Destroy()
+        Dim credit As Long
+        While quantity > 0
+            quantity -= 1
+            Dim item = character.Inventory.StackedItems(itemType).First
+            credit += SellPrices(itemType)
+            item.Destroy()
+        End While
         ShoppeAccountsData.Write(Id, character.Id, credit + If(ShoppeAccountsData.ReadBalance(Id, character.Id), 0))
         Return credit
     End Function
