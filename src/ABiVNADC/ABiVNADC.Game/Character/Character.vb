@@ -12,6 +12,14 @@ Public Class Character
             Return CharacterData.Exists(Id)
         End Get
     End Property
+
+    Public Sub Rename(newName As String)
+        If String.IsNullOrWhiteSpace(newName) Then
+            newName = RNG.FromList(Names.Human)
+        End If
+        CharacterData.WriteName(Id, newName)
+    End Sub
+
     ReadOnly Property FullName As String
         Get
             Return $"{Name} the {CharacterType.Name}"

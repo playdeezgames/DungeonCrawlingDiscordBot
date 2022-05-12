@@ -20,6 +20,7 @@
     Friend Const MoveText = "move"
     Friend Const OffersText = "offers"
     Friend Const PricesText = "prices"
+    Friend Const RenameText = "rename"
     Friend Const RestText = "rest"
     Friend Const RightText = "right"
     Friend Const RipText = "rip"

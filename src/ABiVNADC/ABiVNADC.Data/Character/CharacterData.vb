@@ -22,6 +22,10 @@
             );")
     End Sub
 
+    Public Sub WriteName(characterId As Long, newName As String)
+        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn, newName)
+    End Sub
+
     Public Function Exists(characterId As Long) As Boolean
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, CharacterIdColumn, characterId).Any
     End Function
