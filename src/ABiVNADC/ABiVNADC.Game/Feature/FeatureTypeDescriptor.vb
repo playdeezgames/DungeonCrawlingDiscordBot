@@ -14,7 +14,7 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.Corpse,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "corpse"
+                    .FullName = Function(feature) $"the corpse of {FeatureTextMetadata.Read(feature.Id, FeatureMetadataType.Name)}"
                 }
             },
             {
@@ -28,7 +28,7 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.DungeonEntrance,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "dungeon entrance",
+                    .FullName = Function(feature) $"the entrance to {feature.Location.Dungeon.Name}",
                     .OverworldGenerationWeight = 1
                 }
             },
@@ -36,7 +36,7 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.DungeonExit,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "dungeon exit",
+                    .FullName = Function(feature) $"the exit from {feature.Location.Dungeon.Name}",
                     .DungeonSpawnDice = Function(difficulty, locationCount) "1d1"
                 }
             },
@@ -58,7 +58,7 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.ShoppeEntrance,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "shoppe entrance",
+                    .FullName = Function(feature) $"the entrance to {feature.Location.Shoppe.Name}",
                     .OverworldGenerationWeight = 1
                 }
             },
@@ -66,14 +66,18 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.ShoppeExit,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "shoppe exit"
+                    .FullName = Function(feature) $"the exit from {feature.Location.Shoppe.Name}"
                 }
             },
             {
                 FeatureType.ForSaleSign,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) "for sale sign",
+                    .FullName = Function(feature)
+                                    Dim x = feature.Location.OverworldX.Value
+                                    Dim y = feature.Location.OverworldY.Value
+                                    Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
+                                End Function,
                     .OverworldGenerationWeight = 1
                 }
             }

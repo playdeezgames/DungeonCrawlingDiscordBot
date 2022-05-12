@@ -24,7 +24,7 @@ Public Module FeatureTypeExtensions
         Return FeatureTypeDescriptors(featureType).DungeonSpawnDice(difficulty, locationCount)
     End Function
     <Extension>
-    Function Name(featureType As FeatureType, feature As Feature) As String
+    Function FullName(featureType As FeatureType, feature As Feature) As String
         Return FeatureTypeDescriptors(featureType).FullName(feature)
     End Function
 
