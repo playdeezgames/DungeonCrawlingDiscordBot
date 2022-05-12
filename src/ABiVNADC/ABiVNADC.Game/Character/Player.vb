@@ -58,6 +58,11 @@ Public Class Player
         End If
     End Sub
 
+    Public Sub BribeEnemy(enemy As Character, itemType As ItemType, builder As StringBuilder)
+        Character.BribeEnemy(enemy, itemType, builder)
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
     Public Sub UseItem(item As Item, builder As StringBuilder)
         Select Case item.ItemType
             Case ItemType.Food
