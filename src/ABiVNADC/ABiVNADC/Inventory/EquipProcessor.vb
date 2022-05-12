@@ -13,8 +13,7 @@
                             tokens,
                             builder,
                             Sub(itemType)
-                                character.Equip(itemType, builder)
-                                character.PerformCounterAttacks(builder)
+                                player.Equip(itemType, builder)
                             End Sub)
                     End Sub)
             End Sub)

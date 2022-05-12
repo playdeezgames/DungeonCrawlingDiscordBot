@@ -24,8 +24,6 @@
     End Sub
 
     Private Sub HandleCombatRest(player As Player, builder As StringBuilder)
-        Dim character = player.Character
-        character.CombatRest(builder)
-        character.PerformCounterAttacks(builder)
+        player.CombatRest(builder)
     End Sub
 End Module

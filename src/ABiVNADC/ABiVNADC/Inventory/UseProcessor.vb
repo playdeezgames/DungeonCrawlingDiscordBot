@@ -28,7 +28,6 @@
                                 End If
                                 Dim item = itemStacks(itemType).First
                                 player.UseItem(item, builder)
-                                character.PerformCounterAttacks(builder)
                             End Sub)
                     End Sub)
             End Sub)

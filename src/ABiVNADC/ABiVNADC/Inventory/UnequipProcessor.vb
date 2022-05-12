@@ -17,8 +17,7 @@
                                 If Not equipSlots.Any Then
                                     builder.AppendLine($"You don't have any `{itemType.Name}` equipped.")
                                 End If
-                                character.Unequip(equipSlots.First.Value, builder)
-                                character.PerformCounterAttacks(builder)
+                                player.Unequip(equipSlots.First.Value, builder)
                             End Sub)
                     End Sub)
             End Sub)

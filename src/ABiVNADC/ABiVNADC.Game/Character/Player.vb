@@ -24,6 +24,11 @@ Public Class Player
         End Get
     End Property
 
+    Public Sub Equip(itemType As ItemType, builder As StringBuilder)
+        Character.Equip(itemType, builder)
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
     Public Function Run() As Boolean
         If Not InCombat Then
             Return False
@@ -34,8 +39,18 @@ Public Class Player
         Return currentLocationId <> Character.Location.Id
     End Function
 
+    Public Sub Unequip(item As Item, builder As StringBuilder)
+        Character.Unequip(item, builder)
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
     Public Sub Attack(enemy As Character, builder As StringBuilder)
         Character.Attack(enemy, builder)
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
+    Public Sub CombatRest(builder As StringBuilder)
+        Character.CombatRest(builder)
         Character.PerformCounterAttacks(builder)
     End Sub
 
@@ -79,6 +94,7 @@ Public Class Player
             Case Else
                 Throw New NotImplementedException
         End Select
+        Character.PerformCounterAttacks(builder)
     End Sub
 
     Private Sub UseDagger(builder As StringBuilder)
