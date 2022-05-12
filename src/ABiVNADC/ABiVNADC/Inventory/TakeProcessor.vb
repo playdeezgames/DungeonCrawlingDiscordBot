@@ -14,7 +14,7 @@
                             builder,
                             Sub(location)
                                 If tokens.Count = 1 AndAlso tokens.Single() = AllText Then
-                                    builder.AppendLine(HandleTakeAll(player, character, location))
+                                    HandleTakeAll(player, character, location, builder)
                                     Return
                                 End If
                                 RequireItemTypeQuantity(
@@ -38,14 +38,14 @@
             End Sub)
     End Sub
 
-    Private Function HandleTakeAll(player As Player, character As Character, location As Location) As String
+    Private Sub HandleTakeAll(player As Player, character As Character, location As Location, builder As StringBuilder)
         If location.Inventory.IsEmpty Then
-            Return "There's nothing to take!"
+            builder.AppendLine("There's nothing to take!")
         End If
         For Each item In location.Inventory.Items
             character.Inventory.Add(item)
         Next
-        Return DoCounterAttacks(character, $"{character.FullName} takes everything.
-")
-    End Function
+        builder.AppendLine($"{character.FullName} takes everything.")
+        PerformCounterAttacks(character, builder)
+    End Sub
 End Module
