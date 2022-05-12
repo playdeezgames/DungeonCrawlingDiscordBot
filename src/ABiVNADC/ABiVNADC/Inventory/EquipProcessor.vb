@@ -13,8 +13,8 @@
                             tokens,
                             builder,
                             Sub(itemType)
-                                Dim output = character.Equip(itemType)
-                                builder.AppendLine(DoCounterAttacks(character, output))
+                                character.Equip(itemType, builder)
+                                PerformCounterAttacks(character, builder)
                             End Sub)
                     End Sub)
             End Sub)

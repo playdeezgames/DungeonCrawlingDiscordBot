@@ -18,8 +18,8 @@
                                     ShowCurrentLocation(player, builder)
                                     Return
                                 End If
-                                builder.AppendLine(DoCounterAttacks(character, $"{character.FullName} could not get away.
-"))
+                                builder.AppendLine($"{character.FullName} could not get away.")
+                                PerformCounterAttacks(character, builder)
                             End Sub)
                     End Sub)
             End Sub)

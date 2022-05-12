@@ -12,16 +12,10 @@
                     builder.AppendLine($"{character.FullName} needs to recover energy.")
                     Return
                 End If
-                builder.AppendLine(DoCounterAttacks(character, character.Attack(character.Location.Enemy(character))))
+                character.Attack(character.Location.Enemy(character), builder)
+                PerformCounterAttacks(character, builder)
             End Sub)
     End Sub
-
-    Friend Function DoCounterAttacks(character As Character, output As String) As String
-        Dim builder As New StringBuilder
-        builder.Append(output)
-        FightProcessor.PerformCounterAttacks(character, builder)
-        Return builder.ToString
-    End Function
 
     Friend Sub PerformCounterAttacks(character As Character, builder As StringBuilder)
         If character.InCombat Then
@@ -38,10 +32,9 @@
     Private Sub PerformCounterAttack(character As Character, builder As StringBuilder, enemy As Character)
         builder.AppendLine("---")
         If enemy.CanFight Then
-            builder.Append(enemy.Attack(character))
+            enemy.Attack(character, builder)
         Else
-            Dim restAmount = enemy.CombatRest
-            builder.AppendLine($"{enemy.Name} recovers {restAmount} energy.")
+            enemy.CombatRest(builder)
         End If
     End Sub
 End Module

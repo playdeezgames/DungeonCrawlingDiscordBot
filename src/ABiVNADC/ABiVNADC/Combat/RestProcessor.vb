@@ -10,23 +10,22 @@
                     builder,
                     Sub(character)
                         If player.InCombat Then
-                            builder.AppendLine(HandleCombatRest(player))
+                            HandleCombatRest(player, builder)
                             Return
                         End If
-                        builder.AppendLine(HandleNonCombatRest(player))
+                        HandleNonCombatRest(player, builder)
                     End Sub)
             End Sub)
     End Sub
 
-    Private Function HandleNonCombatRest(player As Player) As String
+    Private Sub HandleNonCombatRest(player As Player, builder As StringBuilder)
         Dim character = player.Character
-        Return character.NonCombatRest()
-    End Function
+        character.NonCombatRest(builder)
+    End Sub
 
-    Private Function HandleCombatRest(player As Player) As String
+    Private Sub HandleCombatRest(player As Player, builder As StringBuilder)
         Dim character = player.Character
-        Dim restAmount = character.CombatRest()
-        Return FightProcessor.DoCounterAttacks(character, $"{character.Name} recovers {restAmount} energy.
-")
-    End Function
+        character.CombatRest(builder)
+        PerformCounterAttacks(character, builder)
+    End Sub
 End Module

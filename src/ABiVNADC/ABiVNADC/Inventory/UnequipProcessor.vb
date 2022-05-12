@@ -17,8 +17,8 @@
                                 If Not equipSlots.Any Then
                                     builder.AppendLine($"You don't have any `{itemType.Name}` equipped.")
                                 End If
-                                Dim output As String = character.Unequip(equipSlots.First.Value)
-                                builder.AppendLine(DoCounterAttacks(character, output))
+                                character.Unequip(equipSlots.First.Value, builder)
+                                PerformCounterAttacks(character, builder)
                             End Sub)
                     End Sub)
             End Sub)

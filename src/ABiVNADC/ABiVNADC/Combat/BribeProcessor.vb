@@ -26,7 +26,8 @@
                                             builder.AppendLine($"No enemy in this location will take that.")
                                             Return
                                         End If
-                                        builder.AppendLine(DoCounterAttacks(character, character.BribeEnemy(enemy, itemType)))
+                                        character.BribeEnemy(enemy, itemType, builder)
+                                        PerformCounterAttacks(character, builder)
                                     End Sub)
                             End Sub)
                     End Sub)

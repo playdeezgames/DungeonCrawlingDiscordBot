@@ -31,7 +31,8 @@
                                         For Each item In items
                                             character.Inventory.Add(item)
                                         Next
-                                        builder.AppendLine(DoCounterAttacks(character, $"{character.FullName} picks up {quantity} {itemType.Name}"))
+                                        builder.AppendLine($"{character.FullName} picks up {quantity} {itemType.Name}")
+                                        PerformCounterAttacks(character, builder)
                                     End Sub)
                             End Sub)
                     End Sub)

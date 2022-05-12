@@ -51,26 +51,25 @@ Public Class Character
         End Get
     End Property
 
-    Public Function BribeEnemy(enemy As Character, itemType As ItemType) As String
+    Public Sub BribeEnemy(enemy As Character, itemType As ItemType, builder As StringBuilder)
         Dim item = Inventory.Items.FirstOrDefault(Function(x) x.ItemType = itemType)
         If item Is Nothing OrElse Not enemy.TakesBribe(itemType) Then
-            Return $"{FullName} fails to bribe {enemy.FullName}."
+            builder.AppendLine($"{FullName} fails to bribe {enemy.FullName}.")
         End If
-        Dim result = $"{FullName} successfully bribes {enemy.FullName}."
+        builder.AppendLine($"{FullName} successfully bribes {enemy.FullName}.")
         enemy.Inventory.Add(item)
         CharacterLocationData.Clear(enemy.Id)
-        Return result
-    End Function
+    End Sub
 
     Public Function TakesBribe(itemType As ItemType) As Boolean
         Return CharacterType.TakesBribe(itemType)
     End Function
 
-    Public Function Unequip(item As Item) As String
+    Public Sub Unequip(item As Item, builder As StringBuilder)
         CharacterEquipSlotData.ClearForItem(item.Id)
         Inventory.Add(item)
-        Return $"{FullName} unequips {item.Name}"
-    End Function
+        builder.AppendLine($"{FullName} unequips {item.Name}")
+    End Sub
 
     ReadOnly Property AttackDice As String
         Get
@@ -87,13 +86,13 @@ Public Class Character
         Return RNG.RollDice(AttackDice)
     End Function
 
-    Public Function Equip(itemType As ItemType) As String
+    Public Sub Equip(itemType As ItemType, builder As StringBuilder)
         Dim itemStacks = Inventory.StackedItems
         If Not itemStacks.ContainsKey(itemType) Then
-            Return $"{FullName} does not have any `{itemType.Name}` in their inventory."
+            builder.AppendLine($"{FullName} does Not have any `{itemType.Name}` In their inventory.")
         End If
         If Not itemType.CanEquip Then
-            Return $"I don't know where you would equip that, and I don't think I wanna know where you'd try!"
+            builder.AppendLine($"I don't know where you would equip that, and I don't think I wanna know where you'd try!")
         End If
         Dim item = itemStacks(itemType).First
         Dim equipSlot = itemType.EquipSlot
@@ -104,8 +103,8 @@ Public Class Character
         End If
         Inventory.Remove(item)
         CharacterEquipSlotData.Write(Id, equipSlot, item.Id)
-        Return $"{FullName} equips {itemType.Name}."
-    End Function
+        builder.AppendLine($"{FullName} equips {itemType.Name}.")
+    End Sub
 
     Private Function GetEquippedItem(equipSlot As EquipSlot) As Item
         Dim itemId As Long? = CharacterEquipSlotData.Read(Id, equipSlot)
@@ -127,17 +126,17 @@ Public Class Character
         Return RNG.RollDice(DefendDice)
     End Function
 
-    Public Function NonCombatRest() As String
+    Public Sub NonCombatRest(builder As StringBuilder)
         Dim characterType As CharacterType = If(HasLocation, Location.Dungeon.GenerateWanderingMonster(), CharacterType.None)
         If characterType <> CharacterType.None Then
             Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0)
             CharacterLocationData.Write(characterId, Location.Id)
-            Return $"Suddenly, {Character.FromId(characterId).FullName} appears!"
+            builder.AppendLine($"Suddenly, {Character.FromId(characterId).FullName} appears!")
         Else
             AddFatigue(Energy - MaximumEnergy)
-            Return $"{FullName} rests fully."
+            builder.AppendLine($"{FullName} rests fully.")
         End If
-    End Function
+    End Sub
 
     ReadOnly Property IsEnemy As Boolean
         Get
@@ -145,12 +144,12 @@ Public Class Character
         End Get
     End Property
 
-    Public Function CombatRest() As Long
+    Public Sub CombatRest(builder As StringBuilder)
         Dim maximumRest = MaximumEnergy - Energy
         Dim restRoll = Math.Min(RNG.RollDice(CharacterType.CombatRestRoll), maximumRest)
         AddFatigue(-restRoll)
-        Return restRoll
-    End Function
+        builder.AppendLine($"{FullName} recovers {restRoll} energy.")
+    End Sub
 
     Public Sub AddWounds(damage As Long)
         Dim newWounds = Math.Max(0, Math.Min(CharacterData.ReadWounds(Id).Value + damage, MaximumHealth))
@@ -293,8 +292,7 @@ Public Class Character
             Return CharacterType.MaximumEnergy(Level)
         End Get
     End Property
-    Function Attack(defender As Character) As String
-        Dim builder As New StringBuilder
+    Sub Attack(defender As Character, builder As StringBuilder)
         Dim fatigue = CharacterType.FightEnergyCost
         AddFatigue(fatigue)
         Dim attackRoll = RollAttack()
@@ -324,8 +322,7 @@ Public Class Character
         Else
             builder.AppendLine($"{defender.FullName} has {defender.Health} health left.")
         End If
-        Return builder.ToString
-    End Function
+    End Sub
 
     ReadOnly Property Experience As Long
         Get
