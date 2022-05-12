@@ -174,6 +174,7 @@ Public Class Character
             FeatureTextMetadata.Write(corpse.Id, FeatureMetadataType.Name, FullName)
         End If
         CharacterData.Clear(Id)
+        InventoryData.ClearOrphans()
     End Sub
 
     Private ReadOnly Property HasPlayer As Boolean
