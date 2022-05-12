@@ -13,13 +13,9 @@
                             character,
                             builder,
                             Sub()
-                                If player.Run() Then
-                                    builder.AppendLine($"{character.FullName} runs!")
+                                If Not player.Run(builder) Then
                                     ShowCurrentLocation(player, builder)
-                                    Return
                                 End If
-                                builder.AppendLine($"{character.FullName} could not get away.")
-                                character.PerformCounterAttacks(builder)
                             End Sub)
                     End Sub)
             End Sub)

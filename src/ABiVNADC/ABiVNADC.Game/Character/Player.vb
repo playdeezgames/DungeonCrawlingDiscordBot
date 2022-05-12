@@ -24,12 +24,22 @@ Public Class Player
         End Get
     End Property
 
+    Public Function Run(builder As StringBuilder) As Boolean
+        If AttemptRun() Then
+            builder.AppendLine($"{Character.FullName} runs!")
+            Return True
+        End If
+        builder.AppendLine($"{Character.FullName} could not get away.")
+        Character.PerformCounterAttacks(builder)
+        Return False
+    End Function
+
     Public Sub Equip(itemType As ItemType, builder As StringBuilder)
         Character.Equip(itemType, builder)
         Character.PerformCounterAttacks(builder)
     End Sub
 
-    Public Function Run() As Boolean
+    Private Function AttemptRun() As Boolean
         If Not InCombat Then
             Return False
         End If
@@ -38,6 +48,8 @@ Public Class Player
         Move()
         Return currentLocationId <> Character.Location.Id
     End Function
+
+
 
     Public Sub Unequip(item As Item, builder As StringBuilder)
         Character.Unequip(item, builder)
