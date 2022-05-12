@@ -30,13 +30,13 @@ Public Class Player
             Return True
         End If
         builder.AppendLine($"{Character.FullName} could not get away.")
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
         Return False
     End Function
 
     Public Sub Equip(itemType As ItemType, builder As StringBuilder)
         Character.Equip(itemType, builder)
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub Take(itemType As ItemType, quantity As Long, builder As StringBuilder)
@@ -51,7 +51,7 @@ Public Class Player
             Character.Inventory.Add(item)
         Next
         builder.AppendLine($"{Character.FullName} picks up {quantity} {itemType.Name}")
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub TakeAll(builder As StringBuilder)
@@ -62,7 +62,7 @@ Public Class Player
             Character.Inventory.Add(item)
         Next
         builder.AppendLine($"{Character.FullName} takes everything.")
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Private Function AttemptRun() As Boolean
@@ -79,17 +79,17 @@ Public Class Player
 
     Public Sub Unequip(item As Item, builder As StringBuilder)
         Character.Unequip(item, builder)
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub Attack(enemy As Character, builder As StringBuilder)
         Character.Attack(enemy, builder)
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub CombatRest(builder As StringBuilder)
         Character.CombatRest(builder)
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Function DeleteDungeon(dungeonName As String) As Boolean
@@ -118,7 +118,7 @@ Public Class Player
 
     Public Sub BribeEnemy(enemy As Character, itemType As ItemType, builder As StringBuilder)
         Character.BribeEnemy(enemy, itemType, builder)
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub UseItem(item As Item, builder As StringBuilder)
@@ -132,7 +132,7 @@ Public Class Player
             Case Else
                 Throw New NotImplementedException
         End Select
-        Character.PerformCounterAttacks(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Private Sub UseDagger(builder As StringBuilder)
