@@ -34,6 +34,11 @@ Public Class Player
         Return currentLocationId <> Character.Location.Id
     End Function
 
+    Public Sub Attack(enemy As Character, builder As StringBuilder)
+        Character.Attack(enemy, builder)
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
     Public Function DeleteDungeon(dungeonName As String) As Boolean
         Dim dungeon = Dungeons.FirstOrDefault(Function(x) x.Name = dungeonName)
         If dungeon IsNot Nothing Then

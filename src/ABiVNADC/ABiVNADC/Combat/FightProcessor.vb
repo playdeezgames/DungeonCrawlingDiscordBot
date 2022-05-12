@@ -12,8 +12,8 @@
                     builder.AppendLine($"{character.FullName} needs to recover energy.")
                     Return
                 End If
-                character.Attack(character.Location.Enemy(character), builder)
-                character.PerformCounterAttacks(builder)
+                Dim enemy = character.Location.Enemy(character)
+                player.Attack(enemy, builder)
             End Sub)
     End Sub
 End Module
