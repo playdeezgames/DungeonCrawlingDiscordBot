@@ -5,30 +5,25 @@
             "Drop what?",
             builder,
             Sub()
-                RequireItemTypeQuantity(
-                    tokens,
+                RequireCharacterLocation(
+                    player,
                     builder,
-                    Sub(itemType, quantity)
-                        RequireCharacter(
-                            player,
+                    Sub(character, location)
+                        RequireItemTypeQuantity(
+                            tokens,
                             builder,
-                            Sub(character)
-                                RequireLocation(
-                                    character,
-                                    builder,
-                                    Sub(location)
-                                        Dim itemStacks = character.Inventory.StackedItems
-                                        If Not itemStacks.ContainsKey(itemType) Then
-                                            builder.AppendLine($"{character.Name} doesn't have any `{itemType.Name}`.")
-                                            Return
-                                        End If
-                                        Dim items = itemStacks(itemType).Take(CInt(quantity))
-                                        quantity = items.LongCount
-                                        For Each item In items
-                                            character.Location.Inventory.Add(item)
-                                        Next
-                                        builder.AppendLine($"{character.Name} drops {quantity} {itemType.Name}")
-                                    End Sub)
+                            Sub(itemType, quantity)
+                                Dim itemStacks = character.Inventory.StackedItems
+                                If Not itemStacks.ContainsKey(itemType) Then
+                                    builder.AppendLine($"{character.Name} doesn't have any `{itemType.Name}`.")
+                                    Return
+                                End If
+                                Dim items = itemStacks(itemType).Take(CInt(quantity))
+                                quantity = items.LongCount
+                                For Each item In items
+                                    character.Location.Inventory.Add(item)
+                                Next
+                                builder.AppendLine($"{character.Name} drops {quantity} {itemType.Name}")
                             End Sub)
                     End Sub)
             End Sub)

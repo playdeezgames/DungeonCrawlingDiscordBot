@@ -23,6 +23,20 @@
         handler(character.Location)
     End Sub
 
+    Sub RequireCharacterLocation(player As Player, builder As StringBuilder, handler As Action(Of Character, Location))
+        RequireCharacter(
+            player,
+            builder,
+            Sub(character)
+                RequireLocation(
+                    character,
+                    builder,
+                    Sub(location)
+                        handler(character, location)
+                    End Sub)
+            End Sub)
+    End Sub
+
     Sub RequireInsideShoppe(character As Character, location As Location, builder As StringBuilder, handler As Action(Of Shoppe))
         If Not location.IsInsideShoppe Then
             builder.AppendLine($"{character.FullName} is not in a shoppe!")
