@@ -13,22 +13,25 @@
                             character,
                             builder,
                             Sub(location)
-                                If tokens.Count = 1 And tokens.Single() = AllText Then
+                                If tokens.Count = 1 AndAlso tokens.Single() = AllText Then
                                     builder.AppendLine(HandleTakeAll(player, character, location))
                                     Return
                                 End If
-                                RequireItemType(
+                                RequireItemTypeQuantity(
                                     tokens,
                                     builder,
-                                    Sub(itemType)
+                                    Sub(itemType, quantity)
                                         Dim itemStacks = location.Inventory.StackedItems
                                         If Not itemStacks.ContainsKey(itemType) Then
                                             builder.AppendLine($"There ain't any `{itemType.Name}` in sight.")
                                             Return
                                         End If
-                                        Dim item = itemStacks(itemType).First
-                                        character.Inventory.Add(item)
-                                        builder.AppendLine(DoCounterAttacks(character, $"{character.FullName} picks up {itemType.Name}"))
+                                        Dim items = itemStacks(itemType).Take(CInt(quantity))
+                                        quantity = items.LongCount
+                                        For Each item In items
+                                            character.Inventory.Add(item)
+                                        Next
+                                        builder.AppendLine(DoCounterAttacks(character, $"{character.FullName} picks up {quantity} {itemType.Name}"))
                                     End Sub)
                             End Sub)
                     End Sub)
