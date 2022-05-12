@@ -30,6 +30,29 @@ Public Class Character
             Return Data.CharacterData.ReadName(Id)
         End Get
     End Property
+
+    Public Sub PerformCounterAttacks(builder As StringBuilder)
+        If InCombat Then
+            Dim enemies = Location.Enemies(Me)
+            For Each enemy In enemies
+                If Not Exists Then
+                    Continue For
+                End If
+                PerformCounterAttack(builder, enemy)
+            Next
+        End If
+    End Sub
+
+    Private Sub PerformCounterAttack(builder As StringBuilder, enemy As Character)
+        builder.AppendLine("---")
+        If enemy.CanFight Then
+            enemy.Attack(Me, builder)
+        Else
+            enemy.CombatRest(builder)
+        End If
+    End Sub
+
+
     ReadOnly Property HasLocation As Boolean
         Get
             Return Location IsNot Nothing

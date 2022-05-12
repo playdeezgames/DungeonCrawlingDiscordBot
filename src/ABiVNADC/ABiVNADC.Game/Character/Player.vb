@@ -58,44 +58,39 @@ Public Class Player
         End If
     End Sub
 
-    Public Function UseItem(item As Item) As String
+    Public Sub UseItem(item As Item, builder As StringBuilder)
         Select Case item.ItemType
             Case ItemType.Food
-                Return UseFood(item)
+                UseFood(item, builder)
             Case ItemType.Potion
-                Return UsePotion(item)
+                UsePotion(item, builder)
             Case ItemType.Dagger
-                Return UseDagger()
+                UseDagger(builder)
             Case Else
                 Throw New NotImplementedException
         End Select
-    End Function
+    End Sub
 
-    Private Function UseDagger() As String
-        Dim result = ItemType.Dagger.UseMessage(Character.FullName)
+    Private Sub UseDagger(builder As StringBuilder)
         Character.Destroy()
-        Return result
-    End Function
+        builder.AppendLine(ItemType.Dagger.UseMessage(Character.FullName))
+    End Sub
 
-    Private Function UsePotion(item As Item) As String
+    Private Sub UsePotion(item As Item, builder As StringBuilder)
         Const PotionWoundRecovery As Long = 4
-        Dim builder As New StringBuilder
         builder.AppendLine(ItemType.Potion.UseMessage(Character.FullName))
         Character.AddWounds(-PotionWoundRecovery)
         builder.Append($"{Character.FullName} now has {Character.Health} health.")
         item.Destroy()
-        Return builder.ToString
-    End Function
+    End Sub
 
-    Private Function UseFood(item As Item) As String
+    Private Sub UseFood(item As Item, builder As StringBuilder)
         Const FoodFatigueRecovery As Long = 4
-        Dim builder As New StringBuilder
         builder.AppendLine(ItemType.Food.UseMessage(Character.FullName))
         Character.AddFatigue(-FoodFatigueRecovery)
         builder.Append($"{Character.FullName} now has {Character.Energy} energy.")
         item.Destroy()
-        Return builder.ToString
-    End Function
+    End Sub
 
     Public Sub TurnLeft()
         If CanTurn Then

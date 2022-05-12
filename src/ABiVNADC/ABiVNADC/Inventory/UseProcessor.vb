@@ -27,8 +27,8 @@
                                     Return
                                 End If
                                 Dim item = itemStacks(itemType).First
-                                builder.AppendLine(player.UseItem(item))
-                                PerformCounterAttacks(character, builder)
+                                player.UseItem(item, builder)
+                                character.PerformCounterAttacks(builder)
                             End Sub)
                     End Sub)
             End Sub)

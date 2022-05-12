@@ -19,7 +19,7 @@
                                     Return
                                 End If
                                 builder.AppendLine($"{character.FullName} could not get away.")
-                                PerformCounterAttacks(character, builder)
+                                character.PerformCounterAttacks(builder)
                             End Sub)
                     End Sub)
             End Sub)

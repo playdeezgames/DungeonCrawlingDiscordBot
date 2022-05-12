@@ -13,28 +13,7 @@
                     Return
                 End If
                 character.Attack(character.Location.Enemy(character), builder)
-                PerformCounterAttacks(character, builder)
+                character.PerformCounterAttacks(builder)
             End Sub)
-    End Sub
-
-    Friend Sub PerformCounterAttacks(character As Character, builder As StringBuilder)
-        If character.InCombat Then
-            Dim enemies = character.Location.Enemies(character)
-            For Each enemy In enemies
-                If Not character.Exists Then
-                    Continue For
-                End If
-                PerformCounterAttack(character, builder, enemy)
-            Next
-        End If
-    End Sub
-
-    Private Sub PerformCounterAttack(character As Character, builder As StringBuilder, enemy As Character)
-        builder.AppendLine("---")
-        If enemy.CanFight Then
-            enemy.Attack(character, builder)
-        Else
-            enemy.CombatRest(builder)
-        End If
     End Sub
 End Module

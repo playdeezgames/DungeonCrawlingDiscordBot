@@ -32,7 +32,7 @@
                                             character.Inventory.Add(item)
                                         Next
                                         builder.AppendLine($"{character.FullName} picks up {quantity} {itemType.Name}")
-                                        PerformCounterAttacks(character, builder)
+                                        character.PerformCounterAttacks(builder)
                                     End Sub)
                             End Sub)
                     End Sub)
@@ -47,6 +47,6 @@
             character.Inventory.Add(item)
         Next
         builder.AppendLine($"{character.FullName} takes everything.")
-        PerformCounterAttacks(character, builder)
+        character.PerformCounterAttacks(builder)
     End Sub
 End Module

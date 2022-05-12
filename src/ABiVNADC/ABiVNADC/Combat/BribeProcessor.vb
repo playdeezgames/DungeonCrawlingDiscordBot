@@ -27,7 +27,7 @@
                                             Return
                                         End If
                                         character.BribeEnemy(enemy, itemType, builder)
-                                        PerformCounterAttacks(character, builder)
+                                        character.PerformCounterAttacks(builder)
                                     End Sub)
                             End Sub)
                     End Sub)
