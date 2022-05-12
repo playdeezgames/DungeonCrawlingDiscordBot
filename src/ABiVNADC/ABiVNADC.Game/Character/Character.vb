@@ -31,7 +31,7 @@ Public Class Character
         End Get
     End Property
 
-    Public Sub PerformCounterAttacks(builder As StringBuilder)
+    Friend Sub PerformCounterAttacks(builder As StringBuilder)
         If InCombat Then
             Dim enemies = Location.Enemies(Me)
             For Each enemy In enemies

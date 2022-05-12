@@ -21,18 +21,7 @@
                                     tokens,
                                     builder,
                                     Sub(itemType, quantity)
-                                        Dim itemStacks = location.Inventory.StackedItems
-                                        If Not itemStacks.ContainsKey(itemType) Then
-                                            builder.AppendLine($"There ain't any `{itemType.Name}` in sight.")
-                                            Return
-                                        End If
-                                        Dim items = itemStacks(itemType).Take(CInt(quantity))
-                                        quantity = items.LongCount
-                                        For Each item In items
-                                            character.Inventory.Add(item)
-                                        Next
-                                        builder.AppendLine($"{character.FullName} picks up {quantity} {itemType.Name}")
-                                        character.PerformCounterAttacks(builder)
+                                        player.Take(itemType, quantity, builder)
                                     End Sub)
                             End Sub)
                     End Sub)
@@ -40,13 +29,6 @@
     End Sub
 
     Private Sub HandleTakeAll(player As Player, character As Character, location As Location, builder As StringBuilder)
-        If location.Inventory.IsEmpty Then
-            builder.AppendLine("There's nothing to take!")
-        End If
-        For Each item In location.Inventory.Items
-            character.Inventory.Add(item)
-        Next
-        builder.AppendLine($"{character.FullName} takes everything.")
-        character.PerformCounterAttacks(builder)
+        player.TakeAll(builder)
     End Sub
 End Module

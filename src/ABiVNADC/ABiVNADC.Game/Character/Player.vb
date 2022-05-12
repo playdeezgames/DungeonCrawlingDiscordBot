@@ -39,6 +39,32 @@ Public Class Player
         Character.PerformCounterAttacks(builder)
     End Sub
 
+    Public Sub Take(itemType As ItemType, quantity As Long, builder As StringBuilder)
+        Dim itemStacks = Character.Location.Inventory.StackedItems
+        If Not itemStacks.ContainsKey(itemType) Then
+            builder.AppendLine($"There ain't any `{itemType.Name}` in sight.")
+            Return
+        End If
+        Dim items = itemStacks(itemType).Take(CInt(quantity))
+        quantity = items.LongCount
+        For Each item In items
+            Character.Inventory.Add(item)
+        Next
+        builder.AppendLine($"{Character.FullName} picks up {quantity} {itemType.Name}")
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
+    Public Sub TakeAll(builder As StringBuilder)
+        If Character.Location.Inventory.IsEmpty Then
+            builder.AppendLine("There's nothing to take!")
+        End If
+        For Each item In Character.Location.Inventory.Items
+            Character.Inventory.Add(item)
+        Next
+        builder.AppendLine($"{Character.FullName} takes everything.")
+        Character.PerformCounterAttacks(builder)
+    End Sub
+
     Private Function AttemptRun() As Boolean
         If Not InCombat Then
             Return False
