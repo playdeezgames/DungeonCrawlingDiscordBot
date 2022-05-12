@@ -5,10 +5,10 @@
             "Drop what?",
             builder,
             Sub()
-                RequireItemType(
+                RequireItemTypeQuantity(
                     tokens,
                     builder,
-                    Sub(itemType)
+                    Sub(itemType, quantity)
                         RequireCharacter(
                             player,
                             builder,
@@ -22,9 +22,12 @@
                                             builder.AppendLine($"{character.Name} doesn't have any `{itemType.Name}`.")
                                             Return
                                         End If
-                                        Dim item = itemStacks(itemType).First
-                                        character.Location.Inventory.Add(item)
-                                        builder.AppendLine($"{character.Name} drops {itemType.Name}")
+                                        Dim items = itemStacks(itemType).Take(CInt(quantity))
+                                        quantity = items.LongCount
+                                        For Each item In items
+                                            character.Location.Inventory.Add(item)
+                                        Next
+                                        builder.AppendLine($"{character.Name} drops {quantity} {itemType.Name}")
                                     End Sub)
                             End Sub)
                     End Sub)
