@@ -245,11 +245,11 @@ Module ItemTypeDescriptorExtensions
                 New ItemTypeDescriptor With
                 {
                     .Name = "potion",
-                    .SpawnCount = AddressOf CommonSpawn,
+                    .SpawnCount = AddressOf RareSpawn,
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} drinks a potion",
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "25d1+2d25"
+                    .BuyPriceDice = "50d1+2d50"
                 }
             },
             {
