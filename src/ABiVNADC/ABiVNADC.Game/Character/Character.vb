@@ -150,7 +150,7 @@ Public Class Character
     End Function
 
     Public Sub NonCombatRest(builder As StringBuilder)
-        Dim characterType As CharacterType = If(HasLocation, Location.Dungeon.GenerateWanderingMonster(), CharacterType.None)
+        Dim characterType As CharacterType = If(HasLocation AndAlso Location.HasDungeon, Location.Dungeon.GenerateWanderingMonster(), CharacterType.None)
         If characterType <> CharacterType.None Then
             Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0)
             CharacterLocationData.Write(characterId, Location.Id)

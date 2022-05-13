@@ -168,7 +168,16 @@
             "Foul",
             "Villainous",
             "Mighty",
-            "Loathsome"
+            "Loathsome",
+            "Condemned",
+            "Dark",
+            "Aggressive",
+            "Cruel",
+            "Creepy",
+            "Spooky",
+            "Filthy",
+            "Grotesque",
+            "Defiant"
         }
     Friend ReadOnly DungeonOwner As New List(Of String) From
         {
@@ -183,7 +192,10 @@
             "Warlord",
             "Lemur",
             "Mutant",
-            "Wyvern"
+            "Wyvern",
+            "Witch Doctor",
+            "Shaman",
+            "Bureaucrat"
         }
     Friend Function GenerateDungeonName() As String
         Return $"{RNG.FromList(DungeonNoun)} of the {RNG.FromList(DungeonAdjective)} {RNG.FromList(DungeonOwner)}"
@@ -192,6 +204,17 @@
         {
             "Uncannily",
             "Obsequiously",
+            "Cheerfully",
+            "Elegantly",
+            "Warmly",
+            "Honestly",
+            "Gracefully",
+            "Casually",
+            "Gradually",
+            "Instantly",
+            "Accidentally",
+            "Seriously",
+            "Nervously",
             "Woefully"
         }
     Friend ReadOnly ShoppeAdjective As New List(Of String) From
@@ -200,8 +223,19 @@
             "Friendly",
             "Sketchy",
             "Wholesome",
-            "'Fair'",
-            "Convenience"
+            "Fair",
+            "Convenient",
+            "Adorable",
+            "Attractive",
+            "Charming",
+            "Delightful",
+            "Exuberant",
+            "Jolly",
+            "Pleasant",
+            "Quaint",
+            "Splendid",
+            "Strange",
+            "Eager"
         }
     Friend ReadOnly ShoppeNoun As New List(Of String) From
         {
@@ -212,6 +246,10 @@
             "Outlet",
             "Store",
             "Bazaar",
+            "Depot",
+            "Arsenal",
+            "Warehouse",
+            "Armory",
             "Mart"
         }
     Friend Function GenerateShoppeName() As String

@@ -93,6 +93,12 @@
         End Get
     End Property
 
+    ReadOnly Property HasDungeon As Boolean
+        Get
+            Return DungeonLocationData.ReadForLocation(Id).HasValue
+        End Get
+    End Property
+
     ReadOnly Property Shoppe As Shoppe
         Get
             Return Shoppe.FromId(ShoppeLocationData.ReadForLocation(Id))
