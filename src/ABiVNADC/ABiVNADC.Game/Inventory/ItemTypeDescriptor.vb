@@ -1,4 +1,6 @@
-﻿Public Class ItemTypeDescriptor
+﻿Imports System.Text
+
+Public Class ItemTypeDescriptor
     Property Name As String
     Property SpawnCount As Func(Of Difficulty, Long, String)
     Property CanUse As Boolean
@@ -12,6 +14,7 @@
     Property CanSellGenerator As Dictionary(Of Boolean, Integer)
     Property BuyPriceDice As String
     Property SellPriceDice As String
+    Property OnUse As Action(Of Character, Item, StringBuilder)
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -23,6 +26,9 @@
         CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
         BuyPriceDice = "0d1"
         SellPriceDice = "0d1"
+        OnUse = Sub(c, i, b)
+
+                End Sub
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -134,7 +140,11 @@ Module ItemTypeDescriptorExtensions
                     .AttackDice = "1d2/2",
                     .WeaponDurability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "12d1+2d12"
+                    .BuyPriceDice = "12d1+2d12",
+                    .OnUse = Sub(character, item, builder)
+                                 character.Destroy()
+                                 builder.AppendLine(ItemType.Dagger.UseMessage(character.FullName))
+                             End Sub
                 }
             },
             {
@@ -162,11 +172,18 @@ Module ItemTypeDescriptorExtensions
                 New ItemTypeDescriptor With
                 {
                     .Name = "food",
-                    .SpawnCount = AddressOf VeryCommonSpawn,
+                    .SpawnCount = AddressOf CommonSpawn,
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} eats food",
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "2d1+2d2"
+                    .BuyPriceDice = "2d1+2d2",
+                    .OnUse = Sub(character, item, builder)
+                                 Const FoodFatigueRecovery As Long = 4
+                                 builder.AppendLine(ItemType.Food.UseMessage(character.FullName))
+                                 character.AddFatigue(-FoodFatigueRecovery)
+                                 builder.Append($"{character.FullName} now has {character.Energy} energy.")
+                                 item.Destroy()
+                             End Sub
                 }
             },
             {
@@ -249,7 +266,35 @@ Module ItemTypeDescriptorExtensions
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} drinks a potion",
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "50d1+2d50"
+                    .BuyPriceDice = "50d1+2d50",
+                    .OnUse = Sub(character, item, builder)
+                                 Const PotionWoundRecovery As Long = 4
+                                 builder.AppendLine(ItemType.Potion.UseMessage(character.FullName))
+                                 character.AddWounds(-PotionWoundRecovery)
+                                 builder.Append($"{character.FullName} now has {character.Health} health.")
+                                 item.Destroy()
+                             End Sub
+                }
+            },
+            {
+                ItemType.RottenFood,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "rotten food",
+                    .SpawnCount = AddressOf VeryCommonSpawn,
+                    .CanUse = True,
+                    .UseMessage = Function(x) $"{x} eats rotten food",
+                    .OnUse = Sub(character, item, builder)
+                                 Const FoodFatigueRecovery As Long = 4
+                                 builder.AppendLine(ItemType.Food.UseMessage(character.FullName))
+                                 character.AddFatigue(-FoodFatigueRecovery)
+                                 If RNG.RollDice("1d2/2") > 0 Then
+                                     character.ChangeEffectDuration(EffectType.Nausea, RNG.RollDice("2d6"))
+                                     builder.AppendLine($"{character.FullName} is a little queasy from the tainted food!")
+                                 End If
+                                 builder.AppendLine($"{character.FullName} now has {character.Energy} energy.")
+                                 item.Destroy()
+                             End Sub
                 }
             },
             {

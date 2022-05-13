@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.CompilerServices
+Imports System.Text
 
 Public Enum ItemType
     None
@@ -19,6 +20,7 @@ Public Enum ItemType
     FishScale
     FishFin
     Jools
+    RottenFood
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From
@@ -39,9 +41,13 @@ Public Module ItemTypeExtensions
             ItemType.ZombieTaint,
             ItemType.FishFin,
             ItemType.FishScale,
-            ItemType.Jools
+            ItemType.Jools,
+            ItemType.RottenFood
         }
-
+    <Extension>
+    Sub OnUse(itemType As ItemType, character As Character, item As Item, builder As StringBuilder)
+        ItemTypeDescriptors(itemType).OnUse.Invoke(character, item, builder)
+    End Sub
     <Extension>
     Function SpawnCount(itemType As ItemType, locationCount As Long, difficulty As Difficulty) As String
         Return ItemTypeDescriptors(itemType).SpawnCount(difficulty, locationCount)

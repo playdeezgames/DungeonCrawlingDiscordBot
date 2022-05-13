@@ -25,7 +25,7 @@ Public Class Player
     End Property
 
     Public Function Run(builder As StringBuilder) As Boolean
-        If AttemptRun() Then
+        If AttemptRun(builder) Then
             builder.AppendLine($"{Character.FullName} runs!")
             Return True
         End If
@@ -65,13 +65,13 @@ Public Class Player
         Character.NextTurn(builder)
     End Sub
 
-    Private Function AttemptRun() As Boolean
+    Private Function AttemptRun(builder As StringBuilder) As Boolean
         If Not InCombat Then
             Return False
         End If
         SetDirection(RNG.FromList(AllDirections))
         Dim currentLocationId = Character.Location.Id
-        Move()
+        Move(builder)
         Return currentLocationId <> Character.Location.Id
     End Function
 
@@ -122,38 +122,8 @@ Public Class Player
     End Sub
 
     Public Sub UseItem(item As Item, builder As StringBuilder)
-        Select Case item.ItemType
-            Case ItemType.Food
-                UseFood(item, builder)
-            Case ItemType.Potion
-                UsePotion(item, builder)
-            Case ItemType.Dagger
-                UseDagger(builder)
-            Case Else
-                Throw New NotImplementedException
-        End Select
+        item.ItemType.OnUse(Character, item, builder)
         Character.NextTurn(builder)
-    End Sub
-
-    Private Sub UseDagger(builder As StringBuilder)
-        Character.Destroy()
-        builder.AppendLine(ItemType.Dagger.UseMessage(Character.FullName))
-    End Sub
-
-    Private Sub UsePotion(item As Item, builder As StringBuilder)
-        Const PotionWoundRecovery As Long = 4
-        builder.AppendLine(ItemType.Potion.UseMessage(Character.FullName))
-        Character.AddWounds(-PotionWoundRecovery)
-        builder.Append($"{Character.FullName} now has {Character.Health} health.")
-        item.Destroy()
-    End Sub
-
-    Private Sub UseFood(item As Item, builder As StringBuilder)
-        Const FoodFatigueRecovery As Long = 4
-        builder.AppendLine(ItemType.Food.UseMessage(Character.FullName))
-        Character.AddFatigue(-FoodFatigueRecovery)
-        builder.Append($"{Character.FullName} now has {Character.Energy} energy.")
-        item.Destroy()
     End Sub
 
     Public Sub TurnLeft()
@@ -168,27 +138,29 @@ Public Class Player
         End If
     End Sub
 
-    Public Sub Move()
+    Public Sub Move(builder As StringBuilder)
         Select Case If(Character?.Location?.LocationType, LocationType.None)
             Case LocationType.Dungeon
-                DungeonMove(Character, AheadDirection.Value)
+                DungeonMove(Character, AheadDirection.Value, builder)
             Case LocationType.Overworld
-                OverworldMove(Character, AheadDirection.Value)
+                OverworldMove(Character, AheadDirection.Value, builder)
         End Select
     End Sub
 
-    Private Shared Sub OverworldMove(character As Character, direction As Direction)
+    Private Shared Sub OverworldMove(character As Character, direction As Direction, builder As StringBuilder)
         Dim walker = DirectionWalker(direction)
         Dim location = character.Location
         Dim nextX = location.OverworldX.Value + walker.DeltaX
         Dim nextY = location.OverworldY.Value + walker.DeltaY
         character.Location = Location.AutogenerateOverworldXY(nextX, nextY)
+        character.NextTurn(builder)
     End Sub
 
-    Private Shared Sub DungeonMove(character As Character, direction As Direction)
+    Private Shared Sub DungeonMove(character As Character, direction As Direction, builder As StringBuilder)
         Dim route As Route = Nothing
         If character.Location.Routes.TryGetValue(direction, route) Then
             character.Location = route.ToLocation
+            character.NextTurn(builder)
         End If
     End Sub
 

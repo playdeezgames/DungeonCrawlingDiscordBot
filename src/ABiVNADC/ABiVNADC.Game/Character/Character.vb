@@ -67,7 +67,7 @@ Public Class Character
         Next
     End Sub
 
-    Private Sub ChangeEffectDuration(effectType As EffectType, delta As Integer)
+    Friend Sub ChangeEffectDuration(effectType As EffectType, delta As Long)
         Dim duration = If(CharacterEffectData.Read(Id, effectType), 0) + delta
         If duration > 0 Then
             CharacterEffectData.Write(Id, effectType, duration)
@@ -445,6 +445,7 @@ Public Class Character
     End Function
 
     Public Sub AddFatigue(fatigue As Long)
-        CharacterData.WriteFatigue(Id, CharacterData.ReadFatigue(Id).Value + fatigue)
+        Dim newFatigue = CharacterData.ReadFatigue(Id).Value + fatigue
+        CharacterData.WriteFatigue(Id, If(newFatigue < 0, 0, newFatigue))
     End Sub
 End Class

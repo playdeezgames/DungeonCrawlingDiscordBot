@@ -27,6 +27,12 @@
                         builder.AppendLine($"- {entry.Key.Name} : {entry.Value.Name}")
                     Next
                 End If
+                Dim effects = character.Effects
+                If effects.Any Then
+                    builder.Append("Effects: ")
+                    builder.AppendJoin(", ", effects.Select(Function(x) x.Name))
+                    builder.AppendLine()
+                End If
                 If Not character.HasLocation Then
                     builder.AppendLine($"{character.Name} is not currently in a dungeon.")
                 Else

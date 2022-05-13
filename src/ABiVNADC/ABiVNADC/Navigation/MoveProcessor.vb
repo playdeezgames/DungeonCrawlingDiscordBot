@@ -9,7 +9,7 @@
                     builder.AppendLine("You cannot do that now!")
                     Return
                 End If
-                player.Move()
+                player.Move(builder)
                 ShowCurrentLocation(player, builder)
             End Sub)
     End Sub
