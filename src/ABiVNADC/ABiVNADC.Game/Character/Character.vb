@@ -119,12 +119,17 @@ Public Class Character
 
     ReadOnly Property AttackDice As String
         Get
+            Dim result As String = ""
             Dim attackItems = Equipment.Values.Where(Function(x) x.HasAttackDice)
             If attackItems.Any Then
-                Return String.Join("+"c, attackItems.Select(Function(x) x.AttackDice))
+                result = String.Join("+"c, attackItems.Select(Function(x) x.AttackDice))
             Else
-                Return CharacterType.AttackDice
+                result = CharacterType.AttackDice
             End If
+            For Each effect In Effects.Where(Function(x) x.HasAttackDice)
+                result &= $"+{effect.AttackDice}"
+            Next
+            Return result
         End Get
     End Property
 

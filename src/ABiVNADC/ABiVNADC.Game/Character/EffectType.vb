@@ -14,4 +14,12 @@ Public Module EffectTypeExtensions
     Sub ApplyOn(effectType As EffectType, character As Character, builder As StringBuilder)
         EffectTypeDescriptors(effectType).ApplyOn.Invoke(character, builder)
     End Sub
+    <Extension>
+    Function HasAttackDice(effectType As EffectType) As Boolean
+        Return effectType.AttackDice <> "0d1"
+    End Function
+    <Extension>
+    Function AttackDice(effectType As EffectType) As String
+        Return EffectTypeDescriptors(effectType).AttackDice
+    End Function
 End Module
