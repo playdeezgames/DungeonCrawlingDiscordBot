@@ -140,6 +140,14 @@ Public Module Store
         ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnName}]=@{columnName};", MakeParameter($"@{columnName}", columnValue))
     End Sub
 
+    Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
+        initializer()
+        ExecuteNonQuery(
+            $"DELETE FROM [{tableName}] WHERE [{firstColumnName}]=@{firstColumnName} AND [{secondColumnName}]=@{secondColumnName};",
+            MakeParameter($"@{firstColumnName}", firstColumnValue),
+            MakeParameter($"@{secondColumnName}", secondColumnValue))
+    End Sub
+
     Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
         initializer()
         ExecuteNonQuery(

@@ -7,6 +7,12 @@ Public Class Character
         Id = characterId
     End Sub
 
+    ReadOnly Property Effects As HashSet(Of EffectType)
+        Get
+            Return New HashSet(Of EffectType)(CharacterEffectData.ReadForCharacter(Id).Select(Function(x) CType(x, EffectType)))
+        End Get
+    End Property
+
     ReadOnly Property Exists As Boolean
         Get
             Return CharacterData.Exists(Id)
@@ -32,6 +38,7 @@ Public Class Character
     End Property
 
     Friend Sub NextTurn(builder As StringBuilder)
+        ApplyEffects(builder)
         If InCombat Then
             Dim enemies = Location.Enemies(Me)
             For Each enemy In enemies
@@ -50,8 +57,24 @@ Public Class Character
         Else
             enemy.CombatRest(builder)
         End If
+        enemy.ApplyEffects(builder)
     End Sub
 
+    Private Sub ApplyEffects(builder As StringBuilder)
+        For Each effect In Effects
+            effect.ApplyOn(Me, builder)
+            ChangeEffectDuration(effect, -1)
+        Next
+    End Sub
+
+    Private Sub ChangeEffectDuration(effectType As EffectType, delta As Integer)
+        Dim duration = If(CharacterEffectData.Read(Id, effectType), 0) + delta
+        If duration > 0 Then
+            CharacterEffectData.Write(Id, effectType, duration)
+        Else
+            CharacterEffectData.Clear(Id, effectType)
+        End If
+    End Sub
 
     ReadOnly Property HasLocation As Boolean
         Get
