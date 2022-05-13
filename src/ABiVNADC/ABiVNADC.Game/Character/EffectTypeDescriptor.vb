@@ -13,7 +13,7 @@ Module EffectTypeDescriptorExtensions
                 {
                     .Name = "nausea",
                     .ApplyOn = Sub(character, builder)
-
+                                   builder.AppendLine($"{character.FullName} feels queasy.")
                                End Sub
                 }
             }
