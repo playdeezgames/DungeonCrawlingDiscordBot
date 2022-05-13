@@ -110,9 +110,13 @@ Public Class Player
         Return False
     End Function
 
-    Public Sub TurnAround()
+    Public Sub TurnAround(builder As StringBuilder)
         If CanTurn Then
             SetDirection(AheadDirection.Value.OppositeDirection)
+            If Character.HasEffect(EffectType.Nausea) AndAlso RNG.RollDice("1d2/2") > 0 Then
+                builder.AppendLine($"When {Character.FullName} spins around, they get sick and vomit on the floor.")
+                Feature.Create(Character.Location, FeatureType.VomitPuddle)
+            End If
         End If
     End Sub
 

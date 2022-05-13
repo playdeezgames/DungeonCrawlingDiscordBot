@@ -70,6 +70,13 @@ Module FeatureTypeDescriptorExtensions
                 }
             },
             {
+                FeatureType.VomitPuddle,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature) $"a puddle of vomit"
+                }
+            },
+            {
                 FeatureType.ForSaleSign,
                 New FeatureTypeDescriptor With
                 {

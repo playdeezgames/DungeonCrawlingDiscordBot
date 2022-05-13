@@ -117,6 +117,10 @@ Public Class Character
         builder.AppendLine($"{FullName} unequips {item.Name}")
     End Sub
 
+    Friend Function HasEffect(effectType As EffectType) As Boolean
+        Return Effects.Contains(effectType)
+    End Function
+
     ReadOnly Property AttackDice As String
         Get
             Dim result As String = ""

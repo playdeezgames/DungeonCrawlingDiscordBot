@@ -50,7 +50,9 @@
             enemy.CharacterType.Sprite.Render(canvas)
         Else
             If location.HasFeatures Then
-                location.Features.First.FeatureType.Sprite.Render(canvas)
+                For Each feature In location.Features
+                    feature.FeatureType.Sprite.Render(canvas)
+                Next
             End If
             If Not location.Inventory.IsEmpty Then
                 canvas.Render(22, 13, Chest, "."c)

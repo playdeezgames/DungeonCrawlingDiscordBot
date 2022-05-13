@@ -11,6 +11,7 @@ Public Enum FeatureType
     Corpse
     ShoppeEntrance
     ShoppeExit
+    VomitPuddle
 End Enum
 Public Module FeatureTypeExtensions
     Friend ReadOnly OverworldFeatureGenerator As Dictionary(Of FeatureType, Integer) =

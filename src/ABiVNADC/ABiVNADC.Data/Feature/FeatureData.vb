@@ -42,7 +42,7 @@
     Public Function Create(locationId As Long, featureType As Long) As Long
         Initialize()
         ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]([{LocationIdColumn}],[{FeatureTypeColumn}]) VALUES(@{LocationIdColumn},@{FeatureTypeColumn});",
+            $"REPLACE INTO [{TableName}]([{LocationIdColumn}],[{FeatureTypeColumn}]) VALUES(@{LocationIdColumn},@{FeatureTypeColumn});",
             MakeParameter($"@{LocationIdColumn}", locationId),
             MakeParameter($"@{FeatureTypeColumn}", featureType))
         Return LastInsertRowId
