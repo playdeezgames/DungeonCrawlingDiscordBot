@@ -11,4 +11,8 @@ Module LocationTypeExtensions
     Function IsPOV(locationType As LocationType) As Boolean
         Return locationType = LocationType.Dungeon
     End Function
+    <Extension>
+    Function CanRest(locationType As LocationType) As Boolean
+        Return locationType = LocationType.Dungeon
+    End Function
 End Module
