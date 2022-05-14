@@ -2,6 +2,7 @@
     Private ProcessorTable As New Dictionary(Of String, Action(Of Player, StringBuilder, IEnumerable(Of String))) From
         {
             {AboutText, AddressOf AboutProcessor.Run},
+            {AcceptText, AddressOf AcceptProcessor.Run},
             {AroundText, AddressOf AroundProcessor.Run},
             {BuyText, AddressOf BuyProcessor.Run},
             {BribeText, AddressOf BribeProcessor.Run},

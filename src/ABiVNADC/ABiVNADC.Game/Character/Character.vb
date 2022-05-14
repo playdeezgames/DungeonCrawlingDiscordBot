@@ -31,6 +31,16 @@ Public Class Character
             Return $"{Name} the {CharacterType.Name}"
         End Get
     End Property
+
+    Public Sub AcceptQuest(questGiver As QuestGiver, builder As StringBuilder)
+        If HasQuest Then
+            builder.AppendLine($"{FullName} already has a quest!")
+            Return
+        End If
+        CharacterQuestData.Write(Id, questGiver.Id)
+        builder.AppendLine($"{FullName} accepts {questGiver.Name}'s quest for {questGiver.TargetQuantity} {questGiver.TargetItemType.Name}.")
+    End Sub
+
     ReadOnly Property Name As String
         Get
             Return Data.CharacterData.ReadName(Id)
@@ -418,6 +428,12 @@ Public Class Character
     ReadOnly Property ExperienceGoal As Long
         Get
             Return CharacterType.ExperienceGoal(ExperienceLevel)
+        End Get
+    End Property
+
+    Public ReadOnly Property HasQuest As Boolean
+        Get
+            Return CharacterQuestData.ReadFeature(Id).HasValue
         End Get
     End Property
 
