@@ -437,6 +437,12 @@ Public Class Character
         End Get
     End Property
 
+    Public ReadOnly Property QuestGiver As QuestGiver
+        Get
+            Return QuestGiver.FromId(CharacterQuestData.ReadFeature(Id))
+        End Get
+    End Property
+
     Private Function ReduceArmorDurability(attackRoll As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
         While attackRoll > 0
