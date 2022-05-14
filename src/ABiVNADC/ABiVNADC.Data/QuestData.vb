@@ -46,6 +46,10 @@
             );")
     End Sub
 
+    Public Sub WriteTargetQuantity(featureId As Long, quantity As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId, TargetItemQuantityColumn, quantity)
+    End Sub
+
     Public Function ReadRewardItemType(featureId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, RewardItemTypeColumn)
     End Function

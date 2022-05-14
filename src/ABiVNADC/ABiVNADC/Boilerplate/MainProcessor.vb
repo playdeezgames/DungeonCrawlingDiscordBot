@@ -7,6 +7,7 @@
             {BuyText, AddressOf BuyProcessor.Run},
             {BribeText, AddressOf BribeProcessor.Run},
             {CreditText, AddressOf CreditProcessor.Run},
+            {DeliverText, AddressOf DeliverProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
             {EnemiesText, AddressOf EnemiesProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},

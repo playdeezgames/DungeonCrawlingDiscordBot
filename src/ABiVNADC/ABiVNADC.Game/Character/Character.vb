@@ -13,6 +13,29 @@ Public Class Character
         End Get
     End Property
 
+    Public Sub Deliver(builder As StringBuilder)
+        If Not HasQuest Then
+            builder.AppendLine($"{FullName} does not have a quest.")
+            Return
+        End If
+        If Location.QuestGiver Is Nothing OrElse Location.QuestGiver.Id <> QuestGiver.Id Then
+            builder.AppendLine($"The quest giver is not here.")
+            Return
+        End If
+        If Not Inventory.HasItem(QuestGiver.TargetItemType) Then
+            builder.AppendLine($"{FullName} does not have any {QuestGiver.TargetItemType.Name}!")
+            Return
+        End If
+        Dim items = Inventory.StackedItems(QuestGiver.TargetItemType).Take(CInt(QuestGiver.TargetQuantity))
+        If items.Count < QuestGiver.TargetQuantity Then
+            builder.AppendLine($"{FullName} does not have enough {QuestGiver.TargetItemType.Name}!")
+            Return
+        End If
+        builder.AppendLine($"{FullName} gives {QuestGiver.Name} the {QuestGiver.TargetQuantity} {QuestGiver.TargetItemType.Name}, and receives {QuestGiver.RewardQuantity} {QuestGiver.RewardItemType.Name}!")
+        QuestGiver.CompleteQuest(Me, items)
+        CharacterQuestData.Clear(Id)
+    End Sub
+
     ReadOnly Property Exists As Boolean
         Get
             Return CharacterData.Exists(Id)

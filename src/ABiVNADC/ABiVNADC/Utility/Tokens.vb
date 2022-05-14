@@ -6,6 +6,7 @@
     Friend Const BribeText = "bribe"
     Friend Const BuyText = "buy"
     Friend Const CreditText = "credit"
+    Friend Const DeliverText = "deliver"
     Friend Const DropText = "drop"
     Friend Const EnemiesText = "enemies"
     Friend Const EnterText = "enter"

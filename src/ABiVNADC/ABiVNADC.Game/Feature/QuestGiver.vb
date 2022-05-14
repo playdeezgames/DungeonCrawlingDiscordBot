@@ -42,4 +42,16 @@
             Return CType(QuestData.ReadRewardItemType(Id).Value, ItemType)
         End Get
     End Property
+
+    Friend Sub CompleteQuest(character As Character, items As IEnumerable(Of Item))
+        For Each item In items
+            item.Destroy()
+        Next
+        Dim quantity = RewardQuantity
+        While quantity > 0
+            character.Inventory.Add(Item.Create(RewardItemType))
+            quantity -= 1
+        End While
+        QuestData.WriteTargetQuantity(Id, TargetQuantity + 1)
+    End Sub
 End Class

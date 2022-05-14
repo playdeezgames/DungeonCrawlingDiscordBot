@@ -22,4 +22,8 @@
     Public Function ReadFeature(characterId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FeatureIdColumn)
     End Function
+
+    Public Sub Clear(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+    End Sub
 End Module
