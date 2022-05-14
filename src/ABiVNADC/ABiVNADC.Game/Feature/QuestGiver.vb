@@ -18,4 +18,28 @@
             Return QuestData.ReadName(Id)
         End Get
     End Property
+
+    ReadOnly Property TargetQuantity As Long
+        Get
+            Return QuestData.ReadTargetQuantity(Id).Value
+        End Get
+    End Property
+
+    ReadOnly Property RewardQuantity As Long
+        Get
+            Return QuestData.ReadRewardQuantity(Id).Value
+        End Get
+    End Property
+
+    ReadOnly Property TargetItemType As ItemType
+        Get
+            Return CType(QuestData.ReadTargetItemType(Id).Value, ItemType)
+        End Get
+    End Property
+
+    ReadOnly Property RewardItemType As ItemType
+        Get
+            Return CType(QuestData.ReadRewardItemType(Id).Value, ItemType)
+        End Get
+    End Property
 End Class

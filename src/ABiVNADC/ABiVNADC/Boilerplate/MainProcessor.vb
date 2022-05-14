@@ -21,6 +21,7 @@
             {MoveText, AddressOf MoveProcessor.Run},
             {OffersText, AddressOf OffersProcessor.Run},
             {PricesText, AddressOf PricesProcessor.Run},
+            {QuestText, AddressOf QuestProcessor.Run},
             {RenameText, AddressOf RenameProcessor.Run},
             {RestText, AddressOf RestProcessor.Run},
             {RightText, AddressOf RightProcessor.Run},

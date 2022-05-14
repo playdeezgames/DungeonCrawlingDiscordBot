@@ -56,7 +56,7 @@
             targetItemType,
             RNG.RollDice(targetItemType.QuestTargetQuantityDice),
             rewardItemType,
-            RNG.RollDice(targetItemType.QuestRewardQuantityDice))
+            RNG.RollDice(rewardItemType.QuestRewardQuantityDice))
     End Sub
 
     ReadOnly Property OverworldX As Long?
@@ -68,6 +68,12 @@
     Public Function HasFeature(featureType As FeatureType) As Boolean
         Return Features.Any(Function(x) x.FeatureType = featureType)
     End Function
+
+    ReadOnly Property QuestGiver As QuestGiver
+        Get
+            Return Features.SingleOrDefault(Function(x) x.FeatureType = FeatureType.QuestGiver)?.QuestGiver
+        End Get
+    End Property
 
     ReadOnly Property OverworldY As Long?
         Get

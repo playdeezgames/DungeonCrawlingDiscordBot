@@ -19,6 +19,18 @@
         Return ReadColumnString(AddressOf Initialize, TableName, FeatureIdColumn, featureId, QuestGiverNameColumn)
     End Function
 
+    Public Function ReadTargetQuantity(featureId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, TargetItemQuantityColumn)
+    End Function
+
+    Public Function ReadRewardQuantity(featureId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, RewardItemQuantityColumn)
+    End Function
+
+    Public Function ReadTargetItemType(featureId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, TargetItemTypeColumn)
+    End Function
+
     Friend Sub Initialize()
         FeatureData.Initialize()
         ExecuteNonQuery(
@@ -33,6 +45,11 @@
                 FOREIGN KEY ([{FeatureIdColumn}]) REFERENCES [{FeatureData.TableName}]([{FeatureData.FeatureIdColumn}])
             );")
     End Sub
+
+    Public Function ReadRewardItemType(featureId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, RewardItemTypeColumn)
+    End Function
+
     Public Sub Write(
                     featureId As Long,
                     questGiverName As String,
