@@ -14,7 +14,9 @@ Module FeatureTypeDescriptorExtensions
                 FeatureType.Corpse,
                 New FeatureTypeDescriptor With
                 {
-                    .FullName = Function(feature) $"the corpse of {FeatureTextMetadata.Read(feature.Id, FeatureMetadataType.Name)}"
+                    .FullName = Function(feature)
+                                    Return $"the corpse(s) of {String.Join(", ", feature.Corpses.select(Function(x) x.CorpseName))}"
+                                End Function
                 }
             },
             {

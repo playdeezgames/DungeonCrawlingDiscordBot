@@ -7,6 +7,12 @@
         Return New Feature(FeatureData.Create(location.Id, featureType))
     End Function
 
+    ReadOnly Property Corpses As IEnumerable(Of Corpse)
+        Get
+            Return CorpseData.ReadForFeature(Id).Select(Function(corpseId) New Corpse(corpseId))
+        End Get
+    End Property
+
     ReadOnly Property QuestGiver As QuestGiver
         Get
             Return QuestGiver.FromId(QuestData.ReadForFeatureId(Id))

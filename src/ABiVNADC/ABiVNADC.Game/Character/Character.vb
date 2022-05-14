@@ -242,8 +242,8 @@ Public Class Character
         End If
         If HasPlayer Then
             Player.AddRIP(Me)
-            Dim corpse = Feature.Create(Location, FeatureType.Corpse)
-            FeatureTextMetadata.Write(corpse.Id, FeatureMetadataType.Name, FullName)
+            Dim corpseFeature = Feature.Create(Location, FeatureType.Corpse)
+            CorpseData.Create(corpseFeature.Id, FullName)
         End If
         CharacterData.Clear(Id)
         InventoryData.ClearOrphans()
