@@ -21,6 +21,7 @@ Public Enum ItemType
     FishFin
     Jools
     RottenFood
+    Compass
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From
@@ -42,7 +43,8 @@ Public Module ItemTypeExtensions
             ItemType.FishFin,
             ItemType.FishScale,
             ItemType.Jools,
-            ItemType.RottenFood
+            ItemType.RottenFood,
+            ItemType.Compass
         }
     <Extension>
     Sub OnUse(itemType As ItemType, character As Character, item As Item, builder As StringBuilder)

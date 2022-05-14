@@ -245,7 +245,7 @@ Public Class Character
         End Get
     End Property
 
-    Private ReadOnly Property Player As Player
+    Public ReadOnly Property Player As Player
         Get
             Dim playerId As Long? = PlayerCharacterData.ReadForCharacter(Id)
             Return If(playerId.HasValue, New Player(playerId.Value), Nothing)

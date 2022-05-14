@@ -29,6 +29,7 @@ Public Class ItemTypeDescriptor
         OnUse = Sub(c, i, b)
 
                 End Sub
+        SpawnCount = Function(difficulty, locationCount) "0d1"
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -126,6 +127,21 @@ Module ItemTypeDescriptorExtensions
                     .ArmorDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "75d1+2d75"
+                }
+            },
+            {
+                ItemType.Compass,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "compass",
+                    .CanUse = True,
+                    .UseMessage = Function(x) $"{x} looks at their compass",
+                    .CanBuyGenerator = MakeBooleanGenerator(19, 1),
+                    .BuyPriceDice = "500d1+2d500",
+                    .OnUse = Sub(character, item, builder)
+                                 builder.AppendLine(ItemType.Compass.UseMessage(character.FullName))
+                                 builder.AppendLine($"{character.FullName} is facing {character.Player.AheadDirection.Value.Name}")
+                             End Sub
                 }
             },
             {
@@ -286,7 +302,7 @@ Module ItemTypeDescriptorExtensions
                     .UseMessage = Function(x) $"{x} eats rotten food",
                     .OnUse = Sub(character, item, builder)
                                  Const FoodFatigueRecovery As Long = 4
-                                 builder.AppendLine(ItemType.Food.UseMessage(character.FullName))
+                                 builder.AppendLine(ItemType.RottenFood.UseMessage(character.FullName))
                                  character.AddFatigue(-FoodFatigueRecovery)
                                  If RNG.RollDice("1d2/2") > 0 Then
                                      character.ChangeEffectDuration(EffectType.Nausea, RNG.RollDice("2d6"))
