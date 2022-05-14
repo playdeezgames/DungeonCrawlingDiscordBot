@@ -48,10 +48,30 @@ Module FeatureTypeDescriptorExtensions
                 }
             },
             {
+                FeatureType.ForSaleSign,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature)
+                                    Dim x = feature.Location.OverworldX.Value
+                                    Dim y = feature.Location.OverworldY.Value
+                                    Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
+                                End Function,
+                    .OverworldGenerationWeight = 1
+                }
+            },
+            {
                 FeatureType.NorthSouthRoad,
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) "north-south road"
+                }
+            },
+            {
+                FeatureType.QuestGiver,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature) $"quest giver named {feature.QuestGiver.Name}",
+                    .OverworldGenerationWeight = 1
                 }
             },
             {
@@ -74,18 +94,6 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) $"a puddle of vomit"
-                }
-            },
-            {
-                FeatureType.ForSaleSign,
-                New FeatureTypeDescriptor With
-                {
-                    .FullName = Function(feature)
-                                    Dim x = feature.Location.OverworldX.Value
-                                    Dim y = feature.Location.OverworldY.Value
-                                    Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
-                                End Function,
-                    .OverworldGenerationWeight = 1
                 }
             }
         }

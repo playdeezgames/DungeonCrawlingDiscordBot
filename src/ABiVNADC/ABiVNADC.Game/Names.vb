@@ -134,6 +134,11 @@
             "Kavyadma",
             "Tabhavosa"
         }
+
+    Friend Function GenerateQuestGiverName() As String
+        Return $"{RNG.FromList(Human)} the {RNG.FromList(QuestGiverProfession)}"
+    End Function
+
     Friend ReadOnly DungeonNoun As New List(Of String) From
         {
             "Dungeon",
@@ -255,4 +260,17 @@
     Friend Function GenerateShoppeName() As String
         Return $"{RNG.FromList(ShoppeAdverb)} {RNG.FromList(ShoppeAdjective)} {RNG.FromList(ShoppeNoun)}"
     End Function
+    Friend ReadOnly QuestGiverProfession As New List(Of String) From
+        {
+            "Harlot",
+            "Innkeeper",
+            "Gong Farmer",
+            "Mudlark",
+            "Tosher",
+            "Knacker",
+            "Peasant",
+            "Midwife",
+            "Plague Doctor",
+            "Wetnurse"
+        }
 End Module

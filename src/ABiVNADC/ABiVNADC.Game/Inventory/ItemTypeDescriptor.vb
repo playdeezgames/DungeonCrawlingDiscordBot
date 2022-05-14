@@ -15,6 +15,10 @@ Public Class ItemTypeDescriptor
     Property BuyPriceDice As String
     Property SellPriceDice As String
     Property OnUse As Action(Of Character, Item, StringBuilder)
+    Property QuestTargetWeight As Integer
+    Property QuestTargetQuantityDice As String
+    Property QuestRewardWeight As Integer
+    Property QuestRewardQuantityDice As String
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -30,9 +34,27 @@ Public Class ItemTypeDescriptor
 
                 End Sub
         SpawnCount = Function(difficulty, locationCount) "0d1"
+        QuestTargetWeight = 0
+        QuestTargetQuantityDice = "0d1"
+        QuestRewardWeight = 0
+        QuestRewardQuantityDice = "0d1"
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
+    Friend ReadOnly Property QuestTargetGenerator As Dictionary(Of ItemType, Integer)
+        Get
+            Dim descriptors = ItemTypeDescriptors
+            Dim candidates = descriptors.Where(Function(x) x.Value.QuestTargetWeight > 0)
+            Return candidates.
+                ToDictionary(Function(x) x.Key, Function(x) x.Value.QuestTargetWeight)
+        End Get
+    End Property
+    Friend ReadOnly Property QuestRewardGenerator As Dictionary(Of ItemType, Integer)
+        Get
+            Return ItemTypeDescriptors.Where(Function(x) x.Value.QuestRewardWeight > 0).
+                ToDictionary(Function(x) x.Key, Function(x) x.Value.QuestRewardWeight)
+        End Get
+    End Property
     Private Function VeryCommonSpawn(difficulty As Difficulty, locationCount As Long) As String
         Select Case difficulty
             Case Difficulty.Yermom
@@ -251,6 +273,16 @@ Module ItemTypeDescriptorExtensions
                 }
             },
             {
+                ItemType.Macguffin,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "macguffin",
+                    .QuestTargetWeight = 1,
+                    .QuestTargetQuantityDice = "1d1",
+                    .SpawnCount = AddressOf RareSpawn
+                }
+            },
+            {
                 ItemType.OrcTooth,
                 New ItemTypeDescriptor With
                 {
@@ -347,6 +379,15 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
                     .SellPriceDice = "5d1+2d5"
+                }
+            },
+            {
+                ItemType.ThankYouNote,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "thank you note",
+                    .QuestRewardWeight = 1,
+                    .QuestRewardQuantityDice = "1d1"
                 }
             },
             {

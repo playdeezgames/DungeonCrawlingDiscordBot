@@ -7,6 +7,12 @@
         Return New Feature(FeatureData.Create(location.Id, featureType))
     End Function
 
+    ReadOnly Property QuestGiver As QuestGiver
+        Get
+            Return QuestGiver.FromId(QuestData.ReadForFeatureId(Id))
+        End Get
+    End Property
+
     ReadOnly Property FullName As String
         Get
             Return FeatureType.FullName(Me)

@@ -22,6 +22,8 @@ Public Enum ItemType
     Jools
     RottenFood
     Compass
+    Macguffin
+    ThankYouNote
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From
@@ -139,5 +141,15 @@ Public Module ItemTypeExtensions
     <Extension>
     Function SellPriceDice(itemType As ItemType) As String
         Return ItemTypeDescriptors(itemType).SellPriceDice
+    End Function
+
+    <Extension>
+    Function QuestTargetQuantityDice(itemType As ItemType) As String
+        Return ItemTypeDescriptors(itemType).QuestTargetQuantityDice
+    End Function
+
+    <Extension>
+    Function QuestRewardQuantityDice(itemType As ItemType) As String
+        Return ItemTypeDescriptors(itemType).QuestRewardQuantityDice
     End Function
 End Module
