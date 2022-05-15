@@ -18,6 +18,12 @@
         End Get
     End Property
 
+    ReadOnly Property CanRest As Boolean
+        Get
+            Return LocationType.CanRest
+        End Get
+    End Property
+
     Private Shared Function CreateOverworld(x As Long, y As Long, terrainType As TerrainType) As Location
         Dim location = New Location(LocationData.Create(LocationType.Overworld))
         OverworldLocationData.Write(location.Id, x, y, terrainType)

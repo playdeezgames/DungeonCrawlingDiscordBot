@@ -9,7 +9,7 @@
                     player,
                     builder,
                     Sub(character, location)
-                        If Not location.LocationType.CanRest Then
+                        If Not location.CanRest Then
                             builder.AppendLine($"{character.FullName} cannot rest here.")
                             Return
                         End If
