@@ -13,4 +13,10 @@
             Return New Location(RouteData.ReadToLocation(Id).Value)
         End Get
     End Property
+    Shared Function FromId(routeId As Long?) As Route
+        Return If(routeId.HasValue, New Route(routeId.Value), Nothing)
+    End Function
+    Shared Function Create(fromLocation As Location, direction As Direction, toLocation As Location) As Route
+        Return New Route(RouteData.Create(fromLocation.Id, direction, toLocation.Id))
+    End Function
 End Class

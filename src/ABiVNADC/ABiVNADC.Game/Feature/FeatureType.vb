@@ -34,13 +34,15 @@ Public Module FeatureTypeExtensions
         FeatureData.Create(location.Id, FeatureType.ForSaleSign)
     End Sub
 
-    Friend Sub GenerateShoppeEntrance(location As Location)
-        Dim feature = New Feature(FeatureData.Create(location.Id, FeatureType.ShoppeEntrance))
-        Dim insideLocation = New Location(LocationData.Create(LocationType.Shoppe))
-        Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, location.Id, insideLocation.Id))
-        ShoppeLocationData.Write(location.Id, shoppe.Id)
-        ShoppeLocationData.Write(insideLocation.Id, shoppe.Id)
-        FeatureData.Create(insideLocation.Id, FeatureType.ShoppeExit)
+    Friend Sub GenerateShoppeEntrance(fromLocation As Location)
+        Dim feature = New Feature(FeatureData.Create(fromLocation.Id, FeatureType.ShoppeEntrance))
+        Dim toLocation = New Location(LocationData.Create(LocationType.Shoppe))
+        Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, fromLocation.Id, toLocation.Id))
+        ShoppeLocationData.Write(fromLocation.Id, shoppe.Id)
+        ShoppeLocationData.Write(toLocation.Id, shoppe.Id)
+        FeatureData.Create(toLocation.Id, FeatureType.ShoppeExit)
+        Route.Create(fromLocation, Direction.Inward, toLocation)
+        Route.Create(toLocation, Direction.Outward, fromLocation)
         For Each itemType In AllItemTypes
             Dim sellPrice As Long = If(RNG.FromGenerator(itemType.CanSellGenerator), RNG.RollDice(itemType.SellPriceDice), 0)
             Dim buyPrice As Long = If(RNG.FromGenerator(itemType.CanBuyGenerator), RNG.RollDice(itemType.BuyPriceDice), 0)
@@ -78,10 +80,15 @@ Public Module FeatureTypeExtensions
             {16, 1}
         }
 
-    Friend Sub GenerateDungeonEntrance(location As Location)
-        FeatureData.Create(location.Id, FeatureType.DungeonEntrance)
+    Friend Sub GenerateDungeonEntrance(fromLocation As Location)
+        FeatureData.Create(fromLocation.Id, FeatureType.DungeonEntrance) 'TODO: remove when replaced with route
+
         Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
-        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(location.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
-        DungeonLocationData.Write(dungeon.Id, location.Id)
+        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
+
+        Route.Create(fromLocation, Direction.Inward, dungeon.StartingLocation)
+        Route.Create(dungeon.StartingLocation, Direction.Outward, fromLocation)
+
+        DungeonLocationData.Write(dungeon.Id, fromLocation.Id) 'TODO: i might be able to remove this
     End Sub
 End Module
