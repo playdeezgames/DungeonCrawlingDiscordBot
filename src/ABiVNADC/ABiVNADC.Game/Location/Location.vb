@@ -49,7 +49,7 @@
                 Case FeatureType.QuestGiver
                     GenerateQuestGiver(location)
                 Case Else
-                    Feature.Create(location, featureType)
+                    featureType.Generate(location)
             End Select
         End If
         Return location

@@ -13,6 +13,7 @@ Public Enum FeatureType
     QuestGiver
     Entrance
     Egress
+    LandClaimOffice
 End Enum
 Public Module FeatureTypeExtensions
     Friend ReadOnly OverworldFeatureGenerator As Dictionary(Of FeatureType, Integer) =
@@ -98,4 +99,9 @@ Public Module FeatureTypeExtensions
 
         DungeonLocationData.Write(dungeon.Id, fromLocation.Id) 'TODO: i might be able to remove this
     End Sub
+
+    <Extension>
+    Function Generate(featureType As FeatureType, location As Location) As Feature
+        Return FeatureTypeDescriptors(featureType).Generator(location)
+    End Function
 End Module
