@@ -2,15 +2,15 @@
 
 Public Enum FeatureType
     None
-    DungeonExit
-    DungeonEntrance
+    DungeonExit 'TODO: move to "exitfeature"
+    DungeonEntrance 'TODO: move to "entrancefeature"
     Crossroads
     NorthSouthRoad
     EastWestRoad
     ForSaleSign
     Corpse
-    ShoppeEntrance
-    ShoppeExit
+    ShoppeEntrance 'TODO: move to entrancefeature
+    ShoppeExit 'TODO: move to exitfeature
     VomitPuddle
     QuestGiver
 End Enum
