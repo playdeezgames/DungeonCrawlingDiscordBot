@@ -18,6 +18,10 @@
         End Get
     End Property
 
+    Public Function HasRoute(direction As Direction) As Boolean
+        Return Routes.ContainsKey(direction)
+    End Function
+
     ReadOnly Property CanRest As Boolean
         Get
             Return LocationType.CanRest

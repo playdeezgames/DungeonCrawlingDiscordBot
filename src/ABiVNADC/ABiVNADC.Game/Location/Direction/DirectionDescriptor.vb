@@ -22,7 +22,7 @@ Module DirectionDescriptorExtensions
                 {
                     .Name = "north",
                     .IsCardinal = True,
-                    .Walker = New MazeDirection(Of Direction)(Direction.North, 0, -1),
+                    .Walker = New MazeDirection(Of Direction)(Direction.South, 0, -1),
                     .LeftDirection = Direction.West,
                     .OppositeDirection = Direction.South,
                     .RightDirection = Direction.East
@@ -34,7 +34,7 @@ Module DirectionDescriptorExtensions
                 {
                     .Name = "east",
                     .IsCardinal = True,
-                    .Walker = New MazeDirection(Of Direction)(Direction.North, 1, 0),
+                    .Walker = New MazeDirection(Of Direction)(Direction.West, 1, 0),
                     .LeftDirection = Direction.North,
                     .OppositeDirection = Direction.West,
                     .RightDirection = Direction.South
@@ -58,9 +58,9 @@ Module DirectionDescriptorExtensions
                 {
                     .Name = "west",
                     .IsCardinal = True,
-                    .Walker = New MazeDirection(Of Direction)(Direction.North, -1, 0),
+                    .Walker = New MazeDirection(Of Direction)(Direction.East, -1, 0),
                     .LeftDirection = Direction.South,
-                    .OppositeDirection = Direction.West,
+                    .OppositeDirection = Direction.East,
                     .RightDirection = Direction.North
                 }
             },

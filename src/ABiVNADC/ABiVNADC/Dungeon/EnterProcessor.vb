@@ -13,17 +13,13 @@
                             character,
                             builder,
                             Sub(location)
-                                If location.HasFeature(FeatureType.DungeonEntrance) Then
-                                    Dim dungeon = location.Dungeon
-                                    character.Location = dungeon.StartingLocation
-                                    builder.AppendLine($"{character.FullName} enters {dungeon.Name}.")
-                                    ShowCurrentLocation(player, builder)
-                                ElseIf location.HasFeature(FeatureType.ShoppeEntrance) Then
-                                    Dim shoppe = location.Shoppe
-                                    character.Location = shoppe.InsideLocation
-                                    builder.AppendLine($"{character.FullName} enters {shoppe.Name}.")
-                                    ShowCurrentLocation(player, builder)
+                                If Not location.HasRoute(Direction.Inward) Then
+                                    builder.AppendLine("There is nothing to enter here.")
+                                    Return
                                 End If
+                                character.Location = location.Routes(Direction.Inward).ToLocation
+                                builder.AppendLine($"{character.FullName} enters.")
+                                ShowCurrentLocation(player, builder)
                             End Sub)
                     End Sub)
             End Sub)
