@@ -14,7 +14,11 @@
                             builder,
                             Sub(location)
                                 If Not location.HasRoute(Direction.Inward) Then
-                                    builder.AppendLine("There is nothing to enter here.")
+                                    builder.AppendLine("There is no entrance here.")
+                                    Return
+                                End If
+                                If character.InCombat Then
+                                    builder.AppendLine($"{character.FullName} cannot enter while in combat!")
                                     Return
                                 End If
                                 character.Location = location.Routes(Direction.Inward).ToLocation

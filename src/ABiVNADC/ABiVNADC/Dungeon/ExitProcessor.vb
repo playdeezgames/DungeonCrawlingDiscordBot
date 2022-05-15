@@ -12,20 +12,17 @@
                     character,
                     builder,
                     Sub(location)
+                        If Not location.HasRoute(Direction.Outward) Then
+                            builder.AppendLine("There is no exit here.")
+                            Return
+                        End If
                         If character.InCombat Then
                             builder.AppendLine($"{character.FullName} cannot exit while in combat!")
+                            Return
                         End If
-                        If location.HasFeature(FeatureType.DungeonExit) Then
-                            Dim dungeon = location.Dungeon
-                            character.Location = dungeon.OverworldLocation
-                            builder.AppendLine($"{character.FullName} leaves the dungeon.")
-                            ShowCurrentLocation(player, builder)
-                        ElseIf location.HasFeature(FeatureType.ShoppeExit) Then
-                            Dim shoppe = location.Shoppe
-                            character.Location = shoppe.OutsideLocation
-                            builder.AppendLine($"{character.FullName} leaves {shoppe.Name}.")
-                            ShowCurrentLocation(player, builder)
-                        End If
+                        character.Location = location.Routes(Direction.Outward).ToLocation
+                        builder.AppendLine($"{character.FullName} exits.")
+                        ShowCurrentLocation(player, builder)
                     End Sub)
             End Sub)
     End Sub
