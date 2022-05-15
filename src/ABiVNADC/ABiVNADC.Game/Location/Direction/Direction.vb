@@ -5,6 +5,8 @@ Public Enum Direction
     East
     South
     West
+    Inward
+    Outward
 End Enum
 Public Module DirectionExtensions
     <Extension>

@@ -63,6 +63,20 @@ Module DirectionDescriptorExtensions
                     .OppositeDirection = Direction.West,
                     .RightDirection = Direction.North
                 }
+            },
+            {
+                Direction.Inward,
+                New DirectionDescriptor With
+                {
+                    .Name = "in"
+                }
+            },
+            {
+                Direction.Outward,
+                New DirectionDescriptor With
+                {
+                    .Name = "out"
+                }
             }
         }
 End Module
