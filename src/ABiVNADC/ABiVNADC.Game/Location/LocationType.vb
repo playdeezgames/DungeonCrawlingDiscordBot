@@ -9,10 +9,10 @@ End Enum
 Module LocationTypeExtensions
     <Extension>
     Function IsPOV(locationType As LocationType) As Boolean
-        Return locationType = LocationType.Dungeon
+        Return LocationTypeDescriptors(locationType).IsPOV
     End Function
     <Extension>
     Function CanRest(locationType As LocationType) As Boolean
-        Return locationType = LocationType.Dungeon
+        Return LocationTypeDescriptors(locationType).CanRest
     End Function
 End Module
