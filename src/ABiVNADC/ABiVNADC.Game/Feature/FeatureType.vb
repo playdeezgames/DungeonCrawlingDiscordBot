@@ -13,6 +13,8 @@ Public Enum FeatureType
     ShoppeExit 'TODO: move to exitfeature
     VomitPuddle
     QuestGiver
+    Entrance
+    Egress
 End Enum
 Public Module FeatureTypeExtensions
     Friend ReadOnly OverworldFeatureGenerator As Dictionary(Of FeatureType, Integer) =

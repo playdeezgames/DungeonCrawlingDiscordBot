@@ -15,7 +15,7 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature)
-                                    Return $"the corpse(s) of {String.Join(", ", feature.Corpses.select(Function(x) x.CorpseName))}"
+                                    Return $"the corpse(s) of {String.Join(", ", feature.Corpses.Select(Function(x) x.CorpseName))}"
                                 End Function
                 }
             },
@@ -47,6 +47,20 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) "east-west road"
+                }
+            },
+            {
+                FeatureType.Egress,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature) $"exit from {feature.Egress.Name}"
+                }
+            },
+            {
+                FeatureType.Entrance,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature) $"entrance to {feature.Entrance.Name}"
                 }
             },
             {

@@ -19,6 +19,18 @@
         End Get
     End Property
 
+    ReadOnly Property Entrance As Entrance
+        Get
+            Return Game.Entrance.FromId(EntranceData.ReadForFeatureId(Id))
+        End Get
+    End Property
+
+    ReadOnly Property Egress As Egress
+        Get
+            Return Game.Egress.FromId(EgressData.ReadForFeatureId(Id))
+        End Get
+    End Property
+
     ReadOnly Property FullName As String
         Get
             Return FeatureType.FullName(Me)
