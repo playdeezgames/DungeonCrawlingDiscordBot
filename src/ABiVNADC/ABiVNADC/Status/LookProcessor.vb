@@ -51,7 +51,7 @@
         Else
             If location.HasFeatures Then
                 For Each feature In location.Features
-                    feature.FeatureType.Sprite.Render(canvas)
+                    feature.FeatureType.Sprite?.Render(canvas)
                 Next
             End If
             If Not location.Inventory.IsEmpty Then

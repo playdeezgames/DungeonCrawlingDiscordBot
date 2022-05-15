@@ -19,4 +19,8 @@
     Public Function ReadName(featureId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, FeatureIdColumn, featureId, NameColumn)
     End Function
+
+    Public Sub Write(featureId As Long, name As String)
+        ReplaceRecord(AddressOf Initialize, TableName, FeatureIdColumn, featureId, NameColumn, name)
+    End Sub
 End Module

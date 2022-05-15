@@ -88,6 +88,11 @@ Public Module FeatureTypeExtensions
         Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
         Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
 
+        Dim entranceId = FeatureData.Create(fromLocation.Id, FeatureType.Entrance)
+        EntranceData.Write(entranceId, dungeon.Name)
+        Dim egressId = FeatureData.Create(dungeon.StartingLocation.Id, FeatureType.Egress)
+        EgressData.Write(egressId, dungeon.Name)
+
         Route.Create(fromLocation, Direction.Inward, dungeon.StartingLocation)
         Route.Create(dungeon.StartingLocation, Direction.Outward, fromLocation)
 
