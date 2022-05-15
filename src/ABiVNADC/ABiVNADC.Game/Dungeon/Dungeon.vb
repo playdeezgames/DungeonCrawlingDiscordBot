@@ -69,7 +69,7 @@
     End Sub
 
     Private Shared Function CreateDungeon(player As Player, dungeonName As String, overworldLocation As Location, locations As List(Of Location), difficulty As Difficulty) As Dungeon
-        Dim startingLocation = locations.Single(Function(l) l.Features.Any(Function(f) f.FeatureType = FeatureType.DungeonExit))
+        Dim startingLocation = RNG.FromList(locations)
         Dim dungeonId = If(
             player IsNot Nothing,
             DungeonData.Create(player.Id, dungeonName, overworldLocation.Id, startingLocation.Id, difficulty),

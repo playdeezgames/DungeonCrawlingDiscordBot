@@ -2,15 +2,13 @@
 
 Public Enum FeatureType
     None
-    DungeonExit 'TODO: move to "exitfeature"
-    DungeonEntrance 'TODO: move to "entrancefeature"
+    DungeonEntrance
     Crossroads
     NorthSouthRoad
     EastWestRoad
     ForSaleSign
     Corpse
-    ShoppeEntrance 'TODO: move to entrancefeature
-    ShoppeExit 'TODO: move to exitfeature
+    ShoppeEntrance
     VomitPuddle
     QuestGiver
     Entrance
@@ -37,12 +35,15 @@ Public Module FeatureTypeExtensions
     End Sub
 
     Friend Sub GenerateShoppeEntrance(fromLocation As Location)
-        Dim feature = New Feature(FeatureData.Create(fromLocation.Id, FeatureType.ShoppeEntrance))
         Dim toLocation = New Location(LocationData.Create(LocationType.Shoppe))
         Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, fromLocation.Id, toLocation.Id))
         ShoppeLocationData.Write(fromLocation.Id, shoppe.Id)
         ShoppeLocationData.Write(toLocation.Id, shoppe.Id)
-        FeatureData.Create(toLocation.Id, FeatureType.ShoppeExit)
+
+        Entrance.Create(fromLocation, shoppe.Name)
+
+        Egress.Create(toLocation, shoppe.Name)
+
         Route.Create(fromLocation, Direction.Inward, toLocation)
         Route.Create(toLocation, Direction.Outward, fromLocation)
         For Each itemType In AllItemTypes
@@ -83,13 +84,12 @@ Public Module FeatureTypeExtensions
         }
 
     Friend Sub GenerateDungeonEntrance(fromLocation As Location)
-        FeatureData.Create(fromLocation.Id, FeatureType.DungeonEntrance) 'TODO: remove when replaced with route
-
         Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
         Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
 
-        Dim entranceId = FeatureData.Create(fromLocation.Id, FeatureType.Entrance)
-        EntranceData.Write(entranceId, dungeon.Name)
+        Entrance.Create(fromLocation, dungeon.Name)
+
+        Egress.Create(dungeon.StartingLocation, dungeon.Name)
         Dim egressId = FeatureData.Create(dungeon.StartingLocation.Id, FeatureType.Egress)
         EgressData.Write(egressId, dungeon.Name)
 

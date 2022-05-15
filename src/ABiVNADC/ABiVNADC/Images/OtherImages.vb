@@ -35,7 +35,7 @@ Module OtherImages
     <Extension>
     Function Sprite(featureType As FeatureType) As Sprite
         Select Case featureType
-            Case FeatureType.DungeonExit, FeatureType.Egress
+            Case FeatureType.Egress
                 Return DungeonExitSprite
             Case FeatureType.VomitPuddle
                 Return VomitPuddleSprite

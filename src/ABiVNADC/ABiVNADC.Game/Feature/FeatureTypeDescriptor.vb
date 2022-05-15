@@ -35,14 +35,6 @@ Module FeatureTypeDescriptorExtensions
                 }
             },
             {
-                FeatureType.DungeonExit,
-                New FeatureTypeDescriptor With
-                {
-                    .FullName = Function(feature) $"the exit from {feature.Location.Dungeon.Name}",
-                    .DungeonSpawnDice = Function(difficulty, locationCount) "1d1"
-                }
-            },
-            {
                 FeatureType.EastWestRoad,
                 New FeatureTypeDescriptor With
                 {
@@ -96,13 +88,6 @@ Module FeatureTypeDescriptorExtensions
                 {
                     .FullName = Function(feature) $"the entrance to {feature.Location.Shoppe.Name}",
                     .OverworldGenerationWeight = 1
-                }
-            },
-            {
-                FeatureType.ShoppeExit,
-                New FeatureTypeDescriptor With
-                {
-                    .FullName = Function(feature) $"the exit from {feature.Location.Shoppe.Name}"
                 }
             },
             {
