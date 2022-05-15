@@ -95,7 +95,7 @@
             For row = 0 To maze.Rows - 1
                 Dim cell = maze.GetCell(column, row)
                 Dim locationId = locationIds(CInt(row * maze.Columns + column))
-                For Each direction In AllDirections
+                For Each direction In AllCardinalDirections
                     Dim door = cell.GetDoor(direction)
                     If door IsNot Nothing AndAlso door.Open Then
                         Dim walkStep = DirectionWalker(direction)

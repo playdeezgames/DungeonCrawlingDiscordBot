@@ -69,7 +69,7 @@ Public Class Player
         If Not InCombat Then
             Return False
         End If
-        SetDirection(RNG.FromList(AllDirections))
+        SetDirection(RNG.FromList(AllCardinalDirections.ToList))
         Dim currentLocationId = Character.Location.Id
         Move(builder)
         Return currentLocationId <> Character.Location.Id
@@ -184,7 +184,7 @@ Public Class Player
     Public Function CreateCharacter(characterName As String) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
             Dim characterId = Data.CharacterData.Create(characterName, CharacterType.N00b, 0)
-            PlayerCharacterData.Write(Id, characterId, RNG.FromList(AllDirections))
+            PlayerCharacterData.Write(Id, characterId, RNG.FromEnumerable(AllCardinalDirections))
             If Character Is Nothing Then
                 SwitchCharacter(characterName)
             End If

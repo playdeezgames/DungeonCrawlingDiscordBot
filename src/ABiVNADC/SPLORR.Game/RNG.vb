@@ -70,6 +70,9 @@ Public Module RNG
     Function FromList(Of TItem)(items As List(Of TItem)) As TItem
         Return items(FromRange(0, items.Count - 1))
     End Function
+    Function FromEnumerable(Of TItem)(items As IEnumerable(Of TItem)) As TItem
+        Return FromList(items.ToList)
+    End Function
 End Module
 Public Module DictionaryExtensions
     <Extension()>
