@@ -122,6 +122,10 @@
 
     Private Sub ShowOverworldLocation(player As Player, location As Location, builder As StringBuilder)
         builder.AppendLine(location.TerrainType.Value.Description(player.Character))
+        Dim owner = location.Owner
+        If owner IsNot Nothing Then
+            builder.AppendLine($"This land is owned by {owner.FullName}.")
+        End If
         If location.HasFeatures Then
             For Each feature In location.Features
                 builder.AppendLine($"There is {feature.FullName} here.")
