@@ -34,4 +34,8 @@
     Public Sub Clear(characterId As Long, effectType As Long)
         ClearForColumnValues(AddressOf Initialize, TableName, CharacterIdColumn, characterId, EffectTypeColumn, effectType)
     End Sub
+
+    Friend Sub ClearForCharacter(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+    End Sub
 End Module
