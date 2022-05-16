@@ -24,6 +24,7 @@ Public Enum ItemType
     Compass
     Macguffin
     ThankYouNote
+    LandClaim
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly AllItemTypes As New List(Of ItemType) From
@@ -46,7 +47,10 @@ Public Module ItemTypeExtensions
             ItemType.FishScale,
             ItemType.Jools,
             ItemType.RottenFood,
-            ItemType.Compass
+            ItemType.Compass,
+            ItemType.Macguffin,
+            ItemType.ThankYouNote,
+            ItemType.LandClaim
         }
     <Extension>
     Sub OnUse(itemType As ItemType, character As Character, item As Item, builder As StringBuilder)

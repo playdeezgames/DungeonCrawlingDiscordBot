@@ -73,7 +73,7 @@
 
     Sub RequireItemTypeQuantity(tokens As IEnumerable(Of String), builder As StringBuilder, handler As Action(Of ItemType, Long))
         Dim quantity As Long = 1
-        Dim itemTypeName As String = ""
+        Dim itemTypeName As String
         If Long.TryParse(tokens.First, quantity) Then
             itemTypeName = StitchTokens(tokens.Skip(1))
         Else

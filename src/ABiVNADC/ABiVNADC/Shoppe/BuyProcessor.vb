@@ -5,18 +5,16 @@
             "Buy what?",
             builder,
             Sub()
-                RequireCharacter(
+                RequireCharacterLocation(
                     player,
                     builder,
-                    Sub(character)
-                        RequireLocation(
-                            character,
+                    Sub(character, location)
+                        RequireItemTypeQuantity(
+                            tokens,
                             builder,
-                            Sub(location)
-                                RequireItemTypeQuantity(
-                                    tokens,
-                                    builder,
-                                    Sub(itemType, quantity)
+                            Sub(itemType, quantity)
+                                Select Case location.LocationType
+                                    Case LocationType.Shoppe
                                         RequireInsideShoppe(
                                             character,
                                             location,
@@ -37,7 +35,11 @@
                                                     shoppe.BuyItem(character, itemType)
                                                 End While
                                             End Sub)
-                                    End Sub)
+                                    Case LocationType.LandClaimOffice
+                                        character.BuyLandClaims(quantity, builder)
+                                    Case Else
+                                        builder.AppendLine("There is nothing here to buy.")
+                                End Select
                             End Sub)
                     End Sub)
             End Sub)

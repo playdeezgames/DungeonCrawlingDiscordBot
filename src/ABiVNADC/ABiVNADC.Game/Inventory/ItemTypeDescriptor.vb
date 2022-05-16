@@ -260,6 +260,16 @@ Module ItemTypeDescriptorExtensions
                 }
             },
             {
+                ItemType.LandClaim,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "land claim",
+                    .SpawnCount = Function(difficulty, locationCount) "0d1",
+                    .CanBuyGenerator = MakeBooleanGenerator(1, 0),
+                    .CanSellGenerator = MakeBooleanGenerator(1, 0)
+                }
+            },
+            {
                 ItemType.LongSword,
                 New ItemTypeDescriptor With
                 {

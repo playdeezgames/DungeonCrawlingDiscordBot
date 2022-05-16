@@ -64,6 +64,30 @@ Public Class Character
         builder.AppendLine($"{FullName} accepts {questGiver.Name}'s quest for {questGiver.TargetQuantity} {questGiver.TargetItemType.Name}.")
     End Sub
 
+    Public Sub BuyLandClaims(quantity As Long, builder As StringBuilder)
+        If Location.LocationType <> LocationType.LandClaimOffice Then
+            builder.AppendLine($"{FullName} needs to be at a land claim office to buy land claims.")
+            Return
+        End If
+        Dim office = Location.LandClaimOffice
+        Dim price = office.ClaimPrice
+        Dim items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools)
+        Dim claims As Long = 0
+        Dim jools As Long = 0
+        While items.LongCount >= price
+            claims += 1
+            Inventory.Add(Item.Create(ItemType.LandClaim))
+            While price > 0
+                jools += 1
+                price -= 1
+                items.First.Destroy()
+            End While
+            price = office.ClaimPrice
+            items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools)
+        End While
+        builder.AppendLine($"{FullName} buys {claims} {ItemType.LandClaim.Name} for {jools} {ItemType.Jools.Name}.")
+    End Sub
+
     ReadOnly Property Name As String
         Get
             Return Data.CharacterData.ReadName(Id)
