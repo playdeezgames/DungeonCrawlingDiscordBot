@@ -3,10 +3,13 @@
     Sub New(featureId As Long)
         Id = featureId
     End Sub
-    ReadOnly Property ClaimPrice As Long
+    Property ClaimPrice As Long
         Get
             Return LandClaimOfficeData.Read(Id).Value
         End Get
+        Set(value As Long)
+            LandClaimOfficeData.Write(Id, value)
+        End Set
     End Property
 
     Friend Shared Function Create(location As Location) As LandClaimOffice

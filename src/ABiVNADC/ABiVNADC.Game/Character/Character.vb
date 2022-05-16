@@ -82,6 +82,7 @@ Public Class Character
                 price -= 1
                 items.First.Destroy()
             End While
+            office.ClaimPrice += 1
             price = office.ClaimPrice
             items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools)
         End While
