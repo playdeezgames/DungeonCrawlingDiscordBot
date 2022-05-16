@@ -67,7 +67,6 @@ Module FeatureTypeDescriptorExtensions
                                      Route.Create(fromLocation, Direction.Inward, dungeon.StartingLocation)
                                      Route.Create(dungeon.StartingLocation, Direction.Outward, fromLocation)
 
-                                     DungeonLocationData.Write(dungeon.Id, fromLocation.Id) 'TODO: i might be able to remove this
                                      Return New Feature(result.Id)
                                  End Function
                 }
@@ -157,7 +156,6 @@ Module FeatureTypeDescriptorExtensions
                     .Generator = Function(fromLocation)
                                      Dim toLocation = New Location(LocationData.Create(LocationType.Shoppe))
                                      Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, fromLocation.Id, toLocation.Id))
-                                     ShoppeLocationData.Write(fromLocation.Id, shoppe.Id)
                                      ShoppeLocationData.Write(toLocation.Id, shoppe.Id)
 
                                      Dim result = Entrance.Create(fromLocation, shoppe.Name)
