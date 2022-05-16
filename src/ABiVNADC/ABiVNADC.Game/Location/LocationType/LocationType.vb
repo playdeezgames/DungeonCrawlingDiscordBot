@@ -5,6 +5,7 @@ Public Enum LocationType As Long
     Dungeon
     Overworld
     Shoppe
+    LandClaimOffice
 End Enum
 Module LocationTypeExtensions
     <Extension>

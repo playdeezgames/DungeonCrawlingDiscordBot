@@ -114,7 +114,16 @@ Module FeatureTypeDescriptorExtensions
                 {
                     .FullName = Function(feature) "land claim office",
                     .OverworldGenerationWeight = 1,
-                    .Generator = MakeGenerator(FeatureType.LandClaimOffice)
+                    .Generator = Function(fromLocation)
+                                     Dim toLocation = New Location(LocationData.Create(LocationType.LandClaimOffice))
+                                     Dim entrance = Game.Entrance.Create(fromLocation, "Land Claim Office")
+                                     Egress.Create(toLocation, "Land Claim Office")
+                                     Dim office = Feature.Create(toLocation, FeatureType.LandClaimOffice)
+                                     'TODO: metadata for land claim office
+                                     Route.Create(fromLocation, Direction.Inward, toLocation)
+                                     Route.Create(toLocation, Direction.Outward, fromLocation)
+                                     Return New Feature(entrance.Id)
+                                 End Function
                 }
             },
             {

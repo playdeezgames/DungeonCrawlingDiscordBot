@@ -105,9 +105,15 @@
                 ShowOverworldLocation(player, player.Character.Location, builder)
             Case LocationType.Shoppe
                 ShowShoppeLocation(player.Character, player.Character.Location.Shoppe, builder)
+            Case LocationType.LandClaimOffice
+                ShowLandClaimOffice(player.Character, builder)
             Case Else
                 builder.AppendLine("Cannot show current location.")
         End Select
+    End Sub
+
+    Private Sub ShowLandClaimOffice(character As Character, builder As StringBuilder)
+        builder.AppendLine($"{character.FullName} is in a Land Claim Office.")
     End Sub
 
     Private Sub ShowShoppeLocation(character As Character, shoppe As Shoppe, builder As StringBuilder)

@@ -18,6 +18,10 @@ Module LocationTypeDescriptorExtensions
                 }
             },
             {
+                LocationType.LandClaimOffice,
+                New LocationTypeDescriptor
+            },
+            {
                 LocationType.Overworld,
                 New LocationTypeDescriptor
             },
