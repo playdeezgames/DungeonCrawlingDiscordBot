@@ -40,7 +40,36 @@ Module FeatureTypeDescriptorExtensions
                 {
                     .FullName = Function(feature) $"the entrance to {feature.Location.Dungeon.Name}",
                     .OverworldGenerationWeight = 1,
-                    .Generator = MakeGenerator(FeatureType.DungeonEntrance)
+                    .Generator = Function(fromLocation)
+                                     Dim dungeonDifficultyGenerator As New Dictionary(Of Difficulty, Integer) From
+                                        {
+                                            {Difficulty.Yermom, 16},
+                                            {Difficulty.Easy, 8},
+                                            {Difficulty.Normal, 4},
+                                            {Difficulty.Difficult, 2},
+                                            {Difficulty.Too, 1}
+                                        }
+                                     Dim dungeonSizeGenerator As New Dictionary(Of Long, Integer) From
+                                        {
+                                            {4, 81},
+                                            {6, 27},
+                                            {8, 9},
+                                            {12, 3},
+                                            {16, 1}
+                                        }
+                                     Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
+                                     Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
+
+                                     Dim result = Entrance.Create(fromLocation, dungeon.Name)
+
+                                     Egress.Create(dungeon.StartingLocation, dungeon.Name)
+
+                                     Route.Create(fromLocation, Direction.Inward, dungeon.StartingLocation)
+                                     Route.Create(dungeon.StartingLocation, Direction.Outward, fromLocation)
+
+                                     DungeonLocationData.Write(dungeon.Id, fromLocation.Id) 'TODO: i might be able to remove this
+                                     Return New Feature(result.Id)
+                                 End Function
                 }
             },
             {
@@ -103,7 +132,20 @@ Module FeatureTypeDescriptorExtensions
                 {
                     .FullName = Function(feature) $"quest giver named {feature.QuestGiver.Name}",
                     .OverworldGenerationWeight = 1,
-                    .Generator = MakeGenerator(FeatureType.QuestGiver)
+                    .Generator = Function(location)
+                                     Dim feature = Game.Feature.Create(location, FeatureType.QuestGiver)
+                                     Dim targetItemType = RNG.FromGenerator(QuestTargetGenerator)
+                                     Dim rewardItemType = RNG.FromGenerator(QuestRewardGenerator)
+                                     Dim name = Names.GenerateQuestGiverName
+                                     QuestGiver.Create(
+                                        feature.Id,
+                                        name,
+                                        targetItemType,
+                                        RNG.RollDice(targetItemType.QuestTargetQuantityDice),
+                                        rewardItemType,
+                                        RNG.RollDice(rewardItemType.QuestRewardQuantityDice))
+                                     Return feature
+                                 End Function
                 }
             },
             {
@@ -112,7 +154,25 @@ Module FeatureTypeDescriptorExtensions
                 {
                     .FullName = Function(feature) $"the entrance to {feature.Location.Shoppe.Name}",
                     .OverworldGenerationWeight = 1,
-                    .Generator = MakeGenerator(FeatureType.ShoppeEntrance)
+                    .Generator = Function(fromLocation)
+                                     Dim toLocation = New Location(LocationData.Create(LocationType.Shoppe))
+                                     Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, fromLocation.Id, toLocation.Id))
+                                     ShoppeLocationData.Write(fromLocation.Id, shoppe.Id)
+                                     ShoppeLocationData.Write(toLocation.Id, shoppe.Id)
+
+                                     Dim result = Entrance.Create(fromLocation, shoppe.Name)
+
+                                     Egress.Create(toLocation, shoppe.Name)
+
+                                     Route.Create(fromLocation, Direction.Inward, toLocation)
+                                     Route.Create(toLocation, Direction.Outward, fromLocation)
+                                     For Each itemType In AllItemTypes
+                                         Dim sellPrice As Long = If(RNG.FromGenerator(itemType.CanSellGenerator), RNG.RollDice(itemType.SellPriceDice), 0)
+                                         Dim buyPrice As Long = If(RNG.FromGenerator(itemType.CanBuyGenerator), RNG.RollDice(itemType.BuyPriceDice), 0)
+                                         ShoppePriceData.Write(shoppe.Id, itemType, buyPrice, sellPrice)
+                                     Next
+                                     Return New Feature(result.Id)
+                                 End Function
                 }
             },
             {

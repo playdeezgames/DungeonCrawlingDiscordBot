@@ -31,29 +31,6 @@ Public Module FeatureTypeExtensions
         Return FeatureTypeDescriptors(featureType).FullName(feature)
     End Function
 
-    Friend Sub GenerateForSaleSign(location As Location)
-        FeatureData.Create(location.Id, FeatureType.ForSaleSign)
-    End Sub
-
-    Friend Sub GenerateShoppeEntrance(fromLocation As Location)
-        Dim toLocation = New Location(LocationData.Create(LocationType.Shoppe))
-        Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, fromLocation.Id, toLocation.Id))
-        ShoppeLocationData.Write(fromLocation.Id, shoppe.Id)
-        ShoppeLocationData.Write(toLocation.Id, shoppe.Id)
-
-        Entrance.Create(fromLocation, shoppe.Name)
-
-        Egress.Create(toLocation, shoppe.Name)
-
-        Route.Create(fromLocation, Direction.Inward, toLocation)
-        Route.Create(toLocation, Direction.Outward, fromLocation)
-        For Each itemType In AllItemTypes
-            Dim sellPrice As Long = If(RNG.FromGenerator(itemType.CanSellGenerator), RNG.RollDice(itemType.SellPriceDice), 0)
-            Dim buyPrice As Long = If(RNG.FromGenerator(itemType.CanBuyGenerator), RNG.RollDice(itemType.BuyPriceDice), 0)
-            ShoppePriceData.Write(shoppe.Id, itemType, buyPrice, sellPrice)
-        Next
-    End Sub
-
     Friend Sub GenerateEastWestRoad(location As Location)
         FeatureData.Create(location.Id, FeatureType.EastWestRoad)
     End Sub
@@ -64,40 +41,6 @@ Public Module FeatureTypeExtensions
 
     Friend Sub GenerateCrossRoads(location As Location)
         FeatureData.Create(location.Id, FeatureType.Crossroads)
-    End Sub
-
-    Private ReadOnly dungeonDifficultyGenerator As New Dictionary(Of Difficulty, Integer) From
-        {
-            {Difficulty.Yermom, 16},
-            {Difficulty.Easy, 8},
-            {Difficulty.Normal, 4},
-            {Difficulty.Difficult, 2},
-            {Difficulty.Too, 1}
-        }
-
-    Private ReadOnly dungeonSizeGenerator As New Dictionary(Of Long, Integer) From
-        {
-            {4, 81},
-            {6, 27},
-            {8, 9},
-            {12, 3},
-            {16, 1}
-        }
-
-    Friend Sub GenerateDungeonEntrance(fromLocation As Location)
-        Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
-        Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
-
-        Entrance.Create(fromLocation, dungeon.Name)
-
-        Egress.Create(dungeon.StartingLocation, dungeon.Name)
-        Dim egressId = FeatureData.Create(dungeon.StartingLocation.Id, FeatureType.Egress)
-        EgressData.Write(egressId, dungeon.Name)
-
-        Route.Create(fromLocation, Direction.Inward, dungeon.StartingLocation)
-        Route.Create(dungeon.StartingLocation, Direction.Outward, fromLocation)
-
-        DungeonLocationData.Write(dungeon.Id, fromLocation.Id) 'TODO: i might be able to remove this
     End Sub
 
     <Extension>

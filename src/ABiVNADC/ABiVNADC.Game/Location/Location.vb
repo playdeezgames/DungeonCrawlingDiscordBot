@@ -40,34 +40,12 @@
         Else
             Dim featureType = RNG.FromGenerator(OverworldFeatureGenerator)
             Select Case featureType
-                Case FeatureType.DungeonEntrance
-                    GenerateDungeonEntrance(location)
-                Case FeatureType.ForSaleSign
-                    GenerateForSaleSign(location)
-                Case FeatureType.ShoppeEntrance
-                    GenerateShoppeEntrance(location)
-                Case FeatureType.QuestGiver
-                    GenerateQuestGiver(location)
                 Case Else
                     featureType.Generate(location)
             End Select
         End If
         Return location
     End Function
-
-    Private Shared Sub GenerateQuestGiver(location As Location)
-        Dim feature = Game.Feature.Create(location, FeatureType.QuestGiver)
-        Dim targetItemType = RNG.FromGenerator(QuestTargetGenerator)
-        Dim rewardItemType = RNG.FromGenerator(QuestRewardGenerator)
-        Dim name = Names.GenerateQuestGiverName
-        QuestGiver.Create(
-            feature.Id,
-            name,
-            targetItemType,
-            RNG.RollDice(targetItemType.QuestTargetQuantityDice),
-            rewardItemType,
-            RNG.RollDice(rewardItemType.QuestRewardQuantityDice))
-    End Sub
 
     ReadOnly Property OverworldX As Long?
         Get
