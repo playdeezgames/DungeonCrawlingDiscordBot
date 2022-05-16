@@ -118,11 +118,10 @@ Module FeatureTypeDescriptorExtensions
                                      Dim toLocation = New Location(LocationData.Create(LocationType.LandClaimOffice))
                                      Dim entrance = Game.Entrance.Create(fromLocation, "Land Claim Office")
                                      Egress.Create(toLocation, "Land Claim Office")
-                                     Dim office = Feature.Create(toLocation, FeatureType.LandClaimOffice)
-                                     'TODO: metadata for land claim office
+                                     Dim office = LandClaimOffice.Create(toLocation)
                                      Route.Create(fromLocation, Direction.Inward, toLocation)
                                      Route.Create(toLocation, Direction.Outward, fromLocation)
-                                     Return New Feature(entrance.Id)
+                                     Return New Feature(office.Id)
                                  End Function
                 }
             },

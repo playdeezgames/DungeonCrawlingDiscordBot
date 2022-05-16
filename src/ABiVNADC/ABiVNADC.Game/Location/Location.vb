@@ -18,6 +18,13 @@
         End Get
     End Property
 
+    ReadOnly Property LandClaimOffice As LandClaimOffice
+        Get
+            Dim result = Features.SingleOrDefault(Function(x) x.FeatureType = FeatureType.LandClaimOffice)
+            Return If(result IsNot Nothing, New LandClaimOffice(result.Id), Nothing)
+        End Get
+    End Property
+
     Public Function HasRoute(direction As Direction) As Boolean
         Return Routes.ContainsKey(direction)
     End Function
