@@ -27,31 +27,11 @@ Public Enum ItemType
     LandClaim
 End Enum
 Public Module ItemTypeExtensions
-    Public ReadOnly AllItemTypes As New List(Of ItemType) From
-        {
-            ItemType.Food,
-            ItemType.Potion,
-            ItemType.Dagger,
-            ItemType.ShortSword,
-            ItemType.LongSword,
-            ItemType.Shield,
-            ItemType.ChainMail,
-            ItemType.PlateMail,
-            ItemType.Helmet,
-            ItemType.Trousers,
-            ItemType.GoblinEar,
-            ItemType.OrcTooth,
-            ItemType.SkullFragment,
-            ItemType.ZombieTaint,
-            ItemType.FishFin,
-            ItemType.FishScale,
-            ItemType.Jools,
-            ItemType.RottenFood,
-            ItemType.Compass,
-            ItemType.Macguffin,
-            ItemType.ThankYouNote,
-            ItemType.LandClaim
-        }
+    Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
+        Get
+            Return ItemTypeDescriptors.Keys
+        End Get
+    End Property
     <Extension>
     Sub OnUse(itemType As ItemType, character As Character, item As Item, builder As StringBuilder)
         ItemTypeDescriptors(itemType).OnUse.Invoke(character, item, builder)
