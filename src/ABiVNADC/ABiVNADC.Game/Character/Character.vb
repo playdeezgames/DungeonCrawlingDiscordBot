@@ -118,7 +118,7 @@ Public Class Character
         enemy.ApplyEffects(builder)
     End Sub
 
-    Private Sub ApplyEffects(builder As StringBuilder)
+    Friend Sub ApplyEffects(builder As StringBuilder)
         For Each effect In Effects
             effect.ApplyOn(Me, builder)
             ChangeEffectDuration(effect, -1)

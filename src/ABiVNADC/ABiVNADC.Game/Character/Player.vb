@@ -164,7 +164,7 @@ Public Class Player
         Dim route As Route = Nothing
         If character.Location.Routes.TryGetValue(direction, route) Then
             character.Location = route.ToLocation
-            character.NextTurn(builder)
+            character.ApplyEffects(builder)
         End If
     End Sub
 
