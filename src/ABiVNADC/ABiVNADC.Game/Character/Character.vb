@@ -302,6 +302,21 @@ Public Class Character
         End Get
     End Property
 
+    Friend Sub ClaimLand(item As Item, builder As StringBuilder)
+        If item.ItemType <> ItemType.LandClaim Then
+            builder.AppendLine($"A {ItemType.LandClaim.Name} is needed to claim land!")
+            Return
+        End If
+        If Not Location.CanClaim Then
+            builder.AppendLine("This plot of land cannot be claimed.")
+            Return
+        End If
+        Location.ForSaleSign.Destroy()
+        item.Destroy()
+        Location.Owner = Me
+        builder.AppendLine($"{FullName} is now the owner of this plot of land.")
+    End Sub
+
     Public ReadOnly Property Player As Player
         Get
             Dim playerId As Long? = PlayerCharacterData.ReadForCharacter(Id)

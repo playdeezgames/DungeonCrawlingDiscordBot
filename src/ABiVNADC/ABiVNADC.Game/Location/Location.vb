@@ -12,6 +12,12 @@
         End Get
     End Property
 
+    ReadOnly Property CanClaim As Boolean
+        Get
+            Return HasFeature(FeatureType.ForSaleSign)
+        End Get
+    End Property
+
     ReadOnly Property IsInsideShoppe As Boolean
         Get
             Return Id = If(Shoppe?.InsideLocation?.Id, 0)
@@ -22,6 +28,22 @@
         Get
             Dim result = Features.SingleOrDefault(Function(x) x.FeatureType = FeatureType.LandClaimOffice)
             Return If(result IsNot Nothing, New LandClaimOffice(result.Id), Nothing)
+        End Get
+    End Property
+
+    Property Owner As Character
+        Get
+            Return Character.FromId(LocationOwnerData.Read(Id))
+        End Get
+        Set(value As Character)
+            LocationOwnerData.Write(Id, value.Id)
+        End Set
+    End Property
+
+    ReadOnly Property ForSaleSign As Feature
+        Get
+            Dim result = Features.SingleOrDefault(Function(x) x.FeatureType = FeatureType.ForSaleSign)
+            Return If(result IsNot Nothing, New Feature(result.Id), Nothing)
         End Get
     End Property
 

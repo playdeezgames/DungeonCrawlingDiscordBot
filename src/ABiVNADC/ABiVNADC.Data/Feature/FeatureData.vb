@@ -35,6 +35,13 @@
             MakeParameter($"@{LocationIdColumn}", locationId)).Value
     End Function
 
+    Public Sub Clear(featureId As Long)
+        CorpseData.Clear(featureId)
+        EgressData.Clear(featureId)
+        EntranceData.Clear(featureId)
+        ClearForColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId)
+    End Sub
+
     Public Function ReadFeatureType(featureId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, FeatureTypeColumn)
     End Function

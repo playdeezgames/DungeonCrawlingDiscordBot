@@ -62,6 +62,7 @@
         PlayerCharacterData.ClearForCharacter(characterId)
         PlayerData.ClearForCharacter(characterId)
         ShoppeAccountsData.ClearForCharacter(characterId)
+        LocationOwnerData.ClearForCharacter(characterId)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
 

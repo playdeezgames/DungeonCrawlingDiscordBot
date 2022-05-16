@@ -48,4 +48,8 @@
             Return CType(FeatureData.ReadFeatureType(Id).Value, FeatureType)
         End Get
     End Property
+
+    Friend Sub Destroy()
+        FeatureData.Clear(Id)
+    End Sub
 End Class

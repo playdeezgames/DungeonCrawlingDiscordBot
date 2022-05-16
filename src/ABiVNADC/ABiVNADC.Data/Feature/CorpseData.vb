@@ -41,4 +41,8 @@
             MakeParameter($"@{CorpseNameColumn}", corpseName))
         Return LastInsertRowId
     End Function
+
+    Friend Sub Clear(featureId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId)
+    End Sub
 End Module
