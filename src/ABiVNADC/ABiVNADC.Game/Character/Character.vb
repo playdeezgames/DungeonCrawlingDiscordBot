@@ -461,7 +461,7 @@ Public Class Character
     Private Function AddExperience(experiencePoints As Long) As Boolean
         Dim result = False
         Dim newExperience = Experience + experiencePoints
-        While newExperience >= ExperienceGoal
+        While newExperience >= ExperienceGoal AndAlso Level < CharacterType.MaximumLevel
             newExperience -= ExperienceGoal
             LevelUp()
             result = True

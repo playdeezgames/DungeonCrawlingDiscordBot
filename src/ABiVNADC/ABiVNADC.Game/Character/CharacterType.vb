@@ -27,16 +27,9 @@ Public Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).MaximumEnergy(level)
     End Function
 
-    Public ReadOnly AllCharacterTypes As New List(Of CharacterType) From
-        {
-            CharacterType.BossFish,
-            CharacterType.MinionFish,
-            CharacterType.Zombie,
-            CharacterType.Orc,
-            CharacterType.Goblin,
-            CharacterType.Skeleton,
-            CharacterType.N00b
-        }
+    Public Function AllCharacterTypes() As IEnumerable(Of CharacterType)
+        Return CharacterTypeDescriptors.Keys
+    End Function
     <Extension>
     Public Function SpawnCount(characterType As CharacterType, locationCount As Long, difficulty As Difficulty) As Long
         Return CharacterTypeDescriptors(characterType).SpawnCount(difficulty)(locationCount)
@@ -85,6 +78,11 @@ Public Module CharacterTypeExtensions
     <Extension>
     Function ExperienceGoal(characterType As CharacterType, level As Long) As Long
         Return CharacterTypeDescriptors(characterType).ExperiencePointGoal(level)
+    End Function
+
+    <Extension>
+    Function MaximumLevel(characterType As CharacterType) As Long
+        Return CharacterTypeDescriptors(characterType).MaximumExperienceLevel
     End Function
 
     <Extension>

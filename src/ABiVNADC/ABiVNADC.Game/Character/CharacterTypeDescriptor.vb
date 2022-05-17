@@ -1,4 +1,4 @@
-﻿Friend Structure CharacterTypeDescriptor
+﻿Friend Class CharacterTypeDescriptor
     Friend Name As String
     Friend MaximumHealth As Func(Of Long, Long)
     Friend MaximumEnergy As Func(Of Long, Long)
@@ -13,7 +13,11 @@
     Friend ExperiencePointValue As Long
     Friend ExperiencePointGoal As Func(Of Long, Long)
     Friend ValidBribes As HashSet(Of ItemType)
-End Structure
+    Friend MaximumExperienceLevel As Long
+    Sub New()
+        MaximumExperienceLevel = Long.MaxValue
+    End Sub
+End Class
 Module CharacterTypeDescriptorExtensions
     Friend ReadOnly CharacterTypeDescriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
