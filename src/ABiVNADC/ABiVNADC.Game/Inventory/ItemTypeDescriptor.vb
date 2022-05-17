@@ -19,6 +19,7 @@ Public Class ItemTypeDescriptor
     Property QuestTargetQuantityDice As String
     Property QuestRewardWeight As Integer
     Property QuestRewardQuantityDice As String
+    Property Encumbrance As Long
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -38,6 +39,7 @@ Public Class ItemTypeDescriptor
         QuestTargetQuantityDice = "0d1"
         QuestRewardWeight = 0
         QuestRewardQuantityDice = "0d1"
+        Encumbrance = 0
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -148,7 +150,8 @@ Module ItemTypeDescriptorExtensions
                     .DefendDice = "1d3/3",
                     .ArmorDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "75d1+2d75"
+                    .BuyPriceDice = "75d1+2d75",
+                    .Encumbrance = 20
                 }
             },
             {
@@ -163,7 +166,8 @@ Module ItemTypeDescriptorExtensions
                     .OnUse = Sub(character, item, builder)
                                  builder.AppendLine(ItemType.Compass.UseMessage(character.FullName))
                                  builder.AppendLine($"{character.FullName} is facing {character.Player.AheadDirection.Value.Name}")
-                             End Sub
+                             End Sub,
+                    .Encumbrance = 1
                 }
             },
             {
@@ -182,7 +186,8 @@ Module ItemTypeDescriptorExtensions
                     .OnUse = Sub(character, item, builder)
                                  character.Destroy()
                                  builder.AppendLine(ItemType.Dagger.UseMessage(character.FullName))
-                             End Sub
+                             End Sub,
+                    .Encumbrance = 1
                 }
             },
             {
@@ -221,7 +226,8 @@ Module ItemTypeDescriptorExtensions
                                  character.AddFatigue(-FoodFatigueRecovery)
                                  builder.Append($"{character.FullName} now has {character.Energy} energy.")
                                  item.Destroy()
-                             End Sub
+                             End Sub,
+                    .Encumbrance = 1
                 }
             },
             {
@@ -244,7 +250,8 @@ Module ItemTypeDescriptorExtensions
                     .DefendDice = "1d3/3",
                     .ArmorDurability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "12d1+2d12"
+                    .BuyPriceDice = "12d1+2d12",
+                    .Encumbrance = 5
                 }
             },
             {
@@ -256,7 +263,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(0, 1),
                     .CanSellGenerator = MakeBooleanGenerator(0, 1),
                     .BuyPriceDice = "100d1",
-                    .SellPriceDice = "95d1"
+                    .SellPriceDice = "95d1",
+                    .Encumbrance = 1
                 }
             },
             {
@@ -282,7 +290,8 @@ Module ItemTypeDescriptorExtensions
                     .AttackDice = "1d2/2+1d2/2+1d2/2",
                     .WeaponDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "50d1+2d50"
+                    .BuyPriceDice = "50d1+2d50",
+                    .Encumbrance = 10
                 }
             },
             {
@@ -315,7 +324,8 @@ Module ItemTypeDescriptorExtensions
                     .DefendDice = "1d3/3+1d3/3",
                     .ArmorDurability = 35,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "150d1+2d150"
+                    .BuyPriceDice = "150d1+2d150",
+                    .Encumbrance = 30
                 }
             },
             {
@@ -334,7 +344,8 @@ Module ItemTypeDescriptorExtensions
                                  character.AddWounds(-PotionWoundRecovery)
                                  builder.Append($"{character.FullName} now has {character.Health} health.")
                                  item.Destroy()
-                             End Sub
+                             End Sub,
+                    .Encumbrance = 1
                 }
             },
             {
@@ -355,7 +366,8 @@ Module ItemTypeDescriptorExtensions
                                  End If
                                  builder.AppendLine($"{character.FullName} now has {character.Energy} energy.")
                                  item.Destroy()
-                             End Sub
+                             End Sub,
+                    .Encumbrance = 1
                 }
             },
             {
@@ -368,7 +380,8 @@ Module ItemTypeDescriptorExtensions
                     .DefendDice = "1d3/3",
                     .ArmorDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "25d1+2d25"
+                    .BuyPriceDice = "25d1+2d25",
+                    .Encumbrance = 10
                 }
             },
             {
@@ -381,7 +394,8 @@ Module ItemTypeDescriptorExtensions
                     .AttackDice = "1d2/2+1d2/2",
                     .WeaponDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
-                    .BuyPriceDice = "25d1+2d25"
+                    .BuyPriceDice = "25d1+2d25",
+                    .Encumbrance = 6
                 }
             },
             {
@@ -400,7 +414,8 @@ Module ItemTypeDescriptorExtensions
                 {
                     .Name = "thank you note",
                     .QuestRewardWeight = 1,
-                    .QuestRewardQuantityDice = "1d1"
+                    .QuestRewardQuantityDice = "1d1",
+                    .Encumbrance = -5
                 }
             },
             {
@@ -411,7 +426,8 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Legs,
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "50d1+2d50"
+                    .SellPriceDice = "50d1+2d50",
+                    .Encumbrance = 1
                 }
             },
             {

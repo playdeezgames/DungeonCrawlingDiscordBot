@@ -13,6 +13,24 @@ Public Class Character
         End Get
     End Property
 
+    ReadOnly Property Encumbrance As Long
+        Get
+            Return Equipment.Sum(Function(x) x.Value.Encumbrance) + Inventory.Encumbrance
+        End Get
+    End Property
+
+    ReadOnly Property MaximumEncumbrance As Long
+        Get
+            Return CharacterType.MaximumEncumbrance
+        End Get
+    End Property
+
+    ReadOnly Property IsEncumbered As Boolean
+        Get
+            Return Encumbrance > MaximumEncumbrance
+        End Get
+    End Property
+
     Public Sub Deliver(builder As StringBuilder)
         If Not HasQuest Then
             builder.AppendLine($"{FullName} does not have a quest.")
@@ -70,21 +88,19 @@ Public Class Character
             Return
         End If
         Dim office = Location.LandClaimOffice
-        Dim price = office.ClaimPrice
-        Dim items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools)
-        Dim claims As Long = 0
+        Dim items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools).ToList
         Dim jools As Long = 0
-        While items.LongCount >= price
+        Dim claims As Long = 0
+        While quantity > 0 AndAlso items.LongCount >= office.ClaimPrice
+            quantity -= 1
             claims += 1
+            jools += office.ClaimPrice
             Inventory.Add(Item.Create(ItemType.LandClaim))
-            While price > 0
-                jools += 1
-                price -= 1
-                items.First.Destroy()
-            End While
+            For Each item In items.Take(CInt(office.ClaimPrice))
+                item.Destroy()
+            Next
             office.ClaimPrice += 1
-            price = office.ClaimPrice
-            items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools)
+            items = Inventory.Items.Where(Function(x) x.ItemType = ItemType.Jools).ToList
         End While
         builder.AppendLine($"{FullName} buys {claims} {ItemType.LandClaim.Name} for {jools} {ItemType.Jools.Name}.")
     End Sub

@@ -114,10 +114,16 @@
 
     Private Sub ShowLandClaimOffice(character As Character, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} is in a Land Claim Office.")
+        If Not character.Location.Inventory.IsEmpty Then
+            builder.AppendLine("There is stuff on the ground.")
+        End If
     End Sub
 
     Private Sub ShowShoppeLocation(character As Character, shoppe As Shoppe, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} is browsing {shoppe.Name}.")
+        If Not character.Location.Inventory.IsEmpty Then
+            builder.AppendLine("There is stuff on the ground.")
+        End If
     End Sub
 
     Private Sub ShowOverworldLocation(player As Player, location As Location, builder As StringBuilder)
@@ -130,6 +136,9 @@
             For Each feature In location.Features
                 builder.AppendLine($"There is {feature.FullName} here.")
             Next
+        End If
+        If Not location.Inventory.IsEmpty Then
+            builder.AppendLine("There is stuff on the ground.")
         End If
     End Sub
 End Module

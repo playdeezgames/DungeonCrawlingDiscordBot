@@ -20,6 +20,7 @@
                 builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
                 builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
                 builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
+                builder.AppendLine($"Encumbrance: {character.Encumbrance}/{character.MaximumEncumbrance}")
                 Dim equipment = character.Equipment
                 If equipment.Any Then
                     builder.AppendLine("Equipment:")

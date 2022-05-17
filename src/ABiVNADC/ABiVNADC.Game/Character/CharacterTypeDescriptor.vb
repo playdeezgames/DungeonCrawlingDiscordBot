@@ -14,8 +14,10 @@
     Friend ExperiencePointGoal As Func(Of Long, Long)
     Friend ValidBribes As HashSet(Of ItemType)
     Friend MaximumExperienceLevel As Long
+    Friend MaximumEncumbrance As Long
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
+        MaximumEncumbrance = 0
     End Sub
 End Class
 Module CharacterTypeDescriptorExtensions
@@ -38,7 +40,8 @@ Module CharacterTypeDescriptorExtensions
                     .LootDrops = New Dictionary(Of ItemType, String),
                     .ExperiencePointValue = 5,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType)
+                    .ValidBribes = New HashSet(Of ItemType),
+                    .MaximumEncumbrance = 50
                 }
             },
             {

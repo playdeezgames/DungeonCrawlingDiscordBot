@@ -243,7 +243,7 @@ Public Class Player
     End Property
     ReadOnly Property CanMove As Boolean
         Get
-            Return CanTurn
+            Return CanTurn AndAlso Not Character.IsEncumbered
         End Get
     End Property
 

@@ -12,6 +12,12 @@
         End Get
     End Property
 
+    ReadOnly Property Encumbrance As Long
+        Get
+            Return Items.Sum(Function(x) x.Encumbrance)
+        End Get
+    End Property
+
     ReadOnly Property Items As IEnumerable(Of Item)
         Get
             Return InventoryItemData.ReadForInventory(Id).Select(Function(id) New Item(id))

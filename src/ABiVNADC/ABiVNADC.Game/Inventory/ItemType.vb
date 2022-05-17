@@ -136,4 +136,9 @@ Public Module ItemTypeExtensions
     Function QuestRewardQuantityDice(itemType As ItemType) As String
         Return ItemTypeDescriptors(itemType).QuestRewardQuantityDice
     End Function
+
+    <Extension>
+    Function Encumbrance(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).Encumbrance
+    End Function
 End Module

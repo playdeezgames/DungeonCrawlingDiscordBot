@@ -13,6 +13,12 @@
         End Get
     End Property
 
+    ReadOnly Property Encumbrance As Long
+        Get
+            Return ItemType.Encumbrance
+        End Get
+    End Property
+
     Friend Sub Destroy()
         ItemData.Clear(Id)
     End Sub

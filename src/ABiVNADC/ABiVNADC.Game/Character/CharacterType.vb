@@ -89,4 +89,9 @@ Public Module CharacterTypeExtensions
     Function TakesBribe(characterType As CharacterType, itemType As ItemType) As Boolean
         Return CharacterTypeDescriptors(characterType).ValidBribes.Contains(itemType)
     End Function
+
+    <Extension>
+    Function MaximumEncumbrance(characterType As CharacterType) As Long
+        Return CharacterTypeDescriptors(characterType).MaximumEncumbrance
+    End Function
 End Module
