@@ -19,7 +19,8 @@ Public Class ItemTypeDescriptor
     Property QuestTargetQuantityDice As String
     Property QuestRewardWeight As Integer
     Property QuestRewardQuantityDice As String
-    Property Encumbrance As Long
+    Property InventoryEncumbrance As Long
+    Property EquippedEncumbrance As Long
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -39,7 +40,8 @@ Public Class ItemTypeDescriptor
         QuestTargetQuantityDice = "0d1"
         QuestRewardWeight = 0
         QuestRewardQuantityDice = "0d1"
-        Encumbrance = 0
+        InventoryEncumbrance = 0
+        EquippedEncumbrance = 0
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -151,7 +153,8 @@ Module ItemTypeDescriptorExtensions
                     .ArmorDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "75d1+2d75",
-                    .Encumbrance = 20
+                    .InventoryEncumbrance = 20,
+                    .EquippedEncumbrance = 15
                 }
             },
             {
@@ -167,7 +170,7 @@ Module ItemTypeDescriptorExtensions
                                  builder.AppendLine(ItemType.Compass.UseMessage(character.FullName))
                                  builder.AppendLine($"{character.FullName} is facing {character.Player.AheadDirection.Value.Name}")
                              End Sub,
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1
                 }
             },
             {
@@ -187,7 +190,8 @@ Module ItemTypeDescriptorExtensions
                                  character.Destroy()
                                  builder.AppendLine(ItemType.Dagger.UseMessage(character.FullName))
                              End Sub,
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .EquippedEncumbrance = 0
                 }
             },
             {
@@ -227,7 +231,7 @@ Module ItemTypeDescriptorExtensions
                                  builder.Append($"{character.FullName} now has {character.Energy} energy.")
                                  item.Destroy()
                              End Sub,
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1
                 }
             },
             {
@@ -251,7 +255,8 @@ Module ItemTypeDescriptorExtensions
                     .ArmorDurability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "12d1+2d12",
-                    .Encumbrance = 5
+                    .InventoryEncumbrance = 5,
+                    .EquippedEncumbrance = 3
                 }
             },
             {
@@ -264,7 +269,7 @@ Module ItemTypeDescriptorExtensions
                     .CanSellGenerator = MakeBooleanGenerator(0, 1),
                     .BuyPriceDice = "100d1",
                     .SellPriceDice = "95d1",
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1
                 }
             },
             {
@@ -291,7 +296,8 @@ Module ItemTypeDescriptorExtensions
                     .WeaponDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "50d1+2d50",
-                    .Encumbrance = 10
+                    .InventoryEncumbrance = 10,
+                    .EquippedEncumbrance = 5
                 }
             },
             {
@@ -325,7 +331,8 @@ Module ItemTypeDescriptorExtensions
                     .ArmorDurability = 35,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "150d1+2d150",
-                    .Encumbrance = 30
+                    .InventoryEncumbrance = 30,
+                    .EquippedEncumbrance = 20
                 }
             },
             {
@@ -345,7 +352,7 @@ Module ItemTypeDescriptorExtensions
                                  builder.Append($"{character.FullName} now has {character.Health} health.")
                                  item.Destroy()
                              End Sub,
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1
                 }
             },
             {
@@ -367,7 +374,7 @@ Module ItemTypeDescriptorExtensions
                                  builder.AppendLine($"{character.FullName} now has {character.Energy} energy.")
                                  item.Destroy()
                              End Sub,
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1
                 }
             },
             {
@@ -381,7 +388,8 @@ Module ItemTypeDescriptorExtensions
                     .ArmorDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "25d1+2d25",
-                    .Encumbrance = 10
+                    .InventoryEncumbrance = 10,
+                    .EquippedEncumbrance = 7
                 }
             },
             {
@@ -395,7 +403,8 @@ Module ItemTypeDescriptorExtensions
                     .WeaponDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(1, 1),
                     .BuyPriceDice = "25d1+2d25",
-                    .Encumbrance = 6
+                    .InventoryEncumbrance = 6,
+                    .EquippedEncumbrance = 4
                 }
             },
             {
@@ -415,7 +424,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "thank you note",
                     .QuestRewardWeight = 1,
                     .QuestRewardQuantityDice = "1d1",
-                    .Encumbrance = -5
+                    .InventoryEncumbrance = -5
                 }
             },
             {
@@ -427,7 +436,8 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Legs,
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
                     .SellPriceDice = "50d1+2d50",
-                    .Encumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .EquippedEncumbrance = -4
                 }
             },
             {

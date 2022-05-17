@@ -138,7 +138,12 @@ Public Module ItemTypeExtensions
     End Function
 
     <Extension>
-    Function Encumbrance(itemType As ItemType) As Long
-        Return ItemTypeDescriptors(itemType).Encumbrance
+    Function InventoryEncumbrance(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).InventoryEncumbrance
+    End Function
+
+    <Extension>
+    Function EquippedEncumbrance(itemType As ItemType) As Long
+        Return ItemTypeDescriptors(itemType).EquippedEncumbrance
     End Function
 End Module

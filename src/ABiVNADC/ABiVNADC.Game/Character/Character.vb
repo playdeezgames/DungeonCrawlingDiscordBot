@@ -15,7 +15,7 @@ Public Class Character
 
     ReadOnly Property Encumbrance As Long
         Get
-            Return Equipment.Sum(Function(x) x.Value.Encumbrance) + Inventory.Encumbrance
+            Return Equipment.Sum(Function(x) x.Value.EquippedEncumbrance) + Inventory.InventoryEncumbrance
         End Get
     End Property
 

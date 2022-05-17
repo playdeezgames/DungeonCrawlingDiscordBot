@@ -12,9 +12,9 @@
         End Get
     End Property
 
-    ReadOnly Property Encumbrance As Long
+    ReadOnly Property InventoryEncumbrance As Long
         Get
-            Return Items.Sum(Function(x) x.Encumbrance)
+            Return Items.Sum(Function(x) x.InventoryEncumbrance)
         End Get
     End Property
 

@@ -13,9 +13,9 @@
         End Get
     End Property
 
-    ReadOnly Property Encumbrance As Long
+    ReadOnly Property InventoryEncumbrance As Long
         Get
-            Return ItemType.Encumbrance
+            Return ItemType.InventoryEncumbrance
         End Get
     End Property
 
