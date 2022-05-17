@@ -32,6 +32,7 @@
     Friend Const StartText = "start"
     Friend Const StatusText = "status"
     Friend Const TakeText = "take"
+    Friend Const TrophiesText = "trophies"
     Friend Const UnequipText = "unequip"
     Friend Const UseText = "use"
     Function StitchTokens(tokens As IEnumerable(Of String)) As String

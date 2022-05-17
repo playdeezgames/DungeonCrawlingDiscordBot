@@ -14,7 +14,11 @@
                             builder,
                             Sub(location)
                                 If tokens.Count = 1 AndAlso tokens.Single() = AllText Then
-                                    HandleTakeAll(player, character, location, builder)
+                                    HandleTakeAll(player, builder)
+                                    Return
+                                End If
+                                If tokens.Count = 1 AndAlso tokens.Single() = TrophiesText Then
+                                    HandleTakeTrophies(player, builder)
                                     Return
                                 End If
                                 RequireItemTypeQuantity(
@@ -28,7 +32,11 @@
             End Sub)
     End Sub
 
-    Private Sub HandleTakeAll(player As Player, character As Character, location As Location, builder As StringBuilder)
+    Private Sub HandleTakeTrophies(player As Player, builder As StringBuilder)
+        player.TakeTrophies(builder)
+    End Sub
+
+    Private Sub HandleTakeAll(player As Player, builder As StringBuilder)
         player.TakeAll(builder)
     End Sub
 End Module

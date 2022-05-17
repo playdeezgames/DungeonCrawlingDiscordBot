@@ -21,6 +21,7 @@ Public Class ItemTypeDescriptor
     Property QuestRewardQuantityDice As String
     Property InventoryEncumbrance As Long
     Property EquippedEncumbrance As Long
+    Property IsTrophy As Boolean
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -42,6 +43,7 @@ Public Class ItemTypeDescriptor
         QuestRewardQuantityDice = "0d1"
         InventoryEncumbrance = 0
         EquippedEncumbrance = 0
+        IsTrophy = False
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -201,7 +203,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "fish fin",
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "40d1+2d40"
+                    .SellPriceDice = "40d1+2d40",
+                    .IsTrophy = True
                 }
             },
             {
@@ -211,7 +214,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "fish scale",
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "20d1+2d20"
+                    .SellPriceDice = "20d1+2d20",
+                    .IsTrophy = True
                 }
             },
             {
@@ -241,7 +245,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "goblin ear",
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "2d1+2d2"
+                    .SellPriceDice = "2d1+2d2",
+                    .IsTrophy = True
                 }
             },
             {
@@ -307,7 +312,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "macguffin",
                     .QuestTargetWeight = 1,
                     .QuestTargetQuantityDice = "1d1",
-                    .SpawnCount = AddressOf RareSpawn
+                    .SpawnCount = AddressOf RareSpawn,
+                    .IsTrophy = True
                 }
             },
             {
@@ -317,7 +323,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "orc tooth",
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "5d1+2d5"
+                    .SellPriceDice = "5d1+2d5",
+                    .IsTrophy = True
                 }
             },
             {
@@ -414,7 +421,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "skull fragment",
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "5d1+2d5"
+                    .SellPriceDice = "5d1+2d5",
+                    .IsTrophy = True
                 }
             },
             {
@@ -447,7 +455,8 @@ Module ItemTypeDescriptorExtensions
                     .Name = "zombie taint",
                     .SpawnCount = Function(difficulty, locationCount) "0d1",
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "30d1+2d30"
+                    .SellPriceDice = "30d1+2d30",
+                    .IsTrophy = True
                 }
             }
         }

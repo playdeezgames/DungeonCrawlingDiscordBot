@@ -20,7 +20,7 @@
                 builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
                 builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
                 builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
-                builder.AppendLine($"Encumbrance: {character.Encumbrance}/{character.MaximumEncumbrance}")
+                ShowEncumbrance(builder, character)
                 Dim equipment = character.Equipment
                 If equipment.Any Then
                     builder.AppendLine("Equipment:")
@@ -42,5 +42,9 @@
                     End If
                 End If
             End Sub)
+    End Sub
+
+    Private Sub ShowEncumbrance(builder As StringBuilder, character As Character)
+        builder.AppendLine($"Encumbrance: {Math.Max(0, character.Encumbrance)}/{character.MaximumEncumbrance}")
     End Sub
 End Module

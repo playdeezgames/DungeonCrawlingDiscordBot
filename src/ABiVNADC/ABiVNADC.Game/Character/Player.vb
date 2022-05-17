@@ -59,6 +59,24 @@ Public Class Player
         Character.NextTurn(builder)
     End Sub
 
+    Public Sub TakeTrophies(builder As StringBuilder)
+        Dim owner = Character.Location.Owner
+        If owner IsNot Nothing AndAlso owner.Id <> Character.Id Then
+            builder.AppendLine("Only the owner of a plot of land may take items from it.")
+            Return
+        End If
+        Dim items = Character.Location.Inventory.Items.Where(Function(x) x.IsTrophy)
+        If Not items.Any Then
+            builder.AppendLine("There are no trophies to take!")
+            Return
+        End If
+        For Each item In items
+            Character.Inventory.Add(item)
+        Next
+        builder.AppendLine($"{Character.FullName} takes all trophies.")
+        Character.NextTurn(builder)
+    End Sub
+
     Public Sub TakeAll(builder As StringBuilder)
         Dim owner = Character.Location.Owner
         If owner IsNot Nothing AndAlso owner.Id <> Character.Id Then
@@ -67,6 +85,7 @@ Public Class Player
         End If
         If Character.Location.Inventory.IsEmpty Then
             builder.AppendLine("There's nothing to take!")
+            Return
         End If
         For Each item In Character.Location.Inventory.Items
             Character.Inventory.Add(item)

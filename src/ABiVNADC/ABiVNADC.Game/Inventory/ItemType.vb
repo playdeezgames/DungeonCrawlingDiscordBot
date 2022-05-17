@@ -146,4 +146,9 @@ Public Module ItemTypeExtensions
     Function EquippedEncumbrance(itemType As ItemType) As Long
         Return ItemTypeDescriptors(itemType).EquippedEncumbrance
     End Function
+
+    <Extension>
+    Function IsTrophy(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).IsTrophy
+    End Function
 End Module

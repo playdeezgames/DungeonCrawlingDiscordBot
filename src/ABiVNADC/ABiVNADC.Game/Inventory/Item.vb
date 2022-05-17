@@ -13,6 +13,18 @@
         End Get
     End Property
 
+    ReadOnly Property IsTrophy As Boolean
+        Get
+            Return ItemType.IsTrophy
+        End Get
+    End Property
+
+    ReadOnly Property EquippedEncumbrance As Long
+        Get
+            Return ItemType.EquippedEncumbrance
+        End Get
+    End Property
+
     ReadOnly Property InventoryEncumbrance As Long
         Get
             Return ItemType.InventoryEncumbrance
