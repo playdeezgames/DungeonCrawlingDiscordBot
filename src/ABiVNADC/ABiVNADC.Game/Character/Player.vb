@@ -40,6 +40,11 @@ Public Class Player
     End Sub
 
     Public Sub Take(itemType As ItemType, quantity As Long, builder As StringBuilder)
+        Dim owner = Character.Location.Owner
+        If owner IsNot Nothing AndAlso owner.Id <> Character.Id Then
+            builder.AppendLine("Only the owner of a plot of land may take items from it.")
+            Return
+        End If
         Dim itemStacks = Character.Location.Inventory.StackedItems
         If Not itemStacks.ContainsKey(itemType) Then
             builder.AppendLine($"There ain't any `{itemType.Name}` in sight.")
@@ -55,6 +60,11 @@ Public Class Player
     End Sub
 
     Public Sub TakeAll(builder As StringBuilder)
+        Dim owner = Character.Location.Owner
+        If owner IsNot Nothing AndAlso owner.Id <> Character.Id Then
+            builder.AppendLine("Only the owner of a plot of land may take items from it.")
+            Return
+        End If
         If Character.Location.Inventory.IsEmpty Then
             builder.AppendLine("There's nothing to take!")
         End If
