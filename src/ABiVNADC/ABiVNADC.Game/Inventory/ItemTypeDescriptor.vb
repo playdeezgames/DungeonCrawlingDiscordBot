@@ -442,6 +442,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "trousers",
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Legs,
+                    .ArmorDurability = 1,
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
                     .SellPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 1,

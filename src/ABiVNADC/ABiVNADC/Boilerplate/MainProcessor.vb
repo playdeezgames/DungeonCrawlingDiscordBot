@@ -1,5 +1,15 @@
 ﻿Public Module MainProcessor
-    Private ProcessorTable As New Dictionary(Of String, Action(Of Player, StringBuilder, IEnumerable(Of String))) From
+    Private ReadOnly CommandAliases As New Dictionary(Of String, String) From
+        {
+            {"a", AroundText},
+            {"f", FightText},
+            {"g", GroundText},
+            {"i", InventoryText},
+            {"l", LeftText},
+            {"m", MoveText},
+            {"r", RightText}
+        }
+    Private ReadOnly ProcessorTable As New Dictionary(Of String, Action(Of Player, StringBuilder, IEnumerable(Of String))) From
         {
             {AboutText, AddressOf AboutProcessor.Run},
             {AcceptText, AddressOf AcceptProcessor.Run},
@@ -43,7 +53,11 @@
     Function Run(player As Player, command As String) As String
         Dim tokens = command.Split(" "c)
         Dim processor As Action(Of Player, StringBuilder, IEnumerable(Of String)) = AddressOf UnknownCommand
-        If Not ProcessorTable.TryGetValue(tokens.First.ToLower, processor) Then
+        Dim firstToken = tokens.First.ToLower
+        If CommandAliases.ContainsKey(firstToken) Then
+            firstToken = CommandAliases(firstToken)
+        End If
+        If Not ProcessorTable.TryGetValue(firstToken, processor) Then
             processor = AddressOf UnknownCommand
         End If
         Dim builder As New StringBuilder
