@@ -5,21 +5,16 @@
             PricesText,
             builder,
             Sub()
-                RequireCharacter(
+                RequireCharacterLocation(
                     player,
                     builder,
-                    Sub(character)
-                        RequireLocation(
+                    Sub(character, location)
+                        RequireInsideShoppe(
                             character,
+                            location,
                             builder,
-                            Sub(location)
-                                RequireInsideShoppe(
-                                    character,
-                                    location,
-                                    builder,
-                                    Sub(shoppe)
-                                        builder.AppendLine($"{character.FullName} has a credit balance of {shoppe.CreditBalance(character)}.")
-                                    End Sub)
+                            Sub(shoppe)
+                                builder.AppendLine($"{character.FullName} has a credit balance of {shoppe.CreditBalance(character)}.")
                             End Sub)
                     End Sub)
             End Sub)

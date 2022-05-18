@@ -5,24 +5,19 @@
             PricesText,
             builder,
             Sub()
-                RequireCharacter(
+                RequireCharacterLocation(
                     player,
                     builder,
-                    Sub(character)
-                        RequireLocation(
+                    Sub(character, location)
+                        RequireInsideShoppe(
                             character,
+                            location,
                             builder,
-                            Sub(location)
-                                RequireInsideShoppe(
-                                    character,
-                                    location,
-                                    builder,
-                                    Sub(shoppe)
-                                        builder.AppendLine("Offers:")
-                                        For Each sellPrice In shoppe.SellPrices
-                                            builder.AppendLine($"- {sellPrice.Key.Name} : {sellPrice.Value} credits")
-                                        Next
-                                    End Sub)
+                            Sub(shoppe)
+                                builder.AppendLine("Offers:")
+                                For Each sellPrice In shoppe.SellPrices
+                                    builder.AppendLine($"- {sellPrice.Key.Name} : {sellPrice.Value} credits")
+                                Next
                             End Sub)
                     End Sub)
             End Sub)
