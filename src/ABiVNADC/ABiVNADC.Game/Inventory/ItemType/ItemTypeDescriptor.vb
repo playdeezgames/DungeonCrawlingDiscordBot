@@ -22,6 +22,7 @@ Public Class ItemTypeDescriptor
     Property InventoryEncumbrance As Long
     Property EquippedEncumbrance As Long
     Property IsTrophy As Boolean
+    Property Aliases As IEnumerable(Of String)
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -44,6 +45,7 @@ Public Class ItemTypeDescriptor
         InventoryEncumbrance = 0
         EquippedEncumbrance = 0
         IsTrophy = False
+        Aliases = New List(Of String)
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -170,7 +172,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(19, 1),
                     .BuyPriceDice = "75d1+2d75",
                     .InventoryEncumbrance = 20,
-                    .EquippedEncumbrance = 15
+                    .EquippedEncumbrance = 15,
+                    .Aliases = New List(Of String) From {"cm", "chain"}
                 }
             },
             {
@@ -186,7 +189,8 @@ Module ItemTypeDescriptorExtensions
                                  builder.AppendLine(ItemType.Compass.UseMessage(character.FullName))
                                  builder.AppendLine($"{character.FullName} is facing {character.Player.AheadDirection.Value.Name}")
                              End Sub,
-                    .InventoryEncumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .Aliases = New List(Of String) From {"c"}
                 }
             },
             {
@@ -207,7 +211,8 @@ Module ItemTypeDescriptorExtensions
                                  builder.AppendLine(ItemType.Dagger.UseMessage(character.FullName))
                              End Sub,
                     .InventoryEncumbrance = 1,
-                    .EquippedEncumbrance = 0
+                    .EquippedEncumbrance = 0,
+                    .Aliases = New List(Of String) From {"d"}
                 }
             },
             {
@@ -249,7 +254,8 @@ Module ItemTypeDescriptorExtensions
                                  builder.Append($"{character.FullName} now has {character.Energy} energy.")
                                  item.Destroy()
                              End Sub,
-                    .InventoryEncumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .Aliases = New List(Of String) From {"f"}
                 }
             },
             {
@@ -275,7 +281,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
                     .InventoryEncumbrance = 5,
-                    .EquippedEncumbrance = 3
+                    .EquippedEncumbrance = 3,
+                    .Aliases = New List(Of String) From {"h", "helm"}
                 }
             },
             {
@@ -288,7 +295,8 @@ Module ItemTypeDescriptorExtensions
                     .CanSellGenerator = MakeBooleanGenerator(0, 1),
                     .BuyPriceDice = "100d1",
                     .SellPriceDice = "95d1",
-                    .InventoryEncumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .Aliases = New List(Of String) From {"j", "$"}
                 }
             },
             {
@@ -316,7 +324,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 10,
-                    .EquippedEncumbrance = 5
+                    .EquippedEncumbrance = 5,
+                    .Aliases = New List(Of String) From {"ls"}
                 }
             },
             {
@@ -353,7 +362,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "150d1+2d150",
                     .InventoryEncumbrance = 30,
-                    .EquippedEncumbrance = 20
+                    .EquippedEncumbrance = 20,
+                    .Aliases = New List(Of String) From {"pm", "plate"}
                 }
             },
             {
@@ -373,7 +383,8 @@ Module ItemTypeDescriptorExtensions
                                  builder.Append($"{character.FullName} now has {character.Health} health.")
                                  item.Destroy()
                              End Sub,
-                    .InventoryEncumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .Aliases = New List(Of String) From {"p", "pot"}
                 }
             },
             {
@@ -395,7 +406,8 @@ Module ItemTypeDescriptorExtensions
                                  builder.AppendLine($"{character.FullName} now has {character.Energy} energy.")
                                  item.Destroy()
                              End Sub,
-                    .InventoryEncumbrance = 1
+                    .InventoryEncumbrance = 1,
+                    .Aliases = New List(Of String) From {"rf"}
                 }
             },
             {
@@ -410,7 +422,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
                     .InventoryEncumbrance = 10,
-                    .EquippedEncumbrance = 7
+                    .EquippedEncumbrance = 7,
+                    .Aliases = New List(Of String) From {"sh"}
                 }
             },
             {
@@ -425,7 +438,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
                     .InventoryEncumbrance = 6,
-                    .EquippedEncumbrance = 4
+                    .EquippedEncumbrance = 4,
+                    .Aliases = New List(Of String) From {"ss"}
                 }
             },
             {
@@ -460,7 +474,8 @@ Module ItemTypeDescriptorExtensions
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
                     .SellPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 1,
-                    .EquippedEncumbrance = -4
+                    .EquippedEncumbrance = -4,
+                    .Aliases = New List(Of String) From {"pants"}
                 }
             },
             {

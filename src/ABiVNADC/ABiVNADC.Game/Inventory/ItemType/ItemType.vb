@@ -54,12 +54,19 @@ Public Module ItemTypeExtensions
     Function CanEquip(itemType As ItemType) As Boolean
         Return itemType.EquipSlot <> Game.EquipSlot.None
     End Function
+
     <Extension>
     Function UseMessage(itemType As ItemType, characterName As String) As String
         Return ItemTypeDescriptors(itemType).UseMessage(characterName)
     End Function
+
+    <Extension>
+    Function Aliases(itemType As ItemType) As IEnumerable(Of String)
+        Return ItemTypeDescriptors(itemType).Aliases
+    End Function
+
     Public Function ParseItemType(itemTypeName As String) As ItemType
-        Return AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName)
+        Return AllItemTypes.SingleOrDefault(Function(x) x.Name = itemTypeName OrElse x.Aliases.Contains(itemTypeName))
     End Function
 
     <Extension>
