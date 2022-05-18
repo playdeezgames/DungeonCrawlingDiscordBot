@@ -11,6 +11,8 @@ Module EquipmentProcessor
                     player,
                     builder,
                     Sub(character)
+                        builder.AppendLine($"Total ATK: {MaximumRoll(character.AttackDice)}")
+                        builder.AppendLine($"Total DEF: {MaximumRoll(character.DefendDice)}")
                         Dim equipment = character.Equipment
                         If Not equipment.Any Then
                             builder.AppendLine($"{character.FullName} has nothing equipped!")

@@ -10,7 +10,7 @@
                     builder,
                     Sub(character)
                         builder.AppendLine($"{character.FullName}'s Encumbrance Details:")
-                        builder.AppendLine($"Total Encumbrance: {character.Encumbrance}/{character.MaximumEncumbrance}")
+                        builder.AppendLine($"Total Encumbrance: {Math.Max(0, character.Encumbrance)}/{character.MaximumEncumbrance}")
                         For Each entry In character.Equipment
                             If entry.Value.EquippedEncumbrance <> 0 Then
                                 builder.AppendLine($"Equipped {entry.Value.Name} : {entry.Value.EquippedEncumbrance}")

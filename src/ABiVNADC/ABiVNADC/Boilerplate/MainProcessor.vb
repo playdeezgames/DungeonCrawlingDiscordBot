@@ -2,12 +2,16 @@
     Private ReadOnly CommandAliases As New Dictionary(Of String, String) From
         {
             {"a", AroundText},
+            {"enc", EncumbranceText},
             {"f", FightText},
             {"g", GroundText},
             {"i", InventoryText},
             {"l", LeftText},
             {"m", MoveText},
-            {"r", RightText}
+            {"r", RightText},
+            {"z", RestText},
+            {"zz", RestText},
+            {"zzz", RestText}
         }
     Private ReadOnly ProcessorTable As New Dictionary(Of String, Action(Of Player, StringBuilder, IEnumerable(Of String))) From
         {

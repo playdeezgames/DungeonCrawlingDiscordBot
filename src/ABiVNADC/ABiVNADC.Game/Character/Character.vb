@@ -219,9 +219,11 @@ Public Class Character
         Dim itemStacks = Inventory.StackedItems
         If Not itemStacks.ContainsKey(itemType) Then
             builder.AppendLine($"{FullName} does Not have any `{itemType.Name}` In their inventory.")
+            Return
         End If
         If Not itemType.CanEquip Then
             builder.AppendLine($"I don't know where you would equip that, and I don't think I wanna know where you'd try!")
+            Return
         End If
         Dim item = itemStacks(itemType).First
         Dim equipSlot = itemType.EquipSlot

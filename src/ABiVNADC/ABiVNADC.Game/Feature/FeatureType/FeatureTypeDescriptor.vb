@@ -39,7 +39,7 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) $"the entrance to {feature.Location.Dungeon.Name}",
-                    .OverworldGenerationWeight = 1,
+                    .OverworldGenerationWeight = 4,
                     .Generator = Function(fromLocation)
                                      Dim dungeonDifficultyGenerator As New Dictionary(Of Difficulty, Integer) From
                                         {
@@ -104,7 +104,7 @@ Module FeatureTypeDescriptorExtensions
                                     Dim y = feature.Location.OverworldY.Value
                                     Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
                                 End Function,
-                    .OverworldGenerationWeight = 1,
+                    .OverworldGenerationWeight = 16,
                     .Generator = MakeGenerator(FeatureType.ForSaleSign)
                 }
             },
@@ -138,7 +138,7 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) $"quest giver named {feature.QuestGiver.Name}",
-                    .OverworldGenerationWeight = 1,
+                    .OverworldGenerationWeight = 8,
                     .Generator = Function(location)
                                      Dim feature = Game.Feature.Create(location, FeatureType.QuestGiver)
                                      Dim targetItemType = RNG.FromGenerator(QuestTargetGenerator)
@@ -160,7 +160,7 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) $"the entrance to {feature.Location.Shoppe.Name}",
-                    .OverworldGenerationWeight = 1,
+                    .OverworldGenerationWeight = 2,
                     .Generator = Function(fromLocation)
                                      Dim toLocation = New Location(LocationData.Create(LocationType.Shoppe))
                                      Dim shoppe = New Shoppe(ShoppeData.Create(GenerateShoppeName, fromLocation.Id, toLocation.Id))
