@@ -21,7 +21,7 @@
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         MaximumEndowment = Function(x) 0
-        EndowmentName = "Cool Points"
+        EndowmentName = "Potential"
     End Sub
 End Class
 Module CharacterTypeDescriptorExtensions

@@ -2,15 +2,22 @@
     Private ReadOnly CommandAliases As New Dictionary(Of String, String) From
         {
             {"a", AroundText},
+            {"drink", UseText},
+            {"eat", UseText},
             {"enc", EncumbranceText},
+            {"doff", UnequipText},
+            {"don", EquipText},
             {"f", FightText},
             {"g", GroundText},
             {"i", InventoryText},
             {"l", LeftText},
             {"m", MoveText},
+            {"quaff", UseText},
             {"r", RightText},
             {"stat", StatusText},
             {"stats", StatusText},
+            {"wear", EquipText},
+            {"wield", EquipText},
             {"z", RestText},
             {"zz", RestText},
             {"zzz", RestText}
