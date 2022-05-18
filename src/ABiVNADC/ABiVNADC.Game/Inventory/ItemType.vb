@@ -25,6 +25,7 @@ Public Enum ItemType
     Macguffin
     ThankYouNote
     LandClaim
+    Backpack
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

@@ -145,6 +145,20 @@ Module ItemTypeDescriptorExtensions
     Friend ReadOnly ItemTypeDescriptors As New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {
+                ItemType.Backpack,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "backpack",
+                    .SpawnCount = AddressOf VeryRareSpawn,
+                    .EquipSlot = EquipSlot.Back,
+                    .ArmorDurability = 1,
+                    .CanBuyGenerator = MakeBooleanGenerator(9, 1),
+                    .BuyPriceDice = "200d1+2d200",
+                    .InventoryEncumbrance = 1,
+                    .EquippedEncumbrance = -20
+                }
+            },
+            {
                 ItemType.ChainMail,
                 New ItemTypeDescriptor With
                 {
@@ -153,7 +167,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Body,
                     .DefendDice = "1d3/3",
                     .ArmorDurability = 20,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(19, 1),
                     .BuyPriceDice = "75d1+2d75",
                     .InventoryEncumbrance = 20,
                     .EquippedEncumbrance = 15
@@ -166,7 +180,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "compass",
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} looks at their compass",
-                    .CanBuyGenerator = MakeBooleanGenerator(19, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "500d1+2d500",
                     .OnUse = Sub(character, item, builder)
                                  builder.AppendLine(ItemType.Compass.UseMessage(character.FullName))
@@ -186,7 +200,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Weapon,
                     .AttackDice = "1d2/2",
                     .WeaponDurability = 5,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
                     .OnUse = Sub(character, item, builder)
                                  character.Destroy()
@@ -226,7 +240,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf CommonSpawn,
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} eats food",
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(1, 9),
                     .BuyPriceDice = "2d1+2d2",
                     .OnUse = Sub(character, item, builder)
                                  Const FoodFatigueRecovery As Long = 4
@@ -258,7 +272,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Head,
                     .DefendDice = "1d3/3",
                     .ArmorDurability = 5,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
                     .InventoryEncumbrance = 5,
                     .EquippedEncumbrance = 3
@@ -299,7 +313,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Weapon,
                     .AttackDice = "1d2/2+1d2/2+1d2/2",
                     .WeaponDurability = 20,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 10,
                     .EquippedEncumbrance = 5
@@ -336,7 +350,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Body,
                     .DefendDice = "1d3/3+1d3/3",
                     .ArmorDurability = 35,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "150d1+2d150",
                     .InventoryEncumbrance = 30,
                     .EquippedEncumbrance = 20
@@ -350,7 +364,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf RareSpawn,
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} drinks a potion",
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(1, 4),
                     .BuyPriceDice = "50d1+2d50",
                     .OnUse = Sub(character, item, builder)
                                  Const PotionWoundRecovery As Long = 4
@@ -393,7 +407,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Shield,
                     .DefendDice = "1d3/3",
                     .ArmorDurability = 10,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
                     .InventoryEncumbrance = 10,
                     .EquippedEncumbrance = 7
@@ -408,7 +422,7 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Weapon,
                     .AttackDice = "1d2/2+1d2/2",
                     .WeaponDurability = 10,
-                    .CanBuyGenerator = MakeBooleanGenerator(1, 1),
+                    .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
                     .InventoryEncumbrance = 6,
                     .EquippedEncumbrance = 4

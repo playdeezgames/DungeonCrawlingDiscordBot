@@ -7,6 +7,7 @@ Public Enum EquipSlot
     Head
     Body
     Legs
+    Back
 End Enum
 Public Module EquipSlotExtensions
     Public ReadOnly AllEquipSlots As New List(Of EquipSlot) From
@@ -15,7 +16,8 @@ Public Module EquipSlotExtensions
             EquipSlot.Shield,
             EquipSlot.Head,
             EquipSlot.Body,
-            EquipSlot.Legs
+            EquipSlot.Legs,
+            EquipSlot.Back
         }
     <Extension>
     Function Name(equipSlot As EquipSlot) As String
@@ -30,6 +32,8 @@ Public Module EquipSlotExtensions
                 Return "shield"
             Case EquipSlot.Weapon
                 Return "weapon"
+            Case EquipSlot.Back
+                Return "back"
             Case Else
                 Throw New NotImplementedException
         End Select
