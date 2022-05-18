@@ -17,11 +17,13 @@
     Friend ValidBribes As HashSet(Of ItemType)
     Friend MaximumExperienceLevel As Long
     Friend MaximumEncumbrance As Long
+    Friend CombatEndowmentRecoveryDice As String
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         MaximumEndowment = Function(x) 0
         EndowmentName = "Potential"
+        CombatEndowmentRecoveryDice = "0d1"
     End Sub
 End Class
 Module CharacterTypeDescriptorExtensions

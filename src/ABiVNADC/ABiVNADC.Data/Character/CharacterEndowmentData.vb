@@ -17,4 +17,8 @@
     Function Read(characterId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, SpentColumn)
     End Function
+
+    Sub Clear(characterId As Long)
+        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+    End Sub
 End Module
