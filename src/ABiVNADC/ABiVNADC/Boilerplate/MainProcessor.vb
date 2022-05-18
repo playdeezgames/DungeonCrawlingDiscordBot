@@ -9,6 +9,8 @@
             {"l", LeftText},
             {"m", MoveText},
             {"r", RightText},
+            {"stat", StatusText},
+            {"stats", StatusText},
             {"z", RestText},
             {"zz", RestText},
             {"zzz", RestText}
