@@ -19,6 +19,7 @@
             {CreditText, AddressOf CreditProcessor.Run},
             {DeliverText, AddressOf DeliverProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
+            {EncumbranceText, AddressOf EncumbranceProcessor.Run},
             {EnemiesText, AddressOf EnemiesProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},
             {EquipText, AddressOf EquipProcessor.Run},
