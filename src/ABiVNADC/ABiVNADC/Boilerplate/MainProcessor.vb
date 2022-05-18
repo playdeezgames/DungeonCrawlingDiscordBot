@@ -22,6 +22,7 @@
             {EnemiesText, AddressOf EnemiesProcessor.Run},
             {EnterText, AddressOf EnterProcessor.Run},
             {EquipText, AddressOf EquipProcessor.Run},
+            {EquipmentText, AddressOf EquipmentProcessor.Run},
             {ExitText, AddressOf ExitProcessor.Run},
             {FeaturesText, AddressOf FeaturesProcessor.Run},
             {FightText, AddressOf FightProcessor.Run},

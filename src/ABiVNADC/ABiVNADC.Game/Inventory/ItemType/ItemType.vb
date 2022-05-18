@@ -112,7 +112,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function WeaponDurability(itemType As ItemType) As Long
-        Return ItemTypeDescriptors(itemType).ArmorDurability
+        Return ItemTypeDescriptors(itemType).WeaponDurability
     End Function
 
     <Extension>

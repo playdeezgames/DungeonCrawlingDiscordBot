@@ -67,6 +67,28 @@ Public Module RNG
         Next
         Return tally
     End Function
+    Public Function MaximumRoll(diceText As String) As Integer
+        Dim diceSets = diceText.Split("+")
+        Dim tally = 0
+        For Each diceSet In diceSets
+            Dim multiplier = 1
+            Dim divisor = 1
+            If diceSet.Contains("*"c) Then
+                Dim scaleTokens = diceSet.Split("*"c)
+                multiplier = CInt(scaleTokens(1))
+                diceSet = scaleTokens(0)
+            ElseIf diceSet.Contains("/"c) Then
+                Dim scaleTokens = diceSet.Split("/"c)
+                divisor = CInt(scaleTokens(1))
+                diceSet = scaleTokens(0)
+            End If
+            Dim tokens = diceSet.Split("d"c, "D"c)
+            Dim dieCount = CInt(tokens(0))
+            Dim dieSize = CInt(tokens(1))
+            tally += (dieCount * dieSize * multiplier) \ divisor
+        Next
+        Return tally
+    End Function
     Function FromList(Of TItem)(items As List(Of TItem)) As TItem
         Return items(FromRange(0, items.Count - 1))
     End Function

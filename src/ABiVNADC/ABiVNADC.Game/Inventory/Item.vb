@@ -104,4 +104,28 @@
         End If
         Return False
     End Function
+
+    ReadOnly Property MaximumArmorDurability As Long
+        Get
+            Return ItemType.ArmorDurability
+        End Get
+    End Property
+
+    ReadOnly Property ArmorDurability As Long
+        Get
+            Return Math.Max(0, MaximumArmorDurability - If(ItemDepletionData.Read(Id), 0))
+        End Get
+    End Property
+
+    ReadOnly Property MaximumWeaponDurability As Long
+        Get
+            Return ItemType.WeaponDurability
+        End Get
+    End Property
+
+    ReadOnly Property WeaponDurability As Long
+        Get
+            Return Math.Max(0, MaximumWeaponDurability - If(ItemDepletionData.Read(Id), 0))
+        End Get
+    End Property
 End Class

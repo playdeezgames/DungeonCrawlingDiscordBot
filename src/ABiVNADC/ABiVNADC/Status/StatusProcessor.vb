@@ -21,13 +21,6 @@
                 builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
                 builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
                 ShowEncumbrance(builder, character)
-                Dim equipment = character.Equipment
-                If equipment.Any Then
-                    builder.AppendLine("Equipment:")
-                    For Each entry In equipment
-                        builder.AppendLine($"- {entry.Key.Name} : {entry.Value.Name}")
-                    Next
-                End If
                 Dim effects = character.Effects
                 If effects.Any Then
                     builder.Append("Effects: ")
