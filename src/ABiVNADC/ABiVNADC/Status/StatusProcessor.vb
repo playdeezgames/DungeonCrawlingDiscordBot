@@ -20,6 +20,7 @@
                 builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
                 builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
                 builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
+                builder.AppendLine($"{character.EndowmentName}: {character.Endowment}/{character.MaximumEndowment}")
                 ShowEncumbrance(builder, character)
                 Dim effects = character.Effects
                 If effects.Any Then

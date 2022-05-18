@@ -2,6 +2,8 @@
     Friend Name As String
     Friend MaximumHealth As Func(Of Long, Long)
     Friend MaximumEnergy As Func(Of Long, Long)
+    Friend MaximumEndowment As Func(Of Long, Long)
+    Friend EndowmentName As String
     Friend NameTable As List(Of String)
     Friend IsEnemy As Boolean
     Friend AttackDice As String
@@ -18,6 +20,8 @@
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
+        MaximumEndowment = Function(x) 0
+        EndowmentName = "Cool Points"
     End Sub
 End Class
 Module CharacterTypeDescriptorExtensions

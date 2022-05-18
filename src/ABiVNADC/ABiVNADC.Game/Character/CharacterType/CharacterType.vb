@@ -94,4 +94,14 @@ Public Module CharacterTypeExtensions
     Function MaximumEncumbrance(characterType As CharacterType) As Long
         Return CharacterTypeDescriptors(characterType).MaximumEncumbrance
     End Function
+
+    <Extension>
+    Function EndowmentName(characterType As CharacterType) As String
+        Return CharacterTypeDescriptors(characterType).EndowmentName
+    End Function
+
+    <Extension>
+    Function MaximumEndowment(characterType As CharacterType, level As Long) As Long
+        Return CharacterTypeDescriptors(characterType).MaximumEndowment(level)
+    End Function
 End Module
