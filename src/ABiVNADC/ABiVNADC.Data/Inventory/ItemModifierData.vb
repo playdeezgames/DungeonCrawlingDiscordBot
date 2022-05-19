@@ -7,8 +7,9 @@
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
-                [{ItemIdColumn}] INT NOT NULL UNIQUE,
+                [{ItemIdColumn}] INT NOT NULL,
                 [{ModifierColumn}] INT NOT NULL,
+                UNIQUE([{ItemIdColumn}],[{ModifierColumn}]),
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub
