@@ -19,6 +19,7 @@
         ItemDepletionData.Clear(itemId)
         InventoryItemData.ClearForItem(itemId)
         CharacterEquipSlotData.ClearForItem(itemId)
+        ItemModifierData.ClearForItem(itemId)
         ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
     End Sub
 

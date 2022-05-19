@@ -159,7 +159,18 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(19, 1),
                     .BuyPriceDice = "200d1+2d200",
                     .InventoryEncumbrance = 1,
-                    .EquippedEncumbrance = 0
+                    .EquippedEncumbrance = 0,
+                    .PostCreate = Sub(item)
+                                      Dim modifierTable As New Dictionary(Of ModifierType, Integer) From
+                                      {
+                                        {ModifierType.None, 16},
+                                        {ModifierType.Defend, 8},
+                                        {ModifierType.Energy, 4},
+                                        {ModifierType.Attack, 2},
+                                        {ModifierType.Health, 1}
+                                      }
+                                      ItemModifierData.Write(item.Id, RNG.FromGenerator(modifierTable))
+                                  End Sub
                 }
             },
             {
