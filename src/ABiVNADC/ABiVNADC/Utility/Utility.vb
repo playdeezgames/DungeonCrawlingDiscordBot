@@ -47,7 +47,7 @@
 
     Sub RequireTokens(tokens As IEnumerable(Of String), errorMessage As String, builder As StringBuilder, handler As Action)
         If Not tokens.Any Then
-            builder.Append(errorMessage)
+            builder.AppendLine(errorMessage)
             Return
         End If
         handler()

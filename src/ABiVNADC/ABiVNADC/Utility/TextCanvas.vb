@@ -22,11 +22,11 @@
         Dim builder As New StringBuilder
         Dim counter As Integer = 0
         For Each character In characters
-            builder.Append(character)
-            counter += 1
-            If counter Mod Columns = 0 Then
+            If counter > 0 AndAlso counter Mod Columns = 0 Then
                 builder.AppendLine()
             End If
+            builder.Append(character)
+            counter += 1
         Next
         Return builder.ToString
     End Function
