@@ -171,9 +171,8 @@ Public Class Character
         End Get
     End Property
 
-    Public Sub BribeEnemy(enemy As Character, itemType As ItemType, builder As StringBuilder)
-        Dim item = Inventory.Items.FirstOrDefault(Function(x) x.ItemType = itemType)
-        If item Is Nothing OrElse Not enemy.TakesBribe(itemType) Then
+    Public Sub BribeEnemy(enemy As Character, item As Item, builder As StringBuilder)
+        If item Is Nothing OrElse Not enemy.TakesBribe(item) Then
             builder.AppendLine($"{FullName} fails to bribe {enemy.FullName}.")
         End If
         builder.AppendLine($"{FullName} successfully bribes {enemy.FullName}.")
@@ -181,8 +180,8 @@ Public Class Character
         CharacterLocationData.Clear(enemy.Id)
     End Sub
 
-    Public Function TakesBribe(itemType As ItemType) As Boolean
-        Return CharacterType.TakesBribe(itemType)
+    Public Function TakesBribe(item As Item) As Boolean
+        Return CharacterType.TakesBribe(item.ItemType)
     End Function
 
     Public Sub Unequip(item As Item, builder As StringBuilder)

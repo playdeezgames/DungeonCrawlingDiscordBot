@@ -161,8 +161,8 @@ Public Class Player
         End If
     End Sub
 
-    Public Sub BribeEnemy(enemy As Character, itemType As ItemType, builder As StringBuilder)
-        Character.BribeEnemy(enemy, itemType, builder)
+    Public Sub BribeEnemy(enemy As Character, item As Item, builder As StringBuilder)
+        Character.BribeEnemy(enemy, item, builder)
         Character.NextTurn(builder)
     End Sub
 

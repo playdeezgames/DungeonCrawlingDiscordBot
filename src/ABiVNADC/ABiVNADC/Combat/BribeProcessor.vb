@@ -9,24 +9,21 @@
                     tokens,
                     builder,
                     Sub(itemType)
-                        RequireCharacter(
+                        RequireCharacterLocation(
                             player,
                             builder,
-                            Sub(character)
-                                RequireLocation(
-                                    character,
+                            Sub(character, location)
+                                RequireItemName(
+                                    tokens,
+                                    AddressOf character.Inventory.FindItemsByName,
                                     builder,
-                                    Sub(location)
-                                        If Not character.Inventory.StackedItems.Keys.Contains(itemType) Then
-                                            builder.AppendLine($"{character.FullName} doesn't have any {itemType.Name}.")
-                                            Return
-                                        End If
-                                        Dim enemy As Character = character.Location.Enemies(character).FirstOrDefault(Function(x) x.TakesBribe(itemType))
+                                    Sub(item)
+                                        Dim enemy As Character = character.Location.Enemies(character).FirstOrDefault(Function(x) x.TakesBribe(item))
                                         If enemy Is Nothing Then
                                             builder.AppendLine($"No enemy in this location will take that.")
                                             Return
                                         End If
-                                        player.BribeEnemy(enemy, itemType, builder)
+                                        player.BribeEnemy(enemy, item, builder)
                                     End Sub)
                             End Sub)
                     End Sub)
