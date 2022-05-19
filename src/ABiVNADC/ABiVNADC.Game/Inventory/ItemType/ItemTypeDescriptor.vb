@@ -147,6 +147,19 @@ Module ItemTypeDescriptorExtensions
     Friend ReadOnly ItemTypeDescriptors As New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {
+                ItemType.Amulet,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "amulet",
+                    .SpawnCount = AddressOf VeryRareSpawn,
+                    .EquipSlot = EquipSlot.Neck,
+                    .CanBuyGenerator = MakeBooleanGenerator(19, 1),
+                    .BuyPriceDice = "200d1+2d200",
+                    .InventoryEncumbrance = 1,
+                    .EquippedEncumbrance = 0
+                }
+            },
+            {
                 ItemType.Backpack,
                 New ItemTypeDescriptor With
                 {

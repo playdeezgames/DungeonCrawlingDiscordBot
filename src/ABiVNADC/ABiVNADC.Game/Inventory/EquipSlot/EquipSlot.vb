@@ -8,6 +8,7 @@ Public Enum EquipSlot
     Body
     Legs
     Back
+    Neck
 End Enum
 Public Module EquipSlotExtensions
     Public Function AllEquipSlots() As IEnumerable(Of EquipSlot)

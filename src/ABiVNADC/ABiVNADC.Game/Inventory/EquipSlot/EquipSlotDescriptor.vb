@@ -27,6 +27,13 @@ Module EquipSlotDescriptorExtensions
                 }
             },
             {
+                EquipSlot.Neck,
+                New EquipSlotDescriptor With
+                {
+                    .Name = "neck"
+                }
+            },
+            {
                 EquipSlot.Legs,
                 New EquipSlotDescriptor With
                 {

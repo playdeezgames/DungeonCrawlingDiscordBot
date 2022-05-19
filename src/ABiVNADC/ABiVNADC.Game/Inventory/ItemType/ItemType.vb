@@ -26,6 +26,7 @@ Public Enum ItemType
     ThankYouNote
     LandClaim
     Backpack
+    Amulet
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
