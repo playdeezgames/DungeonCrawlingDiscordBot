@@ -54,7 +54,7 @@
         InventoryItemData.ClearForItem(item.Id)
     End Sub
 
-    Function GetItemsByFullName(fullName As String) As IEnumerable(Of Item)
-        Return Items.Where(Function(x) x.FullName = fullName)
+    Function FindItemsByName(name As String) As IEnumerable(Of Item)
+        Return Items.Where(Function(x) x.FullName = name OrElse x.ItemType.Name = name OrElse x.ItemType.Aliases.Contains(name))
     End Function
 End Class

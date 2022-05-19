@@ -39,6 +39,18 @@ Public Class Player
         Character.NextTurn(builder)
     End Sub
 
+    Public Sub Take(items As IEnumerable(Of Item), builder As StringBuilder)
+        Dim owner = Character.Location.Owner
+        If owner IsNot Nothing AndAlso owner.Id <> Character.Id Then
+            builder.AppendLine("Only the owner of a plot of land may take items from it.")
+            Return
+        End If
+        Dim namedStacks = items.GroupBy(Function(x) x.FullName)
+        builder.Append($"{Character.FullName} picks up ")
+        builder.AppendJoin(", ", namedStacks.Select(Function(x) $"{x.Key}(x{x.Count})"))
+        builder.AppendLine(".")
+    End Sub
+
     Public Sub Take(itemType As ItemType, quantity As Long, builder As StringBuilder)
         Dim owner = Character.Location.Owner
         If owner IsNot Nothing AndAlso owner.Id <> Character.Id Then

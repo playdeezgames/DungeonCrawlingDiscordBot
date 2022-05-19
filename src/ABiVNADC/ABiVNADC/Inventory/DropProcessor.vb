@@ -9,21 +9,15 @@
                     player,
                     builder,
                     Sub(character, location)
-                        RequireItemTypeQuantity(
+                        RequireItemNameQuantity(
                             tokens,
+                            AddressOf character.Inventory.FindItemsByName,
                             builder,
-                            Sub(itemType, quantity)
-                                Dim itemStacks = character.Inventory.StackedItems
-                                If Not itemStacks.ContainsKey(itemType) Then
-                                    builder.AppendLine($"{character.Name} doesn't have any `{itemType.Name}`.")
-                                    Return
-                                End If
-                                Dim items = itemStacks(itemType).Take(CInt(quantity))
-                                quantity = items.LongCount
+                            Sub(items)
                                 For Each item In items
-                                    character.Location.Inventory.Add(item)
+                                    location.Inventory.Add(item)
                                 Next
-                                builder.AppendLine($"{character.Name} drops {quantity} {itemType.Name}")
+                                builder.AppendLine($"{character.FullName} drops {items.Count} items.")
                             End Sub)
                     End Sub)
             End Sub)

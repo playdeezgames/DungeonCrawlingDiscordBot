@@ -17,11 +17,12 @@
                             HandleTakeTrophies(player, builder)
                             Return
                         End If
-                        RequireItemTypeQuantity(
+                        RequireItemNameQuantity(
                             tokens,
+                            AddressOf location.Inventory.FindItemsByName,
                             builder,
-                            Sub(itemType, quantity)
-                                player.Take(itemType, quantity, builder)
+                            Sub(items)
+                                player.Take(items, builder)
                             End Sub)
                     End Sub)
             End Sub)
