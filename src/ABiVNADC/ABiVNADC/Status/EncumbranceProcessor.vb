@@ -16,9 +16,10 @@
                                 builder.AppendLine($"Equipped {entry.Value.FullName} : {entry.Value.EquippedEncumbrance}")
                             End If
                         Next
-                        For Each itemStack In character.Inventory.StackedItems
-                            If itemStack.Key.InventoryEncumbrance <> 0 Then
-                                builder.AppendLine($"Held {itemStack.Key.Name} : {itemStack.Value.LongCount} @ {itemStack.Key.InventoryEncumbrance} = {itemStack.Value.LongCount * itemStack.Key.InventoryEncumbrance}")
+                        For Each itemStack In character.Inventory.NamedStackedItems
+                            Dim encumbrance = itemStack.Value.Sum(Function(x) x.InventoryEncumbrance)
+                            If encumbrance <> 0 Then
+                                builder.AppendLine($"Held {itemStack.Key} : Count: {itemStack.Value.Count}, Encumbrance: {encumbrance}")
                             End If
                         Next
                     End Sub)

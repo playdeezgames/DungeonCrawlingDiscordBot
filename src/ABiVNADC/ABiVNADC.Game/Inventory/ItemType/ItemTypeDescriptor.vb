@@ -23,6 +23,7 @@ Public Class ItemTypeDescriptor
     Property EquippedEncumbrance As Long
     Property IsTrophy As Boolean
     Property Aliases As IEnumerable(Of String)
+    Property PostCreate As Action(Of Item)
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = "0d1"
@@ -46,6 +47,8 @@ Public Class ItemTypeDescriptor
         EquippedEncumbrance = 0
         IsTrophy = False
         Aliases = New List(Of String)
+        PostCreate = Sub()
+                     End Sub
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions

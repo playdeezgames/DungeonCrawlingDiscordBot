@@ -35,6 +35,17 @@
         End Get
     End Property
 
+    ReadOnly Property NamedStackedItems As Dictionary(Of String, IEnumerable(Of Item))
+        Get
+            Dim itemStacks = Items.GroupBy(Function(x) x.FullName)
+            Dim result As New Dictionary(Of String, IEnumerable(Of Item))
+            For Each itemStack In itemStacks
+                result(itemStack.Key) = itemStack
+            Next
+            Return result
+        End Get
+    End Property
+
     Function HasItem(itemType As ItemType) As Boolean
         Return Items.Any(Function(x) x.ItemType = itemType)
     End Function

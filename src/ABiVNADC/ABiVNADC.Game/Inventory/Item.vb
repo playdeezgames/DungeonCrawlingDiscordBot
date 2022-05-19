@@ -4,7 +4,9 @@
         Id = itemId
     End Sub
     Shared Function Create(itemType As ItemType) As Item
-        Return New Item(ItemData.Create(itemType))
+        Dim item = New Item(ItemData.Create(itemType))
+        itemType.PostCreate(item)
+        Return item
     End Function
 
     ReadOnly Property ItemType As ItemType

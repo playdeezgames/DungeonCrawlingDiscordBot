@@ -160,4 +160,9 @@ Public Module ItemTypeExtensions
     Function IsTrophy(itemType As ItemType) As Boolean
         Return ItemTypeDescriptors(itemType).IsTrophy
     End Function
+
+    <Extension>
+    Sub PostCreate(itemType As ItemType, item As Item)
+        ItemTypeDescriptors(itemType).PostCreate.Invoke(item)
+    End Sub
 End Module
