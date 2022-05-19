@@ -188,7 +188,7 @@ Public Class Character
     Public Sub Unequip(item As Item, builder As StringBuilder)
         CharacterEquipSlotData.ClearForItem(item.Id)
         Inventory.Add(item)
-        builder.AppendLine($"{FullName} unequips {item.Name}")
+        builder.AppendLine($"{FullName} unequips {item.FullName}")
     End Sub
 
     Friend Function HasEffect(effectType As EffectType) As Boolean

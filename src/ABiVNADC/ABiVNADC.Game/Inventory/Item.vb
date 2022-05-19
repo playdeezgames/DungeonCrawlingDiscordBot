@@ -63,7 +63,7 @@
         End Get
     End Property
 
-    ReadOnly Property Name As String
+    ReadOnly Property FullName As String
         Get
             Return ItemType.Name
         End Get

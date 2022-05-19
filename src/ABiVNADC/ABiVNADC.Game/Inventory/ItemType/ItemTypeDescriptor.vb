@@ -153,7 +153,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "backpack",
                     .SpawnCount = AddressOf VeryRareSpawn,
                     .EquipSlot = EquipSlot.Back,
-                    .ArmorDurability = 1,
+                    .ArmorDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "200d1+2d200",
                     .InventoryEncumbrance = 1,

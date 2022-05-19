@@ -20,7 +20,7 @@ Module EquipmentProcessor
                         End If
                         builder.AppendLine($"{character.FullName}'s Equipment:")
                         For Each entry In equipment
-                            builder.Append($"- {entry.Key.Name}: {entry.Value.Name}")
+                            builder.Append($"- {entry.Key.Name}: {entry.Value.FullName}")
                             Dim item = entry.Value
                             If item.HasWeaponDurability Then
                                 builder.Append($" (ATK:{MaximumRoll(item.AttackDice)}, DUR:{item.WeaponDurability}/{item.MaximumWeaponDurability})")
