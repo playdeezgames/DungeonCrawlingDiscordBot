@@ -3,7 +3,7 @@
     Friend MaximumHealth As Func(Of Long, Long)
     Friend MaximumEnergy As Func(Of Long, Long)
     Friend MaximumEndowment As Func(Of Long, Long)
-    Friend EndowmentName As String
+    Friend EndowmentType As EndowmentType
     Friend NameTable As List(Of String)
     Friend IsEnemy As Boolean
     Friend AttackDice As String
@@ -22,7 +22,7 @@
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         MaximumEndowment = Function(x) 0
-        EndowmentName = "Potential"
+        EndowmentType = EndowmentType.None
         CombatEndowmentRecoveryDice = "0d1"
     End Sub
 End Class

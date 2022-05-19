@@ -97,7 +97,7 @@ Public Module CharacterTypeExtensions
 
     <Extension>
     Function EndowmentName(characterType As CharacterType) As String
-        Return CharacterTypeDescriptors(characterType).EndowmentName
+        Return CharacterTypeDescriptors(characterType).EndowmentType.Name
     End Function
 
     <Extension>
