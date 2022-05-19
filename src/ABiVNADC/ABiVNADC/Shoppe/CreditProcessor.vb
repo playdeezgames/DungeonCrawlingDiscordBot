@@ -9,13 +9,8 @@
                     player,
                     builder,
                     Sub(character, location)
-                        RequireInsideShoppe(
-                            character,
-                            location,
-                            builder,
-                            Sub(shoppe)
-                                builder.AppendLine($"{character.FullName} has a credit balance of {shoppe.CreditBalance(character)}.")
-                            End Sub)
+                        Dim shoppe = location.Shoppe
+                        builder.AppendLine($"{character.FullName} has a credit balance of {shoppe.CreditBalance(character)}.")
                     End Sub)
             End Sub)
     End Sub

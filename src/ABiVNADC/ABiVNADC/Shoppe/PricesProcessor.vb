@@ -11,16 +11,11 @@
                     Sub(character, location)
                         Select Case location.LocationType
                             Case LocationType.Shoppe
-                                RequireInsideShoppe(
-                                    character,
-                                    location,
-                                    builder,
-                                    Sub(shoppe)
-                                        builder.AppendLine("Prices:")
-                                        For Each buyPrice In shoppe.BuyPrices
-                                            builder.AppendLine($"- {buyPrice.Key.Name} : {buyPrice.Value} credits")
-                                        Next
-                                    End Sub)
+                                Dim shoppe = location.Shoppe
+                                builder.AppendLine("Prices:")
+                                For Each buyPrice In shoppe.BuyPrices
+                                    builder.AppendLine($"- {buyPrice.Key.Name} : {buyPrice.Value} credits")
+                                Next
                             Case LocationType.LandClaimOffice
                                 builder.AppendLine($"A land claim costs {location.LandClaimOffice.ClaimPrice} jools.")
                             Case Else

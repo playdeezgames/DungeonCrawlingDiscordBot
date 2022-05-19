@@ -37,14 +37,6 @@
             End Sub)
     End Sub
 
-    Sub RequireInsideShoppe(character As Character, location As Location, builder As StringBuilder, handler As Action(Of Shoppe))
-        If Not location.IsInsideShoppe Then
-            builder.AppendLine($"{character.FullName} is not in a shoppe!")
-            Return
-        End If
-        handler(location.Shoppe)
-    End Sub
-
     Sub RequireNoTokens(tokens As IEnumerable(Of String), commandName As String, builder As StringBuilder, handler As Action)
         If tokens.Any Then
             builder.AppendLine($"Round here, just `{commandName}` is the command. I'm picky.")

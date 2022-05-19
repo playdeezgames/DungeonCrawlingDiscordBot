@@ -9,16 +9,11 @@
                     player,
                     builder,
                     Sub(character, location)
-                        RequireInsideShoppe(
-                            character,
-                            location,
-                            builder,
-                            Sub(shoppe)
-                                builder.AppendLine("Offers:")
-                                For Each sellPrice In shoppe.SellPrices
-                                    builder.AppendLine($"- {sellPrice.Key.Name} : {sellPrice.Value} credits")
-                                Next
-                            End Sub)
+                        Dim shoppe = location.Shoppe
+                        builder.AppendLine("Offers:")
+                        For Each sellPrice In Shoppe.SellPrices
+                            builder.AppendLine($"- {sellPrice.Key.Name} : {sellPrice.Value} credits")
+                        Next
                     End Sub)
             End Sub)
     End Sub

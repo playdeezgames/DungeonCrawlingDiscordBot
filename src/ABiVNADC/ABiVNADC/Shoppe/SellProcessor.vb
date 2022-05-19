@@ -22,18 +22,13 @@
                                     builder.AppendLine($"{character.FullName} only has {availableQuantity} {itemType.Name} to sell.")
                                     Return
                                 End If
-                                RequireInsideShoppe(
-                                    character,
-                                    location,
-                                    builder,
-                                    Sub(shoppe)
-                                        Dim credit = shoppe.SellItems(character, itemType, quantity)
-                                        If credit > 0 Then
-                                            builder.AppendLine($"{character.FullName} sells {quantity} {itemType.Name} for {credit} credits.")
-                                        Else
-                                            builder.AppendLine($"{shoppe.Name} does not buy {itemType.Name}.")
-                                        End If
-                                    End Sub)
+                                Dim shoppe = location.Shoppe
+                                Dim credit = shoppe.SellItems(character, itemType, quantity)
+                                If credit > 0 Then
+                                    builder.AppendLine($"{character.FullName} sells {quantity} {itemType.Name} for {credit} credits.")
+                                Else
+                                    builder.AppendLine($"{shoppe.Name} does not buy {itemType.Name}.")
+                                End If
                             End Sub)
                     End Sub)
             End Sub)
