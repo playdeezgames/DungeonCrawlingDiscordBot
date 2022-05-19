@@ -20,4 +20,8 @@
     Friend Sub ClearForItem(itemId As Long)
         ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
     End Sub
+
+    Public Function Read(itemId As Long) As IEnumerable(Of Long)
+        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, ModifierColumn, ItemIdColumn, itemId)
+    End Function
 End Module

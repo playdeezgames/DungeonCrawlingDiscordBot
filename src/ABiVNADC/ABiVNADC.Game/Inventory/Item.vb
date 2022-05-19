@@ -65,11 +65,19 @@
         End Get
     End Property
 
-
+    ReadOnly Property Modifiers As IEnumerable(Of ModifierType)
+        Get
+            Return ItemModifierData.Read(Id).Select(Function(x) CType(x, ModifierType))
+        End Get
+    End Property
 
     ReadOnly Property FullName As String
         Get
-            Return ItemType.Name
+            Dim name = ItemType.Name
+            For Each modifier In Modifiers
+                name = modifier.DecorateName(name)
+            Next
+            Return name
         End Get
     End Property
 
@@ -132,4 +140,8 @@
             Return Math.Max(0, MaximumWeaponDurability - If(ItemDepletionData.Read(Id), 0))
         End Get
     End Property
+
+    Friend Sub AddModifier(modifierType As ModifierType)
+        ItemModifierData.Write(Id, modifierType)
+    End Sub
 End Class

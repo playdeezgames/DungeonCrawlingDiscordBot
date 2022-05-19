@@ -169,7 +169,7 @@ Module ItemTypeDescriptorExtensions
                                         {ModifierType.Attack, 2},
                                         {ModifierType.Health, 1}
                                       }
-                                      ItemModifierData.Write(item.Id, RNG.FromGenerator(modifierTable))
+                                      item.AddModifier(RNG.FromGenerator(modifierTable))
                                   End Sub
                 }
             },
