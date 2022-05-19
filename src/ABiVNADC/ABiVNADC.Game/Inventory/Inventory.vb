@@ -53,4 +53,8 @@
     Friend Sub Remove(item As Item)
         InventoryItemData.ClearForItem(item.Id)
     End Sub
+
+    Function GetItemsByFullName(fullName As String) As IEnumerable(Of Item)
+        Return Items.Where(Function(x) x.FullName = fullName)
+    End Function
 End Class

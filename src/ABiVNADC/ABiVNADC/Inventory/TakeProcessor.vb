@@ -5,28 +5,23 @@
             "Take what?",
             builder,
             Sub()
-                RequireCharacter(
+                RequireCharacterLocation(
                     player,
                     builder,
-                    Sub(character)
-                        RequireLocation(
-                            character,
+                    Sub(character, location)
+                        If tokens.Count = 1 AndAlso tokens.Single() = AllText Then
+                            HandleTakeAll(player, builder)
+                            Return
+                        End If
+                        If tokens.Count = 1 AndAlso tokens.Single() = TrophiesText Then
+                            HandleTakeTrophies(player, builder)
+                            Return
+                        End If
+                        RequireItemTypeQuantity(
+                            tokens,
                             builder,
-                            Sub(location)
-                                If tokens.Count = 1 AndAlso tokens.Single() = AllText Then
-                                    HandleTakeAll(player, builder)
-                                    Return
-                                End If
-                                If tokens.Count = 1 AndAlso tokens.Single() = TrophiesText Then
-                                    HandleTakeTrophies(player, builder)
-                                    Return
-                                End If
-                                RequireItemTypeQuantity(
-                                    tokens,
-                                    builder,
-                                    Sub(itemType, quantity)
-                                        player.Take(itemType, quantity, builder)
-                                    End Sub)
+                            Sub(itemType, quantity)
+                                player.Take(itemType, quantity, builder)
                             End Sub)
                     End Sub)
             End Sub)
