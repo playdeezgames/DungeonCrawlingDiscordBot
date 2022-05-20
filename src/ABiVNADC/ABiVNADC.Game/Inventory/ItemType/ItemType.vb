@@ -76,13 +76,13 @@ Public Module ItemTypeExtensions
     End Function
 
     <Extension>
-    Function AttackDice(itemType As ItemType) As String
-        Return ItemTypeDescriptors(itemType).AttackDice
+    Function AttackDice(itemType As ItemType, item As Item) As String
+        Return ItemTypeDescriptors(itemType).AttackDice(item)
     End Function
 
     <Extension>
-    Function HasAttackDice(itemType As ItemType) As Boolean
-        Return itemType.AttackDice <> "0d1"
+    Function HasAttackDice(itemType As ItemType, item As Item) As Boolean
+        Return itemType.AttackDice(item) <> "0d1"
     End Function
 
 

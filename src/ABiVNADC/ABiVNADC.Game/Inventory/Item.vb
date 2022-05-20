@@ -43,13 +43,13 @@
 
     ReadOnly Property HasAttackDice As Boolean
         Get
-            Return ItemType.HasAttackDice
+            Return ItemType.HasAttackDice(Me)
         End Get
     End Property
 
     ReadOnly Property AttackDice As String
         Get
-            Return ItemType.AttackDice
+            Return ItemType.AttackDice(Me)
         End Get
     End Property
 
@@ -144,4 +144,8 @@
     Friend Sub AddModifier(modifierType As ModifierType)
         ItemModifierData.Write(Id, modifierType)
     End Sub
+
+    Friend Function HasModifier(modifier As ModifierType) As Boolean
+        Return Modifiers.Contains(modifier)
+    End Function
 End Class

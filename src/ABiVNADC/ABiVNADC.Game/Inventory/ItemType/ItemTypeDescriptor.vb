@@ -6,7 +6,7 @@ Public Class ItemTypeDescriptor
     Property CanUse As Boolean
     Property UseMessage As Func(Of String, String)
     Property EquipSlot As EquipSlot
-    Property AttackDice As String
+    Property AttackDice As Func(Of Item, String)
     Property DefendDice As String
     Property ArmorDurability As Long
     Property WeaponDurability As Long
@@ -26,7 +26,7 @@ Public Class ItemTypeDescriptor
     Property PostCreate As Action(Of Item)
     Sub New()
         EquipSlot = EquipSlot.None
-        AttackDice = "0d1"
+        AttackDice = Function(x) "0d1"
         CanUse = False
         DefendDice = "0d1"
         ArmorDurability = 0
@@ -170,7 +170,13 @@ Module ItemTypeDescriptorExtensions
                                         {ModifierType.Health, 1}
                                       }
                                       item.AddModifier(RNG.FromGenerator(modifierTable))
-                                  End Sub
+                                  End Sub,
+                    .AttackDice = Function(item)
+                                      If item.HasModifier(ModifierType.Attack) Then
+                                          Return "1d2/2"
+                                      End If
+                                      Return "0d1"
+                                  End Function
                 }
             },
             {
@@ -229,7 +235,7 @@ Module ItemTypeDescriptorExtensions
                     .CanUse = True,
                     .UseMessage = Function(x) $"{x} commits seppuku",
                     .EquipSlot = EquipSlot.Weapon,
-                    .AttackDice = "1d2/2",
+                    .AttackDice = Function(x) "1d2/2",
                     .WeaponDurability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
@@ -346,7 +352,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "long sword",
                     .SpawnCount = AddressOf VeryRareSpawn,
                     .EquipSlot = EquipSlot.Weapon,
-                    .AttackDice = "1d2/2+1d2/2+1d2/2",
+                    .AttackDice = Function(x) "1d2/2+1d2/2+1d2/2",
                     .WeaponDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "50d1+2d50",
@@ -460,7 +466,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "short sword",
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Weapon,
-                    .AttackDice = "1d2/2+1d2/2",
+                    .AttackDice = Function(x) "1d2/2+1d2/2",
                     .WeaponDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
