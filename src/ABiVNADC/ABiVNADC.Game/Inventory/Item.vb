@@ -95,7 +95,7 @@
 
     ReadOnly Property HasWeaponDurability As Boolean
         Get
-            Return ItemType.HasWeaponDurability
+            Return ItemType.HasWeaponDurability AndAlso HasAttackDice
         End Get
     End Property
 
@@ -113,14 +113,14 @@
 
     ReadOnly Property HasArmorDurability As Boolean
         Get
-            Return ItemType.HasArmorDurability
+            Return ItemType.HasDurability AndAlso ItemType.HasAttackDice(Me)
         End Get
     End Property
 
     Friend Function ReduceArmorDurability(durability As Long) As Boolean
         If HasArmorDurability Then
             Dim depletion As Long = If(ItemDepletionData.Read(Id), 0) + durability
-            If depletion >= ItemType.ArmorDurability Then
+            If depletion >= ItemType.Durability Then
                 Destroy()
                 Return True
             End If
@@ -129,15 +129,15 @@
         Return False
     End Function
 
-    ReadOnly Property MaximumArmorDurability As Long
+    ReadOnly Property MaximumDurability As Long
         Get
-            Return ItemType.ArmorDurability
+            Return ItemType.Durability
         End Get
     End Property
 
-    ReadOnly Property ArmorDurability As Long
+    ReadOnly Property Durability As Long
         Get
-            Return Math.Max(0, MaximumArmorDurability - If(ItemDepletionData.Read(Id), 0))
+            Return Math.Max(0, MaximumDurability - If(ItemDepletionData.Read(Id), 0))
         End Get
     End Property
 

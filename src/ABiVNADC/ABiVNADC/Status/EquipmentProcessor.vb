@@ -32,7 +32,7 @@ Module EquipmentProcessor
                                 builder.Append($" DUR:{item.WeaponDurability}/{item.MaximumWeaponDurability}")
                             End If
                             If item.HasArmorDurability Then
-                                builder.Append($" DUR:{item.ArmorDurability}/{item.MaximumArmorDurability}")
+                                builder.Append($" DUR:{item.Durability}/{item.MaximumDurability}")
                             End If
                             builder.AppendLine()
                         Next
