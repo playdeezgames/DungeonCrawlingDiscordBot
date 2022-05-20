@@ -66,6 +66,7 @@
         CharacterEffectData.ClearForCharacter(characterId)
         CharacterQuestData.Clear(characterId)
         CharacterEndowmentData.Clear(characterId)
+        CharacterStatisticData.ClearForCharacter(characterId)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
 

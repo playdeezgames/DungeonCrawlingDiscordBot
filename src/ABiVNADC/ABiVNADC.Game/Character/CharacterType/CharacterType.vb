@@ -18,6 +18,11 @@ Public Module CharacterTypeExtensions
     End Function
 
     <Extension>
+    Function Maximum(characterType As CharacterType, statisticType As StatisticType, character As Character) As Long
+        Return CharacterTypeDescriptors(characterType).Maximum(statisticType, character)
+    End Function
+
+    <Extension>
     Function MaximumHealth(characterType As CharacterType, level As Long) As Long
         Return CharacterTypeDescriptors(characterType).MaximumHealth(level)
     End Function

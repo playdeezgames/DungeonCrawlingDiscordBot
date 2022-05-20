@@ -18,6 +18,9 @@
                 builder.AppendLine($"Name: {character.Name}")
                 builder.AppendLine($"Class: {character.CharacterType.Name}(level {character.Level})")
                 builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
+                For Each entry In character.Statistics
+                    builder.AppendLine($"{entry.Key.Name}: {entry.Value}/{character.Maximum(entry.Key)}")
+                Next
                 builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
                 builder.AppendLine($"Energy: {character.Energy}/{character.MaximumEnergy}")
                 builder.AppendLine($"{character.EndowmentName}: {character.Endowment}/{character.MaximumEndowment}")

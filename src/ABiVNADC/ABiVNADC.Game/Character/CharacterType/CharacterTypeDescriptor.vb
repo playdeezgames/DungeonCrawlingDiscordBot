@@ -1,5 +1,6 @@
 ﻿Friend Class CharacterTypeDescriptor
     Friend Name As String
+    Friend Maximum As Func(Of StatisticType, Character, Long)
     Friend MaximumHealth As Func(Of Long, Long)
     Friend MaximumEnergy As Func(Of Long, Long)
     Friend MaximumEndowment As Func(Of Long, Long)
@@ -24,6 +25,7 @@
         MaximumEndowment = Function(x) 0
         EndowmentType = EndowmentType.None
         CombatEndowmentRecoveryDice = "0d1"
+        Maximum = Function(s, c) 0
     End Sub
 End Class
 Module CharacterTypeDescriptorExtensions
@@ -34,6 +36,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "n00b",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return c.Level + 7
+                                       Case StatisticType.Health
+                                           Return c.Level + 5
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 5,
                     .MaximumEnergy = Function(l) l + 7,
                     .NameTable = Names.Human,
@@ -55,6 +67,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "goblin",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return c.Level + 10
+                                       Case StatisticType.Health
+                                           Return c.Level + 1
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 1,
                     .MaximumEnergy = Function(l) l + 10,
                     .NameTable = Names.Goblin,
@@ -94,6 +116,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "orc",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return c.Level + 8
+                                       Case StatisticType.Health
+                                           Return c.Level + 1
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 1,
                     .MaximumEnergy = Function(l) l + 8,
                     .NameTable = Names.Orc,
@@ -133,6 +165,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "skeleton",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return 1
+                                       Case StatisticType.Health
+                                           Return c.Level + 1
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 1,
                     .MaximumEnergy = Function(l) 1,
                     .NameTable = Names.Human,
@@ -171,6 +213,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "zombie",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return 1
+                                       Case StatisticType.Health
+                                           Return c.Level + 1
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 1,
                     .MaximumEnergy = Function(l) 1,
                     .NameTable = Names.Human,
@@ -209,6 +261,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "minion fish",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return c.Level + 8
+                                       Case StatisticType.Health
+                                           Return c.Level + 1
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 1,
                     .MaximumEnergy = Function(l) l + 8,
                     .NameTable = Names.Fish,
@@ -247,6 +309,16 @@ Module CharacterTypeDescriptorExtensions
                 New CharacterTypeDescriptor With
                 {
                     .Name = "boss fish",
+                    .Maximum = Function(s, c)
+                                   Select Case s
+                                       Case StatisticType.Energy
+                                           Return c.Level + 4
+                                       Case StatisticType.Health
+                                           Return c.Level + 5
+                                       Case Else
+                                           Return 0
+                                   End Select
+                               End Function,
                     .MaximumHealth = Function(l) l + 5,
                     .MaximumEnergy = Function(l) l + 4,
                     .NameTable = Names.Fish,

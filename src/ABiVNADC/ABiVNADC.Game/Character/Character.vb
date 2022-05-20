@@ -426,6 +426,20 @@ Public Class Character
             Return Equipment.Values
         End Get
     End Property
+
+    ReadOnly Property Statistics As Dictionary(Of StatisticType, Long)
+        Get
+            Return StatisticTypeDescriptors.Keys.
+                Where(Function(x) Maximum(x) > 0).Select(
+                Function(key) (key, Maximum(key) - If(CharacterStatisticData.Read(Id, key), 0))).
+                ToDictionary(Function(x) x.key, Function(x) x.Item2)
+        End Get
+    End Property
+
+    Function Maximum(statisticType As StatisticType) As Long
+        Return CharacterType.Maximum(statisticType, Me)
+    End Function
+
     ReadOnly Property MaximumHealth As Long
         Get
             Return CharacterType.MaximumHealth(Level) + EquipmentItems.Sum(Function(x) x.HealthModifier)
