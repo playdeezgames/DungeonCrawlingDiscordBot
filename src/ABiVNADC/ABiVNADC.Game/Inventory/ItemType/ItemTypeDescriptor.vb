@@ -288,7 +288,7 @@ Module ItemTypeDescriptorExtensions
                                  Const FoodFatigueRecovery As Long = 4
                                  builder.AppendLine(ItemType.Food.UseMessage(character.FullName))
                                  character.AddFatigue(-FoodFatigueRecovery)
-                                 builder.Append($"{character.FullName} now has {character.Energy} energy.")
+                                 builder.Append($"{character.FullName} now has {character.Statistic(StatisticType.Energy)} energy.")
                                  item.Destroy()
                              End Sub,
                     .InventoryEncumbrance = 1,
@@ -440,7 +440,7 @@ Module ItemTypeDescriptorExtensions
                                      character.ChangeEffectDuration(EffectType.Nausea, RNG.RollDice("2d6"))
                                      builder.AppendLine($"{character.FullName} is a little queasy from the tainted food!")
                                  End If
-                                 builder.AppendLine($"{character.FullName} now has {character.Energy} energy.")
+                                 builder.AppendLine($"{character.FullName} now has {character.Statistic(StatisticType.Energy)} energy.")
                                  item.Destroy()
                              End Sub,
                     .InventoryEncumbrance = 1,
