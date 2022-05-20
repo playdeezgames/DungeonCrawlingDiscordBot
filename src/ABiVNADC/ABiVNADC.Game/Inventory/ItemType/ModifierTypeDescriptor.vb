@@ -12,7 +12,7 @@ Module ModifierTypeDescriptorExtensions
                 New ModifierTypeDescriptor With
                 {
                     .NameDecorator = Function(name)
-                                         Return $"{name} of aggression"
+                                         Return $"{name} of valor"
                                      End Function
                 }
             },
@@ -21,7 +21,7 @@ Module ModifierTypeDescriptorExtensions
                 New ModifierTypeDescriptor With
                 {
                     .NameDecorator = Function(name)
-                                         Return $"{name} of defense"
+                                         Return $"{name} of vindication"
                                      End Function
                 }
             },
