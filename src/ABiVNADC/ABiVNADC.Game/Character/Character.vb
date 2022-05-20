@@ -421,9 +421,14 @@ Public Class Character
             Return Data.ReadLevel(Id).Value
         End Get
     End Property
+    ReadOnly Property EquipmentItems As IEnumerable(Of Item)
+        Get
+            Return Equipment.Values
+        End Get
+    End Property
     ReadOnly Property MaximumHealth As Long
         Get
-            Return CharacterType.MaximumHealth(Level)
+            Return CharacterType.MaximumHealth(Level) + EquipmentItems.Sum(Function(x) x.HealthModifier)
         End Get
     End Property
     ReadOnly Property MaximumEnergy As Long

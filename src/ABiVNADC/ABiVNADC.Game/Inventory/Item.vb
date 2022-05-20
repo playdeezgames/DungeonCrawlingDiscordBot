@@ -9,6 +9,12 @@
         Return item
     End Function
 
+    ReadOnly Property HealthModifier As Long
+        Get
+            Return ItemType.HealthModifier(Me)
+        End Get
+    End Property
+
     ReadOnly Property ItemType As ItemType
         Get
             Return CType(ItemData.ReadItemType(Id).Value, ItemType)

@@ -165,4 +165,9 @@ Public Module ItemTypeExtensions
     Sub PostCreate(itemType As ItemType, item As Item)
         ItemTypeDescriptors(itemType).PostCreate.Invoke(item)
     End Sub
+
+    <Extension>
+    Function HealthModifier(itemType As ItemType, item As Item) As Long
+        ItemTypeDescriptors(itemType).HealthModifier(item)
+    End Function
 End Module
