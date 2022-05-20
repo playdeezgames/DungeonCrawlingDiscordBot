@@ -168,6 +168,6 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function HealthModifier(itemType As ItemType, item As Item) As Long
-        ItemTypeDescriptors(itemType).HealthModifier(item)
+        Return ItemTypeDescriptors(itemType).HealthModifier(item)
     End Function
 End Module
