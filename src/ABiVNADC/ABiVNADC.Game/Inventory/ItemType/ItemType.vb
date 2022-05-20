@@ -97,13 +97,13 @@ Public Module ItemTypeExtensions
     End Function
 
     <Extension>
-    Function HasDurability(itemType As ItemType) As Boolean
-        Return itemType.Durability > 0
+    Function HasDurability(itemType As ItemType, durabilityType As DurabilityType) As Boolean
+        Return itemType.Durability(durabilityType) > 0
     End Function
 
     <Extension>
-    Function Durability(itemType As ItemType) As Long
-        Return ItemTypeDescriptors(itemType).Durability
+    Function Durability(itemType As ItemType, durabilityType As DurabilityType) As Long
+        Return ItemTypeDescriptors(itemType).Durability(durabilityType)
     End Function
 
     <Extension>

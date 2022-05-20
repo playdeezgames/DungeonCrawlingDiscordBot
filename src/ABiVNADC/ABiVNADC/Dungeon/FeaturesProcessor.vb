@@ -16,6 +16,7 @@
                                 Dim features = location.Features
                                 If Not features.Any Then
                                     builder.AppendLine($"There are no features here.")
+                                    Return
                                 End If
                                 builder.AppendLine($"Features present: {String.Join(", ", features.Select(Function(x) x.FullName))}")
                             End Sub)

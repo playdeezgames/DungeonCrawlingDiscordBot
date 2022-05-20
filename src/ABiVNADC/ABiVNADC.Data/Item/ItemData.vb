@@ -16,7 +16,7 @@
     End Function
 
     Public Sub Clear(itemId As Long)
-        ItemDepletionData.Clear(itemId)
+        ItemDepletionData.ClearForItem(itemId)
         InventoryItemData.ClearForItem(itemId)
         CharacterEquipSlotData.ClearForItem(itemId)
         ItemModifierData.ClearForItem(itemId)

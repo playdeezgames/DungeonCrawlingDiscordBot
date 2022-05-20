@@ -525,11 +525,11 @@ Public Class Character
     Private Function ReduceArmorDurability(attackRoll As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
         While attackRoll > 0
-            Dim items = Equipment.Values.Where(Function(x) x.HasDurability).ToList
+            Dim items = Equipment.Values.Where(Function(x) x.HasDurability(DurabilityType.Armor)).ToList
             If items.Any Then
                 Dim item = RNG.FromList(items)
                 Dim itemType = item.ItemType
-                If item.ReduceDurability(1) Then
+                If item.ReduceDurability(DurabilityType.Armor, 1) Then
                     result.Add(itemType)
                 End If
             End If
@@ -541,11 +541,11 @@ Public Class Character
     Private Function ReduceWeaponDurability(attackRoll As Long) As IEnumerable(Of ItemType)
         Dim result As New List(Of ItemType)
         While attackRoll > 0
-            Dim items = Equipment.Values.Where(Function(x) x.HasDurability).ToList
+            Dim items = Equipment.Values.Where(Function(x) x.HasDurability(DurabilityType.Weapon)).ToList
             If items.Any Then
                 Dim item = RNG.FromList(items)
                 Dim itemType = item.ItemType
-                If item.ReduceDurability(1) Then
+                If item.ReduceDurability(DurabilityType.Weapon, 1) Then
                     result.Add(itemType)
                 End If
             End If

@@ -85,7 +85,7 @@ Public Module RNG
             Dim tokens = diceSet.Split("d"c, "D"c)
             Dim dieCount = CInt(tokens(0))
             Dim dieSize = CInt(tokens(1))
-            tally += (dieCount * dieSize * multiplier) \ divisor
+            tally += (Math.Max(dieCount * dieSize, dieCount) * multiplier) \ divisor
         Next
         Return tally
     End Function

@@ -93,35 +93,29 @@
         End Get
     End Property
 
-    ReadOnly Property HasDurability As Boolean
-        Get
-            Return ItemType.HasDurability
-        End Get
-    End Property
+    Function HasDurability(durabilityType As DurabilityType) As Boolean
+        Return ItemType.HasDurability(durabilityType)
+    End Function
 
-    Friend Function ReduceDurability(durability As Long) As Boolean
-        If HasDurability Then
-            Dim depletion As Long = If(ItemDepletionData.Read(Id), 0) + durability
-            If depletion >= ItemType.Durability Then
+    Friend Function ReduceDurability(durabiltyType As DurabilityType, durability As Long) As Boolean
+        If HasDurability(durabiltyType) Then
+            Dim depletion As Long = If(ItemDepletionData.Read(Id, durabiltyType), 0) + durability
+            If depletion >= ItemType.Durability(durabiltyType) Then
                 Destroy()
                 Return True
             End If
-            ItemDepletionData.Write(Id, depletion)
+            ItemDepletionData.Write(Id, durabiltyType, depletion)
         End If
         Return False
     End Function
 
-    ReadOnly Property MaximumDurability As Long
-        Get
-            Return ItemType.Durability
-        End Get
-    End Property
+    Function MaximumDurability(durabilityType As DurabilityType) As Long
+        Return ItemType.Durability(durabilityType)
+    End Function
 
-    ReadOnly Property Durability As Long
-        Get
-            Return Math.Max(0, MaximumDurability - If(ItemDepletionData.Read(Id), 0))
-        End Get
-    End Property
+    Function Durability(durabilityType As DurabilityType) As Long
+        Return Math.Max(0, MaximumDurability(durabilityType) - If(ItemDepletionData.Read(Id, durabilityType), 0))
+    End Function
 
     Friend Sub AddModifier(modifierType As ModifierType, delta As Long)
         ItemModifierData.Write(Id, modifierType, If(ItemModifierData.ReadLevel(Id, modifierType), 0) + delta)
