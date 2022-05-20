@@ -53,16 +53,6 @@
         handler()
     End Sub
 
-    Sub RequireItemType(tokens As IEnumerable(Of String), builder As StringBuilder, handler As Action(Of ItemType))
-        Dim itemTypeName = StitchTokens(tokens)
-        Dim itemType = ParseItemType(itemTypeName)
-        If itemType = ItemType.None Then
-            builder.AppendLine($"I don't know what a `{itemTypeName}` is.")
-            Return
-        End If
-        handler(itemType)
-    End Sub
-
     Sub RequireItemTypeQuantity(tokens As IEnumerable(Of String), builder As StringBuilder, handler As Action(Of ItemType, Long))
         Dim quantity As Long = 1
         Dim itemTypeName As String

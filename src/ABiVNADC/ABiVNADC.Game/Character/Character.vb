@@ -417,6 +417,10 @@ Public Class Character
         End Get
     End Property
 
+    Function FindEquipmentItemsByName(name As String) As IEnumerable(Of Item)
+        Return EquipmentItems.Where(Function(x) x.FullName = name OrElse x.ItemType.Name = name OrElse x.ItemType.Aliases.Contains(name))
+    End Function
+
     ReadOnly Property Statistics As Dictionary(Of StatisticType, Long)
         Get
             Return StatisticTypeDescriptors.Keys.

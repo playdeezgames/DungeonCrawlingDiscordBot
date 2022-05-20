@@ -13,6 +13,12 @@
         Return ItemType.Modifier(statisticType, Me)
     End Function
 
+    ReadOnly Property CanUse As Boolean
+        Get
+            Return ItemType.CanUse
+        End Get
+    End Property
+
     ReadOnly Property ItemType As ItemType
         Get
             Return CType(ItemData.ReadItemType(Id).Value, ItemType)

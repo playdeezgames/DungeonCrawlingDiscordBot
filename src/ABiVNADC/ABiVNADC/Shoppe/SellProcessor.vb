@@ -9,26 +9,15 @@
                     player,
                     builder,
                     Sub(character, location)
-                        RequireItemTypeQuantity(
+                        RequireItemNameQuantity(
                             tokens,
+                            AddressOf character.Inventory.FindItemsByName,
                             builder,
-                            Sub(itemType, quantity)
-                                If Not character.Inventory.HasItem(itemType) Then
-                                    builder.AppendLine($"{character.FullName} does not have any {itemType.Name} to sell.")
-                                    Return
-                                End If
-                                Dim availableQuantity = character.Inventory.StackedItems(itemType).LongCount
-                                If availableQuantity < quantity Then
-                                    builder.AppendLine($"{character.FullName} only has {availableQuantity} {itemType.Name} to sell.")
-                                    Return
-                                End If
+                            Sub(items)
                                 Dim shoppe = location.Shoppe
-                                Dim credit = shoppe.SellItems(character, itemType, quantity)
-                                If credit > 0 Then
-                                    builder.AppendLine($"{character.FullName} sells {quantity} {itemType.Name} for {credit} credits.")
-                                Else
-                                    builder.AppendLine($"{shoppe.Name} does not buy {itemType.Name}.")
-                                End If
+                                Dim fullName = items.First.FullName
+                                Dim quantity = items.LongCount
+                                shoppe.SellItems(character, items, builder)
                             End Sub)
                     End Sub)
             End Sub)

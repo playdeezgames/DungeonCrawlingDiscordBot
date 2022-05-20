@@ -5,28 +5,19 @@
             "Use what?",
             builder,
             Sub()
-                RequireItemType(
-                    tokens,
+                RequireCharacter(
+                    player,
                     builder,
-                    Sub(itemType)
-                        If itemType = ItemType.None Then
-                            builder.AppendLine($"I don't know what a `{itemType.Name}` is.")
-                            Return
-                        End If
-                        If Not itemType.CanUse Then
-                            builder.AppendLine($"Cannot use `{itemType.Name}`.")
-                            Return
-                        End If
-                        RequireCharacter(
-                            player,
+                    Sub(character)
+                        RequireItemName(
+                            tokens,
+                            AddressOf character.Inventory.FindItemsByName,
                             builder,
-                            Sub(character)
-                                Dim itemStacks = character.Inventory.StackedItems
-                                If Not itemStacks.ContainsKey(itemType) Then
-                                    builder.AppendLine($"{character.Name} doesn't have any `{itemType.Name}`.")
+                            Sub(item)
+                                If Not item.CanUse Then
+                                    builder.AppendLine($"Cannot use `{item.FullName}`.")
                                     Return
                                 End If
-                                Dim item = itemStacks(itemType).First
                                 player.UseItem(item, builder)
                             End Sub)
                     End Sub)
