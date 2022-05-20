@@ -14,8 +14,8 @@
                             builder.AppendLine($"{character.FullName} has nothing in their inventory.")
                             Return
                         End If
-                        Dim itemStacks = inventory.StackedItems
-                        builder.AppendLine($"{character.FullName}'s Inventory: {String.Join(", ", itemStacks.Select(Function(entry) $"{entry.Key.Name}(x{entry.Value.Count})"))}")
+                        Dim itemStacks = inventory.NamedStackedItems
+                        builder.AppendLine($"{character.FullName}'s Inventory: {String.Join(", ", itemStacks.Select(Function(entry) $"{entry.Key}(x{entry.Value.Count})"))}")
                     End Sub)
             End Sub)
     End Sub

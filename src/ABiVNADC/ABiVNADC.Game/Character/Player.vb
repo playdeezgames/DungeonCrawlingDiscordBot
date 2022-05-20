@@ -49,6 +49,9 @@ Public Class Player
         builder.Append($"{Character.FullName} picks up ")
         builder.AppendJoin(", ", namedStacks.Select(Function(x) $"{x.Key}(x{x.Count})"))
         builder.AppendLine(".")
+        For Each item In items
+            Character.Inventory.Add(item)
+        Next
     End Sub
 
     Public Sub Take(itemType As ItemType, quantity As Long, builder As StringBuilder)

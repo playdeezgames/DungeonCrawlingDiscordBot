@@ -18,8 +18,8 @@
                                     builder.AppendLine("There is nothing on the ground.")
                                     Return
                                 End If
-                                Dim itemStacks = inventory.StackedItems
-                                builder.AppendLine($"Items on the ground: {String.Join(", ", itemStacks.Select(Function(entry) $"{entry.Key.Name}(x{entry.Value.Count})"))}")
+                                Dim itemStacks = inventory.NamedStackedItems
+                                builder.AppendLine($"Items on the ground: {String.Join(", ", itemStacks.Select(Function(entry) $"{entry.Key}(x{entry.Value.Count})"))}")
                             End Sub)
                     End Sub)
             End Sub)
