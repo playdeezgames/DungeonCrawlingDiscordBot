@@ -22,11 +22,17 @@ Module EquipmentProcessor
                         For Each entry In equipment
                             builder.Append($"- {entry.Key.Name}: {entry.Value.FullName}")
                             Dim item = entry.Value
+                            If item.HasAttackDice Then
+                                builder.Append($" ATK:{MaximumRoll(item.AttackDice)}")
+                            End If
+                            If item.HasDefendDice Then
+                                builder.Append($" DEF:{MaximumRoll(item.DefendDice)}")
+                            End If
                             If item.HasWeaponDurability Then
-                                builder.Append($" (ATK:{MaximumRoll(item.AttackDice)}, DUR:{item.WeaponDurability}/{item.MaximumWeaponDurability})")
+                                builder.Append($" DUR:{item.WeaponDurability}/{item.MaximumWeaponDurability}")
                             End If
                             If item.HasArmorDurability Then
-                                builder.Append($" (DEF:{MaximumRoll(item.DefendDice)}, DUR:{item.ArmorDurability}/{item.MaximumArmorDurability})")
+                                builder.Append($" DUR:{item.ArmorDurability}/{item.MaximumArmorDurability}")
                             End If
                             builder.AppendLine()
                         Next
