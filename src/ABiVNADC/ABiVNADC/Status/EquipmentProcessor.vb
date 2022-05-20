@@ -28,10 +28,7 @@ Module EquipmentProcessor
                             If item.HasDefendDice Then
                                 builder.Append($" DEF:{MaximumRoll(item.DefendDice)}")
                             End If
-                            If item.HasWeaponDurability Then
-                                builder.Append($" DUR:{item.WeaponDurability}/{item.MaximumWeaponDurability}")
-                            End If
-                            If item.HasArmorDurability Then
+                            If item.HasDurability Then
                                 builder.Append($" DUR:{item.Durability}/{item.MaximumDurability}")
                             End If
                             builder.AppendLine()

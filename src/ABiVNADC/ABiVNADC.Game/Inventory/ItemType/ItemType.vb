@@ -103,17 +103,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function Durability(itemType As ItemType) As Long
-        Return ItemTypeDescriptors(itemType).ArmorDurability
-    End Function
-
-    <Extension>
-    Function HasWeaponDurability(itemType As ItemType) As Boolean
-        Return itemType.WeaponDurability > 0
-    End Function
-
-    <Extension>
-    Function WeaponDurability(itemType As ItemType) As Long
-        Return ItemTypeDescriptors(itemType).WeaponDurability
+        Return ItemTypeDescriptors(itemType).Durability
     End Function
 
     <Extension>

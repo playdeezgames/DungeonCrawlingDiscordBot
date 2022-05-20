@@ -8,8 +8,7 @@ Public Class ItemTypeDescriptor
     Property EquipSlot As EquipSlot
     Property AttackDice As Func(Of Item, String)
     Property DefendDice As Func(Of Item, String)
-    Property ArmorDurability As Long
-    Property WeaponDurability As Long
+    Property Durability As Long
     Property CanBuyGenerator As Dictionary(Of Boolean, Integer)
     Property CanSellGenerator As Dictionary(Of Boolean, Integer)
     Property BuyPriceDice As String
@@ -31,8 +30,7 @@ Public Class ItemTypeDescriptor
         AttackDice = Function(x) "0d1"
         CanUse = False
         DefendDice = Function(x) "0d1"
-        ArmorDurability = 0
-        WeaponDurability = 0
+        Durability = 0
         CanBuyGenerator = RNG.MakeBooleanGenerator(1, 0)
         CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
         BuyPriceDice = "0d1"
@@ -192,7 +190,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "backpack",
                     .SpawnCount = AddressOf VeryRareSpawn,
                     .EquipSlot = EquipSlot.Back,
-                    .ArmorDurability = 10,
+                    .Durability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "200d1+2d200",
                     .InventoryEncumbrance = 1,
@@ -207,7 +205,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Body,
                     .DefendDice = Function(x) "1d3/3",
-                    .ArmorDurability = 20,
+                    .Durability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(19, 1),
                     .BuyPriceDice = "75d1+2d75",
                     .InventoryEncumbrance = 20,
@@ -242,7 +240,7 @@ Module ItemTypeDescriptorExtensions
                     .UseMessage = Function(x) $"{x} commits seppuku",
                     .EquipSlot = EquipSlot.Weapon,
                     .AttackDice = Function(x) "1d2/2",
-                    .WeaponDurability = 5,
+                    .Durability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
                     .OnUse = Sub(character, item, builder)
@@ -316,7 +314,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf UncommonSpawn,
                     .EquipSlot = EquipSlot.Head,
                     .DefendDice = Function(x) "1d3/3",
-                    .ArmorDurability = 5,
+                    .Durability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
                     .InventoryEncumbrance = 5,
@@ -359,7 +357,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf VeryRareSpawn,
                     .EquipSlot = EquipSlot.Weapon,
                     .AttackDice = Function(x) "1d2/2+1d2/2+1d2/2",
-                    .WeaponDurability = 20,
+                    .Durability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 10,
@@ -397,7 +395,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf VeryRareSpawn,
                     .EquipSlot = EquipSlot.Body,
                     .DefendDice = Function(x) "1d3/3+1d3/3",
-                    .ArmorDurability = 35,
+                    .Durability = 35,
                     .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "150d1+2d150",
                     .InventoryEncumbrance = 30,
@@ -457,7 +455,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf UncommonSpawn,
                     .EquipSlot = EquipSlot.Shield,
                     .DefendDice = Function(x) "1d3/3",
-                    .ArmorDurability = 10,
+                    .Durability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
                     .InventoryEncumbrance = 10,
@@ -473,7 +471,7 @@ Module ItemTypeDescriptorExtensions
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Weapon,
                     .AttackDice = Function(x) "1d2/2+1d2/2",
-                    .WeaponDurability = 10,
+                    .Durability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
                     .InventoryEncumbrance = 6,
@@ -509,7 +507,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "trousers",
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Legs,
-                    .ArmorDurability = 1,
+                    .Durability = 1,
                     .CanSellGenerator = MakeBooleanGenerator(1, 1),
                     .SellPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 1,
