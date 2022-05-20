@@ -555,22 +555,4 @@ Public Class Character
         Dim newFatigue = If(CharacterStatisticData.Read(Id, StatisticType.Energy), 0) + fatigue
         CharacterStatisticData.Write(Id, StatisticType.Energy, If(newFatigue < 0, 0, newFatigue))
     End Sub
-
-    ReadOnly Property MaximumEndowment As Long
-        Get
-            Return CharacterType.MaximumEndowment(Level)
-        End Get
-    End Property
-
-    ReadOnly Property Endowment As Long
-        Get
-            Return Math.Max(0, MaximumEndowment - If(CharacterEndowmentData.Read(Id), 0))
-        End Get
-    End Property
-
-    ReadOnly Property EndowmentName As String
-        Get
-            Return CharacterType.EndowmentName
-        End Get
-    End Property
 End Class

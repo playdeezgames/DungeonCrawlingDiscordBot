@@ -1,8 +1,6 @@
 ﻿Friend Class CharacterTypeDescriptor
     Friend Name As String
     Friend Maximum As Func(Of StatisticType, Character, Long)
-    Friend MaximumEndowment As Func(Of Long, Long)
-    Friend EndowmentType As EndowmentType
     Friend NameTable As List(Of String)
     Friend IsEnemy As Boolean
     Friend AttackDice As String
@@ -20,8 +18,6 @@
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
-        MaximumEndowment = Function(x) 0
-        EndowmentType = EndowmentType.None
         CombatEndowmentRecoveryDice = "0d1"
         Maximum = Function(s, c) 0
     End Sub
