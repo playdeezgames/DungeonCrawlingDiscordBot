@@ -22,16 +22,6 @@ Public Module CharacterTypeExtensions
         Return CharacterTypeDescriptors(characterType).Maximum(statisticType, character)
     End Function
 
-    <Extension>
-    Function MaximumHealth(characterType As CharacterType, level As Long) As Long
-        Return CharacterTypeDescriptors(characterType).MaximumHealth(level)
-    End Function
-
-    <Extension>
-    Function MaximumEnergy(characterType As CharacterType, level As Long) As Long
-        Return CharacterTypeDescriptors(characterType).MaximumEnergy(level)
-    End Function
-
     Public Function AllCharacterTypes() As IEnumerable(Of CharacterType)
         Return CharacterTypeDescriptors.Keys
     End Function

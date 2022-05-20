@@ -276,8 +276,8 @@ Public Class Character
     End Sub
 
     Public Sub AddWounds(damage As Long)
-        Dim newWounds = Math.Max(0, Math.Min(CharacterData.ReadWounds(Id).Value + damage, MaximumHealth))
-        CharacterData.WriteWounds(Id, newWounds)
+        Dim newWounds = Math.Max(0, Math.Min(If(CharacterStatisticData.Read(Id, StatisticType.Health), 0) + damage, Maximum(StatisticType.Health)))
+        CharacterStatisticData.Write(Id, StatisticType.Health, newWounds)
     End Sub
 
     Shared Function FromId(characterId As Long?) As Character
@@ -289,7 +289,7 @@ Public Class Character
 
     Public ReadOnly Property IsDead() As Boolean
         Get
-            Return Health <= 0
+            Return Statistic(StatisticType.Health) <= 0
         End Get
     End Property
 
@@ -406,11 +406,6 @@ Public Class Character
             Return InCombat AndAlso Statistic(StatisticType.Energy) >= CharacterType.FightEnergyCost
         End Get
     End Property
-    ReadOnly Property Health As Long
-        Get
-            Return MaximumHealth - ReadWounds(Id).Value
-        End Get
-    End Property
     ReadOnly Property Level As Long
         Get
             Return CharacterData.ReadLevel(Id).Value
@@ -435,14 +430,9 @@ Public Class Character
     End Function
 
     Function Maximum(statisticType As StatisticType) As Long
-        Return CharacterType.Maximum(statisticType, Me)
+        Return CharacterType.Maximum(statisticType, Me) + EquipmentItems.Sum(Function(x) x.StatisticModifier(statisticType))
     End Function
 
-    ReadOnly Property MaximumHealth As Long
-        Get
-            Return CharacterType.MaximumHealth(Level) + EquipmentItems.Sum(Function(x) x.HealthModifier)
-        End Get
-    End Property
     Sub Attack(defender As Character, builder As StringBuilder)
         Dim fatigue = CharacterType.FightEnergyCost
         AddFatigue(fatigue)
@@ -471,7 +461,7 @@ Public Class Character
             End If
             defender.Destroy()
         Else
-            builder.AppendLine($"{defender.FullName} has {defender.Health} health left.")
+            builder.AppendLine($"{defender.FullName} has {defender.Statistic(StatisticType.Health)} health left.")
         End If
     End Sub
 
@@ -495,7 +485,7 @@ Public Class Character
 
     Private Sub LevelUp()
         CharacterData.WriteCharacterLevel(Id, ExperienceLevel + 1)
-        AddWounds(Health - MaximumHealth)
+        AddWounds(Statistic(StatisticType.Health) - Maximum(StatisticType.Health))
         AddFatigue(Statistic(StatisticType.Energy) - Maximum(StatisticType.Energy))
     End Sub
 
@@ -562,7 +552,7 @@ Public Class Character
     End Function
 
     Public Sub AddFatigue(fatigue As Long)
-        Dim newFatigue = CharacterStatisticData.Read(Id, StatisticType.Energy).Value + fatigue
+        Dim newFatigue = If(CharacterStatisticData.Read(Id, StatisticType.Energy), 0) + fatigue
         CharacterStatisticData.Write(Id, StatisticType.Energy, If(newFatigue < 0, 0, newFatigue))
     End Sub
 

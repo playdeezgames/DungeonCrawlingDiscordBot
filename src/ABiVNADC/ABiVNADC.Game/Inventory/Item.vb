@@ -9,17 +9,9 @@
         Return item
     End Function
 
-    ReadOnly Property HealthModifier As Long
-        Get
-            Return ItemType.HealthModifier(Me)
-        End Get
-    End Property
-
-    ReadOnly Property EnergyModifier As Long
-        Get
-            Return ItemType.EnergyModifier(Me)
-        End Get
-    End Property
+    Function StatisticModifier(statisticType As StatisticType) As Long
+        Return ItemType.Modifier(statisticType, Me)
+    End Function
 
     ReadOnly Property ItemType As ItemType
         Get
@@ -86,8 +78,8 @@
     ReadOnly Property FullName As String
         Get
             Dim name = ItemType.Name
-            For Each modifier In Modifiers
-                name = modifier.DecorateName(name)
+            For Each m In Modifiers
+                name = m.DecorateName(name)
             Next
             Return name
         End Get

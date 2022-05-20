@@ -4,7 +4,6 @@
     Friend Const CharacterNameColumn = "CharacterName"
     Friend Const CharacterTypeColumn = "CharacterType"
     Friend Const CharacterLevelColumn = "CharacterLevel"
-    Friend Const WoundsColumn = "Wounds"
     Friend Const ExperienceColumn = "Experience"
 
     Friend Sub Initialize()
@@ -15,7 +14,6 @@
                 [{CharacterNameColumn}] TEXT NOT NULL,
                 [{CharacterTypeColumn}] INT NOT NULL,
                 [{CharacterLevelColumn}] INT NOT NULL,
-                [{WoundsColumn}] INT NOT NULL DEFAULT (0),
                 [{ExperienceColumn}] INT NOT NULL DEFAULT (0)
             );")
     End Sub
@@ -49,10 +47,6 @@
         Return LastInsertRowId
     End Function
 
-    Public Sub WriteWounds(characterId As Long, wounds As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, WoundsColumn, wounds)
-    End Sub
-
     Public Sub Clear(characterId As Long)
         CharacterEquipSlotData.ClearForCharacter(characterId)
         CharacterInventoryData.ClearForCharacter(characterId)
@@ -67,10 +61,6 @@
         CharacterStatisticData.ClearForCharacter(characterId)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
-
-    Public Function ReadWounds(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, WoundsColumn)
-    End Function
 
     Public Function ReadCharacterType(characterId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterTypeColumn)

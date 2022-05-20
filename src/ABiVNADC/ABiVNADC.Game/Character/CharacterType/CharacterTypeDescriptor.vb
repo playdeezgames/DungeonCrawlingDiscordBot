@@ -1,8 +1,6 @@
 ﻿Friend Class CharacterTypeDescriptor
     Friend Name As String
     Friend Maximum As Func(Of StatisticType, Character, Long)
-    Friend MaximumHealth As Func(Of Long, Long)
-    Friend MaximumEnergy As Func(Of Long, Long)
     Friend MaximumEndowment As Func(Of Long, Long)
     Friend EndowmentType As EndowmentType
     Friend NameTable As List(Of String)
@@ -46,8 +44,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 5,
-                    .MaximumEnergy = Function(l) l + 7,
                     .NameTable = Names.Human,
                     .IsEnemy = False,
                     .AttackDice = "1d3/3",
@@ -77,8 +73,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 1,
-                    .MaximumEnergy = Function(l) l + 10,
                     .NameTable = Names.Goblin,
                     .IsEnemy = True,
                     .AttackDice = "1d3/3+1d3/3",
@@ -126,8 +120,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 1,
-                    .MaximumEnergy = Function(l) l + 8,
                     .NameTable = Names.Orc,
                     .IsEnemy = True,
                     .AttackDice = "1d3/3+1d3/3+1d3/3",
@@ -175,8 +167,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 1,
-                    .MaximumEnergy = Function(l) 1,
                     .NameTable = Names.Human,
                     .IsEnemy = True,
                     .AttackDice = "1d3/3+1d3/3",
@@ -223,8 +213,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 1,
-                    .MaximumEnergy = Function(l) 1,
                     .NameTable = Names.Human,
                     .IsEnemy = True,
                     .AttackDice = "1d3/3+1d3/3",
@@ -271,8 +259,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 1,
-                    .MaximumEnergy = Function(l) l + 8,
                     .NameTable = Names.Fish,
                     .IsEnemy = True,
                     .AttackDice = "1d3/3+1d3/3",
@@ -319,8 +305,6 @@ Module CharacterTypeDescriptorExtensions
                                            Return 0
                                    End Select
                                End Function,
-                    .MaximumHealth = Function(l) l + 5,
-                    .MaximumEnergy = Function(l) l + 4,
                     .NameTable = Names.Fish,
                     .IsEnemy = True,
                     .AttackDice = "1d3/3+1d3/3+1d3/3+1d3/3+1d3/3",

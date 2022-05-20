@@ -21,7 +21,6 @@
                 For Each entry In character.Statistics
                     builder.AppendLine($"{entry.Key.Name}: {entry.Value}/{character.Maximum(entry.Key)}")
                 Next
-                builder.AppendLine($"Health: {character.Health}/{character.MaximumHealth}")
                 builder.AppendLine($"{character.EndowmentName}: {character.Endowment}/{character.MaximumEndowment}")
                 ShowEncumbrance(builder, character)
                 Dim effects = character.Effects

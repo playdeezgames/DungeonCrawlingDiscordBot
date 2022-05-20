@@ -23,9 +23,11 @@ Public Class ItemTypeDescriptor
     Property IsTrophy As Boolean
     Property Aliases As IEnumerable(Of String)
     Property PostCreate As Action(Of Item)
+    Property Modifier As Func(Of StatisticType, Item, Long)
     Property HealthModifier As Func(Of Item, Long)
     Property EnergyModifier As Func(Of Item, Long)
     Sub New()
+        Modifier = Function(s, i) 0
         EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"
         CanUse = False
@@ -417,7 +419,7 @@ Module ItemTypeDescriptorExtensions
                                  Const PotionWoundRecovery As Long = 4
                                  builder.AppendLine(ItemType.Potion.UseMessage(character.FullName))
                                  character.AddWounds(-PotionWoundRecovery)
-                                 builder.Append($"{character.FullName} now has {character.Health} health.")
+                                 builder.Append($"{character.FullName} now has {character.Statistic(StatisticType.Health)} health.")
                                  item.Destroy()
                              End Sub,
                     .InventoryEncumbrance = 1,
