@@ -87,13 +87,13 @@ Public Module ItemTypeExtensions
 
 
     <Extension>
-    Function DefendDice(itemType As ItemType) As String
-        Return ItemTypeDescriptors(itemType).DefendDice
+    Function DefendDice(itemType As ItemType, item As Item) As String
+        Return ItemTypeDescriptors(itemType).DefendDice(item)
     End Function
 
     <Extension>
-    Function HasDefendDice(itemType As ItemType) As Boolean
-        Return itemType.DefendDice <> "0d1"
+    Function HasDefendDice(itemType As ItemType, item As Item) As Boolean
+        Return itemType.DefendDice(item) <> "0d1"
     End Function
 
     <Extension>

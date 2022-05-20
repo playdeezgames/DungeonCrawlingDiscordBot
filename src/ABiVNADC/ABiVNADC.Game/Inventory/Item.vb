@@ -55,13 +55,13 @@
 
     ReadOnly Property HasDefendDice As Boolean
         Get
-            Return ItemType.HasDefendDice
+            Return ItemType.HasDefendDice(Me)
         End Get
     End Property
 
     ReadOnly Property DefendDice As String
         Get
-            Return ItemType.DefendDice
+            Return ItemType.DefendDice(Me)
         End Get
     End Property
 

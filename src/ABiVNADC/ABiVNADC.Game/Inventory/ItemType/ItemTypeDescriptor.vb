@@ -7,7 +7,7 @@ Public Class ItemTypeDescriptor
     Property UseMessage As Func(Of String, String)
     Property EquipSlot As EquipSlot
     Property AttackDice As Func(Of Item, String)
-    Property DefendDice As String
+    Property DefendDice As Func(Of Item, String)
     Property ArmorDurability As Long
     Property WeaponDurability As Long
     Property CanBuyGenerator As Dictionary(Of Boolean, Integer)
@@ -28,7 +28,7 @@ Public Class ItemTypeDescriptor
         EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"
         CanUse = False
-        DefendDice = "0d1"
+        DefendDice = Function(x) "0d1"
         ArmorDurability = 0
         WeaponDurability = 0
         CanBuyGenerator = RNG.MakeBooleanGenerator(1, 0)
@@ -176,6 +176,12 @@ Module ItemTypeDescriptorExtensions
                                           Return "1d2/2"
                                       End If
                                       Return "0d1"
+                                  End Function,
+                    .DefendDice = Function(item)
+                                      If item.HasModifier(ModifierType.Defend) Then
+                                          Return "1d3/3"
+                                      End If
+                                      Return "0d1"
                                   End Function
                 }
             },
@@ -200,7 +206,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "chain mail",
                     .SpawnCount = AddressOf RareSpawn,
                     .EquipSlot = EquipSlot.Body,
-                    .DefendDice = "1d3/3",
+                    .DefendDice = Function(x) "1d3/3",
                     .ArmorDurability = 20,
                     .CanBuyGenerator = MakeBooleanGenerator(19, 1),
                     .BuyPriceDice = "75d1+2d75",
@@ -309,7 +315,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "helmet",
                     .SpawnCount = AddressOf UncommonSpawn,
                     .EquipSlot = EquipSlot.Head,
-                    .DefendDice = "1d3/3",
+                    .DefendDice = Function(x) "1d3/3",
                     .ArmorDurability = 5,
                     .CanBuyGenerator = MakeBooleanGenerator(4, 1),
                     .BuyPriceDice = "12d1+2d12",
@@ -390,7 +396,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "plate mail",
                     .SpawnCount = AddressOf VeryRareSpawn,
                     .EquipSlot = EquipSlot.Body,
-                    .DefendDice = "1d3/3+1d3/3",
+                    .DefendDice = Function(x) "1d3/3+1d3/3",
                     .ArmorDurability = 35,
                     .CanBuyGenerator = MakeBooleanGenerator(49, 1),
                     .BuyPriceDice = "150d1+2d150",
@@ -450,7 +456,7 @@ Module ItemTypeDescriptorExtensions
                     .Name = "shield",
                     .SpawnCount = AddressOf UncommonSpawn,
                     .EquipSlot = EquipSlot.Shield,
-                    .DefendDice = "1d3/3",
+                    .DefendDice = Function(x) "1d3/3",
                     .ArmorDurability = 10,
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "25d1+2d25",
