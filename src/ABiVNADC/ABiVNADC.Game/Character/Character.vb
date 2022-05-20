@@ -214,18 +214,12 @@ Public Class Character
         Return RNG.RollDice(AttackDice)
     End Function
 
-    Public Sub Equip(itemType As ItemType, builder As StringBuilder)
-        Dim itemStacks = Inventory.StackedItems
-        If Not itemStacks.ContainsKey(itemType) Then
-            builder.AppendLine($"{FullName} does Not have any `{itemType.Name}` In their inventory.")
-            Return
-        End If
-        If Not itemType.CanEquip Then
+    Public Sub Equip(item As Item, builder As StringBuilder)
+        If Not item.ItemType.CanEquip Then
             builder.AppendLine($"I don't know where you would equip that, and I don't think I wanna know where you'd try!")
             Return
         End If
-        Dim item = itemStacks(itemType).First
-        Dim equipSlot = itemType.EquipSlot
+        Dim equipSlot = item.ItemType.EquipSlot
         Dim equippedItem As Item = GetEquippedItem(equipSlot)
         If equippedItem IsNot Nothing Then
             CharacterEquipSlotData.ClearForItem(equippedItem.Id)
@@ -233,7 +227,7 @@ Public Class Character
         End If
         Inventory.Remove(item)
         CharacterEquipSlotData.Write(Id, equipSlot, item.Id)
-        builder.AppendLine($"{FullName} equips {itemType.Name}.")
+        builder.AppendLine($"{FullName} equips {item.FullName}.")
     End Sub
 
     Private Function GetEquippedItem(equipSlot As EquipSlot) As Item

@@ -34,8 +34,8 @@ Public Class Player
         Return False
     End Function
 
-    Public Sub Equip(itemType As ItemType, builder As StringBuilder)
-        Character.Equip(itemType, builder)
+    Public Sub Equip(item As Item, builder As StringBuilder)
+        Character.Equip(item, builder)
         Character.NextTurn(builder)
     End Sub
 

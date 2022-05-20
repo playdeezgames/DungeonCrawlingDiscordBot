@@ -9,11 +9,12 @@
                     player,
                     builder,
                     Sub(character)
-                        RequireItemType(
+                        RequireItemName(
                             tokens,
+                            AddressOf character.Inventory.FindItemsByName,
                             builder,
-                            Sub(itemType)
-                                player.Equip(itemType, builder)
+                            Sub(item)
+                                player.Equip(item, builder)
                             End Sub)
                     End Sub)
             End Sub)
