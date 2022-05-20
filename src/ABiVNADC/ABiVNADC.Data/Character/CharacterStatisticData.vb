@@ -26,4 +26,13 @@
     Friend Sub ClearForCharacter(characterId As Long)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
+
+    Public Sub Write(characterId As Long, statisticType As Long, amount As Long)
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            CharacterIdColumn, characterId,
+            StatisticTypeColumn, statisticType,
+            AmountColumn, amount)
+    End Sub
 End Module

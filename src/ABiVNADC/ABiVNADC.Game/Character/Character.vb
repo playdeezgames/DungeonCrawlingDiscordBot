@@ -257,7 +257,7 @@ Public Class Character
             CharacterLocationData.Write(characterId, Location.Id)
             builder.AppendLine($"Suddenly, {Character.FromId(characterId).FullName} appears!")
         Else
-            AddFatigue(Energy - MaximumEnergy)
+            AddFatigue(Statistic(StatisticType.Energy) - Maximum(StatisticType.Energy))
             builder.AppendLine($"{FullName} rests fully.")
         End If
     End Sub
@@ -269,7 +269,7 @@ Public Class Character
     End Property
 
     Public Sub CombatRest(builder As StringBuilder)
-        Dim maximumRest = MaximumEnergy - Energy
+        Dim maximumRest = Maximum(StatisticType.Energy) - Statistic(StatisticType.Energy)
         Dim restRoll = Math.Min(RNG.RollDice(CharacterType.CombatRestRoll), maximumRest)
         AddFatigue(-restRoll)
         builder.AppendLine($"{FullName} recovers {restRoll} energy.")
@@ -403,17 +403,12 @@ Public Class Character
     End Property
     ReadOnly Property CanFight As Boolean
         Get
-            Return InCombat AndAlso Energy >= CharacterType.FightEnergyCost
+            Return InCombat AndAlso Statistic(StatisticType.Energy) >= CharacterType.FightEnergyCost
         End Get
     End Property
     ReadOnly Property Health As Long
         Get
             Return MaximumHealth - ReadWounds(Id).Value
-        End Get
-    End Property
-    ReadOnly Property Energy As Long
-        Get
-            Return MaximumEnergy - CharacterData.ReadFatigue(Id).Value
         End Get
     End Property
     ReadOnly Property Level As Long
@@ -430,11 +425,14 @@ Public Class Character
     ReadOnly Property Statistics As Dictionary(Of StatisticType, Long)
         Get
             Return StatisticTypeDescriptors.Keys.
-                Where(Function(x) Maximum(x) > 0).Select(
-                Function(key) (key, Maximum(key) - If(CharacterStatisticData.Read(Id, key), 0))).
-                ToDictionary(Function(x) x.key, Function(x) x.Item2)
+                Where(Function(x) Maximum(x) > 0).
+                ToDictionary(Function(key) key, Function(key) Statistic(key))
         End Get
     End Property
+
+    Function Statistic(statisticType As StatisticType) As Long
+        Return Maximum(statisticType) - If(CharacterStatisticData.Read(Id, statisticType), 0)
+    End Function
 
     Function Maximum(statisticType As StatisticType) As Long
         Return CharacterType.Maximum(statisticType, Me)
@@ -443,11 +441,6 @@ Public Class Character
     ReadOnly Property MaximumHealth As Long
         Get
             Return CharacterType.MaximumHealth(Level) + EquipmentItems.Sum(Function(x) x.HealthModifier)
-        End Get
-    End Property
-    ReadOnly Property MaximumEnergy As Long
-        Get
-            Return CharacterType.MaximumEnergy(Level) + EquipmentItems.Sum(Function(x) x.EnergyModifier)
         End Get
     End Property
     Sub Attack(defender As Character, builder As StringBuilder)
@@ -503,7 +496,7 @@ Public Class Character
     Private Sub LevelUp()
         CharacterData.WriteCharacterLevel(Id, ExperienceLevel + 1)
         AddWounds(Health - MaximumHealth)
-        AddFatigue(Energy - MaximumEnergy)
+        AddFatigue(Statistic(StatisticType.Energy) - Maximum(StatisticType.Energy))
     End Sub
 
     ReadOnly Property ExperiencePointValue As Long
@@ -569,8 +562,8 @@ Public Class Character
     End Function
 
     Public Sub AddFatigue(fatigue As Long)
-        Dim newFatigue = CharacterData.ReadFatigue(Id).Value + fatigue
-        CharacterData.WriteFatigue(Id, If(newFatigue < 0, 0, newFatigue))
+        Dim newFatigue = CharacterStatisticData.Read(Id, StatisticType.Energy).Value + fatigue
+        CharacterStatisticData.Write(Id, StatisticType.Energy, If(newFatigue < 0, 0, newFatigue))
     End Sub
 
     ReadOnly Property MaximumEndowment As Long

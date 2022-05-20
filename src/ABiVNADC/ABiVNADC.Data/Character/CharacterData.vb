@@ -5,7 +5,6 @@
     Friend Const CharacterTypeColumn = "CharacterType"
     Friend Const CharacterLevelColumn = "CharacterLevel"
     Friend Const WoundsColumn = "Wounds"
-    Friend Const FatigueColumn = "Fatigue"
     Friend Const ExperienceColumn = "Experience"
 
     Friend Sub Initialize()
@@ -17,7 +16,6 @@
                 [{CharacterTypeColumn}] INT NOT NULL,
                 [{CharacterLevelColumn}] INT NOT NULL,
                 [{WoundsColumn}] INT NOT NULL DEFAULT (0),
-                [{FatigueColumn}] INT NOT NULL DEFAULT (0),
                 [{ExperienceColumn}] INT NOT NULL DEFAULT (0)
             );")
     End Sub
@@ -85,14 +83,6 @@
     Public Function ReadName(characterId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
     End Function
-
-    Public Function ReadFatigue(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FatigueColumn)
-    End Function
-
-    Public Sub WriteFatigue(characterId As Long, fatigue As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FatigueColumn, fatigue)
-    End Sub
 
     Public Function ReadExperience(characterId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, ExperienceColumn)
