@@ -174,7 +174,8 @@ Module ItemTypeDescriptorExtensions
                                         {ModifierType.Attack, 2},
                                         {ModifierType.Health, 1}
                                       }
-                                      item.AddModifier(RNG.FromGenerator(modifierTable), 1)
+                                      Dim modifier = RNG.FromGenerator(modifierTable)
+                                      item.AddModifier(modifier, If(modifier = ModifierType.None, 0, 1))
                                   End Sub,
                     .AttackDice = Function(item) If(item.HasModifier(ModifierType.Attack), $"{item.ModifierLevel(ModifierType.Attack)}d2/2", "0d1"),
                     .DefendDice = Function(item) If(item.HasModifier(ModifierType.Defend), $"{item.ModifierLevel(ModifierType.Defend)}d3/3", "0d1"),
