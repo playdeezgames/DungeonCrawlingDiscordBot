@@ -15,6 +15,12 @@
         End Get
     End Property
 
+    ReadOnly Property EnergyModifier As Long
+        Get
+            Return ItemType.EnergyModifier(Me)
+        End Get
+    End Property
+
     ReadOnly Property ItemType As ItemType
         Get
             Return CType(ItemData.ReadItemType(Id).Value, ItemType)

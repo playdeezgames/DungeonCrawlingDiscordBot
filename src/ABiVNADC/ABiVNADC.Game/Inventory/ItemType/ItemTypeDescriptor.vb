@@ -25,6 +25,7 @@ Public Class ItemTypeDescriptor
     Property Aliases As IEnumerable(Of String)
     Property PostCreate As Action(Of Item)
     Property HealthModifier As Func(Of Item, Long)
+    Property EnergyModifier As Func(Of Item, Long)
     Sub New()
         EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"
@@ -37,7 +38,6 @@ Public Class ItemTypeDescriptor
         BuyPriceDice = "0d1"
         SellPriceDice = "0d1"
         OnUse = Sub(c, i, b)
-
                 End Sub
         SpawnCount = Function(difficulty, locationCount) "0d1"
         QuestTargetWeight = 0
@@ -51,6 +51,7 @@ Public Class ItemTypeDescriptor
         PostCreate = Sub()
                      End Sub
         HealthModifier = Function(x) 0
+        EnergyModifier = Function(x) 0
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -175,7 +176,8 @@ Module ItemTypeDescriptorExtensions
                                   End Sub,
                     .AttackDice = Function(item) If(item.HasModifier(ModifierType.Attack), "1d2/2", "0d1"),
                     .DefendDice = Function(item) If(item.HasModifier(ModifierType.Defend), "1d3/3", "0d1"),
-                    .HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), 1, 0)
+                    .HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), 1, 0),
+                    .EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), 1, 0)
                 }
             },
             {

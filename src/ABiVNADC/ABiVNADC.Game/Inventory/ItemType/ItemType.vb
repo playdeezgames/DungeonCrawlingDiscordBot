@@ -170,4 +170,9 @@ Public Module ItemTypeExtensions
     Function HealthModifier(itemType As ItemType, item As Item) As Long
         Return ItemTypeDescriptors(itemType).HealthModifier(item)
     End Function
+
+    <Extension>
+    Function EnergyModifier(itemType As ItemType, item As Item) As Long
+        Return ItemTypeDescriptors(itemType).EnergyModifier(item)
+    End Function
 End Module

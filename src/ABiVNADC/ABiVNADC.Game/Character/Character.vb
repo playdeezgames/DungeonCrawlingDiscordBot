@@ -433,7 +433,7 @@ Public Class Character
     End Property
     ReadOnly Property MaximumEnergy As Long
         Get
-            Return CharacterType.MaximumEnergy(Level)
+            Return CharacterType.MaximumEnergy(Level) + EquipmentItems.Sum(Function(x) x.EnergyModifier)
         End Get
     End Property
     Sub Attack(defender As Character, builder As StringBuilder)
