@@ -161,6 +161,8 @@ Module ItemTypeDescriptorExtensions
                     .EquipSlot = EquipSlot.Neck,
                     .CanBuyGenerator = MakeBooleanGenerator(19, 1),
                     .BuyPriceDice = "200d1+2d200",
+                    .CanSellGenerator = MakeBooleanGenerator(4, 1),
+                    .SellPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 1,
                     .EquippedEncumbrance = 0,
                     .PostCreate = Sub(item)
