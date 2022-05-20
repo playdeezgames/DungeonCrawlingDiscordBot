@@ -174,12 +174,12 @@ Module ItemTypeDescriptorExtensions
                                         {ModifierType.Attack, 2},
                                         {ModifierType.Health, 1}
                                       }
-                                      item.AddModifier(RNG.FromGenerator(modifierTable))
+                                      item.AddModifier(RNG.FromGenerator(modifierTable), 1)
                                   End Sub,
-                    .AttackDice = Function(item) If(item.HasModifier(ModifierType.Attack), "1d2/2", "0d1"),
-                    .DefendDice = Function(item) If(item.HasModifier(ModifierType.Defend), "1d3/3", "0d1"),
-                    .HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), 1, 0),
-                    .EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), 1, 0)
+                    .AttackDice = Function(item) If(item.HasModifier(ModifierType.Attack), $"{item.ModifierLevel(ModifierType.Attack)}d2/2", "0d1"),
+                    .DefendDice = Function(item) If(item.HasModifier(ModifierType.Defend), $"{item.ModifierLevel(ModifierType.Defend)}d3/3", "0d1"),
+                    .HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), item.ModifierLevel(ModifierType.Health), 0),
+                    .EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), item.ModifierLevel(ModifierType.Energy), 0)
                 }
             },
             {

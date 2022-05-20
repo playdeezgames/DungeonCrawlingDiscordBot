@@ -418,7 +418,7 @@ Public Class Character
     End Property
     ReadOnly Property Level As Long
         Get
-            Return Data.ReadLevel(Id).Value
+            Return CharacterData.ReadLevel(Id).Value
         End Get
     End Property
     ReadOnly Property EquipmentItems As IEnumerable(Of Item)

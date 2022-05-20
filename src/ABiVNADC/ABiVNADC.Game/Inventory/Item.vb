@@ -79,7 +79,7 @@
 
     ReadOnly Property Modifiers As IEnumerable(Of ModifierType)
         Get
-            Return ItemModifierData.Read(Id).Select(Function(x) CType(x, ModifierType))
+            Return ItemModifierData.Read(Id).Keys.Select(Function(x) CType(x, ModifierType))
         End Get
     End Property
 
@@ -153,11 +153,15 @@
         End Get
     End Property
 
-    Friend Sub AddModifier(modifierType As ModifierType)
-        ItemModifierData.Write(Id, modifierType)
+    Friend Sub AddModifier(modifierType As ModifierType, delta As Long)
+        ItemModifierData.Write(Id, modifierType, If(ItemModifierData.ReadLevel(Id, modifierType), 0) + delta)
     End Sub
 
-    Friend Function HasModifier(modifier As ModifierType) As Boolean
-        Return Modifiers.Contains(modifier)
+    Friend Function HasModifier(modifierType As ModifierType) As Boolean
+        Return Modifiers.Contains(modifierType)
+    End Function
+
+    Friend Function ModifierLevel(modifierType As ModifierType) As Long
+        Return If(ItemModifierData.ReadLevel(Id, modifierType), 0)
     End Function
 End Class

@@ -2,6 +2,7 @@
     Friend Const TableName = "ItemModifiers"
     Friend Const ItemIdColumn = ItemData.ItemIdColumn
     Friend Const ModifierColumn = "Modifier"
+    Friend Const LevelColumn = "Level"
     Friend Sub Initialize()
         ItemData.Initialize()
         ExecuteNonQuery(
@@ -9,11 +10,12 @@
             (
                 [{ItemIdColumn}] INT NOT NULL,
                 [{ModifierColumn}] INT NOT NULL,
+                [{LevelColumn}] INT NOT NULL,
                 UNIQUE([{ItemIdColumn}],[{ModifierColumn}]),
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub
-    Public Sub Write(itemId As Long, modifierType As Long)
+    Public Sub Write(itemId As Long, modifierType As Long, level As Long)
         ReplaceRecord(AddressOf Initialize, TableName, ItemIdColumn, itemId, ModifierColumn, modifierType)
     End Sub
 
@@ -21,7 +23,25 @@
         ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
     End Sub
 
-    Public Function Read(itemId As Long) As IEnumerable(Of Long)
-        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, ModifierColumn, ItemIdColumn, itemId)
+    Public Function ReadLevel(itemId As Long, modifierType As Long) As Long?
+        Initialize()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT [{LevelColumn}] FROM [{TableName}] WHERE [{ItemIdColumn}]=@{ItemIdColumn} AND [{ModifierColumn}]=@{ModifierColumn};",
+            MakeParameter($"@{ItemIdColumn}", itemId),
+            MakeParameter($"@{ModifierColumn}", modifierType))
+    End Function
+
+    Public Function Read(itemId As Long) As Dictionary(Of Long, Long)
+        Initialize()
+        Dim entries = ExecuteReader(
+            Function(reader) (CLng(reader(ModifierColumn)), CLng(reader(LevelColumn))),
+            $"SELECT 
+                [{ModifierColumn}],
+                [{LevelColumn}] 
+            FROM [{TableName}] 
+            WHERE 
+                [{ItemIdColumn}]=@{ItemIdColumn};",
+            MakeParameter($"@{ItemIdColumn}", itemId))
+        Return entries.ToDictionary(Of Long, Long)(Function(x) x.Item1, Function(x) x.Item2)
     End Function
 End Module
