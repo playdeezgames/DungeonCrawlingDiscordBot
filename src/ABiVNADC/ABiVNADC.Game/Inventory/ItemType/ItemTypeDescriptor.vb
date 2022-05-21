@@ -218,7 +218,8 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(9, 1),
                     .BuyPriceDice = "200d1+2d200",
                     .InventoryEncumbrance = 1,
-                    .EquippedEncumbrance = -20
+                    .EquippedEncumbrance = -20,
+                    .Aliases = New List(Of String) From {"pack"}
                 }
             },
             {

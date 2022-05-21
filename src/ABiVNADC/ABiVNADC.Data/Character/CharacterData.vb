@@ -5,16 +5,19 @@
     Friend Const CharacterTypeColumn = "CharacterType"
     Friend Const CharacterLevelColumn = "CharacterLevel"
     Friend Const ExperienceColumn = "Experience"
+    Friend Const LocationIdColumn = LocationData.LocationIdColumn
 
     Friend Sub Initialize()
         ExecuteNonQuery(
             $"CREATE TABLE IF NOT EXISTS [{TableName}]
             (
                 [{CharacterIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT,
+                [{LocationIdColumn}] INT NOT NULL,
                 [{CharacterNameColumn}] TEXT NOT NULL,
                 [{CharacterTypeColumn}] INT NOT NULL,
                 [{CharacterLevelColumn}] INT NOT NULL,
-                [{ExperienceColumn}] INT NOT NULL DEFAULT (0)
+                [{ExperienceColumn}] INT NOT NULL DEFAULT (0),
+                FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
     End Sub
 
@@ -26,14 +29,19 @@
         Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, CharacterIdColumn, characterId).Any
     End Function
 
-    Public Function Create(characterName As String, characterType As Long, characterLevel As Long) As Long
-        Return CreateRecord(AddressOf Initialize, TableName, (CharacterNameColumn, characterName), (CharacterTypeColumn, characterType), (CharacterLevelColumn, characterLevel))
+    Public Function Create(characterName As String, characterType As Long, characterLevel As Long, locationId As Long) As Long
+        Return CreateRecord(
+            AddressOf Initialize,
+            TableName,
+            (CharacterNameColumn, characterName),
+            (CharacterTypeColumn, characterType),
+            (CharacterLevelColumn, characterLevel),
+            (LocationIdColumn, locationId))
     End Function
 
     Public Sub Clear(characterId As Long)
         CharacterEquipSlotData.ClearForCharacter(characterId)
         CharacterInventoryData.ClearForCharacter(characterId)
-        CharacterLocationData.Clear(characterId)
         PlayerCharacterData.ClearForCharacter(characterId)
         PlayerData.ClearForCharacter(characterId)
         ShoppeAccountsData.ClearForCharacter(characterId)
@@ -53,6 +61,10 @@
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn)
     End Function
 
+    Public Function ReadLocation(characterId As Long) As Long?
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, LocationIdColumn)
+    End Function
+
     Public Function ReadName(characterId As Long) As String
         Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
     End Function
@@ -69,7 +81,15 @@
         WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn, level)
     End Sub
 
+    Public Sub WriteLocation(characterId As Long, locationId As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, LocationIdColumn, locationId)
+    End Sub
+
     Public Function ReadCharacterLevel(characterId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn)
+    End Function
+
+    Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
+        Return ReadIdsWithColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, LocationIdColumn, locationId)
     End Function
 End Module

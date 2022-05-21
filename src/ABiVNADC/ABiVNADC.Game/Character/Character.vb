@@ -174,8 +174,8 @@ Public Class Character
         End Get
     End Property
 
-    Public Function Create(characterType As CharacterType, level As Long) As Character
-        Return New Character(CharacterData.Create(characterType.RandomName, characterType, level))
+    Public Function Create(characterType As CharacterType, level As Long, location As Location) As Character
+        Return New Character(CharacterData.Create(characterType.RandomName, characterType, level, location.Id))
     End Function
 
     ReadOnly Property Equipment As Dictionary(Of EquipSlot, Item)
@@ -195,7 +195,7 @@ Public Class Character
         End If
         builder.AppendLine($"{FullName} successfully bribes {enemy.FullName}.")
         enemy.Inventory.Add(item)
-        CharacterLocationData.Clear(enemy.Id)
+        enemy.Destroy()
     End Sub
 
     Public Function TakesBribe(item As Item) As Boolean
@@ -269,8 +269,7 @@ Public Class Character
     Public Sub NonCombatRest(builder As StringBuilder)
         Dim characterType As CharacterType = If(HasLocation AndAlso Location.HasDungeon, Location.Dungeon.GenerateWanderingMonster(), CharacterType.None)
         If characterType <> CharacterType.None Then
-            Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0)
-            CharacterLocationData.Write(characterId, Location.Id)
+            Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0, Location.Id)
             builder.AppendLine($"Suddenly, {Character.FromId(characterId).FullName} appears!")
         Else
             AddFatigue(Statistic(StatisticType.Energy) - Maximum(StatisticType.Energy))
@@ -378,18 +377,14 @@ Public Class Character
 
     Property Location As Location
         Get
-            Dim locationId As Long? = CharacterLocationData.Read(Id)
+            Dim locationId As Long? = CharacterData.ReadLocation(Id)
             If locationId.HasValue Then
                 Return New Location(locationId.Value)
             End If
             Return Nothing
         End Get
         Set(value As Location)
-            If value Is Nothing Then
-                CharacterLocationData.Clear(Id)
-            Else
-                CharacterLocationData.Write(Id, value.Id)
-            End If
+            CharacterData.WriteLocation(Id, value.Id)
         End Set
     End Property
     ReadOnly Property Inventory As Inventory Implements IInventoryHost.Inventory

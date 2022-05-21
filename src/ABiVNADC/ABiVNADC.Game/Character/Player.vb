@@ -251,16 +251,15 @@ Public Class Player
 
     Public Sub CreateCharacter()
         If Not HasCharacter Then
-            CreateCharacter(RNG.FromList(Names.Human))
             Dim x As Long = RNG.FromRange(Short.MinValue, Short.MaxValue)
             Dim y As Long = RNG.FromRange(Short.MinValue, Short.MaxValue)
-            Character.Location = Game.Location.AutogenerateOverworldXY(x, y)
+            CreateCharacter(RNG.FromList(Names.Human), Game.Location.AutogenerateOverworldXY(x, y))
         End If
     End Sub
 
-    Public Function CreateCharacter(characterName As String) As Boolean
+    Public Function CreateCharacter(characterName As String, location As Location) As Boolean
         If PlayerCharacterData.ReadCountForPlayerAndCharacterName(Id, characterName) = 0 Then
-            Dim characterId = Data.CharacterData.Create(characterName, CharacterType.N00b, 0)
+            Dim characterId = Data.CharacterData.Create(characterName, CharacterType.N00b, 0, location.Id)
             PlayerCharacterData.Write(Id, characterId, RNG.FromEnumerable(AllCardinalDirections))
             If Character Is Nothing Then
                 SwitchCharacter(characterName)

@@ -39,7 +39,7 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) $"the entrance to {feature.Location.Dungeon.Name}",
-                    .OverworldGenerationWeight = 4,
+                    .OverworldGenerationWeight = 8,
                     .Generator = Function(fromLocation)
                                      Dim dungeonDifficultyGenerator As New Dictionary(Of Difficulty, Integer) From
                                         {
@@ -138,7 +138,7 @@ Module FeatureTypeDescriptorExtensions
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature) $"quest giver named {feature.QuestGiver.Name}",
-                    .OverworldGenerationWeight = 8,
+                    .OverworldGenerationWeight = 4,
                     .Generator = Function(location)
                                      Dim feature = Game.Feature.Create(location, FeatureType.QuestGiver)
                                      Dim targetItemType = RNG.FromGenerator(QuestTargetGenerator)
