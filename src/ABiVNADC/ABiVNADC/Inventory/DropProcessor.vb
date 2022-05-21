@@ -5,19 +5,16 @@
             "Drop what?",
             builder,
             Sub()
-                RequireCharacterLocation(
+                RequireCharacter(
                     player,
                     builder,
-                    Sub(character, location)
+                    Sub(character)
                         RequireItemNameQuantity(
                             tokens,
                             AddressOf character.Inventory.FindItemsByName,
                             builder,
                             Sub(items)
-                                For Each item In items
-                                    location.Inventory.Add(item)
-                                Next
-                                builder.AppendLine($"{character.FullName} drops {items.Count} items.")
+                                character.Drop(items, builder)
                             End Sub)
                     End Sub)
             End Sub)

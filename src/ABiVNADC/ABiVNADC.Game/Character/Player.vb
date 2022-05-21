@@ -178,12 +178,14 @@ Public Class Player
     End Function
 
     Public Sub TurnAround(builder As StringBuilder)
-        If CanTurn Then
-            SetDirection(AheadDirection.Value.OppositeDirection)
-            If Character.HasEffect(EffectType.Nausea) AndAlso RNG.RollDice("1d2/2") > 0 Then
-                builder.AppendLine($"When {Character.FullName} spins around, they get sick and vomit on the floor.")
-                Feature.Create(Character.Location, FeatureType.VomitPuddle)
-            End If
+        If Not CanTurn Then
+            builder.AppendLine("You cannot do that now!")
+            Return
+        End If
+        SetDirection(AheadDirection.Value.OppositeDirection)
+        If Character.HasEffect(EffectType.Nausea) AndAlso RNG.RollDice("1d2/2") > 0 Then
+            builder.AppendLine($"When {Character.FullName} spins around, they get sick and vomit on the floor.")
+            Feature.Create(Character.Location, FeatureType.VomitPuddle)
         End If
     End Sub
 
@@ -193,20 +195,28 @@ Public Class Player
     End Sub
 
     Public Sub UseItem(item As Item, builder As StringBuilder)
+        If Not item.CanUse Then
+            builder.AppendLine($"Cannot use `{item.FullName}`.")
+            Return
+        End If
         item.ItemType.OnUse(Character, item, builder)
         Character.NextTurn(builder)
     End Sub
 
-    Public Sub TurnLeft()
-        If CanTurn Then
-            SetDirection(AheadDirection.Value.LeftDirection)
+    Public Sub TurnLeft(builder As StringBuilder)
+        If Not CanTurn Then
+            builder.AppendLine("You cannot do that now!")
+            Return
         End If
+        SetDirection(AheadDirection.Value.LeftDirection)
     End Sub
 
-    Public Sub TurnRight()
-        If CanTurn Then
-            SetDirection(AheadDirection.Value.RightDirection)
+    Public Sub TurnRight(builder As StringBuilder)
+        If Not CanTurn Then
+            builder.AppendLine("You cannot do that now!")
+            Return
         End If
+        SetDirection(AheadDirection.Value.RightDirection)
     End Sub
 
     Public Sub Move(builder As StringBuilder)

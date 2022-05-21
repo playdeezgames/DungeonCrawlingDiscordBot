@@ -25,6 +25,13 @@ Public Class Character
         End Get
     End Property
 
+    Public Sub Drop(items As IEnumerable(Of Item), builder As StringBuilder)
+        For Each item In items
+            Location.Inventory.Add(item)
+        Next
+        builder.AppendLine($"{FullName} drops {items.Count} items.")
+    End Sub
+
     ReadOnly Property MaximumEncumbrance As Long
         Get
             Return CharacterType.MaximumEncumbrance

@@ -5,10 +5,6 @@
             AroundText,
             builder,
             Sub()
-                If Not player.CanTurn Then
-                    builder.AppendLine("You cannot do that now!")
-                    Return
-                End If
                 player.TurnAround(builder)
                 ShowCurrentLocation(player, builder)
             End Sub)

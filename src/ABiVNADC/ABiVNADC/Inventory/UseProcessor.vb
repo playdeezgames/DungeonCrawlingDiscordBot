@@ -14,10 +14,6 @@
                             AddressOf character.Inventory.FindItemsByName,
                             builder,
                             Sub(item)
-                                If Not item.CanUse Then
-                                    builder.AppendLine($"Cannot use `{item.FullName}`.")
-                                    Return
-                                End If
                                 player.UseItem(item, builder)
                             End Sub)
                     End Sub)
