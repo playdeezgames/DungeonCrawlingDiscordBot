@@ -34,27 +34,7 @@
     End Function
 
     Public Function Create(dungeonName As String, overworldLocationId As Long, startingLocationId As Long, difficulty As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{DungeonNameColumn}],
-                [{OverworldLocationIdColumn}],
-                [{StartingLocationIdColumn}],
-                [{DifficultyColumn}]
-            ) 
-            VALUES
-            (
-                @{DungeonNameColumn},
-                @{OverworldLocationIdColumn},
-                @{StartingLocationIdColumn},
-                @{DifficultyColumn}
-            );",
-            MakeParameter($"@{DungeonNameColumn}", dungeonName),
-            MakeParameter($"@{DifficultyColumn}", difficulty),
-            MakeParameter($"@{StartingLocationIdColumn}", startingLocationId),
-            MakeParameter($"@{OverworldLocationIdColumn}", overworldLocationId))
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName, (DungeonNameColumn, dungeonName), (OverworldLocationIdColumn, overworldLocationId), (StartingLocationIdColumn, startingLocationId), (DifficultyColumn, difficulty))
     End Function
 
     Public Function ReadName(dungeonId As Long) As String

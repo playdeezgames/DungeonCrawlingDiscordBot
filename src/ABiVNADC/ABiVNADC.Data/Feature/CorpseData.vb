@@ -25,21 +25,7 @@
     End Function
 
     Public Function Create(featureId As Long, corpseName As String) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{FeatureIdColumn}],
-                [{CorpseNameColumn}]
-            ) 
-            VALUES
-            (
-                @{FeatureIdColumn},
-                @{CorpseNameColumn}
-            );",
-            MakeParameter($"@{FeatureIdColumn}", featureId),
-            MakeParameter($"@{CorpseNameColumn}", corpseName))
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName, (FeatureIdColumn, featureId), (CorpseNameColumn, corpseName))
     End Function
 
     Friend Sub Clear(featureId As Long)
