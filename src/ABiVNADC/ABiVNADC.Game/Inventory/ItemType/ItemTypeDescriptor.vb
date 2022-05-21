@@ -50,8 +50,8 @@ Public Class ItemTypeDescriptor
         Aliases = New List(Of String)
         PostCreate = Sub()
                      End Sub
-        HealthModifier = Function(x) 0
-        EnergyModifier = Function(x) 0
+        HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), item.ModifierLevel(ModifierType.Health), 0)
+        EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), item.ModifierLevel(ModifierType.Energy), 0)
     End Sub
 End Class
 Module ItemTypeDescriptorExtensions
@@ -193,9 +193,7 @@ Module ItemTypeDescriptorExtensions
                                  builder.AppendLine($"{character.FullName} confers {modifier.Name} to {target.FullName}.")
                                  item.AddModifier(modifier, -1)
                                  target.AddModifier(modifier, 1)
-                             End Sub,
-                    .HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), item.ModifierLevel(ModifierType.Health), 0),
-                    .EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), item.ModifierLevel(ModifierType.Energy), 0)
+                             End Sub
                 }
             },
             {

@@ -86,7 +86,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function HasAttackDice(itemType As ItemType, item As Item) As Boolean
-        Return itemType.AttackDice(item) <> "0d1"
+        Return itemType.AttackDice(item) <> "0d1" OrElse item.HasModifier(ModifierType.Attack)
     End Function
 
 
@@ -101,7 +101,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function HasDefendDice(itemType As ItemType, item As Item) As Boolean
-        Return itemType.DefendDice(item) <> "0d1"
+        Return itemType.DefendDice(item) <> "0d1" OrElse item.HasModifier(ModifierType.Defend)
     End Function
 
     <Extension>

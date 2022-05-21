@@ -65,7 +65,7 @@
 
     ReadOnly Property HasDefendDice As Boolean
         Get
-            Return ItemType.HasDefendDice(Me)
+            Return ItemType.HasDefendDice(Me) OrElse HasModifier(ModifierType.Defend)
         End Get
     End Property
 
