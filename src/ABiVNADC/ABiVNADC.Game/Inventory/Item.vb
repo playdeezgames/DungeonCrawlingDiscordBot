@@ -123,7 +123,7 @@
     End Sub
 
     Friend Function HasModifier(modifierType As ModifierType) As Boolean
-        Return Modifiers.ContainsKey(modifierType)
+        Return Modifiers.ContainsKey(modifierType) AndAlso Modifiers(modifierType) <> 0
     End Function
 
     Friend Function ModifierLevel(modifierType As ModifierType) As Long

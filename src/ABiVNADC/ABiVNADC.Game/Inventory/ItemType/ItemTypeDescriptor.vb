@@ -194,8 +194,6 @@ Module ItemTypeDescriptorExtensions
                                  item.AddModifier(modifier, -1)
                                  target.AddModifier(modifier, 1)
                              End Sub,
-                    .AttackDice = Function(item) If(item.HasModifier(ModifierType.Attack), $"{item.ModifierLevel(ModifierType.Attack)}d2/2", "0d1"),
-                    .DefendDice = Function(item) If(item.HasModifier(ModifierType.Defend), $"{item.ModifierLevel(ModifierType.Defend)}d3/3", "0d1"),
                     .HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), item.ModifierLevel(ModifierType.Health), 0),
                     .EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), item.ModifierLevel(ModifierType.Energy), 0)
                 }

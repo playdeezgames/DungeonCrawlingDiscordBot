@@ -77,7 +77,11 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function AttackDice(itemType As ItemType, item As Item) As String
-        Return ItemTypeDescriptors(itemType).AttackDice(item)
+        Dim result = ItemTypeDescriptors(itemType).AttackDice(item)
+        If item.HasModifier(ModifierType.Attack) Then
+            result = $"{result}+{item.Modifiers(ModifierType.Attack)}d2/2"
+        End If
+        Return result
     End Function
 
     <Extension>
@@ -88,7 +92,11 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function DefendDice(itemType As ItemType, item As Item) As String
-        Return ItemTypeDescriptors(itemType).DefendDice(item)
+        Dim result = ItemTypeDescriptors(itemType).DefendDice(item)
+        If item.HasModifier(ModifierType.Defend) Then
+            result = $"{result}+{item.Modifiers(ModifierType.Defend)}d3/3"
+        End If
+        Return result
     End Function
 
     <Extension>
