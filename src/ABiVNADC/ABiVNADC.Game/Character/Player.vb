@@ -12,6 +12,22 @@ Public Class Player
         End Get
     End Property
 
+    Public Sub Rest(builder As StringBuilder)
+        If Character IsNot Nothing Then
+            builder.AppendLine("You have no current character.")
+            Return
+        End If
+        If Not Character.Location.CanRest Then
+            builder.AppendLine($"{Character.FullName} cannot rest here.")
+            Return
+        End If
+        If InCombat Then
+            CombatRest(builder)
+            Return
+        End If
+        Character.NonCombatRest(builder)
+    End Sub
+
     ReadOnly Property CanFight As Boolean
         Get
             Return If(Character?.CanFight, False)
