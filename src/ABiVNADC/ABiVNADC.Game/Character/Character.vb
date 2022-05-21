@@ -198,7 +198,9 @@ Public Class Character
         Get
             Dim result As String = If(Equipment.ContainsKey(EquipSlot.Weapon), "0d1", CharacterType.AttackDice)
             Dim attackItems = Equipment.Values.Where(Function(x) x.HasAttackDice)
-            result = $"{result}+{String.Join("+"c, attackItems.Select(Function(x) x.AttackDice))}"
+            If attackItems.Any Then
+                result = $"{result}+{String.Join("+"c, attackItems.Select(Function(x) x.AttackDice))}"
+            End If
             For Each effect In Effects.Where(Function(x) x.HasAttackDice)
                 result &= $"+{effect.AttackDice}"
             Next

@@ -9,6 +9,7 @@ Public Enum CharacterType
     Zombie
     MinionFish
     BossFish
+    Mummy
 End Enum
 Public Module CharacterTypeExtensions
 

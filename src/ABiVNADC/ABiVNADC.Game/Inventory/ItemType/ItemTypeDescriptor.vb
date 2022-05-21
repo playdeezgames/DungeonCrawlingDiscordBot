@@ -197,6 +197,17 @@ Module ItemTypeDescriptorExtensions
                 }
             },
             {
+                ItemType.Ankh,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "ankh",
+                    .SpawnCount = Function(difficulty, locationCount) "0d1",
+                    .CanSellGenerator = MakeBooleanGenerator(1, 1),
+                    .SellPriceDice = "100d1+2d100",
+                    .IsTrophy = True
+                }
+            },
+            {
                 ItemType.Backpack,
                 New ItemTypeDescriptor With
                 {
@@ -208,6 +219,17 @@ Module ItemTypeDescriptorExtensions
                     .BuyPriceDice = "200d1+2d200",
                     .InventoryEncumbrance = 1,
                     .EquippedEncumbrance = -20
+                }
+            },
+            {
+                ItemType.Bandage,
+                New ItemTypeDescriptor With
+                {
+                    .Name = "bandage",
+                    .SpawnCount = Function(difficulty, locationCount) "0d1",
+                    .CanSellGenerator = MakeBooleanGenerator(1, 1),
+                    .SellPriceDice = "10d1+2d10",
+                    .IsTrophy = True
                 }
             },
             {

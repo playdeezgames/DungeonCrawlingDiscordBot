@@ -27,6 +27,8 @@ Public Enum ItemType
     LandClaim
     Backpack
     Amulet
+    Bandage
+    Ankh
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
