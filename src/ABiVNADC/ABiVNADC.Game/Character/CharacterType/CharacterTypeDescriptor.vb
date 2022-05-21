@@ -16,6 +16,7 @@
     Friend MaximumEncumbrance As Long
     Friend CombatEndowmentRecoveryDice As String
     Friend CombatActionTable As Func(Of Character, Dictionary(Of CombatActionType, Integer))
+    Friend SortOrder As Long
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
@@ -104,7 +105,8 @@ Module CharacterTypeDescriptorExtensions
                     .LootDrops = New Dictionary(Of ItemType, String),
                     .ExperiencePointValue = 0,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType)
+                    .ValidBribes = New HashSet(Of ItemType),
+                    .SortOrder = 1
                 }
             },
             {
@@ -151,7 +153,8 @@ Module CharacterTypeDescriptorExtensions
                     },
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
+                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools},
+                    .SortOrder = 100
                 }
             },
             {
@@ -198,7 +201,8 @@ Module CharacterTypeDescriptorExtensions
                         },
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType)
+                    .ValidBribes = New HashSet(Of ItemType),
+                    .SortOrder = 10
                 }
             },
             {
@@ -245,7 +249,8 @@ Module CharacterTypeDescriptorExtensions
                         },
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
+                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools},
+                    .SortOrder = 50
                 }
             },
             {
@@ -291,7 +296,8 @@ Module CharacterTypeDescriptorExtensions
                         },
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType)
+                    .ValidBribes = New HashSet(Of ItemType),
+                    .SortOrder = 100
                 }
             },
             {
@@ -337,7 +343,8 @@ Module CharacterTypeDescriptorExtensions
                         },
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType)
+                    .ValidBribes = New HashSet(Of ItemType),
+                    .SortOrder = 50
                 }
             },
             {
@@ -383,7 +390,8 @@ Module CharacterTypeDescriptorExtensions
                         },
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
+                    .ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools},
+                    .SortOrder = 20
                 }
             },
             {
@@ -431,7 +439,8 @@ Module CharacterTypeDescriptorExtensions
                         },
                     .ExperiencePointValue = 5,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
-                    .ValidBribes = New HashSet(Of ItemType)
+                    .ValidBribes = New HashSet(Of ItemType),
+                    .SortOrder = 5
                 }
             }
         }

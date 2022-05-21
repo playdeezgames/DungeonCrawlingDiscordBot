@@ -96,4 +96,9 @@ Public Module CharacterTypeExtensions
     Function CombatActionTable(characterType As CharacterType, character As Character) As Dictionary(Of CombatActionType, Integer)
         Return CharacterTypeDescriptors(characterType).CombatActionTable(character)
     End Function
+
+    <Extension>
+    Function SortOrder(characterType As CharacterType) As Long
+        Return CharacterTypeDescriptors(characterType).SortOrder
+    End Function
 End Module

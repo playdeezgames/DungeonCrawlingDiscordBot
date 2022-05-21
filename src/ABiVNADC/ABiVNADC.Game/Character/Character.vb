@@ -7,6 +7,12 @@ Public Class Character
         Id = characterId
     End Sub
 
+    ReadOnly Property SortOrder As Long
+        Get
+            Return CharacterType.SortOrder
+        End Get
+    End Property
+
     ReadOnly Property Effects As HashSet(Of EffectType)
         Get
             Return New HashSet(Of EffectType)(CharacterEffectData.ReadForCharacter(Id).Select(Function(x) CType(x, EffectType)))

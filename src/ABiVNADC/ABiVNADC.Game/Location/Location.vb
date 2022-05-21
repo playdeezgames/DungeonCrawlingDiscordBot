@@ -172,7 +172,7 @@
 
     ReadOnly Property Characters As IEnumerable(Of Character)
         Get
-            Return CharacterLocationData.ReadForLocation(Id).Select(Function(id) New Character(id))
+            Return CharacterLocationData.ReadForLocation(Id).Select(Function(id) New Character(id)).OrderBy(Function(x) x.SortOrder)
         End Get
     End Property
 
