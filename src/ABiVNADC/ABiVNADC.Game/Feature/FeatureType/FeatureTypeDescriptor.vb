@@ -58,7 +58,7 @@ Module FeatureTypeDescriptorExtensions
                                             {16, 1}
                                         }
                                      Dim dungeonSize = RNG.FromGenerator(dungeonSizeGenerator)
-                                     Dim dungeon = Game.Dungeon.Create(Nothing, GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
+                                     Dim dungeon = Game.Dungeon.Create(GenerateDungeonName, New Location(fromLocation.Id), dungeonSize, dungeonSize, RNG.FromGenerator(dungeonDifficultyGenerator))
 
                                      Dim result = Entrance.Create(fromLocation, dungeon.Name)
 

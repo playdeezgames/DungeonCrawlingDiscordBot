@@ -6,9 +6,7 @@
             $"CREATE TABLE IF NOT EXISTS [{TableName}]([{InventoryIdColumn}] INTEGER PRIMARY KEY AUTOINCREMENT);")
     End Sub
     Public Function Create() As Long
-        Initialize()
-        ExecuteNonQuery($"INSERT INTO [{TableName}] DEFAULT VALUES;")
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName)
     End Function
 
     Public Sub ClearOrphans()

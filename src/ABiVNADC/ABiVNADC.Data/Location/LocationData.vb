@@ -16,10 +16,6 @@
     End Function
 
     Public Function Create(locationType As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]([{LocationTypeColumn}]) VALUES(@{LocationTypeColumn});",
-            MakeParameter($"@{LocationTypeColumn}", locationType))
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName, (LocationTypeColumn, locationType))
     End Function
 End Module

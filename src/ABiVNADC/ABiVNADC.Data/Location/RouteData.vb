@@ -33,23 +33,11 @@
             );")
     End Sub
     Public Function Create(fromLocationId As Long, direction As Long, toLocationId As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{FromLocationIdColumn}],
-                [{DirectionColumn}],
-                [{ToLocationIdColumn}]
-            ) 
-            VALUES
-            (
-                @{FromLocationIdColumn},
-                @{DirectionColumn},
-                @{ToLocationIdColumn}
-            );",
-            MakeParameter($"@{FromLocationIdColumn}", fromLocationId),
-            MakeParameter($"@{DirectionColumn}", direction),
-            MakeParameter($"@{ToLocationIdColumn}", toLocationId))
-        Return LastInsertRowId
+        Return CreateRecord(
+            AddressOf Initialize,
+            TableName,
+            (FromLocationIdColumn, fromLocationId),
+            (DirectionColumn, direction),
+            (ToLocationIdColumn, toLocationId))
     End Function
 End Module

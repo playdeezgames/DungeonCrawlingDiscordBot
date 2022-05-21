@@ -24,17 +24,6 @@
     End Sub
 
     Public Function Create(itemType As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{ItemTypeColumn}]
-            ) 
-            VALUES
-            (
-                @{ItemTypeColumn}
-            );",
-            MakeParameter($"@{ItemTypeColumn}", itemType))
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName, (ItemTypeColumn, itemType))
     End Function
 End Module

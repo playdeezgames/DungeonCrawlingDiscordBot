@@ -31,23 +31,6 @@
             );")
     End Sub
     Public Function Create(shoppeName As String, outsideLocationId As Long, insideLocationId As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{ShoppeNameColumn}],
-                [{OutsideLocationIdColumn}],
-                [{InsideLocationIdColumn}]
-            ) 
-            VALUES
-            (
-                @{ShoppeNameColumn},
-                @{OutsideLocationIdColumn},
-                @{InsideLocationIdColumn}
-            )",
-            MakeParameter($"@{ShoppeNameColumn}", shoppeName),
-            MakeParameter($"@{OutsideLocationIdColumn}", outsideLocationId),
-            MakeParameter($"@{InsideLocationIdColumn}", insideLocationId))
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName, (ShoppeNameColumn, shoppeName), (OutsideLocationIdColumn, outsideLocationId), (InsideLocationIdColumn, insideLocationId))
     End Function
 End Module

@@ -136,15 +136,6 @@ Public Class Player
         Character.NextTurn(builder)
     End Sub
 
-    Public Function DeleteDungeon(dungeonName As String) As Boolean
-        Dim dungeon = Dungeons.FirstOrDefault(Function(x) x.Name = dungeonName)
-        If dungeon IsNot Nothing Then
-            DungeonData.Clear(dungeon.Id)
-            Return True
-        End If
-        Return False
-    End Function
-
     Public Function DeleteCharacter(characterName As String) As Boolean
         Dim character = Characters.FirstOrDefault(Function(x) x.Name = characterName)
         If character IsNot Nothing Then
@@ -261,12 +252,6 @@ Public Class Player
     Friend Sub AddRIP(character As Character)
         PlayerRIPData.Write(Id, $"{character.FullName}(Level: {character.Level})")
     End Sub
-
-    ReadOnly Property Dungeons As IEnumerable(Of Dungeon)
-        Get
-            Return DungeonData.ReadForPlayer(Id).Select(Function(id) Dungeon.FromId(id))
-        End Get
-    End Property
 
     ReadOnly Property AheadDirection As Direction?
         Get

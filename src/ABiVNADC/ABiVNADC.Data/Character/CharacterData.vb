@@ -27,24 +27,7 @@
     End Function
 
     Public Function Create(characterName As String, characterType As Long, characterLevel As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{CharacterNameColumn}],
-                [{CharacterTypeColumn}],
-                [{CharacterLevelColumn}]
-            )
-            VALUES
-            (
-                @{CharacterNameColumn},
-                @{CharacterTypeColumn},
-                @{CharacterLevelColumn}
-            );",
-            MakeParameter($"@{CharacterNameColumn}", characterName),
-            MakeParameter($"@{CharacterTypeColumn}", characterType),
-            MakeParameter($"@{CharacterLevelColumn}", characterLevel))
-        Return LastInsertRowId
+        Return CreateRecord(AddressOf Initialize, TableName, (CharacterNameColumn, characterName), (CharacterTypeColumn, characterType), (CharacterLevelColumn, characterLevel))
     End Function
 
     Public Sub Clear(characterId As Long)

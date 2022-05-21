@@ -15,20 +15,7 @@
     End Sub
 
     Public Sub Write(playerId As Long, tombstoneText As String)
-        Initialize()
-        ExecuteNonQuery(
-            $"INSERT INTO [{TableName}]
-            (
-                [{PlayerIdColumn}],
-                [{TombstoneTextColumn}]
-            ) 
-            VALUES
-            (
-                @{PlayerIdColumn},
-                @{TombstoneTextColumn}
-            );",
-            MakeParameter($"@{PlayerIdColumn}", playerId),
-            MakeParameter($"@{TombstoneTextColumn}", tombstoneText))
+        CreateRecord(AddressOf Initialize, TableName, (PlayerIdColumn, playerId), (TombstoneTextColumn, tombstoneText))
     End Sub
 
     Public Function ReadTombstoneTexts(playerId As Long) As IEnumerable(Of String)
