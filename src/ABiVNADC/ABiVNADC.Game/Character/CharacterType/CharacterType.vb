@@ -10,6 +10,7 @@ Public Enum CharacterType
     MinionFish
     BossFish
     Mummy
+    Crab
 End Enum
 Public Module CharacterTypeExtensions
 
