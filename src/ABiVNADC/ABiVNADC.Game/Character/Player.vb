@@ -12,8 +12,24 @@ Public Class Player
         End Get
     End Property
 
+    Public Sub Fight(builder As StringBuilder)
+        If Character Is Nothing Then
+            builder.AppendLine("You have no current character.")
+        End If
+        If Not Character.InCombat Then
+            builder.AppendLine($"{Character.FullName} is not in combat.")
+            Return
+        End If
+        If Not Character.CanFight Then
+            builder.AppendLine($"{Character.FullName} needs to recover energy.")
+            Return
+        End If
+        Dim enemy = Character.Location.Enemy(Character)
+        Attack(enemy, builder)
+    End Sub
+
     Public Sub Rest(builder As StringBuilder)
-        If Character IsNot Nothing Then
+        If Character Is Nothing Then
             builder.AppendLine("You have no current character.")
             Return
         End If
