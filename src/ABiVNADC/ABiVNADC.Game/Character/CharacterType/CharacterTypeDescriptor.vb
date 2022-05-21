@@ -15,11 +15,21 @@
     Friend MaximumExperienceLevel As Long
     Friend MaximumEncumbrance As Long
     Friend CombatEndowmentRecoveryDice As String
+    Friend CombatActionTable As Func(Of Character, Dictionary(Of CombatActionType, Integer))
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         CombatEndowmentRecoveryDice = "0d1"
         Maximum = Function(s, c) 0
+        CombatActionTable = Function(character)
+                                If character.CanFight Then
+                                    Return New Dictionary(Of CombatActionType, Integer) From
+                                        {{CombatActionType.Attack, 1}}
+                                Else
+                                    Return New Dictionary(Of CombatActionType, Integer) From
+                                        {{CombatActionType.Rest, 1}}
+                                End If
+                            End Function
     End Sub
 End Class
 Module CharacterTypeDescriptorExtensions

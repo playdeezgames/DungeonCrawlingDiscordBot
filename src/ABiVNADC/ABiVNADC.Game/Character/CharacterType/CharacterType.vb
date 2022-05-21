@@ -90,4 +90,9 @@ Public Module CharacterTypeExtensions
     Function MaximumEncumbrance(characterType As CharacterType) As Long
         Return CharacterTypeDescriptors(characterType).MaximumEncumbrance
     End Function
+
+    <Extension>
+    Function CombatActionTable(characterType As CharacterType, character As Character) As Dictionary(Of CombatActionType, Integer)
+        Return CharacterTypeDescriptors(characterType).CombatActionTable(character)
+    End Function
 End Module

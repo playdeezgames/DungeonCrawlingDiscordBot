@@ -126,13 +126,18 @@ Public Class Character
 
     Private Sub PerformCounterAttack(builder As StringBuilder, enemy As Character)
         builder.AppendLine("---")
-        If enemy.CanFight Then
-            enemy.Attack(Me, builder)
-        Else
-            enemy.CombatRest(builder)
-        End If
+        Select Case RNG.FromGenerator(enemy.CombatActionTable())
+            Case CombatActionType.Attack
+                enemy.Attack(Me, builder)
+            Case CombatActionType.Rest
+                enemy.CombatRest(builder)
+        End Select
         enemy.ApplyEffects(builder)
     End Sub
+
+    Private Function CombatActionTable() As Dictionary(Of CombatActionType, Integer)
+        Return CharacterType.CombatActionTable(Me)
+    End Function
 
     Friend Sub ApplyEffects(builder As StringBuilder)
         For Each effect In Effects
