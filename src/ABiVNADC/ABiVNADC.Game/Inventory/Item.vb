@@ -75,17 +75,20 @@
         End Get
     End Property
 
-    ReadOnly Property Modifiers As IEnumerable(Of ModifierType)
+    ReadOnly Property Modifiers As Dictionary(Of ModifierType, Long)
         Get
-            Return ItemModifierData.Read(Id).Keys.Select(Function(x) CType(x, ModifierType))
+            Return ItemModifierData.Read(Id).
+                ToDictionary(
+                Function(entry) CType(entry.Key, ModifierType),
+                Function(entry) entry.Value)
         End Get
     End Property
 
     ReadOnly Property FullName As String
         Get
             Dim name = ItemType.Name
-            For Each m In Modifiers
-                name = m.DecorateName(name)
+            For Each entry In Modifiers.Where(Function(e) e.Value > 0)
+                name = entry.Key.DecorateName(name)
             Next
             Return name
         End Get
@@ -120,7 +123,7 @@
     End Sub
 
     Friend Function HasModifier(modifierType As ModifierType) As Boolean
-        Return Modifiers.Contains(modifierType)
+        Return Modifiers.ContainsKey(modifierType)
     End Function
 
     Friend Function ModifierLevel(modifierType As ModifierType) As Long

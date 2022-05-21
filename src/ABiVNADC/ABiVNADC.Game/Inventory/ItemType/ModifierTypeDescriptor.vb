@@ -1,5 +1,6 @@
 ﻿Public Class ModifierTypeDescriptor
     Property NameDecorator As Func(Of String, String)
+    Property Name As String
     Sub New()
         NameDecorator = Function(x) x
     End Sub
@@ -11,6 +12,7 @@ Module ModifierTypeDescriptorExtensions
                 ModifierType.Attack,
                 New ModifierTypeDescriptor With
                 {
+                    .Name = "valor",
                     .NameDecorator = Function(name)
                                          Return $"{name} of valor"
                                      End Function
@@ -20,6 +22,7 @@ Module ModifierTypeDescriptorExtensions
                 ModifierType.Defend,
                 New ModifierTypeDescriptor With
                 {
+                    .Name = "vinidication",
                     .NameDecorator = Function(name)
                                          Return $"{name} of vindication"
                                      End Function
@@ -29,6 +32,7 @@ Module ModifierTypeDescriptorExtensions
                 ModifierType.Energy,
                 New ModifierTypeDescriptor With
                 {
+                    .Name = "vigor",
                     .NameDecorator = Function(name)
                                          Return $"{name} of vigor"
                                      End Function
@@ -38,6 +42,7 @@ Module ModifierTypeDescriptorExtensions
                 ModifierType.Health,
                 New ModifierTypeDescriptor With
                 {
+                    .Name = "vitality",
                     .NameDecorator = Function(name)
                                          Return $"{name} of vitality"
                                      End Function
