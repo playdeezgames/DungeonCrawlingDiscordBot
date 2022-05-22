@@ -1,7 +1,7 @@
 ﻿Friend Class AmuletDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("amulet")
+        MyBase.New("amulet", True)
         SpawnCount = AddressOf VeryRareSpawn
         EquipSlot = EquipSlot.Neck
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
@@ -24,7 +24,6 @@
                              item.AddModifier(modifier, 1)
                          End If
                      End Sub
-        CanUse = True
         OnUse = Sub(character, item, builder)
                     If Not item.Modifiers.Any Then
                         builder.AppendLine($"{item.FullName} has no power to confer.")

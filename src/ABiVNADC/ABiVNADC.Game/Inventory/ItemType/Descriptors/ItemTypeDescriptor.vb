@@ -2,9 +2,10 @@
 
 Public Class ItemTypeDescriptor
     ReadOnly Property Name As String
-    Property SpawnCount As Func(Of Difficulty, Long, String)
-    Property CanUse As Boolean
+    ReadOnly Property CanUse As Boolean
     Property UseMessage As Func(Of String, String)
+    Property OnUse As Action(Of Character, Item, StringBuilder)
+    Property SpawnCount As Func(Of Difficulty, Long, String)
     Property EquipSlot As EquipSlot
     Property AttackDice As Func(Of Item, String)
     Property DefendDice As Func(Of Item, String)
@@ -13,7 +14,6 @@ Public Class ItemTypeDescriptor
     Property CanSellGenerator As Dictionary(Of Boolean, Integer)
     Property BuyPriceDice As String
     Property SellPriceDice As String
-    Property OnUse As Action(Of Character, Item, StringBuilder)
     Property QuestTargetWeight As Integer
     Property QuestTargetQuantityDice As String
     Property QuestRewardWeight As Integer
@@ -26,20 +26,21 @@ Public Class ItemTypeDescriptor
     Property Modifier As Func(Of StatisticType, Item, Long)
     Property HealthModifier As Func(Of Item, Long)
     Property EnergyModifier As Func(Of Item, Long)
-    Sub New(name As String)
+    Sub New(name As String, canUse As Boolean)
         Me.Name = name
+        Me.CanUse = canUse
+        OnUse = Sub(c, i, b)
+                End Sub
+
         Modifier = Function(s, i) 0
         EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"
-        CanUse = False
         DefendDice = Function(x) "0d1"
         Durability = Function(x) 0
         CanBuyGenerator = RNG.MakeBooleanGenerator(1, 0)
         CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
         BuyPriceDice = "0d1"
         SellPriceDice = "0d1"
-        OnUse = Sub(c, i, b)
-                End Sub
         SpawnCount = Function(difficulty, locationCount) "0d1"
         QuestTargetWeight = 0
         QuestTargetQuantityDice = "0d1"

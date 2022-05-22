@@ -1,7 +1,7 @@
 ﻿Friend Class PlateMailDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("plate mail")
+        MyBase.New("plate mail", False)
         SpawnCount = AddressOf VeryRareSpawn
         EquipSlot = EquipSlot.Body
         DefendDice = Function(x) "1d3/3+1d3/3"

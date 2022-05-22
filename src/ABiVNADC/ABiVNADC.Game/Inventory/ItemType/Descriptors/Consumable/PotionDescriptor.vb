@@ -1,9 +1,8 @@
 ﻿Friend Class PotionDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("potion")
+        MyBase.New("potion", True)
         SpawnCount = AddressOf RareSpawn
-        CanUse = True
         UseMessage = Function(x) $"{x} drinks a potion"
         CanBuyGenerator = MakeBooleanGenerator(1, 4)
         BuyPriceDice = "50d1+2d50"

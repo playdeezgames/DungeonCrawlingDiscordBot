@@ -1,7 +1,7 @@
 ﻿Friend Class HelmetDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("helmet")
+        MyBase.New("helmet", False)
         SpawnCount = AddressOf UncommonSpawn
         EquipSlot = EquipSlot.Head
         DefendDice = Function(x) "1d3/3"

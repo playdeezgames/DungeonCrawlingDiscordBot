@@ -1,9 +1,8 @@
 ﻿Friend Class RottenFoodDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("rotten food")
+        MyBase.New("rotten food", True)
         SpawnCount = AddressOf VeryCommonSpawn
-        CanUse = True
         UseMessage = Function(x) $"{x} eats rotten food"
         OnUse = Sub(character, item, builder)
                     Const FoodFatigueRecovery As Long = 4

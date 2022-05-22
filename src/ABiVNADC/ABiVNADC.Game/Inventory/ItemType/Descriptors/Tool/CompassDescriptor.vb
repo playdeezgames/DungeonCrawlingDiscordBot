@@ -1,8 +1,7 @@
 ﻿Friend Class CompassDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("compass")
-        CanUse = True
+        MyBase.New("compass", True)
         UseMessage = Function(x) $"{x} looks at their compass"
         CanBuyGenerator = MakeBooleanGenerator(49, 1)
         BuyPriceDice = "500d1+2d500"

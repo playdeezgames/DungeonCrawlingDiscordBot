@@ -1,7 +1,7 @@
 ﻿Friend Class BackpackDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("backpack")
+        MyBase.New("backpack", False)
         SpawnCount = AddressOf VeryRareSpawn
         EquipSlot = EquipSlot.Back
         Durability = Function(x) If(x = DurabilityType.Armor, 10, 0)
