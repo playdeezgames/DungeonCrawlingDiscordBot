@@ -46,9 +46,9 @@ Module CharacterTypeDescriptorExtensions
                     .Maximum = Function(s, c)
                                    Select Case s
                                        Case StatisticType.Energy
-                                           Return c.Level + 7
+                                           Return c.Level \ 2 + 7
                                        Case StatisticType.Health
-                                           Return c.Level + 5
+                                           Return (c.Level + 1) \ 2 + 3
                                        Case Else
                                            Return 0
                                    End Select
