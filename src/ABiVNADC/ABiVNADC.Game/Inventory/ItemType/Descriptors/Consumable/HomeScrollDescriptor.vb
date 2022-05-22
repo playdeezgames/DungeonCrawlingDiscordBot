@@ -1,7 +1,24 @@
-﻿Friend Class HomeScrollDescriptor
+﻿Imports System.Text
+
+Friend Class HomeScrollDescriptor
     Inherits ItemTypeDescriptor
+    Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
+        Dim homeStones = character.OwnedFeatures.Where(Function(x) x.FeatureType = FeatureType.HomeStone)
+        If Not homeStones.Any Then
+            builder.AppendLine($"{character.FullName} does not own any home stones!")
+            Return
+        End If
+        If character.Location.LocationType <> LocationType.Overworld Then
+            builder.AppendLine($"{character.FullName} must be in the overworld in order to use a home scroll!")
+            Return
+        End If
+        Dim destination = RNG.FromEnumerable(homeStones)
+        character.Location = destination.Location
+        item.Destroy()
+        builder.AppendLine($"{character.FullName} uses the home scroll to transport themselves instantly to one of their home stones.")
+    End Sub
     Sub New()
-        MyBase.New("home scroll", False)
+        MyBase.New("home scroll", True)
         SpawnCount = Function(difficulty, locationCount) "0d1"
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "50d1+2d50"
