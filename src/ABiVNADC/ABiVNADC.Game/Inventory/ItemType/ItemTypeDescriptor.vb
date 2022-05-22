@@ -117,7 +117,7 @@ Module ItemTypeDescriptorExtensions
                 Throw New NotImplementedException
         End Select
     End Function
-    Private Function RareSpawn(difficulty As Difficulty, locationCount As Long) As String
+    Friend Function RareSpawn(difficulty As Difficulty, locationCount As Long) As String
         Select Case difficulty
             Case Difficulty.Yermom
                 Return $"{locationCount \ 3}d1"
@@ -525,39 +525,15 @@ Module ItemTypeDescriptorExtensions
             },
             {
                 ItemType.SkullFragment,
-                New ItemTypeDescriptor With
-                {
-                    .Name = "skull fragment",
-                    .SpawnCount = Function(difficulty, locationCount) "0d1",
-                    .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "5d1+2d5",
-                    .IsTrophy = True
-                }
+                New SkullFragmentDescriptor
             },
             {
                 ItemType.ThankYouNote,
-                New ItemTypeDescriptor With
-                {
-                    .Name = "thank you note",
-                    .QuestRewardWeight = 1,
-                    .QuestRewardQuantityDice = "1d1",
-                    .InventoryEncumbrance = -5
-                }
+                New ThankYouNoteDescriptor
             },
             {
                 ItemType.Trousers,
-                New ItemTypeDescriptor With
-                {
-                    .Name = "trousers",
-                    .SpawnCount = AddressOf RareSpawn,
-                    .EquipSlot = EquipSlot.Legs,
-                    .Durability = Function(x) If(x = DurabilityType.Armor, 1, 0),
-                    .CanSellGenerator = MakeBooleanGenerator(1, 1),
-                    .SellPriceDice = "50d1+2d50",
-                    .InventoryEncumbrance = 1,
-                    .EquippedEncumbrance = -4,
-                    .Aliases = New List(Of String) From {"pants"}
-                }
+                New TrousersDescriptor
             },
             {
                 ItemType.ZombieTaint,

@@ -1,11 +1,12 @@
-﻿Friend Class ZombieTaintDescriptor
+﻿Friend Class SkullFragmentDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
         MyBase.New
-        Name = "zombie taint"
+        Name = "skull fragment"
         SpawnCount = Function(difficulty, locationCount) "0d1"
         CanSellGenerator = MakeBooleanGenerator(1, 1)
-        SellPriceDice = "30d1+2d30"
+        SellPriceDice = "5d1+2d5"
         IsTrophy = True
     End Sub
+
 End Class
