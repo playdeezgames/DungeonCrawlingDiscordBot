@@ -61,11 +61,6 @@ Public Module ItemTypeExtensions
     End Function
 
     <Extension>
-    Function UseMessage(itemType As ItemType, characterName As String) As String
-        Return ItemTypeDescriptors(itemType).UseMessage(characterName)
-    End Function
-
-    <Extension>
     Function Aliases(itemType As ItemType) As IEnumerable(Of String)
         Return ItemTypeDescriptors(itemType).Aliases
     End Function

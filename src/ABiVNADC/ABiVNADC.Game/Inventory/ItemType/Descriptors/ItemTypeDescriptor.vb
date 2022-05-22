@@ -3,9 +3,6 @@
 Public Class ItemTypeDescriptor
     ReadOnly Property Name As String
     ReadOnly Property CanUse As Boolean
-    Overridable Function UseMessage(name As String) As String
-        Return $"{name} uses the thing!"
-    End Function
     Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
 
     End Sub

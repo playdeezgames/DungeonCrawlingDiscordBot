@@ -2,12 +2,9 @@
 
 Friend Class DaggerDescriptor
     Inherits ItemTypeDescriptor
-    Public Overrides Function UseMessage(name As String) As String
-        Return $"{name} commits seppuku"
-    End Function
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
+        builder.AppendLine($"{character.FullName} commits seppuku")
         character.Destroy()
-        builder.AppendLine(ItemType.Dagger.UseMessage(character.FullName))
     End Sub
     Sub New()
         MyBase.New("dagger", True)

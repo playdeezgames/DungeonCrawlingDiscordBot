@@ -2,13 +2,9 @@
 
 Friend Class FoodDescriptor
     Inherits ItemTypeDescriptor
-    Public Overrides Function UseMessage(name As String) As String
-        Return $"{name} eats food"
-    End Function
-
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         Const FoodFatigueRecovery As Long = 4
-        builder.AppendLine(ItemType.Food.UseMessage(character.FullName))
+        builder.AppendLine($"{character.FullName} eats food")
         character.AddFatigue(-FoodFatigueRecovery)
         builder.Append($"{character.FullName} now has {character.Statistic(StatisticType.Energy)} energy.")
         item.Destroy()
