@@ -367,7 +367,7 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(3, 1),
                     .BuyPriceDice = "50d1+2d50",
                     .InventoryEncumbrance = 0,
-                    .Aliases = New List(Of String) From {"hs"}
+                    .Aliases = New List(Of String) From {"hs", "scroll"}
                 }
             },
             {
@@ -379,7 +379,7 @@ Module ItemTypeDescriptorExtensions
                     .CanBuyGenerator = MakeBooleanGenerator(25, 1),
                     .BuyPriceDice = "1000d1+2d1000",
                     .InventoryEncumbrance = 50,
-                    .Aliases = New List(Of String)
+                    .Aliases = New List(Of String) From {"stone"}
                 }
             },
             {
