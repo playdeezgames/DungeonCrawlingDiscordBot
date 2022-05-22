@@ -1,9 +1,11 @@
 ﻿Friend Class PotionDescriptor
     Inherits ItemTypeDescriptor
+    Public Overrides Function UseMessage(name As String) As String
+        Return $"{name} drinks a potion"
+    End Function
     Sub New()
         MyBase.New("potion", True)
         SpawnCount = AddressOf RareSpawn
-        UseMessage = Function(x) $"{x} drinks a potion"
         CanBuyGenerator = MakeBooleanGenerator(1, 4)
         BuyPriceDice = "50d1+2d50"
         OnUse = Sub(character, item, builder)

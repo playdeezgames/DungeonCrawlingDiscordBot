@@ -3,7 +3,9 @@
 Public Class ItemTypeDescriptor
     ReadOnly Property Name As String
     ReadOnly Property CanUse As Boolean
-    Property UseMessage As Func(Of String, String)
+    Overridable Function UseMessage(name As String) As String
+        Return $"{name} uses the thing!"
+    End Function
     Property OnUse As Action(Of Character, Item, StringBuilder)
     Property SpawnCount As Func(Of Difficulty, Long, String)
     Property EquipSlot As EquipSlot

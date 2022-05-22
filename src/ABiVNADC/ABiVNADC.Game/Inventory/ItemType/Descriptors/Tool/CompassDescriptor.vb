@@ -1,8 +1,10 @@
 ﻿Friend Class CompassDescriptor
     Inherits ItemTypeDescriptor
+    Public Overrides Function UseMessage(name As String) As String
+        Return $"{name} looks at their compass"
+    End Function
     Sub New()
         MyBase.New("compass", True)
-        UseMessage = Function(x) $"{x} looks at their compass"
         CanBuyGenerator = MakeBooleanGenerator(49, 1)
         BuyPriceDice = "500d1+2d500"
         OnUse = Sub(character, item, builder)

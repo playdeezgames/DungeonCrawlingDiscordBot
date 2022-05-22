@@ -1,9 +1,11 @@
 ﻿Friend Class DaggerDescriptor
     Inherits ItemTypeDescriptor
+    Public Overrides Function UseMessage(name As String) As String
+        Return $"{name} commits seppuku"
+    End Function
     Sub New()
         MyBase.New("dagger", True)
         SpawnCount = AddressOf UncommonSpawn
-        UseMessage = Function(x) $"{x} commits seppuku"
         EquipSlot = EquipSlot.Weapon
         AttackDice = Function(x) "1d2/2"
         Durability = Function(x) If(x = DurabilityType.Weapon, 5, 0)

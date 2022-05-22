@@ -1,9 +1,11 @@
 ﻿Friend Class RottenFoodDescriptor
     Inherits ItemTypeDescriptor
+    Public Overrides Function UseMessage(name As String) As String
+        Return $"{name} eats rotten food"
+    End Function
     Sub New()
         MyBase.New("rotten food", True)
         SpawnCount = AddressOf VeryCommonSpawn
-        UseMessage = Function(x) $"{x} eats rotten food"
         OnUse = Sub(character, item, builder)
                     Const FoodFatigueRecovery As Long = 4
                     builder.AppendLine(ItemType.RottenFood.UseMessage(character.FullName))
