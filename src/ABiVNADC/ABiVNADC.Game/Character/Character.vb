@@ -467,8 +467,8 @@ Public Class Character
         AddFatigue(fatigue)
         Dim attackRoll = RollAttack()
         builder.AppendLine($"{FullName} rolls an attack of {attackRoll}!")
-        For Each weapon In ReduceWeaponDurability(attackRoll)
-            builder.AppendLine($"! ! ! {FullName}'s {weapon.FullName} breaks ! ! !")
+        For Each weaponName In ReduceWeaponDurability(attackRoll)
+            builder.AppendLine($"! ! ! {FullName}'s {weaponName} breaks ! ! !")
         Next
         Dim defendRoll = defender.RollDefend
         builder.AppendLine($"{defender.FullName} rolls a defend of {defendRoll}!")
@@ -564,14 +564,15 @@ Public Class Character
         Return result
     End Function
 
-    Private Function ReduceWeaponDurability(attackRoll As Long) As IEnumerable(Of Item)
-        Dim result As New List(Of Item)
+    Private Function ReduceWeaponDurability(attackRoll As Long) As IEnumerable(Of String)
+        Dim result As New List(Of String)
         While attackRoll > 0
             Dim items = Equipment.Values.Where(Function(x) x.HasDurability(DurabilityType.Weapon)).ToList
             If items.Any Then
                 Dim item = RNG.FromList(items)
-                If item.ReduceDurability(DurabilityType.Weapon, 1) Then
-                    result.Add(item)
+                Dim itemName = item.FullName
+                If item.ReduceDurability(DurabilityType.Weapon, 1) Then 'ReductDurability may Destroy the item
+                    result.Add(itemName)
                 End If
             End If
             attackRoll -= 1
