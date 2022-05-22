@@ -29,6 +29,8 @@ Public Enum ItemType
     Amulet
     Bandage
     Ankh
+    HomeStone
+    HomeScroll
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
