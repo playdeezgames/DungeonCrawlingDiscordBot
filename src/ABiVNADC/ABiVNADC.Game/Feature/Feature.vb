@@ -13,6 +13,19 @@
         End Get
     End Property
 
+    Property Owner As Character
+        Get
+            Return Character.FromId(FeatureOwnerData.ReadCharacter(Id))
+        End Get
+        Set(value As Character)
+            If value Is Nothing Then
+                FeatureOwnerData.Clear(Id)
+                Return
+            End If
+            FeatureOwnerData.Write(Id, value.Id)
+        End Set
+    End Property
+
     ReadOnly Property QuestGiver As QuestGiver
         Get
             Return QuestGiver.FromId(QuestData.ReadForFeatureId(Id))

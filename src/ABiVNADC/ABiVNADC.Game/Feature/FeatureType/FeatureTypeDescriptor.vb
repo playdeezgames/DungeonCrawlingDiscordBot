@@ -109,6 +109,21 @@ Module FeatureTypeDescriptorExtensions
                 }
             },
             {
+                FeatureType.HomeStone,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature)
+                                    Dim owner = feature.Owner
+                                    If owner Is Nothing Then
+                                        Return $"an unowned home stone"
+                                    End If
+                                    Return $"a home stone owned by {owner.FullName}"
+                                End Function,
+                    .OverworldGenerationWeight = 0,
+                    .Generator = MakeGenerator(FeatureType.HomeStone)
+                }
+            },
+            {
                 FeatureType.LandClaimOffice,
                 New FeatureTypeDescriptor With
                 {

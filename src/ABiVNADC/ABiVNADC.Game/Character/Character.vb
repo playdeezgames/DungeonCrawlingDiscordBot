@@ -13,6 +13,12 @@ Public Class Character
         End Get
     End Property
 
+    ReadOnly Property OwnedFeatures As IEnumerable(Of Feature)
+        Get
+            Return FeatureOwnerData.ReadForCharacter(Id).Select(Function(id) Feature(id))
+        End Get
+    End Property
+
     ReadOnly Property Effects As HashSet(Of EffectType)
         Get
             Return New HashSet(Of EffectType)(CharacterEffectData.ReadForCharacter(Id).Select(Function(x) CType(x, EffectType)))

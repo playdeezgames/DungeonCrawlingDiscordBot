@@ -14,6 +14,7 @@ Public Enum FeatureType
     Entrance
     Egress
     LandClaimOffice
+    HomeStone
 End Enum
 Public Module FeatureTypeExtensions
     Friend ReadOnly OverworldFeatureGenerator As Dictionary(Of FeatureType, Integer) =
