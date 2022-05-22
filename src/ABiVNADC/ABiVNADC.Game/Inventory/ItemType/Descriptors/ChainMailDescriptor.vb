@@ -1,8 +1,7 @@
 ﻿Friend Class ChainMailDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "chain mail"
+        MyBase.New("chain mail")
         SpawnCount = AddressOf RareSpawn
         EquipSlot = EquipSlot.Body
         DefendDice = Function(x) "1d3/3"

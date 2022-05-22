@@ -1,8 +1,7 @@
 ﻿Friend Class TrousersDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "trousers"
+        MyBase.New("trousers")
         SpawnCount = AddressOf RareSpawn
         EquipSlot = EquipSlot.Legs
         Durability = Function(x) If(x = DurabilityType.Armor, 1, 0)

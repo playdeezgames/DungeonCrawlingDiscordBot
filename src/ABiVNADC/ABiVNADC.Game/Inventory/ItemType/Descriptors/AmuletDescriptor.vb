@@ -1,8 +1,7 @@
 ﻿Friend Class AmuletDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "amulet"
+        MyBase.New("amulet")
         SpawnCount = AddressOf VeryRareSpawn
         EquipSlot = EquipSlot.Neck
         CanBuyGenerator = MakeBooleanGenerator(19, 1)

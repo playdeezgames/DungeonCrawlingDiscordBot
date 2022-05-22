@@ -1,8 +1,7 @@
 ﻿Friend Class MacguffinDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "macguffin"
+        MyBase.New("macguffin")
         QuestTargetWeight = 1
         QuestTargetQuantityDice = "1d1"
         SpawnCount = AddressOf RareSpawn

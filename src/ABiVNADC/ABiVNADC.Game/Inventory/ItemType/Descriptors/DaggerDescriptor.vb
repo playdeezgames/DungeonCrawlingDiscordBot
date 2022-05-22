@@ -1,8 +1,7 @@
 ﻿Friend Class DaggerDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "dagger"
+        MyBase.New("dagger")
         SpawnCount = AddressOf UncommonSpawn
         CanUse = True
         UseMessage = Function(x) $"{x} commits seppuku"

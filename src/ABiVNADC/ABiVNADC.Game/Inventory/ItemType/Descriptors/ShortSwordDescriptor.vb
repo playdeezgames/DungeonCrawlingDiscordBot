@@ -1,8 +1,7 @@
 ﻿Friend Class ShortSwordDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "short sword"
+        MyBase.New("short sword")
         SpawnCount = AddressOf RareSpawn
         EquipSlot = EquipSlot.Weapon
         AttackDice = Function(x) "1d2/2+1d2/2"

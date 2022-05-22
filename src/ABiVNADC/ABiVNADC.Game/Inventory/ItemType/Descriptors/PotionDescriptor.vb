@@ -1,8 +1,7 @@
 ﻿Friend Class PotionDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "potion"
+        MyBase.New("potion")
         SpawnCount = AddressOf RareSpawn
         CanUse = True
         UseMessage = Function(x) $"{x} drinks a potion"

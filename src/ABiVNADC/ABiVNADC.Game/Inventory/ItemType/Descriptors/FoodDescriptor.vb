@@ -1,8 +1,7 @@
 ﻿Friend Class FoodDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "food"
+        MyBase.New("food")
         SpawnCount = AddressOf CommonSpawn
         CanUse = True
         UseMessage = Function(x) $"{x} eats food"

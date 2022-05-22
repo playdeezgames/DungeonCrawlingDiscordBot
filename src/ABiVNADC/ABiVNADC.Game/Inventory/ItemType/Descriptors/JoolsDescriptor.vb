@@ -1,8 +1,7 @@
 ﻿Friend Class JoolsDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "jools"
+        MyBase.New("jools")
         SpawnCount = Function(difficulty, locationCount) "0d1"
         CanBuyGenerator = MakeBooleanGenerator(0, 1)
         CanSellGenerator = MakeBooleanGenerator(0, 1)

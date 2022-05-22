@@ -1,7 +1,7 @@
 ﻿Imports System.Text
 
 Public Class ItemTypeDescriptor
-    Property Name As String
+    ReadOnly Property Name As String
     Property SpawnCount As Func(Of Difficulty, Long, String)
     Property CanUse As Boolean
     Property UseMessage As Func(Of String, String)
@@ -26,7 +26,8 @@ Public Class ItemTypeDescriptor
     Property Modifier As Func(Of StatisticType, Item, Long)
     Property HealthModifier As Func(Of Item, Long)
     Property EnergyModifier As Func(Of Item, Long)
-    Sub New()
+    Sub New(name As String)
+        Me.Name = name
         Modifier = Function(s, i) 0
         EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"

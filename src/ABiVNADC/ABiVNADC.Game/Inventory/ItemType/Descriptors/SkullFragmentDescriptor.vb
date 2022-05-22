@@ -1,8 +1,7 @@
 ﻿Friend Class SkullFragmentDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "skull fragment"
+        MyBase.New("skull fragment")
         SpawnCount = Function(difficulty, locationCount) "0d1"
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "5d1+2d5"

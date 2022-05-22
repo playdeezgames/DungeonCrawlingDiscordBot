@@ -1,8 +1,7 @@
 ﻿Friend Class ShieldDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New
-        Name = "shield"
+        MyBase.New("shield")
         SpawnCount = AddressOf UncommonSpawn
         EquipSlot = EquipSlot.Shield
         DefendDice = Function(x) "1d3/3"
