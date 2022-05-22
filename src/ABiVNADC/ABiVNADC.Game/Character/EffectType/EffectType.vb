@@ -4,6 +4,7 @@ Imports System.Text
 Public Enum EffectType
     None
     Nausea
+    Infection
 End Enum
 Public Module EffectTypeExtensions
     <Extension>

@@ -13,6 +13,10 @@ Public Enum CharacterType
     Crab
 End Enum
 Public Module CharacterTypeExtensions
+    <Extension>
+    Function InfectionDice(characterType As CharacterType) As String
+        Return CharacterTypeDescriptors(characterType).InfectionDice
+    End Function
 
     <Extension>
     Function Name(characterType As CharacterType) As String

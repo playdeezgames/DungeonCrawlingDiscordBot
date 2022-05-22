@@ -11,7 +11,7 @@
                 [{ItemIdColumn}] INT NOT NULL,
                 [{DurabilityTypeColumn}] INT NOT NULL,
                 [{DepletionColumn}] INT NOT NULL,
-                UNIQUE([{DurabilityTypeColumn}],[{DepletionColumn}]),
+                UNIQUE([{ItemIdColumn}],[{DurabilityTypeColumn}]),
                 FOREIGN KEY ([{ItemIdColumn}]) REFERENCES [{ItemData.TableName}]([{ItemData.ItemIdColumn}])
             );")
     End Sub

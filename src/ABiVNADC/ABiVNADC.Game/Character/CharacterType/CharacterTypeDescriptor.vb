@@ -17,11 +17,13 @@
     Friend CombatEndowmentRecoveryDice As String
     Friend CombatActionTable As Func(Of Character, Dictionary(Of CombatActionType, Integer))
     Friend SortOrder As Long
+    Friend InfectionDice As String
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         CombatEndowmentRecoveryDice = "0d1"
         Maximum = Function(s, c) 0
+        InfectionDice = "0d1"
         CombatActionTable = Function(character)
                                 If character.CanFight Then
                                     Return New Dictionary(Of CombatActionType, Integer) From
@@ -202,7 +204,15 @@ Module CharacterTypeDescriptorExtensions
                     .ExperiencePointValue = 1,
                     .ExperiencePointGoal = Function(x) 10 * (x + 1),
                     .ValidBribes = New HashSet(Of ItemType),
-                    .SortOrder = 10
+                    .SortOrder = 10,
+                    .InfectionDice = "1d6",
+                    .CombatActionTable = Function(character)
+                                             Return New Dictionary(Of CombatActionType, Integer) From
+                                                 {
+                                                    {CombatActionType.Attack, 4},
+                                                    {CombatActionType.Infect, 1}
+                                                 }
+                                         End Function
                 }
             },
             {

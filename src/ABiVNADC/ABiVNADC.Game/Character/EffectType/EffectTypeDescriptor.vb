@@ -15,6 +15,18 @@ Module EffectTypeDescriptorExtensions
     Friend ReadOnly EffectTypeDescriptors As New Dictionary(Of EffectType, EffectTypeDescriptor) From
         {
             {
+                EffectType.Infection,
+                New EffectTypeDescriptor With
+                {
+                    .Name = "infection",
+                    .ApplyOn = Sub(character, builder)
+                                   Dim damage = RNG.RollDice("1d3/3")
+                                   character.AddWounds(damage)
+                                   builder.AppendLine($"{character.FullName} takes {damage} points of infection damage.")
+                               End Sub
+                }
+            },
+            {
                 EffectType.Nausea,
                 New EffectTypeDescriptor With
                 {

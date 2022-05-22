@@ -142,11 +142,25 @@ Public Class Character
         Select Case RNG.FromGenerator(enemy.CombatActionTable())
             Case CombatActionType.Attack
                 enemy.Attack(Me, builder)
+            Case CombatActionType.Infect
+                enemy.Infect(Me, builder)
             Case CombatActionType.Rest
                 enemy.CombatRest(builder)
         End Select
         enemy.ApplyEffects(builder)
     End Sub
+
+    Private Sub Infect(character As Character, builder As StringBuilder)
+        Dim infection = RNG.RollDice(InfectionDice)
+        character.ChangeEffectDuration(EffectType.Infection, infection)
+        builder.AppendLine($"{FullName} infects {character.FullName} for {infection} turns.")
+    End Sub
+
+    ReadOnly Property InfectionDice As String
+        Get
+            Return CharacterType.InfectionDice
+        End Get
+    End Property
 
     Private Function CombatActionTable() As Dictionary(Of CombatActionType, Integer)
         Return CharacterType.CombatActionTable(Me)
@@ -453,8 +467,8 @@ Public Class Character
         AddFatigue(fatigue)
         Dim attackRoll = RollAttack()
         builder.AppendLine($"{FullName} rolls an attack of {attackRoll}!")
-        For Each weaponType In ReduceWeaponDurability(attackRoll)
-            builder.AppendLine($"! ! ! {FullName}'s {weaponType.Name} breaks ! ! !")
+        For Each weapon In ReduceWeaponDurability(attackRoll)
+            builder.AppendLine($"! ! ! {FullName}'s {weapon.FullName} breaks ! ! !")
         Next
         Dim defendRoll = defender.RollDefend
         builder.AppendLine($"{defender.FullName} rolls a defend of {defendRoll}!")
@@ -550,15 +564,14 @@ Public Class Character
         Return result
     End Function
 
-    Private Function ReduceWeaponDurability(attackRoll As Long) As IEnumerable(Of ItemType)
-        Dim result As New List(Of ItemType)
+    Private Function ReduceWeaponDurability(attackRoll As Long) As IEnumerable(Of Item)
+        Dim result As New List(Of Item)
         While attackRoll > 0
             Dim items = Equipment.Values.Where(Function(x) x.HasDurability(DurabilityType.Weapon)).ToList
             If items.Any Then
                 Dim item = RNG.FromList(items)
-                Dim itemType = item.ItemType
                 If item.ReduceDurability(DurabilityType.Weapon, 1) Then
-                    result.Add(itemType)
+                    result.Add(item)
                 End If
             End If
             attackRoll -= 1
