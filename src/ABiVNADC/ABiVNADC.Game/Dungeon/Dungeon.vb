@@ -14,11 +14,6 @@
             Return DungeonData.ReadName(Id)
         End Get
     End Property
-    ReadOnly Property OverworldLocation As Location
-        Get
-            Return New Location(DungeonData.ReadOverworldLocation(Id).Value)
-        End Get
-    End Property
     ReadOnly Property StartingLocation As Location
         Get
             Return New Location(DungeonData.ReadStartingLocation(Id).Value)
@@ -47,12 +42,12 @@
     End Sub
 
     Private Shared Sub PopulateCreatures(locationIds As List(Of Long), difficulty As Difficulty)
-        For Each characterType In AllCharacterTypes
-            Dim spawnCount = characterType.SpawnCount(locationIds.LongCount, difficulty)
-            While spawnCount > 0
-                Dim characterId = Data.CharacterData.Create(characterType.RandomName, characterType, 0, RNG.FromList(locationIds))
-                spawnCount -= 1
-            End While
+        Dim locations = locationIds.Select(Function(x) New Location(x))
+        For Each characterType In AllCharacterTypes()
+            Dim spawnLocations = characterType.SpawnLocations(difficulty, locations)
+            For Each spawnLocation In spawnLocations
+                Data.CharacterData.Create(characterType.RandomName, characterType, 0, spawnLocation.Id)
+            Next
         Next
     End Sub
 
@@ -68,7 +63,7 @@
     End Sub
 
     Private Shared Function CreateDungeon(dungeonName As String, overworldLocation As Location, locations As List(Of Location), difficulty As Difficulty) As Dungeon
-        Dim startingLocation = RNG.FromList(locations)
+        Dim startingLocation = RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount > 1))
         Dim dungeonId =
             DungeonData.Create(dungeonName, overworldLocation.Id, startingLocation.Id, difficulty)
         For Each location In locations

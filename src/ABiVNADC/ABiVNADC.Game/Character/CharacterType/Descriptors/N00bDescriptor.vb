@@ -19,7 +19,6 @@
         DefendDice = "1d3/3+1d3/3"
         FightEnergyCost = 1
         CombatRestRoll = "1d1+1d2/2"
-        SpawnCount = Function(difficulty) Function(x) 0
         LootDrops = New Dictionary(Of ItemType, String)
         ExperiencePointValue = 5
         ExperiencePointGoal = Function(x) 10 * (x + 1)

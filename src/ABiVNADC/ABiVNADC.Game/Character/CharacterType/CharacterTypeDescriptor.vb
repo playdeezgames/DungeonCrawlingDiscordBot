@@ -7,7 +7,6 @@
     Friend DefendDice As String
     Friend FightEnergyCost As Long
     Friend CombatRestRoll As String
-    Friend SpawnCount As Func(Of Difficulty, Func(Of Long, Long))
     Friend LootDrops As Dictionary(Of ItemType, String)
     Friend ExperiencePointValue As Long
     Friend ExperiencePointGoal As Func(Of Long, Long)
@@ -18,6 +17,9 @@
     Friend CombatActionTable As Func(Of Character, Dictionary(Of CombatActionType, Integer))
     Friend SortOrder As Long
     Friend InfectionDice As String
+    Overridable Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Return New List(Of Location)
+    End Function
     Sub New()
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0

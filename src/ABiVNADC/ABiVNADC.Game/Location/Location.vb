@@ -18,6 +18,12 @@
         End Get
     End Property
 
+    ReadOnly Property RouteCount As Long
+        Get
+            Return Routes.LongCount
+        End Get
+    End Property
+
     ReadOnly Property IsInsideShoppe As Boolean
         Get
             Return Id = If(Shoppe?.InsideLocation?.Id, 0)

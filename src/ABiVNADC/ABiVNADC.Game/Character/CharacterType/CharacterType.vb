@@ -31,9 +31,10 @@ Public Module CharacterTypeExtensions
     Public Function AllCharacterTypes() As IEnumerable(Of CharacterType)
         Return CharacterTypeDescriptors.Keys
     End Function
+
     <Extension>
-    Public Function SpawnCount(characterType As CharacterType, locationCount As Long, difficulty As Difficulty) As Long
-        Return CharacterTypeDescriptors(characterType).SpawnCount(difficulty)(locationCount)
+    Public Function SpawnLocations(characterType As CharacterType, difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Return CharacterTypeDescriptors(characterType).SpawnLocations(difficulty, locations)
     End Function
 
     <Extension>

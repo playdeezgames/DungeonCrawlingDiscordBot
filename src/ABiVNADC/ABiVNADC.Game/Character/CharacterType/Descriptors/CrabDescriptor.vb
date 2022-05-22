@@ -19,27 +19,17 @@
         DefendDice = "1d6/6+1d6/6+1d6/6+1d6/6+1d6/6"
         FightEnergyCost = 0
         CombatRestRoll = "0d1"
-        SpawnCount = Function(difficulty)
-                         Select Case difficulty
-                             Case Difficulty.Yermom
-                                 Return Function(x) 0
-                             Case Difficulty.Easy
-                                 Return Function(x) 0
-                             Case Difficulty.Normal
-                                 Return Function(x) 0
-                             Case Difficulty.Difficult
-                                 Return Function(x) 0
-                             Case Difficulty.Too
-                                 Return Function(x) 1
-                             Case Else
-                                 Throw New NotImplementedException
-                         End Select
-                     End Function
         LootDrops = New Dictionary(Of ItemType, String)
         ExperiencePointValue = 0
         ExperiencePointGoal = Function(x) 10 * (x + 1)
         ValidBribes = New HashSet(Of ItemType)
         SortOrder = 1
     End Sub
-
+    Public Overrides Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Dim result As New List(Of Location)
+        If difficulty = Difficulty.Too Then
+            result.Add(RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount = 1)))
+        End If
+        Return result
+    End Function
 End Class
