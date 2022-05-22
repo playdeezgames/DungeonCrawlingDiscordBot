@@ -15,7 +15,7 @@ Public Class Character
 
     ReadOnly Property OwnedFeatures As IEnumerable(Of Feature)
         Get
-            Return FeatureOwnerData.ReadForCharacter(Id).Select(Function(id) Feature(id))
+            Return FeatureOwnerData.ReadForCharacter(Id).Select(Function(id) New Feature(id))
         End Get
     End Property
 

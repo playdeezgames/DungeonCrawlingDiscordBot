@@ -31,6 +31,12 @@
         End Get
     End Property
 
+    ReadOnly Property HasOwner As Boolean
+        Get
+            Return Owner IsNot Nothing
+        End Get
+    End Property
+
     Property Owner As Character
         Get
             Return Character.FromId(LocationOwnerData.Read(Id))

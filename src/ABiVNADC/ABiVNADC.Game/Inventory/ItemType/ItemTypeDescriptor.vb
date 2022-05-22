@@ -360,27 +360,11 @@ Module ItemTypeDescriptorExtensions
             },
             {
                 ItemType.HomeScroll,
-                New ItemTypeDescriptor With
-                {
-                    .Name = "home scroll",
-                    .SpawnCount = Function(difficulty, locationCount) "0d1",
-                    .CanBuyGenerator = MakeBooleanGenerator(3, 1),
-                    .BuyPriceDice = "50d1+2d50",
-                    .InventoryEncumbrance = 0,
-                    .Aliases = New List(Of String) From {"hs", "scroll"}
-                }
+                New HomeScrollDescriptor
             },
             {
                 ItemType.HomeStone,
-                New ItemTypeDescriptor With
-                {
-                    .Name = "home stone",
-                    .SpawnCount = Function(difficulty, locationCount) "0d1",
-                    .CanBuyGenerator = MakeBooleanGenerator(25, 1),
-                    .BuyPriceDice = "1000d1+2d1000",
-                    .InventoryEncumbrance = 50,
-                    .Aliases = New List(Of String) From {"stone"}
-                }
+                New HomeStoneDescriptor
             },
             {
                 ItemType.Jools,
