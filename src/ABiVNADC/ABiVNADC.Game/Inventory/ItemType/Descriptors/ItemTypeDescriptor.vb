@@ -6,7 +6,9 @@ Public Class ItemTypeDescriptor
     Overridable Function UseMessage(name As String) As String
         Return $"{name} uses the thing!"
     End Function
-    Property OnUse As Action(Of Character, Item, StringBuilder)
+    Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
+
+    End Sub
     Property SpawnCount As Func(Of Difficulty, Long, String)
     Property EquipSlot As EquipSlot
     Property AttackDice As Func(Of Item, String)
@@ -31,9 +33,6 @@ Public Class ItemTypeDescriptor
     Sub New(name As String, canUse As Boolean)
         Me.Name = name
         Me.CanUse = canUse
-        OnUse = Sub(c, i, b)
-                End Sub
-
         Modifier = Function(s, i) 0
         EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"

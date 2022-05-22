@@ -1,4 +1,6 @@
-﻿Friend Class AmuletDescriptor
+﻿Imports System.Text
+
+Friend Class AmuletDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
         MyBase.New("amulet", True)
@@ -24,19 +26,19 @@
                              item.AddModifier(modifier, 1)
                          End If
                      End Sub
-        OnUse = Sub(character, item, builder)
-                    If Not item.Modifiers.Any Then
-                        builder.AppendLine($"{item.FullName} has no power to confer.")
-                        Return
-                    End If
-                    If Not character.Equipment.Any Then
-                        builder.AppendLine($"{character.FullName} has no equipment to confer power to.")
-                    End If
-                    Dim modifier = RNG.FromEnumerable(item.Modifiers.Where(Function(x) x.Value > 0).Select(Function(x) x.Key))
-                    Dim target = RNG.FromEnumerable(character.EquipmentItems)
-                    builder.AppendLine($"{character.FullName} confers {modifier.Name} to {target.FullName}.")
-                    item.AddModifier(modifier, -1)
-                    target.AddModifier(modifier, 1)
-                End Sub
+    End Sub
+    Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
+        If Not item.Modifiers.Any Then
+            builder.AppendLine($"{item.FullName} has no power to confer.")
+            Return
+        End If
+        If Not character.Equipment.Any Then
+            builder.AppendLine($"{character.FullName} has no equipment to confer power to.")
+        End If
+        Dim modifier = RNG.FromEnumerable(item.Modifiers.Where(Function(x) x.Value > 0).Select(Function(x) x.Key))
+        Dim target = RNG.FromEnumerable(character.EquipmentItems)
+        builder.AppendLine($"{character.FullName} confers {modifier.Name} to {target.FullName}.")
+        item.AddModifier(modifier, -1)
+        target.AddModifier(modifier, 1)
     End Sub
 End Class

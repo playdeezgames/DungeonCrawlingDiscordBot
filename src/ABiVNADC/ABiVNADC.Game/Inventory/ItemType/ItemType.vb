@@ -40,7 +40,7 @@ Public Module ItemTypeExtensions
     End Property
     <Extension>
     Sub OnUse(itemType As ItemType, character As Character, item As Item, builder As StringBuilder)
-        ItemTypeDescriptors(itemType).OnUse.Invoke(character, item, builder)
+        ItemTypeDescriptors(itemType).OnUse(character, item, builder)
     End Sub
     <Extension>
     Function SpawnCount(itemType As ItemType, locationCount As Long, difficulty As Difficulty) As String
