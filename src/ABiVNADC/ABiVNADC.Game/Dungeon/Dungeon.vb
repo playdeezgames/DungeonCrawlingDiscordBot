@@ -52,13 +52,12 @@
     End Sub
 
     Private Shared Sub PopulateItems(locationIds As List(Of Long), difficulty As Difficulty)
+        Dim locations = locationIds.Select(Function(x) New Location(x))
         For Each itemType In AllItemTypes
-            Dim spawnCount = RNG.RollDice(itemType.SpawnCount(locationIds.LongCount, difficulty))
-            While spawnCount > 0
-                Dim location = New Location(RNG.FromList(locationIds))
-                location.Inventory.Add(Item.Create(itemType))
-                spawnCount -= 1
-            End While
+            Dim spawnLocations = itemType.SpawnLocations(difficulty, locations)
+            For Each spawnLocation In spawnLocations
+                spawnLocation.Inventory.Add(Item.Create(itemType))
+            Next
         Next
     End Sub
 

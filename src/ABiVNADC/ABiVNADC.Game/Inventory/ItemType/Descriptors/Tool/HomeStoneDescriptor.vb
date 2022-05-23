@@ -4,7 +4,6 @@ Friend Class HomeStoneDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
         MyBase.New("home stone", True)
-        SpawnCount = Function(difficulty, locationCount) "0d1"
         CanBuyGenerator = MakeBooleanGenerator(25, 1)
         BuyPriceDice = "1000d1+2d1000"
         InventoryEncumbrance = 50

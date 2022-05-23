@@ -84,6 +84,7 @@ Public Class Player
         For Each item In items
             Character.Inventory.Add(item)
         Next
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub Take(itemType As ItemType, quantity As Long, builder As StringBuilder)

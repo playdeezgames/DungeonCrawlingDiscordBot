@@ -2,7 +2,6 @@
     Inherits ItemTypeDescriptor
     Sub New()
         MyBase.New("fish scale", False)
-        SpawnCount = Function(difficulty, locationCount) "0d1"
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "20d1+2d20"
         IsTrophy = True

@@ -6,7 +6,6 @@ Public Class ItemTypeDescriptor
     Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
 
     End Sub
-    Property SpawnCount As Func(Of Difficulty, Long, String)
     Property EquipSlot As EquipSlot
     Property AttackDice As Func(Of Item, String)
     Property DefendDice As Func(Of Item, String)
@@ -39,7 +38,6 @@ Public Class ItemTypeDescriptor
         CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
         BuyPriceDice = "0d1"
         SellPriceDice = "0d1"
-        SpawnCount = Function(difficulty, locationCount) "0d1"
         QuestTargetWeight = 0
         QuestTargetQuantityDice = "0d1"
         QuestRewardWeight = 0
@@ -53,6 +51,10 @@ Public Class ItemTypeDescriptor
         HealthModifier = Function(item) If(item.HasModifier(ModifierType.Health), item.ModifierLevel(ModifierType.Health), 0)
         EnergyModifier = Function(item) If(item.HasModifier(ModifierType.Energy), item.ModifierLevel(ModifierType.Energy), 0)
     End Sub
+
+    Overridable Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Return New List(Of Location)
+    End Function
 End Class
 Module ItemTypeDescriptorExtensions
     Friend ReadOnly Property QuestTargetGenerator As Dictionary(Of ItemType, Integer)

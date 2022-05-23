@@ -19,7 +19,6 @@ Friend Class HomeScrollDescriptor
     End Sub
     Sub New()
         MyBase.New("home scroll", True)
-        SpawnCount = Function(difficulty, locationCount) "0d1"
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 0

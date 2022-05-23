@@ -176,6 +176,11 @@ Public Class Character
         For Each effect In Effects
             effect.ApplyOn(Me, builder)
             ChangeEffectDuration(effect, -1)
+            If IsDead Then
+                builder.AppendLine($"{FullName} is dead.")
+                Destroy()
+                Exit For
+            End If
         Next
     End Sub
 

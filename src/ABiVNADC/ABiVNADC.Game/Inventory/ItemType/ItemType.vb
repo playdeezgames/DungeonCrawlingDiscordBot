@@ -42,10 +42,6 @@ Public Module ItemTypeExtensions
     Sub OnUse(itemType As ItemType, character As Character, item As Item, builder As StringBuilder)
         ItemTypeDescriptors(itemType).OnUse(character, item, builder)
     End Sub
-    <Extension>
-    Function SpawnCount(itemType As ItemType, locationCount As Long, difficulty As Difficulty) As String
-        Return ItemTypeDescriptors(itemType).SpawnCount(difficulty, locationCount)
-    End Function
 
     <Extension>
     Function Name(itemType As ItemType) As String
@@ -166,5 +162,10 @@ Public Module ItemTypeExtensions
     <Extension>
     Function Modifier(itemType As ItemType, statisticType As StatisticType, item As Item) As Long
         Return ItemTypeDescriptors(itemType).Modifier(statisticType, item)
+    End Function
+
+    <Extension>
+    Function SpawnLocations(itemType As ItemType, difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Return ItemTypeDescriptors(itemType).SpawnLocations(difficulty, locations)
     End Function
 End Module
