@@ -13,4 +13,8 @@ Module FactionExtensions
     Function Name(faction As Faction) As String
         Return FactionDescriptors(faction).Name
     End Function
+    <Extension>
+    Function IsEnemy(faction As Faction, otherFaction As Faction) As Boolean
+        Return FactionDescriptors(faction).IsEnemy(otherFaction)
+    End Function
 End Module

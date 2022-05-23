@@ -43,8 +43,8 @@ Public Module CharacterTypeExtensions
     End Function
 
     <Extension>
-    Public Function IsEnemy(characterType As CharacterType) As Boolean
-        Return CharacterTypeDescriptors(characterType).IsEnemy
+    Public Function IsEnemy(characterType As CharacterType, candidate As Character) As Boolean
+        Return CharacterTypeDescriptors(characterType).IsEnemy(candidate)
     End Function
 
     <Extension>

@@ -189,7 +189,7 @@
     End Property
 
     Function Enemies(forCharacter As Character) As IEnumerable(Of Character)
-        Return Characters.Where(Function(x) x.IsEnemy <> forCharacter.IsEnemy)
+        Return Characters.Where(Function(x) x.IsEnemy(forCharacter))
     End Function
 
     Function Enemy(forCharacter As Character) As Character

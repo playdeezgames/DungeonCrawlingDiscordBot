@@ -302,9 +302,15 @@ Public Class Character
         End If
     End Sub
 
-    ReadOnly Property IsEnemy As Boolean
+    ReadOnly Property IsEnemy(candidate As Character) As Boolean
         Get
-            Return Exists AndAlso CharacterType.IsEnemy
+            Return Exists AndAlso CharacterType <> CharacterType.None AndAlso CharacterType.IsEnemy(candidate)
+        End Get
+    End Property
+
+    ReadOnly Property Faction As Faction
+        Get
+            Return CharacterType.Faction
         End Get
     End Property
 

@@ -14,7 +14,6 @@
                       End Select
                   End Function
         NameTable = Names.Human
-        IsEnemy = True
         AttackDice = "1d3/3+1d3/3"
         DefendDice = "1d6/6+1d6/6+1d6/6"
         FightEnergyCost = 0

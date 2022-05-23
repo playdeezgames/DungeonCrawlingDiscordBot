@@ -3,7 +3,6 @@
     Friend Name As String
     Friend Maximum As Func(Of StatisticType, Character, Long)
     Friend NameTable As List(Of String)
-    Friend IsEnemy As Boolean
     Friend AttackDice As String
     Friend DefendDice As String
     Friend FightEnergyCost As Long
@@ -38,6 +37,9 @@
                                 End If
                             End Function
     End Sub
+    Function IsEnemy(candidate As Character) As Boolean
+        Return Faction.IsEnemy(candidate.Faction)
+    End Function
 End Class
 Module CharacterTypeDescriptorExtensions
     Friend ReadOnly CharacterTypeDescriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
