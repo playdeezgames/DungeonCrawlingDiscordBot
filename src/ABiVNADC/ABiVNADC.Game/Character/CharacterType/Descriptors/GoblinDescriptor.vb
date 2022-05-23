@@ -1,7 +1,7 @@
 ﻿Friend Class GoblinDescriptor
     Inherits CharacterTypeDescriptor
     Sub New()
-        MyBase.New
+        MyBase.New(Faction.Goblinoids)
         Name = "goblin"
         Maximum = Function(s, c)
                       Select Case s

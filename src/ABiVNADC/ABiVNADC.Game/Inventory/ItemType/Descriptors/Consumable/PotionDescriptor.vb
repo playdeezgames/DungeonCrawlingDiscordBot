@@ -6,7 +6,7 @@ Friend Class PotionDescriptor
         Const PotionWoundRecovery As Long = 4
         builder.AppendLine($"{character.FullName} drinks a potion")
         character.AddWounds(-PotionWoundRecovery)
-        builder.Append($"{character.FullName} now has {character.Statistic(StatisticType.Health)} health.")
+        builder.AppendLine($"{character.FullName} now has {character.Statistic(StatisticType.Health)} health.")
         item.Destroy()
     End Sub
     Sub New()

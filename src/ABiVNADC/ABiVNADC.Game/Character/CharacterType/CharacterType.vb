@@ -106,4 +106,9 @@ Public Module CharacterTypeExtensions
     Function SortOrder(characterType As CharacterType) As Long
         Return CharacterTypeDescriptors(characterType).SortOrder
     End Function
+
+    <Extension>
+    Function Faction(characterType As CharacterType) As Faction
+        Return CharacterTypeDescriptors(characterType).Faction
+    End Function
 End Module
