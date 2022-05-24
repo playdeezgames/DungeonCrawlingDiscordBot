@@ -38,15 +38,23 @@
                             End Function
     End Sub
     Function IsEnemy(candidate As Character) As Boolean
-        Return Faction.IsEnemy(candidate.Faction)
+        Return candidate.Exists AndAlso Faction.IsEnemy(candidate.Faction)
     End Function
 End Class
 Module CharacterTypeDescriptorExtensions
     Friend ReadOnly CharacterTypeDescriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
             {
+                CharacterType.Bat,
+                New BatDescriptor
+            },
+            {
                 CharacterType.BossFish,
                 New BossFishDescriptor
+            },
+            {
+                CharacterType.Bug,
+                New BugDescriptor
             },
             {
                 CharacterType.Crab,
@@ -73,8 +81,16 @@ Module CharacterTypeDescriptorExtensions
                 New OrcDescriptor
             },
             {
+                CharacterType.Rat,
+                New RatDescriptor
+            },
+            {
                 CharacterType.Skeleton,
                 New SkeletonDescriptor
+            },
+            {
+                CharacterType.Snake,
+                New SnakeDescriptor
             },
             {
                 CharacterType.Zombie,

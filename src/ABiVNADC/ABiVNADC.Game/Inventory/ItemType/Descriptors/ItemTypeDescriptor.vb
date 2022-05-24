@@ -71,87 +71,6 @@ Module ItemTypeDescriptorExtensions
                 ToDictionary(Function(x) x.Key, Function(x) x.Value.QuestRewardWeight)
         End Get
     End Property
-    Friend Function VeryCommonSpawn(difficulty As Difficulty, locationCount As Long) As String
-        Select Case difficulty
-            Case Difficulty.Yermom
-                Return $"{locationCount * 3 \ 2}d1"
-            Case Difficulty.Easy
-                Return $"{locationCount}d1"
-            Case Difficulty.Normal
-                Return $"{locationCount * 3 \ 4}d1"
-            Case Difficulty.Difficult
-                Return $"{locationCount * 2 \ 3}d1"
-            Case Difficulty.Too
-                Return $"{locationCount \ 2}d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-    Friend Function CommonSpawn(difficulty As Difficulty, locationCount As Long) As String
-        Select Case difficulty
-            Case Difficulty.Yermom
-                Return $"{locationCount * 3 \ 4}d1"
-            Case Difficulty.Easy
-                Return $"{locationCount * 2 \ 3}d1"
-            Case Difficulty.Normal
-                Return $"{locationCount \ 2}d1"
-            Case Difficulty.Difficult
-                Return $"{locationCount \ 3}d1"
-            Case Difficulty.Too
-                Return $"{locationCount \ 4}d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-    Friend Function UncommonSpawn(difficulty As Difficulty, locationCount As Long) As String
-        Select Case difficulty
-            Case Difficulty.Yermom
-                Return $"{locationCount \ 2}d1"
-            Case Difficulty.Easy
-                Return $"{locationCount \ 3}d1"
-            Case Difficulty.Normal
-                Return $"{locationCount \ 4}d1"
-            Case Difficulty.Difficult
-                Return $"{locationCount \ 6}d1"
-            Case Difficulty.Too
-                Return $"{locationCount \ 8}d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-    Friend Function RareSpawn(difficulty As Difficulty, locationCount As Long) As String
-        Select Case difficulty
-            Case Difficulty.Yermom
-                Return $"{locationCount \ 3}d1"
-            Case Difficulty.Easy
-                Return $"{locationCount \ 4}d1"
-            Case Difficulty.Normal
-                Return $"{locationCount \ 6}d1"
-            Case Difficulty.Difficult
-                Return $"{locationCount \ 8}d1"
-            Case Difficulty.Too
-                Return $"{locationCount \ 12}d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-    Friend Function VeryRareSpawn(difficulty As Difficulty, locationCount As Long) As String
-        Select Case difficulty
-            Case Difficulty.Yermom
-                Return $"{locationCount \ 4}d1"
-            Case Difficulty.Easy
-                Return $"{locationCount \ 6}d1"
-            Case Difficulty.Normal
-                Return $"{locationCount \ 8}d1"
-            Case Difficulty.Difficult
-                Return $"{locationCount \ 12}d1"
-            Case Difficulty.Too
-                Return $"{locationCount \ 16}d1"
-            Case Else
-                Throw New NotImplementedException
-        End Select
-    End Function
-
     Friend ReadOnly ItemTypeDescriptors As New Dictionary(Of ItemType, ItemTypeDescriptor) From
         {
             {
@@ -169,6 +88,14 @@ Module ItemTypeDescriptorExtensions
             {
                 ItemType.Bandage,
                 New BandageDescriptor
+            },
+            {
+                ItemType.BatWing,
+                New BatWingDescriptor
+            },
+            {
+                ItemType.BugGuts,
+                New BugGutsDescriptor
             },
             {
                 ItemType.ChainMail,
@@ -239,6 +166,10 @@ Module ItemTypeDescriptorExtensions
                 New PotionDescriptor
             },
             {
+                ItemType.RatTail,
+                New RatTailDescriptor
+            },
+            {
                 ItemType.RottenFood,
                 New RottenFoodDescriptor
             },
@@ -253,6 +184,10 @@ Module ItemTypeDescriptorExtensions
             {
                 ItemType.SkullFragment,
                 New SkullFragmentDescriptor
+            },
+            {
+                ItemType.SnakeFang,
+                New SnakeFangDescriptor
             },
             {
                 ItemType.ThankYouNote,

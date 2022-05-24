@@ -31,6 +31,10 @@ Public Enum ItemType
     Ankh
     HomeStone
     HomeScroll
+    BatWing
+    BugGuts
+    RatTail
+    SnakeFang
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

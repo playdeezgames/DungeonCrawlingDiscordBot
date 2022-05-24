@@ -121,6 +121,66 @@ Module CharacterImages
                                                 "...@@   @@..",
                                                 "..@.@@@@@.@."
                                             }))
+    Private ReadOnly Snake As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                "....@@@@....",
+                                                "...@ @@@@...",
+                                                "...@@..@@...",
+                                                "..@...@@....",
+                                                "......@@....",
+                                                ".....@@.....",
+                                                ".@...@@.@@..",
+                                                "..@@.@@..@@.",
+                                                ".....@@@@@@.",
+                                                "......@@@@.."
+                                            }))
+    Private ReadOnly Rat As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                "...@@.......",
+                                                "..@  @@...@.",
+                                                "..@  @ @@@..",
+                                                "...@@@@@@...",
+                                                ".....@@@....",
+                                                "....@@@.....",
+                                                ".@.@@@@@....",
+                                                "@..@@@@.@...",
+                                                "@..@.@@.....",
+                                                ".@@.@@@@@..."
+                                            }))
+    Private ReadOnly Bat As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "...@.....@..",
+                                                "..@.......@.",
+                                                ".@@.@...@.@@",
+                                                ".@@.@@@@@.@@",
+                                                ".@@.@ @ @.@@",
+                                                ".@@..@@@..@@",
+                                                "..@@..@..@@.",
+                                                ".@.@.@@@.@.@",
+                                                ".....@@@....",
+                                                "............",
+                                                ".....@.@...."
+                                            }))
+    Private ReadOnly Bug As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "............",
+                                                "............",
+                                                ".....@@@....",
+                                                "..@.@@@@@.@.",
+                                                ".@.@@@@@@@.@",
+                                                "....@@@@@...",
+                                                "..@@.@@@.@@.",
+                                                ".@..@@@@@..@",
+                                                "...@..@..@..",
+                                                "...@.@.@.@..",
+                                                "..@.......@.",
+                                                "............"
+                                            }))
 
     Private ReadOnly GoblinSprite As New Sprite(Goblin, 16, 2, "."c)
     Private ReadOnly OrcSprite As New Sprite(Orc, 16, 2, "."c)
@@ -130,6 +190,10 @@ Module CharacterImages
     Private ReadOnly BossFishSprite As New Sprite(BossFish, 16, 2, "."c)
     Private ReadOnly MummySprite As New Sprite(Mummy, 16, 2, "."c)
     Private ReadOnly CrabSprite As New Sprite(Crab, 16, 2, "."c)
+    Private ReadOnly SnakeSprite As New Sprite(Snake, 16, 2, "."c)
+    Private ReadOnly RatSprite As New Sprite(Rat, 16, 2, "."c)
+    Private ReadOnly BatSprite As New Sprite(Bat, 16, 2, "."c)
+    Private ReadOnly BugSprite As New Sprite(Bug, 16, 2, "."c)
     Private Function Enhance(lines As List(Of String)) As List(Of String)
         Dim result As New List(Of String)
         For Each line In lines
@@ -167,6 +231,14 @@ Module CharacterImages
                 Return MummySprite
             Case CharacterType.Crab
                 Return CrabSprite
+            Case characterType.Rat
+                Return RatSprite
+            Case characterType.Bat
+                Return BatSprite
+            Case characterType.Snake
+                Return SnakeSprite
+            Case characterType.Bug
+                Return BugSprite
             Case Else
                 Throw New NotImplementedException
         End Select

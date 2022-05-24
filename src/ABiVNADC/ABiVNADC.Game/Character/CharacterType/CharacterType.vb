@@ -11,6 +11,10 @@ Public Enum CharacterType
     BossFish
     Mummy
     Crab
+    Rat
+    Bat
+    Snake
+    Bug
 End Enum
 Public Module CharacterTypeExtensions
     <Extension>

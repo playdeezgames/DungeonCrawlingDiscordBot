@@ -14,6 +14,7 @@ Module FactionDescriptorExtensions
             {Faction.Goblinoids, New GoblinoidFactionDescriptor},
             {Faction.Monster, New MonsterFactionDescriptor},
             {Faction.Player, New PlayerFactionDescriptor},
-            {Faction.Undead, New UndeadFactionDescriptor}
+            {Faction.Undead, New UndeadFactionDescriptor},
+            {Faction.Vermin, New VerminFactionDescriptor}
         }
 End Module

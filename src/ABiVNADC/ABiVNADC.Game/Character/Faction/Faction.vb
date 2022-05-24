@@ -7,6 +7,7 @@ Public Enum Faction
     Undead
     Fish
     Monster
+    Vermin
 End Enum
 Module FactionExtensions
     <Extension>
