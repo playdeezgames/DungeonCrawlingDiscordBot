@@ -38,7 +38,7 @@
     Public Overrides Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Dim result As New List(Of Location)
         Dim candidates = locations.Where(Function(x) x.RouteCount = 1)
-        Dim count = SpawnCountTable(difficulty)(candidates.LongCount)
+        Dim count = Faction.AdjustSpawnCountForTheme(theme, SpawnCountTable(difficulty)(candidates.LongCount))
         While result.LongCount < count
             result.Add(RNG.FromEnumerable(candidates))
         End While

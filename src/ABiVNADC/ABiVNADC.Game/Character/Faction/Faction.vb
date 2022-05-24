@@ -18,4 +18,8 @@ Module FactionExtensions
     Function IsEnemy(faction As Faction, otherFaction As Faction) As Boolean
         Return FactionDescriptors(faction).IsEnemy(otherFaction)
     End Function
+    <Extension>
+    Function AdjustSpawnCountForTheme(faction As Faction, theme As DungeonTheme, count As Long) As Long
+        Return FactionDescriptors(faction).AdjustSpawnCountForTheme(theme, count)
+    End Function
 End Module

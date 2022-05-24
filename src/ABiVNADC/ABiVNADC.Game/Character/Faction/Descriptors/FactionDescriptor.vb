@@ -6,6 +6,9 @@
     Overridable Function IsEnemy(faction As Faction) As Boolean
         Return False
     End Function
+    Overridable Function AdjustSpawnCountForTheme(theme As DungeonTheme, count As Long) As Long
+        Return count
+    End Function
 End Class
 Module FactionDescriptorExtensions
     Friend ReadOnly FactionDescriptors As New Dictionary(Of Faction, FactionDescriptor) From
