@@ -169,7 +169,7 @@ Public Module ItemTypeExtensions
     End Function
 
     <Extension>
-    Function SpawnLocations(itemType As ItemType, difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
-        Return ItemTypeDescriptors(itemType).SpawnLocations(difficulty, locations)
+    Function SpawnLocations(itemType As ItemType, difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Return ItemTypeDescriptors(itemType).SpawnLocations(difficulty, theme, locations)
     End Function
 End Module

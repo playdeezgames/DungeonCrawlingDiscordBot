@@ -18,7 +18,7 @@
             {Difficulty.Difficult, Function(x) 6},
             {Difficulty.Too, Function(x) 8}
         }
-    Public Overrides Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+    Public Overrides Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Dim result As New List(Of Location)
         Dim candidates = locations
         Dim count = SpawnCountTable(difficulty)(candidates.LongCount)

@@ -24,8 +24,8 @@ Public Module FeatureTypeExtensions
                 Function(x) x.Key,
                 Function(x) x.Value.OverworldGenerationWeight)
     <Extension>
-    Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty) As String
-        Return FeatureTypeDescriptors(featureType).DungeonSpawnDice(difficulty, locationCount)
+    Function DungeonSpawnCount(featureType As FeatureType, locationCount As Long, difficulty As Difficulty, theme As DungeonTheme) As String
+        Return FeatureTypeDescriptors(featureType).DungeonSpawnDice(difficulty, theme, locationCount)
     End Function
     <Extension>
     Function FullName(featureType As FeatureType, feature As Feature) As String

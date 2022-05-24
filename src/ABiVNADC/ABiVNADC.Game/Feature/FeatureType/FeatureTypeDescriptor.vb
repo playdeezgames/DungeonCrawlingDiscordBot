@@ -1,10 +1,10 @@
 ﻿Public Class FeatureTypeDescriptor
-    Property DungeonSpawnDice As Func(Of Difficulty, Long, String)
+    Property DungeonSpawnDice As Func(Of Difficulty, DungeonTheme, Long, String)
     Property OverworldGenerationWeight As Integer
     Property FullName As Func(Of Feature, String)
     Property Generator As Func(Of Location, Feature)
     Sub New()
-        DungeonSpawnDice = Function(difficulty, locationCount) "0d1"
+        DungeonSpawnDice = Function(difficulty, theme, locationCount) "0d1"
         OverworldGenerationWeight = 0
     End Sub
 End Class

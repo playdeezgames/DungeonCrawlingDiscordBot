@@ -19,19 +19,28 @@
             Return New Location(DungeonData.ReadStartingLocation(Id).Value)
         End Get
     End Property
+    Private Shared ReadOnly themeGenerator As New Dictionary(Of DungeonTheme, Integer) From
+        {
+            {DungeonTheme.Sewers, 16},
+            {DungeonTheme.Dungeon, 2},
+            {DungeonTheme.Crypt, 8},
+            {DungeonTheme.Ruins, 4},
+            {DungeonTheme.Cavern, 1}
+        }
     Shared Function Create(dungeonName As String, overworldLocation As Location, mazeColumns As Long, mazeRows As Long, difficulty As Difficulty) As Dungeon
         Dim maze As Maze(Of Direction) = CreateMaze(mazeColumns, mazeRows)
         Dim locationIds As List(Of Long) = CreateLocations(maze)
+        Dim theme = RNG.FromGenerator(themeGenerator)
         PopulateDoors(maze, locationIds)
-        PopulateItems(locationIds, difficulty)
-        PopulateCreatures(locationIds, difficulty)
-        PopulateFeatures(locationIds, difficulty)
+        PopulateItems(locationIds, difficulty, theme)
+        PopulateCreatures(locationIds, difficulty, theme)
+        PopulateFeatures(locationIds, difficulty, theme)
         Return CreateDungeon(dungeonName, overworldLocation, locationIds.Select(Function(id) New Location(id)).ToList, difficulty)
     End Function
 
-    Private Shared Sub PopulateFeatures(locationIds As List(Of Long), difficulty As Difficulty)
+    Private Shared Sub PopulateFeatures(locationIds As List(Of Long), difficulty As Difficulty, theme As DungeonTheme)
         For Each descriptor In FeatureTypeDescriptors
-            Dim spawnCount = RNG.RollDice(descriptor.Value.DungeonSpawnDice(difficulty, locationIds.LongCount))
+            Dim spawnCount = RNG.RollDice(descriptor.Value.DungeonSpawnDice(difficulty, theme, locationIds.LongCount))
             While spawnCount > 0
                 Dim location = New Location(RNG.FromList(locationIds))
                 'TODO: what if the feature type already exists at a given location?
@@ -41,20 +50,20 @@
         Next
     End Sub
 
-    Private Shared Sub PopulateCreatures(locationIds As List(Of Long), difficulty As Difficulty)
+    Private Shared Sub PopulateCreatures(locationIds As List(Of Long), difficulty As Difficulty, theme As DungeonTheme)
         Dim locations = locationIds.Select(Function(x) New Location(x))
         For Each characterType In AllCharacterTypes()
-            Dim spawnLocations = characterType.SpawnLocations(difficulty, locations)
+            Dim spawnLocations = characterType.SpawnLocations(difficulty, theme, locations)
             For Each spawnLocation In spawnLocations
                 Data.CharacterData.Create(characterType.RandomName, characterType, 0, spawnLocation.Id)
             Next
         Next
     End Sub
 
-    Private Shared Sub PopulateItems(locationIds As List(Of Long), difficulty As Difficulty)
+    Private Shared Sub PopulateItems(locationIds As List(Of Long), difficulty As Difficulty, theme As DungeonTheme)
         Dim locations = locationIds.Select(Function(x) New Location(x))
         For Each itemType In AllItemTypes
-            Dim spawnLocations = itemType.SpawnLocations(difficulty, locations)
+            Dim spawnLocations = itemType.SpawnLocations(difficulty, theme, locations)
             For Each spawnLocation In spawnLocations
                 spawnLocation.Inventory.Add(Item.Create(itemType))
             Next

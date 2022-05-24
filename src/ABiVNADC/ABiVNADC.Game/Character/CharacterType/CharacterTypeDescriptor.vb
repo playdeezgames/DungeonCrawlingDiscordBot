@@ -17,7 +17,7 @@
     Friend CombatActionTable As Func(Of Character, Dictionary(Of CombatActionType, Integer))
     Friend SortOrder As Long
     Friend InfectionDice As String
-    Overridable Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+    Overridable Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Return New List(Of Location)
     End Function
     Sub New(faction As Faction)

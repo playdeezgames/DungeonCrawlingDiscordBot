@@ -37,7 +37,7 @@
             {Difficulty.Difficult, 2},
             {Difficulty.Too, 4}
         }
-    Public Overrides Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+    Public Overrides Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Dim result As New List(Of Location)
         Dim count = SpawnCountTable(difficulty)
         Dim deadEnds = locations.Where(Function(x) x.RouteCount = 1)

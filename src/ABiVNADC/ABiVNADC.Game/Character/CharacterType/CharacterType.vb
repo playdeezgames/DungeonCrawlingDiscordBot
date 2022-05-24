@@ -37,8 +37,8 @@ Public Module CharacterTypeExtensions
     End Function
 
     <Extension>
-    Public Function SpawnLocations(characterType As CharacterType, difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
-        Return CharacterTypeDescriptors(characterType).SpawnLocations(difficulty, locations)
+    Public Function SpawnLocations(characterType As CharacterType, difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+        Return CharacterTypeDescriptors(characterType).SpawnLocations(difficulty, theme, locations)
     End Function
 
     <Extension>

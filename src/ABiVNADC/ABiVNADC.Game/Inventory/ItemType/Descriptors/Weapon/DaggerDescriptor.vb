@@ -25,7 +25,7 @@ Friend Class DaggerDescriptor
             {Difficulty.Difficult, Function(x) 8},
             {Difficulty.Too, Function(x) 12}
         }
-    Public Overrides Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+    Public Overrides Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Dim result As New List(Of Location)
         Dim candidates = locations
         Dim count = SpawnCountTable(difficulty)(candidates.LongCount)

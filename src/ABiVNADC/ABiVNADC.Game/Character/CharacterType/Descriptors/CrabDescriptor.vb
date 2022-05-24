@@ -24,7 +24,7 @@
         ValidBribes = New HashSet(Of ItemType)
         SortOrder = 1
     End Sub
-    Public Overrides Function SpawnLocations(difficulty As Difficulty, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
+    Public Overrides Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Dim result As New List(Of Location)
         If difficulty = Difficulty.Too Then
             result.Add(RNG.FromEnumerable(locations.Where(Function(x) x.RouteCount = 1)))
