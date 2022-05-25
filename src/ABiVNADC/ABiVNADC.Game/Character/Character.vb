@@ -7,6 +7,12 @@ Public Class Character
         Id = characterId
     End Sub
 
+    ReadOnly Property IsPoisoned As Boolean
+        Get
+            Return CharacterPoisoningData.Read(Id).Any
+        End Get
+    End Property
+
     ReadOnly Property SortOrder As Long
         Get
             Return CharacterType.SortOrder

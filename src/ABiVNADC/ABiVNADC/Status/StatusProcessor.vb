@@ -22,6 +22,9 @@
                     builder.AppendLine($"{entry.Key.Name}: {entry.Value}/{character.Maximum(entry.Key)}")
                 Next
                 ShowEncumbrance(builder, character)
+                If character.IsPoisoned Then
+                    builder.AppendLine("Yer poisoned!")
+                End If
                 Dim effects = character.Effects
                 If effects.Any Then
                     builder.Append("Effects: ")
