@@ -13,6 +13,10 @@ Public Class Character
         End Get
     End Property
 
+    Friend Sub PurgePoisons()
+        CharacterPoisoningData.Clear(Id)
+    End Sub
+
     ReadOnly Property SortOrder As Long
         Get
             Return CharacterType.SortOrder

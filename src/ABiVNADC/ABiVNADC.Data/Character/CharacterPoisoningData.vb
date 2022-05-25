@@ -24,7 +24,7 @@
         CreateRecord(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (PoisoningColumn, poisonDice))
     End Sub
 
-    Friend Sub Clear(characterId As Long)
+    Public Sub Clear(characterId As Long)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
 End Module

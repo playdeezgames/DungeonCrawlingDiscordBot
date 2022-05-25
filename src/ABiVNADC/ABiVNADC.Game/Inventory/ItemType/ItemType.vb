@@ -35,6 +35,7 @@ Public Enum ItemType
     BugGuts
     RatTail
     SnakeFang
+    Antidote
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

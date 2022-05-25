@@ -82,6 +82,10 @@ Module ItemTypeDescriptorExtensions
                 New AnkhDescriptor
             },
             {
+                ItemType.Antidote,
+                New AntidoteDescriptor
+            },
+            {
                 ItemType.Backpack,
                 New BackpackDescriptor
             },
