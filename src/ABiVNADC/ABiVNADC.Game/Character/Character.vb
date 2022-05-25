@@ -150,11 +150,28 @@ Public Class Character
                 enemy.Attack(Me, builder)
             Case CombatActionType.Infect
                 enemy.Infect(Me, builder)
+            Case CombatActionType.Poison
+                enemy.Poison(Me, builder)
             Case CombatActionType.Rest
                 enemy.CombatRest(builder)
         End Select
         enemy.ApplyEffects(builder)
     End Sub
+
+    Private Sub Poison(character As Character, builder As StringBuilder)
+        character.AddPoison(PoisonDice)
+        builder.AppendLine($"{FullName} poisons {character.FullName}!")
+    End Sub
+
+    Private Sub AddPoison(poisonDice As String)
+        CharacterPoisoningData.Write(Id, poisonDice)
+    End Sub
+
+    ReadOnly Property PoisonDice As String
+        Get
+            Return CharacterType.PoisonDice
+        End Get
+    End Property
 
     Private Sub Infect(character As Character, builder As StringBuilder)
         Dim infection = RNG.RollDice(InfectionDice)
@@ -173,6 +190,12 @@ Public Class Character
     End Function
 
     Friend Sub ApplyEffects(builder As StringBuilder)
+        ApplyPoisoning(builder)
+        If IsDead Then
+            builder.AppendLine($"{FullName} is dead.")
+            Destroy()
+            Return
+        End If
         For Each effect In Effects
             effect.ApplyOn(Me, builder)
             ChangeEffectDuration(effect, -1)
@@ -182,6 +205,18 @@ Public Class Character
                 Exit For
             End If
         Next
+    End Sub
+
+    Private Sub ApplyPoisoning(builder As StringBuilder)
+        Dim poisonings = CharacterPoisoningData.Read(Id)
+        If poisonings.Any Then
+            Dim diceToRoll = String.Join("+", poisonings)
+            Dim poisonDamage = RNG.RollDice(diceToRoll)
+            If poisonDamage > 0 Then
+                builder.AppendLine($"{FullName} suffers {poisonDamage} poison damage!")
+                AddWounds(poisonDamage)
+            End If
+        End If
     End Sub
 
     Friend Sub ChangeEffectDuration(effectType As EffectType, delta As Long)

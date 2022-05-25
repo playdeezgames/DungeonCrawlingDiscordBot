@@ -51,6 +51,7 @@
         CharacterEndowmentData.Clear(characterId)
         CharacterStatisticData.ClearForCharacter(characterId)
         FeatureOwnerData.ClearForCharacter(characterId)
+        CharacterPoisoningData.Clear(characterId)
         ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
     End Sub
 

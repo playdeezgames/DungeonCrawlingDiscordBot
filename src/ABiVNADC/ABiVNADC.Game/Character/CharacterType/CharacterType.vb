@@ -115,4 +115,9 @@ Public Module CharacterTypeExtensions
     Function GenerateCombatAction(characterType As CharacterType, character As Character) As CombatActionType
         Return CharacterTypeDescriptors(characterType).GenerateCombatAction(character)
     End Function
+
+    <Extension>
+    Function PoisonDice(characterType As CharacterType) As String
+        Return CharacterTypeDescriptors(characterType).PoisonDice
+    End Function
 End Module

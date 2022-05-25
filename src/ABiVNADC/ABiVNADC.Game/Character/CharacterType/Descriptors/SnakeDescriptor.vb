@@ -1,7 +1,7 @@
 ﻿Friend Class SnakeDescriptor
     Inherits CharacterTypeDescriptor
     Sub New()
-        MyBase.New(Faction.Vermin)
+        MyBase.New(Faction.Vermin, "1d3/3")
         Name = "giant snake"
         Maximum = Function(s, c)
                       Select Case s
@@ -43,5 +43,13 @@
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+    Private Shared combatActionTable As New Dictionary(Of CombatActionType, Integer) From
+        {
+            {CombatActionType.Attack, 4},
+            {CombatActionType.Poison, 1}
+        }
+    Public Overrides Function GenerateCombatAction(character As Character) As CombatActionType
+        Return RNG.FromGenerator(combatActionTable)
     End Function
 End Class

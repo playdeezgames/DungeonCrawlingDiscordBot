@@ -1,5 +1,6 @@
 ﻿Friend Class CharacterTypeDescriptor
     ReadOnly Property Faction As Faction
+    ReadOnly Property PoisonDice As String
     Friend Name As String
     Friend Maximum As Func(Of StatisticType, Character, Long)
     Friend NameTable As List(Of String)
@@ -26,8 +27,9 @@
     Overridable Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Return New List(Of Location)
     End Function
-    Sub New(faction As Faction)
+    Sub New(faction As Faction, poisonDice As String)
         Me.Faction = faction
+        Me.PoisonDice = poisonDice
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         CombatEndowmentRecoveryDice = "0d1"

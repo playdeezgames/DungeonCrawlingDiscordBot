@@ -1,7 +1,7 @@
 ﻿Friend Class BossFishDescriptor
     Inherits CharacterTypeDescriptor
     Sub New()
-        MyBase.New(Faction.Fish)
+        MyBase.New(Faction.Fish, "0d1")
         Name = "boss fish"
         Maximum = Function(s, c)
                       Select Case s

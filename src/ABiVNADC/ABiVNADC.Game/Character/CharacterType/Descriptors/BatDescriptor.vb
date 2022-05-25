@@ -1,7 +1,7 @@
 ﻿Friend Class BatDescriptor
     Inherits CharacterTypeDescriptor
     Sub New()
-        MyBase.New(Faction.Vermin)
+        MyBase.New(Faction.Vermin, "0d1")
         Name = "giant bat"
         Maximum = Function(s, c)
                       Select Case s
