@@ -5,8 +5,6 @@
         Name = "mummy"
         Maximum = Function(s, c)
                       Select Case s
-                          Case StatisticType.Energy
-                              Return 1
                           Case StatisticType.Health
                               Return c.Level + 2
                           Case Else

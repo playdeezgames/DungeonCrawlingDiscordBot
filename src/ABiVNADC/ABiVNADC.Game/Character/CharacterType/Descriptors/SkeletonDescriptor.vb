@@ -5,8 +5,6 @@
         Name = "skeleton"
         Maximum = Function(s, c)
                       Select Case s
-                          Case StatisticType.Energy
-                              Return 1
                           Case StatisticType.Health
                               Return c.Level + 1
                           Case Else
