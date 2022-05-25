@@ -145,7 +145,7 @@ Public Class Character
 
     Private Sub PerformCounterAttack(builder As StringBuilder, enemy As Character)
         builder.AppendLine("---")
-        Select Case RNG.FromGenerator(enemy.CombatActionTable())
+        Select Case enemy.GenerateCombatAction()
             Case CombatActionType.Attack
                 enemy.Attack(Me, builder)
             Case CombatActionType.Infect
@@ -168,8 +168,8 @@ Public Class Character
         End Get
     End Property
 
-    Private Function CombatActionTable() As Dictionary(Of CombatActionType, Integer)
-        Return CharacterType.CombatActionTable(Me)
+    Private Function GenerateCombatAction() As CombatActionType
+        Return CharacterType.GenerateCombatAction(Me)
     End Function
 
     Friend Sub ApplyEffects(builder As StringBuilder)

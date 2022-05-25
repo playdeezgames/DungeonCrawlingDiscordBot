@@ -28,14 +28,15 @@
         ValidBribes = New HashSet(Of ItemType)
         SortOrder = 10
         InfectionDice = "1d6"
-        CombatActionTable = Function(character)
-                                Return New Dictionary(Of CombatActionType, Integer) From
+    End Sub
+    Private Shared combatActionTable As New Dictionary(Of CombatActionType, Integer) From
                                                  {
                                                     {CombatActionType.Attack, 4},
                                                     {CombatActionType.Infect, 1}
                                                  }
-                            End Function
-    End Sub
+    Public Overrides Function GenerateCombatAction(character As Character) As CombatActionType
+        Return RNG.FromGenerator(combatActionTable)
+    End Function
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) x * 1 \ 6},

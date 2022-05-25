@@ -27,6 +27,7 @@
         ExperiencePointGoal = Function(x) 10 * (x + 1)
         ValidBribes = New HashSet(Of ItemType)
         SortOrder = 200
+        InfectionDice = "1d4"
     End Sub
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
@@ -44,5 +45,13 @@
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+    Private Shared combatActionTable As New Dictionary(Of CombatActionType, Integer) From
+        {
+            {CombatActionType.Attack, 9},
+            {CombatActionType.Infect, 1}
+        }
+    Public Overrides Function GenerateCombatAction(character As Character) As CombatActionType
+        Return RNG.FromGenerator(combatActionTable)
     End Function
 End Class

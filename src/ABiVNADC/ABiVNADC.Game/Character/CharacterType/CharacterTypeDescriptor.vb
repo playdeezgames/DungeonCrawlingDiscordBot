@@ -14,9 +14,15 @@
     Friend MaximumExperienceLevel As Long
     Friend MaximumEncumbrance As Long
     Friend CombatEndowmentRecoveryDice As String
-    Friend CombatActionTable As Func(Of Character, Dictionary(Of CombatActionType, Integer))
     Friend SortOrder As Long
     Friend InfectionDice As String
+    Overridable Function GenerateCombatAction(character As Character) As CombatActionType
+        If character.CanFight Then
+            Return CombatActionType.Attack
+        Else
+            Return CombatActionType.Rest
+        End If
+    End Function
     Overridable Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Return New List(Of Location)
     End Function
@@ -27,15 +33,6 @@
         CombatEndowmentRecoveryDice = "0d1"
         Maximum = Function(s, c) 0
         InfectionDice = "0d1"
-        CombatActionTable = Function(character)
-                                If character.CanFight Then
-                                    Return New Dictionary(Of CombatActionType, Integer) From
-                                        {{CombatActionType.Attack, 1}}
-                                Else
-                                    Return New Dictionary(Of CombatActionType, Integer) From
-                                        {{CombatActionType.Rest, 1}}
-                                End If
-                            End Function
     End Sub
     Function IsEnemy(candidate As Character) As Boolean
         Return candidate.Exists AndAlso Faction.IsEnemy(candidate.Faction)
