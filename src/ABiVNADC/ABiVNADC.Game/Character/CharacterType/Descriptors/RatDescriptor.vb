@@ -20,7 +20,7 @@
         CombatRestRoll = "1d2/2+1d2/2+1d2/2+1d2/2"
         LootDrops = New Dictionary(Of ItemType, String) From
             {
-                {ItemType.RatTail, "1d3/1"}
+                {ItemType.RatTail, "1d3/3"}
             }
 
         ExperiencePointValue = 0

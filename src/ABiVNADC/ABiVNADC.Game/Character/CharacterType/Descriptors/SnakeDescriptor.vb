@@ -20,7 +20,7 @@
         CombatRestRoll = "1d2/2+1d2/2"
         LootDrops = New Dictionary(Of ItemType, String) From
             {
-                {ItemType.SnakeFang, "1d3/1"}
+                {ItemType.SnakeFang, "1d3/2"}
             }
         ExperiencePointValue = 0
         ExperiencePointGoal = Function(x) 10 * (x + 1)
