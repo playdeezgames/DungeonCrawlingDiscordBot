@@ -190,6 +190,10 @@ Module ItemTypeDescriptorExtensions
                 New SkullFragmentDescriptor
             },
             {
+                ItemType.SleepScroll,
+                New SleepScrollDescriptor
+            },
+            {
                 ItemType.SnakeFang,
                 New SnakeFangDescriptor
             },
