@@ -5,6 +5,10 @@ Friend Class EscapeScrollDescriptor
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} uses the escape scroll!")
         item.Destroy()
+        If Not character.Location.Routes.Any Then
+            builder.AppendLine("Nothing happens.")
+            Return
+        End If
         Dim direction = RNG.FromEnumerable(character.Location.Routes.Keys)
         character.Location = character.Location.Routes(direction).ToLocation
         If character.Location.HasEnemies(character) Then
