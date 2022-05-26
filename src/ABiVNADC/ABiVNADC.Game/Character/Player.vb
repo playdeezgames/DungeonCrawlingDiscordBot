@@ -15,6 +15,7 @@ Public Class Player
     Public Sub Fight(builder As StringBuilder)
         If Character Is Nothing Then
             builder.AppendLine("You have no current character.")
+            Return
         End If
         If Not Character.InCombat Then
             builder.AppendLine($"{Character.FullName} is not in combat.")
@@ -265,6 +266,7 @@ Public Class Player
             If Character Is Nothing Then
                 SwitchCharacter(characterName)
             End If
+            'Character.Inventory.Add(Item.Create(ItemType.EscapeScroll))
             Return True
         End If
         Return False

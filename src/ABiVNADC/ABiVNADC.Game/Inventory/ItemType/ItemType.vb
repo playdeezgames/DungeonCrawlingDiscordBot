@@ -37,6 +37,7 @@ Public Enum ItemType
     SnakeFang
     Antidote
     SleepScroll
+    EscapeScroll
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

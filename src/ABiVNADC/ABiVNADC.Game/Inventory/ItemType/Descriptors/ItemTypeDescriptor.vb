@@ -114,6 +114,10 @@ Module ItemTypeDescriptorExtensions
                 New DaggerDescriptor
             },
             {
+                ItemType.EscapeScroll,
+                New EscapeScrollDescriptor
+            },
+            {
                 ItemType.FishFin,
                 New FishFinDescriptor
             },
