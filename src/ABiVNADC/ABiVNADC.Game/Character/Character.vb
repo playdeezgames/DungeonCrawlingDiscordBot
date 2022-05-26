@@ -23,6 +23,16 @@ Public Class Character
         End Get
     End Property
 
+    Friend Sub ApplyElementalDamage(elementalDamageType As ElementalDamageType, damage As Long, builder As StringBuilder)
+        damage = CharacterType.ModifyElementalDamage(elementalDamageType, damage)
+        builder.AppendLine($"{FullName} takes {damage} damage from {elementalDamageType.Name}.")
+        AddWounds(damage)
+        If IsDead Then
+            builder.AppendLine($"{FullName} dies.")
+            Destroy()
+        End If
+    End Sub
+
     ReadOnly Property OwnedFeatures As IEnumerable(Of Feature)
         Get
             Return FeatureOwnerData.ReadForCharacter(Id).Select(Function(id) New Feature(id))

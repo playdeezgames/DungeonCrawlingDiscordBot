@@ -10,6 +10,11 @@
     Friend CombatRestRoll As String
     Friend LootDrops As Dictionary(Of ItemType, String)
     Friend ExperiencePointValue As Long
+
+    Friend Overridable Function ModifyElementalDamage(elementalDamageType As ElementalDamageType, damage As Long) As Long
+        Return damage
+    End Function
+
     Friend ExperiencePointGoal As Func(Of Long, Long)
     Friend ValidBribes As HashSet(Of ItemType)
     Friend MaximumExperienceLevel As Long

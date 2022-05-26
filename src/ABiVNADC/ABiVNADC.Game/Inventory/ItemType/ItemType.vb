@@ -38,6 +38,7 @@ Public Enum ItemType
     Antidote
     SleepScroll
     EscapeScroll
+    FireScroll
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

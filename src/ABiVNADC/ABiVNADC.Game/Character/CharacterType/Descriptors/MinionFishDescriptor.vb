@@ -44,4 +44,12 @@
         End While
         Return result
     End Function
+    Friend Overrides Function ModifyElementalDamage(elementalDamageType As ElementalDamageType, damage As Long) As Long
+        Select Case elementalDamageType
+            Case ElementalDamageType.Fire
+                Return 0
+            Case Else
+                Return damage
+        End Select
+    End Function
 End Class

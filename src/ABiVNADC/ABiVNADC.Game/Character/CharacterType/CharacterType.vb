@@ -18,6 +18,10 @@ Public Enum CharacterType
 End Enum
 Public Module CharacterTypeExtensions
     <Extension>
+    Function ModifyElementalDamage(characterType As CharacterType, elementalDamageType As ElementalDamageType, damage As Long) As Long
+        Return CharacterTypeDescriptors(characterType).ModifyElementalDamage(elementalDamageType, damage)
+    End Function
+    <Extension>
     Function InfectionDice(characterType As CharacterType) As String
         Return CharacterTypeDescriptors(characterType).InfectionDice
     End Function

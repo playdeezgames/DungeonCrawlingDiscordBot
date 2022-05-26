@@ -118,6 +118,10 @@ Module ItemTypeDescriptorExtensions
                 New EscapeScrollDescriptor
             },
             {
+                ItemType.FireScroll,
+                New FireScrollDescriptor
+            },
+            {
                 ItemType.FishFin,
                 New FishFinDescriptor
             },
