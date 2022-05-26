@@ -10,6 +10,7 @@ Friend Class SleepScrollDescriptor
             Dim maximumFatigue = enemy.Maximum(StatisticType.Energy)
             If maximumFatigue > 0 Then
                 enemy.AddFatigue(maximumFatigue)
+                enemy.ChangeEffectDuration(EffectType.Groggy, 1)
                 builder.AppendLine($"{enemy.FullName} is hit by a wave of drowsiness!")
             End If
         Next

@@ -50,6 +50,10 @@
             {CombatActionType.Poison, 1}
         }
     Public Overrides Function GenerateCombatAction(character As Character) As CombatActionType
-        Return RNG.FromGenerator(combatActionTable)
+        If character.CanFight Then
+            Return RNG.FromGenerator(combatActionTable)
+        Else
+            Return CombatActionType.Rest
+        End If
     End Function
 End Class

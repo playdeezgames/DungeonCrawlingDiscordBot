@@ -5,6 +5,7 @@ Public Enum EffectType
     None
     Nausea
     Infection
+    Groggy
 End Enum
 Public Module EffectTypeExtensions
     <Extension>
@@ -22,5 +23,13 @@ Public Module EffectTypeExtensions
     <Extension>
     Function AttackDice(effectType As EffectType) As String
         Return EffectTypeDescriptors(effectType).AttackDice
+    End Function
+    <Extension>
+    Function HasDefendDice(effectType As EffectType) As Boolean
+        Return effectType.DefendDice <> "0d1"
+    End Function
+    <Extension>
+    Function DefendDice(effectType As EffectType) As String
+        Return EffectTypeDescriptors(effectType).DefendDice
     End Function
 End Module

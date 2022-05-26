@@ -297,7 +297,8 @@ Public Class Character
     End Property
 
     Public Function RollAttack() As Long
-        Return RNG.RollDice(AttackDice)
+        Dim result = RNG.RollDice(AttackDice)
+        Return If(result < 0, 0, result)
     End Function
 
     Public Sub Equip(item As Item, builder As StringBuilder)
@@ -323,17 +324,21 @@ Public Class Character
 
     ReadOnly Property DefendDice As String
         Get
+            Dim result = CharacterType.DefendDice
             Dim defendItems = Equipment.Values.Where(Function(x) x.HasDefendDice)
-            If defendItems.Any Then
-                Return $"{CharacterType.DefendDice}+{String.Join("+"c, defendItems.Select(Function(x) x.DefendDice))}"
-            Else
-                Return CharacterType.DefendDice
-            End If
+            For Each defendItem In defendItems
+                result &= $"+{defendItem.DefendDice}"
+            Next
+            For Each effect In Effects.Where(Function(x) x.HasDefendDice)
+                result &= $"+{effect.DefendDice}"
+            Next
+            Return result
         End Get
     End Property
 
     Public Function RollDefend() As Long
-        Return RNG.RollDice(DefendDice)
+        Dim result = RNG.RollDice(DefendDice)
+        Return If(result < 0, 0, result)
     End Function
 
     Public Sub NonCombatRest(builder As StringBuilder)
