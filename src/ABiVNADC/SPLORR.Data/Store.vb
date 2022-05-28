@@ -128,7 +128,7 @@ Public Module Store
             MakeParameter($"@{idColumnName}", idColumnValue),
             MakeParameter($"@{columnName}", columnValue))
     End Sub
-    Function ReadLongsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, longColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
+    Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, longColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
         Return ExecuteReader(
             Function(reader) CType(reader(longColumnName), TOutputColumn),

@@ -26,7 +26,7 @@
     End Sub
 
     Public Function Exists(characterId As Long) As Boolean
-        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (CharacterIdColumn, characterId)).Any
+        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (CharacterIdColumn, characterId)).Any
     End Function
 
     Public Function Create(characterName As String, characterType As Long, characterLevel As Long, locationId As Long) As Long
@@ -92,6 +92,6 @@
     End Function
 
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
-        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (LocationIdColumn, locationId))
+        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (LocationIdColumn, locationId))
     End Function
 End Module

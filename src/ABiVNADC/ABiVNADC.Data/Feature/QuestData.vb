@@ -8,7 +8,7 @@
     Friend Const RewardItemQuantityColumn = "RewardItemQuantity"
 
     Public Function ReadForFeatureId(featureId As Long) As Long?
-        Dim result = ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (FeatureIdColumn, featureId))
+        Dim result = ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (FeatureIdColumn, featureId))
         If result.Any Then
             Return result.First
         End If

@@ -63,7 +63,7 @@
     End Sub
 
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)
-        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (PlayerIdColumn, playerId))
+        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (PlayerIdColumn, playerId))
     End Function
 
     Public Function ReadCountForPlayerAndCharacterName(playerId As Long, characterName As String) As Long

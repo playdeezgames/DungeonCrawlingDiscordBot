@@ -15,7 +15,7 @@
     Friend Const DirectionColumn = "Direction"
 
     Public Function ReadForForLocation(forLocationId As Long) As List(Of Long)
-        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, RouteIdColumn, (FromLocationIdColumn, forLocationId))
+        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, RouteIdColumn, (FromLocationIdColumn, forLocationId))
     End Function
 
     Friend Sub Initialize()

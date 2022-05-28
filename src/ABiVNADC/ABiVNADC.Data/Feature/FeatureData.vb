@@ -17,7 +17,7 @@
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)
-        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (LocationIdColumn, locationId))
+        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Function ReadLocation(featureId As Long) As Long?

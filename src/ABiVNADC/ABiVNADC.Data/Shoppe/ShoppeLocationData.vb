@@ -18,6 +18,6 @@
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As Long?
-        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ShoppeIdColumn, (LocationIdColumn, locationId)).SingleOrDefault
+        Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ShoppeIdColumn, (LocationIdColumn, locationId)).SingleOrDefault
     End Function
 End Module
