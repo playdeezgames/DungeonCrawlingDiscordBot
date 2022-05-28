@@ -32,11 +32,7 @@
     End Function
 
     Public Function ReadForXY(x As Long, y As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{LocationIdColumn}] FROM [{TableName}] WHERE [{XColumn}]=@{XColumn} AND [{YColumn}]=@{YColumn};",
-            MakeParameter($"@{XColumn}", x),
-            MakeParameter($"@{YColumn}", y))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (XColumn, x), (YColumn, y))
     End Function
 
     Public Sub Write(locationId As Long, x As Long, y As Long, terrainType As Long)

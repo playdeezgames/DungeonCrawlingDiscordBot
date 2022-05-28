@@ -3,6 +3,7 @@
     Friend Const RouteIdColumn = "RouteId"
     Friend Const FromLocationIdColumn = "FromLocationId"
     Friend Const ToLocationIdColumn = "ToLocationId"
+    Friend Const DirectionColumn = "Direction"
 
     Public Function ReadDirection(routeId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, RouteIdColumn, routeId, DirectionColumn)
@@ -12,7 +13,6 @@
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, RouteIdColumn, routeId, ToLocationIdColumn)
     End Function
 
-    Friend Const DirectionColumn = "Direction"
 
     Public Function ReadForForLocation(forLocationId As Long) As List(Of Long)
         Return ReadRecordsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, RouteIdColumn, (FromLocationIdColumn, forLocationId))
