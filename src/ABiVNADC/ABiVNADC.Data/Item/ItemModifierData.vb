@@ -24,11 +24,7 @@
     End Sub
 
     Public Function ReadLevel(itemId As Long, modifierType As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{LevelColumn}] FROM [{TableName}] WHERE [{ItemIdColumn}]=@{ItemIdColumn} AND [{ModifierColumn}]=@{ModifierColumn};",
-            MakeParameter($"@{ItemIdColumn}", itemId),
-            MakeParameter($"@{ModifierColumn}", modifierType))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, LevelColumn, (ItemIdColumn, itemId), (ModifierColumn, modifierType))
     End Function
 
     Public Function Read(itemId As Long) As Dictionary(Of Long, Long)

@@ -16,11 +16,7 @@
             );")
     End Sub
     Public Function Read(itemId As Long, durabilityType As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{DepletionColumn}] FROM [{TableName}] WHERE [{ItemIdColumn}]=@{ItemIdColumn} AND [{DurabilityTypeColumn}]=@{DurabilityTypeColumn};",
-            MakeParameter($"@{ItemIdColumn}", itemId),
-            MakeParameter($"@{DurabilityTypeColumn}", durabilityType))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, DepletionColumn, (ItemIdColumn, itemId), (DurabilityTypeColumn, durabilityType))
     End Function
 
     Sub ClearForItem(itemId As Long)
