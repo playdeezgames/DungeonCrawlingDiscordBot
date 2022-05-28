@@ -266,7 +266,7 @@ Public Class Player
             If Character Is Nothing Then
                 SwitchCharacter(characterName)
             End If
-            Character.Inventory.Add(Item.Create(ItemType.EscapeScroll))
+            'Character.Inventory.Add(Item.Create(ItemType.EscapeScroll))
             Return True
         End If
         Return False
