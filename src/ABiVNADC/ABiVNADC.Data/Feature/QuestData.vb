@@ -61,30 +61,14 @@
                     targetQuantity As Long,
                     rewardItemType As Long,
                     rewardQuantity As Long)
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]
-            (
-                [{FeatureIdColumn}],
-                [{QuestGiverNameColumn}],
-                [{TargetItemTypeColumn}],
-                [{TargetItemQuantityColumn}],
-                [{RewardItemTypeColumn}],
-                [{RewardItemQuantityColumn}]
-            ) 
-            VALUES 
-            (
-                @{FeatureIdColumn},
-                @{QuestGiverNameColumn},
-                @{TargetItemTypeColumn},
-                @{TargetItemQuantityColumn},
-                @{RewardItemTypeColumn},
-                @{RewardItemQuantityColumn});",
-            MakeParameter($"@{FeatureIdColumn}", featureId),
-            MakeParameter($"@{QuestGiverNameColumn}", questGiverName),
-            MakeParameter($"@{TargetItemTypeColumn}", targetItemType),
-            MakeParameter($"@{TargetItemQuantityColumn}", targetQuantity),
-            MakeParameter($"@{RewardItemTypeColumn}", rewardItemType),
-            MakeParameter($"@{RewardItemQuantityColumn}", rewardQuantity))
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (FeatureIdColumn, featureId),
+            (QuestGiverNameColumn, questGiverName),
+            (TargetItemTypeColumn, targetItemType),
+            (TargetItemQuantityColumn, targetQuantity),
+            (RewardItemTypeColumn, rewardItemType),
+            (RewardItemQuantityColumn, rewardQuantity))
     End Sub
 End Module

@@ -24,7 +24,7 @@
                     c.[{CharacterInventoryData.InventoryIdColumn}] IS NULL AND 
                     l.[{LocationInventoryData.InventoryIdColumn}] IS NULL;")
         For Each orphan In orphans
-            ExecuteNonQuery($"DELETE FROM [{TableName}] WHERE [{InventoryIdColumn}]=@{InventoryIdColumn};", MakeParameter($"@{InventoryIdColumn}", orphan))
+            ClearForColumnValue(AddressOf Initialize, TableName, InventoryIdColumn, orphan)
         Next
     End Sub
 End Module
