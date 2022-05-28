@@ -124,4 +124,8 @@ Public Module CharacterTypeExtensions
     Function PoisonDice(characterType As CharacterType) As String
         Return CharacterTypeDescriptors(characterType).PoisonDice
     End Function
+    <Extension>
+    Function IncentiveValue(characterType As CharacterType, character As Character) As Long
+        Return CharacterTypeDescriptors(characterType).IncentiveValue(character)
+    End Function
 End Module

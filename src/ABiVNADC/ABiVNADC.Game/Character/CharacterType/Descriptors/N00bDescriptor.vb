@@ -24,4 +24,8 @@
         ValidBribes = New HashSet(Of ItemType)
         MaximumEncumbrance = 50
     End Sub
+    Public Overrides Function IncentiveValue(character As Character) As Long
+        Dim level = character.Level
+        Return (level + 1) * (level + 2) \ 2
+    End Function
 End Class

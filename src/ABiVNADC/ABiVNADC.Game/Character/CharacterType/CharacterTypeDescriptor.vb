@@ -44,6 +44,10 @@
     Function IsEnemy(candidate As Character) As Boolean
         Return candidate.Exists AndAlso Faction.IsEnemy(candidate.Faction)
     End Function
+
+    Overridable Function IncentiveValue(character As Character) As Long
+        Return 0
+    End Function
 End Class
 Module CharacterTypeDescriptorExtensions
     Friend ReadOnly CharacterTypeDescriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From

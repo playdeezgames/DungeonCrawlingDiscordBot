@@ -293,8 +293,11 @@ Public Class Player
         End Get
     End Property
 
-    Friend Sub AddRIP(character As Character)
+    Friend Sub AddRIP(character As Character, incentivize As Boolean)
         PlayerRIPData.Write(Id, $"{character.FullName}(Level: {character.Level})")
+        If incentivize Then
+            PlayerIncentiveData.Write(Id, If(PlayerIncentiveData.Read(Id), 0) + character.IncentiveValue)
+        End If
     End Sub
 
     ReadOnly Property AheadDirection As Direction?

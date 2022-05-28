@@ -29,7 +29,7 @@ Public Class Character
         AddWounds(damage)
         If IsDead Then
             builder.AppendLine($"{FullName} dies.")
-            Destroy()
+            Destroy(True)
         End If
     End Sub
 
@@ -213,7 +213,7 @@ Public Class Character
         ApplyPoisoning(builder)
         If IsDead Then
             builder.AppendLine($"{FullName} is dead.")
-            Destroy()
+            Destroy(True)
             Return
         End If
         For Each effect In Effects
@@ -221,7 +221,7 @@ Public Class Character
             ChangeEffectDuration(effect, -1)
             If IsDead Then
                 builder.AppendLine($"{FullName} is dead.")
-                Destroy()
+                Destroy(True)
                 Exit For
             End If
         Next
@@ -275,7 +275,7 @@ Public Class Character
         End If
         builder.AppendLine($"{FullName} successfully bribes {enemy.FullName}.")
         enemy.Inventory.Add(item)
-        enemy.Destroy()
+        enemy.Destroy(False)
     End Sub
 
     Public Function TakesBribe(item As Item) As Boolean
@@ -399,20 +399,26 @@ Public Class Character
         End Get
     End Property
 
-    Public Sub Destroy()
+    Public Sub Destroy(incentivize As Boolean)
         If HasLocation Then
             DropEquipment()
             DropInventory()
             DropLoot()
         End If
         If HasPlayer Then
-            Player.AddRIP(Me)
+            Player.AddRIP(Me, incentivize)
             Dim corpseFeature = Feature.Create(Location, FeatureType.Corpse)
             CorpseData.Create(corpseFeature.Id, FullName)
         End If
         CharacterData.Clear(Id)
         InventoryData.ClearOrphans()
     End Sub
+
+    ReadOnly Property IncentiveValue As Long
+        Get
+            Return CharacterType.IncentiveValue(Me)
+        End Get
+    End Property
 
     Private ReadOnly Property HasPlayer As Boolean
         Get
@@ -565,7 +571,7 @@ Public Class Character
             If AddExperience(defender.ExperiencePointValue) Then
                 builder.AppendLine($"{FullName} is now level {ExperienceLevel}!")
             End If
-            defender.Destroy()
+            defender.Destroy(True)
         Else
             builder.AppendLine($"{defender.FullName} has {defender.Statistic(StatisticType.Health)} health left.")
         End If

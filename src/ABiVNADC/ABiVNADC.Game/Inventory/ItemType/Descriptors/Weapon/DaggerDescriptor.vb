@@ -4,7 +4,7 @@ Friend Class DaggerDescriptor
     Inherits ItemTypeDescriptor
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} commits seppuku")
-        character.Destroy()
+        character.Destroy(False)
     End Sub
     Sub New()
         MyBase.New("dagger", True)
