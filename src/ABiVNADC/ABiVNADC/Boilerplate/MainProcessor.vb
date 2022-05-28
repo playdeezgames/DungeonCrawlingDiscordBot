@@ -44,6 +44,7 @@
             {FightText, AddressOf FightProcessor.Run},
             {GroundText, AddressOf GroundProcessor.Run},
             {HelpText, AddressOf HelpProcessor.Run},
+            {IncentivesText, AddressOf IncentivesProcessor.Run},
             {InventoryText, AddressOf InventoryProcessor.Run},
             {LeftText, AddressOf LeftProcessor.Run},
             {LookText, AddressOf LookProcessor.Run},

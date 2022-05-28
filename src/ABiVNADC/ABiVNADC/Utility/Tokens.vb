@@ -18,6 +18,7 @@
     Friend Const FightText = "fight"
     Friend Const GroundText = "ground"
     Friend Const HelpText = "help"
+    Friend Const IncentivesText = "incentives"
     Friend Const InventoryText = "inventory"
     Friend Const LeftText = "left"
     Friend Const LookText = "look"

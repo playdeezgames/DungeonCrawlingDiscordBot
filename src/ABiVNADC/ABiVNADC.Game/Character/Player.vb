@@ -12,6 +12,12 @@ Public Class Player
         End Get
     End Property
 
+    ReadOnly Property IncentivePoints As Long
+        Get
+            Return If(PlayerIncentiveData.Read(Id), 0)
+        End Get
+    End Property
+
     Public Sub Fight(builder As StringBuilder)
         If Character Is Nothing Then
             builder.AppendLine("You have no current character.")
