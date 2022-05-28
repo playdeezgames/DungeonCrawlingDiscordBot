@@ -128,11 +128,11 @@ Public Module Store
             MakeParameter($"@{idColumnName}", idColumnValue),
             MakeParameter($"@{columnName}", columnValue))
     End Sub
-    Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, longColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
+    Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
         Return ExecuteReader(
-            Function(reader) CType(reader(longColumnName), TOutputColumn),
-            $"SELECT [{longColumnName}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
+            Function(reader) CType(reader(outputColumnName), TOutputColumn),
+            $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
 

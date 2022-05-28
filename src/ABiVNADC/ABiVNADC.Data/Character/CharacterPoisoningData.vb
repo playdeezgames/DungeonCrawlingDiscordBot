@@ -13,11 +13,7 @@
             );")
     End Sub
     Public Function Read(characterId As Long) As IEnumerable(Of String)
-        Initialize()
-        Return ExecuteReader(
-            Function(reader) CStr(reader(PoisoningColumn)),
-            $"SELECT [{PoisoningColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn};",
-            MakeParameter($"@{CharacterIdColumn}", characterId))
+        Return ReadRecordsWithColumnValue(Of Long, String)(AddressOf Initialize, TableName, PoisoningColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Sub Write(characterId As Long, poisonDice As String)
