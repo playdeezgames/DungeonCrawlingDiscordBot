@@ -43,10 +43,6 @@
     End Sub
 
     Public Function Read(characterId As Long, equipSlot As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{ItemIdColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn} AND [{EquipSlotColumn}]=@{EquipSlotColumn};",
-            MakeParameter($"@{CharacterIdColumn}", characterId),
-            MakeParameter($"@{EquipSlotColumn}", equipSlot))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, ItemIdColumn, (CharacterIdColumn, characterId), (EquipSlotColumn, equipSlot))
     End Function
 End Module

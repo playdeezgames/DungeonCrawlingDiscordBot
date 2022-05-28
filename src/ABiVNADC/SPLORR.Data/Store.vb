@@ -88,6 +88,13 @@ Public Module Store
             $"SELECT [{columnName}] FROM [{tableName}] WHERE [{idColumnName}]=@{idColumnName};",
             MakeParameter($"@{idColumnName}", idColumnValue))
     End Function
+    Public Function ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn)) As TOutputColumn?
+        initializer()
+        Return ExecuteScalar(Of TOutputColumn)(
+            $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} AND  [{secondColumnValue.Item1}]=@{secondColumnValue.Item1};",
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
+    End Function
     Public Function ReadColumnString(Of TColumn)(initializer As Action, tableName As String, idColumnName As String, idColumnValue As Long, otherColumnName As String, otherColumnValue As TColumn, outputColumnName As String) As String
         initializer()
         Return ExecuteScalar(

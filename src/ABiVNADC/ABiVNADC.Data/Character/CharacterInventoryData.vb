@@ -16,20 +16,7 @@
     End Sub
 
     Public Sub Write(CharacterId As Long, inventoryId As Long)
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]
-            (
-                [{CharacterIdColumn}],
-                [{InventoryIdColumn}]
-            ) 
-            VALUES 
-            (
-                @{CharacterIdColumn},
-                @{InventoryIdColumn}
-            );",
-            MakeParameter($"@{CharacterIdColumn}", CharacterId),
-            MakeParameter($"@{InventoryIdColumn}", inventoryId))
+        ReplaceRecord(AddressOf Initialize, TableName, CharacterIdColumn, CharacterId, InventoryIdColumn, inventoryId)
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)

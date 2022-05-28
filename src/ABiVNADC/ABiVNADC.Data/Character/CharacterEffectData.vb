@@ -20,11 +20,7 @@
     End Function
 
     Public Function Read(characterId As Long, effectType As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{DurationColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn} AND [{EffectTypeColumn}]=@{EffectTypeColumn};",
-            MakeParameter($"@{CharacterIdColumn}", characterId),
-            MakeParameter($"@{EffectTypeColumn}", effectType))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, DurationColumn, (CharacterIdColumn, characterId), (EffectTypeColumn, effectType))
     End Function
 
     Public Sub Write(characterId As Long, effectType As Long, duration As Long)
