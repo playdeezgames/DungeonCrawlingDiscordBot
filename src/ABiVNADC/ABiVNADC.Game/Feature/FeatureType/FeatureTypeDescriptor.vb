@@ -124,6 +124,22 @@ Module FeatureTypeDescriptorExtensions
                 }
             },
             {
+                FeatureType.IncentivesOffice,
+                New FeatureTypeDescriptor With
+                {
+                    .FullName = Function(feature) "incentives office",
+                    .OverworldGenerationWeight = 1,
+                    .Generator = Function(fromLocation)
+                                     Dim toLocation = New Location(LocationData.Create(LocationType.IncentivesOffice))
+                                     Dim entrance = Game.Entrance.Create(fromLocation, "Incentives Office")
+                                     Egress.Create(toLocation, "Incentives Office")
+                                     Route.Create(fromLocation, Direction.Inward, toLocation)
+                                     Route.Create(toLocation, Direction.Outward, fromLocation)
+                                     Return Feature.Create(toLocation, FeatureType.IncentivesOffice)
+                                 End Function
+                }
+            },
+            {
                 FeatureType.LandClaimOffice,
                 New FeatureTypeDescriptor With
                 {
