@@ -21,7 +21,7 @@
     End Sub
 
     Public Function ReadForFeature(featureId As Long) As IEnumerable(Of Long)
-        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, CorpseIdColumn, FeatureIdColumn, featureId)
+        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CorpseIdColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function Create(featureId As Long, corpseName As String) As Long

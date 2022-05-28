@@ -16,7 +16,7 @@
     End Sub
 
     Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Long)
-        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, CharacterIdColumn, characterId)
+        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (CharacterIdColumn, characterId))
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long)

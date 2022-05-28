@@ -16,7 +16,7 @@
             );")
     End Sub
     Public Function ReadForCharacter(characterId As Long) As IEnumerable(Of Long)
-        Return ReadIdsWithColumnValue(AddressOf Initialize, TableName, EffectTypeColumn, CharacterIdColumn, characterId)
+        Return ReadLongsWithColumnValue(Of Long, Long)(AddressOf Initialize, TableName, EffectTypeColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function Read(characterId As Long, effectType As Long) As Long?

@@ -121,18 +121,12 @@ Public Module Store
             MakeParameter($"@{idColumnName}", idColumnValue),
             MakeParameter($"@{columnName}", columnValue))
     End Sub
-    Function ReadAllIds(initializer As Action, tableName As String, idColumnName As String) As List(Of Long)
+    Function ReadLongsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, longColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
         Return ExecuteReader(
-            Function(reader) CLng(reader($"{idColumnName}")),
-            $"SELECT [{idColumnName}] FROM [{tableName}]")
-    End Function
-    Function ReadIdsWithColumnValue(Of TColumn)(initializer As Action, tableName As String, idColumnName As String, forColumnName As String, forColumnValue As TColumn) As List(Of Long)
-        initializer()
-        Return ExecuteReader(
-            Function(reader) CLng(reader(idColumnName)),
-            $"SELECT [{idColumnName}] FROM [{tableName}] WHERE [{forColumnName}]=@{forColumnName};",
-            MakeParameter($"@{forColumnName}", forColumnValue))
+            Function(reader) CType(reader(longColumnName), TOutputColumn),
+            $"SELECT [{longColumnName}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
+            MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
 
     Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnName As String, columnValue As TColumn)
