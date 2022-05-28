@@ -5,6 +5,15 @@ Public Class Player
     Sub New(playerId As Long)
         Id = playerId
     End Sub
+    ReadOnly Property Incentives As Dictionary(Of IncentiveType, Long)
+        Get
+            Return PlayerIncentiveLevelData.
+                ReadForPlayer(Id).
+                ToDictionary(
+                    Function(x) CType(x.Key, IncentiveType),
+                    Function(x) x.Value)
+        End Get
+    End Property
 
     ReadOnly Property InCombat As Boolean
         Get

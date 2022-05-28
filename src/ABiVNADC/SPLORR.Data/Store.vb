@@ -136,6 +136,21 @@ Public Module Store
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
 
+    Function ReadRecordsWithColumnValue(
+            Of TInputColumn,
+                TFirstOutputColumn,
+                TSecondOutputColumn)(
+                    initializer As Action,
+                    tableName As String,
+                    outputColumnNames As (String, String),
+                    forColumnValue As (String, TInputColumn)) As List(Of Tuple(Of TFirstOutputColumn, TSecondOutputColumn))
+        initializer()
+        Return ExecuteReader(
+            Function(reader) New Tuple(Of TFirstOutputColumn, TSecondOutputColumn)(CType(reader(outputColumnNames.Item1), TFirstOutputColumn), CType(reader(outputColumnNames.Item2), TSecondOutputColumn)),
+            $"SELECT [{outputColumnNames.Item1}],[{outputColumnNames.Item2}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
+            MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
+    End Function
+
     Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnName As String, columnValue As TColumn)
         initializer()
         ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnName}]=@{columnName};", MakeParameter($"@{columnName}", columnValue))
