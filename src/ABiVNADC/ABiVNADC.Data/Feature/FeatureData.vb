@@ -25,14 +25,7 @@
     End Function
 
     Public Function ReadCountForLocation(locationId As Long) As Long
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT 
-                COUNT(1) 
-            FROM [{TableName}] 
-            WHERE 
-                [{LocationIdColumn}]=@{LocationIdColumn};",
-            MakeParameter($"@{LocationIdColumn}", locationId)).Value
+        Return ReadCountForColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId))
     End Function
 
     Public Sub Clear(featureId As Long)
@@ -47,11 +40,7 @@
     End Function
 
     Public Function Create(locationId As Long, featureType As Long) As Long
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]([{LocationIdColumn}],[{FeatureTypeColumn}]) VALUES(@{LocationIdColumn},@{FeatureTypeColumn});",
-            MakeParameter($"@{LocationIdColumn}", locationId),
-            MakeParameter($"@{FeatureTypeColumn}", featureType))
+        ReplaceRecord(AddressOf Initialize, TableName, LocationIdColumn, locationId, FeatureTypeColumn, featureType)
         Return LastInsertRowId
     End Function
 End Module

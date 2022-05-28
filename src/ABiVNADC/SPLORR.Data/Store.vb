@@ -258,4 +258,14 @@ Public Module Store
             MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2))
         Return LastInsertRowId
     End Function
+    Function ReadCountForColumnValue(Of TInputColumn)(initializer As Action, tableName As String, inputColumnValue As (String, TInputColumn)) As Long
+        initializer()
+        Return ExecuteScalar(Of Long)(
+            $"SELECT 
+                COUNT(1) 
+            FROM [{tableName}] 
+            WHERE 
+                [{inputColumnValue.Item1}]=@{inputColumnValue.Item1};",
+            MakeParameter($"@{inputColumnValue.Item1}", inputColumnValue.Item2)).Value
+    End Function
 End Module

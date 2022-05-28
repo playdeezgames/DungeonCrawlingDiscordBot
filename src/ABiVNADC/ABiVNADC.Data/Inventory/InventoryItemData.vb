@@ -24,30 +24,10 @@
     End Function
 
     Public Function ReadCountForInventory(inventoryId As Long) As Long
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT 
-                COUNT(1) 
-            FROM [{TableName}] 
-            WHERE 
-                [{InventoryIdColumn}]=@{InventoryIdColumn};",
-            MakeParameter($"@{InventoryIdColumn}", inventoryId)).Value
+        Return ReadCountForColumnValue(AddressOf Initialize, TableName, (InventoryIdColumn, inventoryId))
     End Function
 
     Public Sub Write(inventoryId As Long, itemId As Long)
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]
-            (
-                [{InventoryIdColumn}],
-                [{ItemIdColumn}]
-            ) 
-            VALUES
-            (
-                @{InventoryIdColumn},
-                @{ItemIdColumn}
-            );",
-            MakeParameter($"@{InventoryIdColumn}", inventoryId),
-            MakeParameter($"@{ItemIdColumn}", itemId))
+        ReplaceRecord(AddressOf Initialize, TableName, InventoryIdColumn, inventoryId, ItemIdColumn, itemId)
     End Sub
 End Module
