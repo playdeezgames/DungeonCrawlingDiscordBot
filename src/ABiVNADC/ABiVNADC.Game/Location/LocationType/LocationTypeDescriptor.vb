@@ -18,6 +18,10 @@ Module LocationTypeDescriptorExtensions
                 }
             },
             {
+                LocationType.IncentivesOffice,
+                New LocationTypeDescriptor
+            },
+            {
                 LocationType.LandClaimOffice,
                 New LocationTypeDescriptor
             },
