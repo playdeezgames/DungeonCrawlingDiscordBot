@@ -16,11 +16,7 @@
             );")
     End Sub
     Public Function Read(characterId As Long, statisticType As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{AmountColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn} AND [{StatisticTypeColumn}]=@{StatisticTypeColumn};",
-            MakeParameter($"@{CharacterIdColumn}", characterId),
-            MakeParameter($"@{StatisticTypeColumn}", statisticType))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, AmountColumn, (CharacterIdColumn, characterId), (StatisticTypeColumn, statisticType))
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long)
