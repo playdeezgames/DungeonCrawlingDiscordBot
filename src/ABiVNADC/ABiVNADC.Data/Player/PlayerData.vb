@@ -17,20 +17,7 @@ Public Module PlayerData
     End Function
 
     Public Sub Write(playerId As Long, characterId As Long)
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]
-            (
-                [{PlayerIdColumn}],
-                [{CharacterIdColumn}]
-            ) 
-            VALUES
-            (
-                @{PlayerIdColumn},
-                @{CharacterIdColumn}
-            );",
-            MakeParameter($"@{PlayerIdColumn}", playerId),
-            MakeParameter($"@{CharacterIdColumn}", characterId))
+        ReplaceRecord(AddressOf Initialize, TableName, PlayerIdColumn, playerId, CharacterIdColumn, characterId)
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)

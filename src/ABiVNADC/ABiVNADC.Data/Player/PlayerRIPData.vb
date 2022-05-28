@@ -19,10 +19,6 @@
     End Sub
 
     Public Function ReadTombstoneTexts(playerId As Long) As IEnumerable(Of String)
-        Initialize()
-        Return ExecuteReader(
-            Function(reader) CStr(reader(TombstoneTextColumn)),
-            $"SELECT [{TombstoneTextColumn}] FROM [{TableName}] WHERE [{PlayerIdColumn}]=@{PlayerIdColumn};",
-            MakeParameter($"@{PlayerIdColumn}", playerId))
+        Return ReadRecordsWithColumnValue(Of Long, String)(AddressOf Initialize, TableName, TombstoneTextColumn, (PlayerIdColumn, playerId))
     End Function
 End Module

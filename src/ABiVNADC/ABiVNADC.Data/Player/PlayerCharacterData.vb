@@ -18,23 +18,7 @@
     End Sub
 
     Public Sub Write(playerId As Long, characterId As Long, direction As Long)
-        Initialize()
-        ExecuteNonQuery(
-            $"REPLACE INTO [{TableName}]
-            (
-                [{PlayerIdColumn}],
-                [{CharacterIdColumn}],
-                [{DirectionColumn}]
-            ) 
-            VALUES
-            (
-                @{PlayerIdColumn},
-                @{CharacterIdColumn},
-                @{DirectionColumn}
-            );",
-            MakeParameter($"@{PlayerIdColumn}", playerId),
-            MakeParameter($"@{CharacterIdColumn}", characterId),
-            MakeParameter($"@{DirectionColumn}", direction))
+        ReplaceRecord(AddressOf Initialize, TableName, PlayerIdColumn, playerId, CharacterIdColumn, characterId, DirectionColumn, direction)
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
@@ -87,9 +71,6 @@
     End Function
 
     Public Function ReadForCharacter(characterId As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{PlayerIdColumn}] FROM [{TableName}] WHERE [{CharacterIdColumn}]=@{CharacterIdColumn};",
-            MakeParameter($"@{CharacterIdColumn}", characterId))
+        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, PlayerIdColumn)
     End Function
 End Module
