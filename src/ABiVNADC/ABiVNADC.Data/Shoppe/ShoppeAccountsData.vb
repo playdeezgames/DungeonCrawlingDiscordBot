@@ -18,11 +18,7 @@
             );")
     End Sub
     Public Function ReadBalance(shoppeId As Long, characterId As Long) As Long?
-        Initialize()
-        Return ExecuteScalar(Of Long)(
-            $"SELECT [{BalanceColumn}] FROM [{TableName}] WHERE [{ShoppeIdColumn}]=@{ShoppeIdColumn} AND [{CharacterIdColumn}]=@{CharacterIdColumn};",
-            MakeParameter($"@{ShoppeIdColumn}", shoppeId),
-            MakeParameter($"@{CharacterIdColumn}", characterId))
+        Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, BalanceColumn, (ShoppeIdColumn, shoppeId), (CharacterIdColumn, characterId))
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long)
