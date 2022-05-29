@@ -203,4 +203,11 @@
     Shared Function FromId(locationId As Long?) As Location
         Return If(locationId.HasValue, New Location(locationId.Value), Nothing)
     End Function
+
+    Friend Sub EnteredBy(character As Character)
+        If character.HasPlayer Then
+            Return 'if this isn't a player... we don't care
+        End If
+        LocationType.HandleEnteredBy(character, Me)
+    End Sub
 End Class

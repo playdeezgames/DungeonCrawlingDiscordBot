@@ -426,12 +426,6 @@ Public Class Character
         End Get
     End Property
 
-    Private ReadOnly Property HasPlayer As Boolean
-        Get
-            Return Player IsNot Nothing
-        End Get
-    End Property
-
     Friend Sub ClaimLand(item As Item, builder As StringBuilder)
         If item.ItemType <> ItemType.LandClaim Then
             builder.AppendLine($"A {ItemType.LandClaim.Name} is needed to claim land!")
@@ -478,6 +472,12 @@ Public Class Character
         Next
     End Sub
 
+    ReadOnly Property HasPlayer As Boolean
+        Get
+            Return Player IsNot Nothing
+        End Get
+    End Property
+
     Property Location As Location
         Get
             Dim locationId As Long? = CharacterData.ReadLocation(Id)
@@ -487,7 +487,10 @@ Public Class Character
             Return Nothing
         End Get
         Set(value As Location)
-            CharacterData.WriteLocation(Id, value.Id)
+            If value.Id <> Location.Id Then
+                CharacterData.WriteLocation(Id, value.Id)
+                Location.EnteredBy(Me)
+            End If
         End Set
     End Property
     ReadOnly Property Inventory As Inventory Implements IInventoryHost.Inventory

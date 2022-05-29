@@ -17,4 +17,8 @@ Module LocationTypeExtensions
     Function CanRest(locationType As LocationType) As Boolean
         Return LocationTypeDescriptors(locationType).CanRest
     End Function
+    <Extension>
+    Sub HandleEnteredBy(locationType As LocationType, character As Character, location As Location)
+        LocationTypeDescriptors(locationType).HandleEnteredBy(character, location)
+    End Sub
 End Module

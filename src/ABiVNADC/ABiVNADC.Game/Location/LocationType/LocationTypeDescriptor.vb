@@ -1,37 +1,35 @@
-﻿Public Class LocationTypeDescriptor
-    Property IsPOV As Boolean
-    Property CanRest As Boolean
-    Sub New()
-        IsPOV = False
-        CanRest = False
+﻿Public MustInherit Class LocationTypeDescriptor
+    ReadOnly Property IsPOV As Boolean
+    ReadOnly Property CanRest As Boolean
+    Sub New(isPov As Boolean, canRest As Boolean)
+        Me.IsPOV = isPov
+        Me.CanRest = canRest
     End Sub
+
+    MustOverride Sub HandleEnteredBy(character As Character, location As Location)
 End Class
 Module LocationTypeDescriptorUtility
     Friend ReadOnly LocationTypeDescriptors As New Dictionary(Of LocationType, LocationTypeDescriptor) From
         {
             {
                 LocationType.Dungeon,
-                New LocationTypeDescriptor With
-                {
-                    .IsPOV = True,
-                    .CanRest = True
-                }
+                New DungeonLocationDescriptor
             },
             {
                 LocationType.IncentivesOffice,
-                New LocationTypeDescriptor
+                New NormalLocationDescriptor
             },
             {
                 LocationType.LandClaimOffice,
-                New LocationTypeDescriptor
+                New NormalLocationDescriptor
             },
             {
                 LocationType.Overworld,
-                New LocationTypeDescriptor
+                New OverworldLocationDescriptor
             },
             {
                 LocationType.Shoppe,
-                New LocationTypeDescriptor
+                New NormalLocationDescriptor
             }
         }
 End Module
