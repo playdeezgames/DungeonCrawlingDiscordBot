@@ -128,7 +128,7 @@
     End Sub
 
     Private Sub ShowIncentivesOffice(character As Character, builder As StringBuilder)
-        builder.AppendLine($"{character.FullName} is in a Incentives Office.")
+        builder.AppendLine($"{character.FullName} is in an Incentives Office.")
         If Not character.Location.Inventory.IsEmpty Then
             builder.AppendLine("There is stuff on the ground.")
         End If
