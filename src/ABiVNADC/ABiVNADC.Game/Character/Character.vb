@@ -13,6 +13,12 @@ Public Class Character
         End Get
     End Property
 
+    ReadOnly Property NeedsRest As Boolean
+        Get
+            Return Exists AndAlso Statistic(StatisticType.Energy) < Maximum(StatisticType.Energy)
+        End Get
+    End Property
+
     Friend Sub PurgePoisons()
         CharacterPoisoningData.Clear(Id)
     End Sub

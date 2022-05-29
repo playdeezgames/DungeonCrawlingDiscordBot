@@ -53,6 +53,10 @@ Public Class Player
             builder.AppendLine($"{Character.FullName} cannot rest here.")
             Return
         End If
+        If Not Character.NeedsRest Then
+            builder.AppendLine($"{Character.FullName} is ready for action!")
+            Return
+        End If
         If InCombat Then
             CombatRest(builder)
             Return
