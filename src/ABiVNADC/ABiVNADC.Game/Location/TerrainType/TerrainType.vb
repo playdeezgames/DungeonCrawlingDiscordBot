@@ -17,7 +17,7 @@ Public Module TerrainTypeExtensions
     End Property
     <Extension>
     Public Function Description(terrainType As TerrainType, character As Character) As String
-        Return $"{character.FullName} is in {TerrainTypeDescriptors(terrainType).Description}"
+        Return $"{character.FullName} is in {TerrainTypeDescriptors(terrainType).Description}."
     End Function
     <Extension>
     Public Function GeneratePeril(terrainType As TerrainType) As Long
