@@ -1,4 +1,4 @@
-﻿Public Class IncentiveTypeDescriptor
+﻿Public MustInherit Class IncentiveTypeDescriptor
     ReadOnly Property Name As String
     ReadOnly BasePrice As Long
     Sub New(name As String, basePrice As Long)
@@ -12,13 +12,15 @@
         End If
         Return CLng(BasePrice * 2 ^ level)
     End Function
+
+    MustOverride Sub ApplyTo(character As Character, level As Long)
 End Class
 Module IncentiveTypeDescriptorUtility
     Friend ReadOnly IncentiveTypeDescriptors As New Dictionary(Of IncentiveType, IncentiveTypeDescriptor) From
         {
             {
                 IncentiveType.StartingFood,
-                New IncentiveTypeDescriptor("starting food", 5)
+                New StartingFoodIncentiveDescriptor
             }
         }
 End Module

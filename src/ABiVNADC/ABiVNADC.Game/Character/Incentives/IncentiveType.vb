@@ -18,4 +18,8 @@ Public Module IncentiveTypeExtensions
     Function IncentivePrice(incentiveType As IncentiveType, level As Long) As Long
         Return IncentiveTypeDescriptors(incentiveType).IncentivePrice(level)
     End Function
+    <Extension>
+    Sub ApplyTo(incentiveType As IncentiveType, character As Character, level As Long)
+        IncentiveTypeDescriptors(incentiveType).ApplyTo(character, level)
+    End Sub
 End Module

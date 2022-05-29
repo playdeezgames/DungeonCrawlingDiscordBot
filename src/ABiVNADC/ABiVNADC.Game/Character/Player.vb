@@ -303,7 +303,9 @@ Public Class Player
             If Character Is Nothing Then
                 SwitchCharacter(characterName)
             End If
-            'Character.Inventory.Add(Item.Create(ItemType.EscapeScroll))
+            For Each entry In Incentives
+                entry.Key.ApplyTo(Character, entry.Value)
+            Next
             Return True
         End If
         Return False
