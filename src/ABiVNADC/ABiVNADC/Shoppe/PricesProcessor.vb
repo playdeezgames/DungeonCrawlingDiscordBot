@@ -34,8 +34,7 @@
     Private Sub RunIncentiveOffice(player As Player, builder As StringBuilder)
         builder.AppendLine("Incentives:")
         For Each incentiveType In AllIncentives
-            Dim level = If(player.Incentives.ContainsKey(incentiveType), player.Incentives(incentiveType), 0)
-            builder.AppendLine($"- {incentiveType.Name} (cost: {incentiveType.IncentivePrice(level)})")
+            builder.AppendLine($"- {incentiveType.Name} (cost: {incentiveType.IncentivePrice(player.IncentiveLevel(incentiveType))})")
         Next
     End Sub
 End Module

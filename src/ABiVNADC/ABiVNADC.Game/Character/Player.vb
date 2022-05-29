@@ -82,6 +82,28 @@ Public Class Player
         Return False
     End Function
 
+    Public Function IncentiveLevel(incentiveType As IncentiveType) As Long
+        Return If(PlayerIncentiveLevelData.Read(Id, incentiveType), 0)
+    End Function
+
+    Public Sub BuyIncentive(incentiveType As IncentiveType, builder As StringBuilder)
+        If incentiveType = IncentiveType.None Then
+            builder.AppendLine("Unknown incentive type!")
+            Return
+        End If
+        Dim level = IncentiveLevel(incentiveType)
+        Dim price = incentiveType.IncentivePrice(level)
+        Dim available = IncentivePoints
+        If price > available Then
+            builder.AppendLine($"You only have {available} incentive points!")
+            Return
+        End If
+        level += 1
+        PlayerIncentiveData.Write(Id, available - price)
+        PlayerIncentiveLevelData.Write(Id, incentiveType, level)
+        builder.AppendLine($"You now have `{incentiveType.Name}` level {level}!")
+    End Sub
+
     Public Sub Equip(item As Item, builder As StringBuilder)
         Character.Equip(item, builder)
         Character.NextTurn(builder)

@@ -53,7 +53,10 @@
         handler()
     End Sub
 
-    Sub RequireItemTypeQuantity(tokens As IEnumerable(Of String), builder As StringBuilder, handler As Action(Of ItemType, Long))
+    Sub RequireItemTypeQuantity(
+                               tokens As IEnumerable(Of String),
+                               builder As StringBuilder,
+                               handler As Action(Of ItemType, Long))
         Dim quantity As Long = 1
         Dim itemTypeName As String
         If Long.TryParse(tokens.First, quantity) Then
@@ -117,9 +120,18 @@
                 ShowShoppeLocation(player.Character, player.Character.Location.Shoppe, builder)
             Case LocationType.LandClaimOffice
                 ShowLandClaimOffice(player.Character, builder)
+            Case LocationType.IncentivesOffice
+                ShowIncentivesOffice(player.Character, builder)
             Case Else
                 builder.AppendLine("Cannot show current location.")
         End Select
+    End Sub
+
+    Private Sub ShowIncentivesOffice(character As Character, builder As StringBuilder)
+        builder.AppendLine($"{character.FullName} is in a Incentives Office.")
+        If Not character.Location.Inventory.IsEmpty Then
+            builder.AppendLine("There is stuff on the ground.")
+        End If
     End Sub
 
     Private Sub ShowLandClaimOffice(character As Character, builder As StringBuilder)
