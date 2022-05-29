@@ -25,6 +25,10 @@ Module IncentiveTypeDescriptorUtility
             {
                 IncentiveType.StartingPotion,
                 New StartingPotionIncentiveDescriptor
+            },
+            {
+                IncentiveType.StartingDagger,
+                New StartingDaggerIncentiveDescriptor
             }
         }
 End Module

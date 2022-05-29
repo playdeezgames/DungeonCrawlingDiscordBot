@@ -4,6 +4,7 @@ Public Enum IncentiveType
     None
     StartingFood
     StartingPotion
+    StartingDagger
 End Enum
 Public Module IncentiveTypeExtensions
     ReadOnly Property AllIncentives As IEnumerable(Of IncentiveType)
