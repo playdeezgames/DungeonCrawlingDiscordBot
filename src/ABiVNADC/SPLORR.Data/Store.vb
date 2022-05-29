@@ -228,6 +228,43 @@ Public Module Store
                          TSecondColumn,
                          TThirdColumn,
                          TFourthColumn,
+                         TFifthColumn)(
+                                      initializer As Action,
+                                      tableName As String,
+                                      firstColumnValue As (String, TFirstColumn),
+                                      secondColumnValue As (String, TSecondColumn),
+                                      thirdColumnValue As (String, TThirdColumn),
+                                      fourthColumnValue As (String, TFourthColumn),
+                                      fifthColumnValue As (String, TFifthColumn))
+        initializer()
+        ExecuteNonQuery(
+            $"REPLACE INTO [{tableName}]
+            (
+                [{firstColumnValue.Item1}],
+                [{secondColumnValue.Item1}],
+                [{thirdColumnValue.Item1}],
+                [{fourthColumnValue.Item1}],
+                [{fifthColumnValue.Item1}]
+            ) 
+            VALUES
+            (
+                @{firstColumnValue.Item1},
+                @{secondColumnValue.Item1},
+                @{thirdColumnValue.Item1},
+                @{fourthColumnValue.Item1},
+                @{fifthColumnValue.Item1}
+            );",
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
+            MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2),
+            MakeParameter($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2),
+            MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2))
+    End Sub
+    Sub ReplaceRecord(
+                     Of TFirstColumn,
+                         TSecondColumn,
+                         TThirdColumn,
+                         TFourthColumn,
                          TFifthColumn,
                          TSixthColumn)(
                                       initializer As Action,

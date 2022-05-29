@@ -71,7 +71,7 @@
 
     Private Shared Function CreateOverworld(x As Long, y As Long, terrainType As TerrainType) As Location
         Dim location = New Location(LocationData.Create(LocationType.Overworld))
-        OverworldLocationData.Write(location.Id, x, y, terrainType)
+        OverworldLocationData.Write(location.Id, x, y, terrainType, terrainType.GeneratePeril, terrainType.GeneratePerilThreshold)
         If x = 0 AndAlso y = 0 Then
             GenerateCrossRoads(location)
         ElseIf x = 0 Then

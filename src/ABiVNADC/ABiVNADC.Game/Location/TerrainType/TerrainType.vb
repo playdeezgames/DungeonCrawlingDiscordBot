@@ -19,4 +19,12 @@ Public Module TerrainTypeExtensions
     Public Function Description(terrainType As TerrainType, character As Character) As String
         Return $"{character.FullName} is in {TerrainTypeDescriptors(terrainType).Description}"
     End Function
+    <Extension>
+    Public Function GeneratePeril(terrainType As TerrainType) As Long
+        Return TerrainTypeDescriptors(terrainType).GeneratePeril
+    End Function
+    <Extension>
+    Public Function GeneratePerilThreshold(terrainType As TerrainType) As Long
+        Return TerrainTypeDescriptors(terrainType).GeneratePerilThreshold
+    End Function
 End Module

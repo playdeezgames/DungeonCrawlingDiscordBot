@@ -4,6 +4,8 @@
     Friend Const XColumn = "X"
     Friend Const YColumn = "Y"
     Friend Const TerrainTypeColumn = "TerrainType"
+    Friend Const PerilThresholdColumn = "PerilThreshold"
+    Friend Const PerilColumn = "Peril"
 
     Public Function ReadTerrainType(locationId As Long) As Long?
         Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, TerrainTypeColumn)
@@ -18,6 +20,8 @@
                 [{XColumn}] INT NOT NULL,
                 [{YColumn}] INT NOT NULL,
                 [{TerrainTypeColumn}] INT NOT NULL,
+                [{PerilColumn}] INT NOT NULL,
+                [{PerilThresholdColumn}] INT NOT NULL,
                 UNIQUE([{XColumn}],[{YColumn}]),
                 FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
@@ -35,7 +39,15 @@
         Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (XColumn, x), (YColumn, y))
     End Function
 
-    Public Sub Write(locationId As Long, x As Long, y As Long, terrainType As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, LocationIdColumn, locationId, XColumn, x, YColumn, y, TerrainTypeColumn, terrainType)
+    Public Sub Write(locationId As Long, x As Long, y As Long, terrainType As Long, peril As Long, perilThreshold As Long)
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (LocationIdColumn, locationId),
+            (XColumn, x),
+            (YColumn, y),
+            (TerrainTypeColumn, terrainType),
+            (PerilColumn, peril),
+            (PerilThresholdColumn, perilThreshold))
     End Sub
 End Module
