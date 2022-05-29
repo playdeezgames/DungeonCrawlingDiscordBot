@@ -28,4 +28,8 @@
     <Import Include="SPLORR.Game" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Location\TerrainType\Descriptor\" />
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,7 @@ Public Enum TerrainType
     Hills
     Mountains
     Desert
+    Swamp
 End Enum
 Public Module TerrainTypeExtensions
     Friend ReadOnly Property TerrainTypeGenerator As Dictionary(Of TerrainType, Integer)

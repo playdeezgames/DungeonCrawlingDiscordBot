@@ -1,49 +1,39 @@
-﻿Public Class TerrainTypeDescriptor
-    Property GeneratorWeight As Integer
-    Property Description As String
+﻿Public MustInherit Class TerrainTypeDescriptor
+    ReadOnly Property GeneratorWeight As Integer
+    ReadOnly Property Description As String
+    Sub New(generatorWeight As Integer, description As String)
+        Me.GeneratorWeight = generatorWeight
+        Me.Description = description
+    End Sub
+    MustOverride Function GeneratePerilThreshold() As Long
+    MustOverride Function GeneratePeril() As Long
 End Class
 Module TerrainTypeDescriptorUtility
     Friend ReadOnly TerrainTypeDescriptors As New Dictionary(Of TerrainType, TerrainTypeDescriptor) From
         {
             {
                 TerrainType.Desert,
-                New TerrainTypeDescriptor With
-                {
-                    .GeneratorWeight = 1,
-                    .Description = "a sandy desert"
-                }
+                New DesertDescriptor
             },
             {
                 TerrainType.Forest,
-                New TerrainTypeDescriptor With
-                {
-                    .GeneratorWeight = 6,
-                    .Description = "a forest"
-                }
+                New ForestDescriptor
             },
             {
                 TerrainType.Hills,
-                New TerrainTypeDescriptor With
-                {
-                    .GeneratorWeight = 3,
-                    .Description = "a hilly area"
-                }
+                New HillsDescriptor
             },
             {
                 TerrainType.Mountains,
-                New TerrainTypeDescriptor With
-                {
-                    .GeneratorWeight = 2,
-                    .Description = "a mountainous area"
-                }
+                New MountainsDescriptor
             },
             {
                 TerrainType.Plains,
-                New TerrainTypeDescriptor With
-                {
-                    .GeneratorWeight = 6,
-                    .Description = "a flat plains"
-                }
+                New PlainsDescriptor
+            },
+            {
+                TerrainType.Swamp,
+                New SwampDescriptor
             }
         }
 End Module
