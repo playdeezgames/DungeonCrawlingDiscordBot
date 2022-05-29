@@ -49,7 +49,7 @@
         Return 0
     End Function
 End Class
-Module CharacterTypeDescriptorExtensions
+Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From
         {
             {

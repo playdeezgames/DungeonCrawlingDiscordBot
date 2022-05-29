@@ -13,7 +13,7 @@ Public Class EffectTypeDescriptor
         DefendDice = "0d1"
     End Sub
 End Class
-Module EffectTypeDescriptorExtensions
+Module EffectTypeDescriptorUtility
     Friend ReadOnly EffectTypeDescriptors As New Dictionary(Of EffectType, EffectTypeDescriptor) From
         {
             {

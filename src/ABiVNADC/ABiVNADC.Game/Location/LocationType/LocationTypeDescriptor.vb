@@ -6,7 +6,7 @@
         CanRest = False
     End Sub
 End Class
-Module LocationTypeDescriptorExtensions
+Module LocationTypeDescriptorUtility
     Friend ReadOnly LocationTypeDescriptors As New Dictionary(Of LocationType, LocationTypeDescriptor) From
         {
             {

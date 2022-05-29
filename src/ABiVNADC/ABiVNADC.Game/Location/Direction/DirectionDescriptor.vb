@@ -13,7 +13,7 @@
         OppositeDirection = Nothing
     End Sub
 End Class
-Module DirectionDescriptorExtensions
+Module DirectionDescriptorUtility
     Friend ReadOnly DirectionDescriptors As New Dictionary(Of Direction, DirectionDescriptor) From
         {
             {

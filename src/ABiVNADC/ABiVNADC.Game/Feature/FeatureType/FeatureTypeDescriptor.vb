@@ -8,7 +8,7 @@
         OverworldGenerationWeight = 0
     End Sub
 End Class
-Module FeatureTypeDescriptorExtensions
+Module FeatureTypeDescriptorUtility
     Private Function MakeGenerator(featureType As FeatureType) As Func(Of Location, Feature)
         Return Function(location)
                    Return Feature.Create(location, featureType)

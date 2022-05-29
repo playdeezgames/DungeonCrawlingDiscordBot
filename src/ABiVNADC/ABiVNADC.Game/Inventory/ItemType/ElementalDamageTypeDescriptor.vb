@@ -4,7 +4,7 @@
         Me.Name = name
     End Sub
 End Class
-Module ElementalDamageTypeDescriptorExtensions
+Module ElementalDamageTypeDescriptorUtility
     Friend ElementalDamageTypeDescriptors As New Dictionary(Of ElementalDamageType, ElementalDamageTypeDescriptor) From
         {
             {

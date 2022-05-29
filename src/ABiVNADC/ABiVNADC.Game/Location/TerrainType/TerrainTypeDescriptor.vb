@@ -2,7 +2,7 @@
     Property GeneratorWeight As Integer
     Property Description As String
 End Class
-Module TerrainTypeDescriptorExtensions
+Module TerrainTypeDescriptorUtility
     Friend ReadOnly TerrainTypeDescriptors As New Dictionary(Of TerrainType, TerrainTypeDescriptor) From
         {
             {

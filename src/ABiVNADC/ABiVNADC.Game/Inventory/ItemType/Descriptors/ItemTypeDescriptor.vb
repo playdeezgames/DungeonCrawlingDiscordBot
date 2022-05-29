@@ -56,7 +56,7 @@ Public Class ItemTypeDescriptor
         Return New List(Of Location)
     End Function
 End Class
-Module ItemTypeDescriptorExtensions
+Module ItemTypeDescriptorUtility
     Friend ReadOnly Property QuestTargetGenerator As Dictionary(Of ItemType, Integer)
         Get
             Dim descriptors = ItemTypeDescriptors

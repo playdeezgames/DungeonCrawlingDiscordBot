@@ -10,7 +10,7 @@
         Return count
     End Function
 End Class
-Module FactionDescriptorExtensions
+Module FactionDescriptorUtility
     Friend ReadOnly FactionDescriptors As New Dictionary(Of Faction, FactionDescriptor) From
         {
             {Faction.Fish, New FishFactionDescriptor},

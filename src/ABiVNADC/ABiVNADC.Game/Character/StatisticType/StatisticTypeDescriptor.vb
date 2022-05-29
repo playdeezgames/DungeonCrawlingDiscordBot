@@ -1,7 +1,7 @@
 ﻿Public Class StatisticTypeDescriptor
     Property Name As String
 End Class
-Friend Module StatisticTypeDescriptorExtensions
+Friend Module StatisticTypeDescriptorUtility
     Friend ReadOnly StatisticTypeDescriptors As New Dictionary(Of StatisticType, StatisticTypeDescriptor) From
         {
             {

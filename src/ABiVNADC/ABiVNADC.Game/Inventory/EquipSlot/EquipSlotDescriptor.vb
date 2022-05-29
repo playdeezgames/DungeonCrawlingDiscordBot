@@ -2,7 +2,7 @@
     Property Name As String
 
 End Class
-Module EquipSlotDescriptorExtensions
+Module EquipSlotDescriptorUtility
     Friend ReadOnly EquipSlotDescriptors As New Dictionary(Of EquipSlot, EquipSlotDescriptor) From
         {
             {

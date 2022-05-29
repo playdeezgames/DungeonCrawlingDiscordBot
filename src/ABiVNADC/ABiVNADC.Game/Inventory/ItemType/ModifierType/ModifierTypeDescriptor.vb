@@ -5,7 +5,7 @@
         NameDecorator = Function(x) x
     End Sub
 End Class
-Module ModifierTypeDescriptorExtensions
+Module ModifierTypeDescriptorUtility
     Friend ReadOnly ModifierTypeDescriptors As New Dictionary(Of ModifierType, ModifierTypeDescriptor) From
         {
             {

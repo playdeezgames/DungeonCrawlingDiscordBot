@@ -4,7 +4,7 @@
         Me.Name = name
     End Sub
 End Class
-Module IncentiveTypeDescriptorExtensions
+Module IncentiveTypeDescriptorUtility
     Friend ReadOnly IncentiveTypeDescriptors As New Dictionary(Of IncentiveType, IncentiveTypeDescriptor) From
         {
             {
