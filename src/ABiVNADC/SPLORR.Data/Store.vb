@@ -30,7 +30,7 @@ Public Module Store
             loadConnection.BackupDatabase(connection)
         End Using
     End Sub
-    Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
+    Private Function CreateCommand(query As String, ParamArray parameters() As SqliteParameter) As SqliteCommand
         Dim command = connection.CreateCommand()
         command.CommandText = query
         For Each parameter In parameters
@@ -38,25 +38,25 @@ Public Module Store
         Next
         Return command
     End Function
-    Function MakeParameter(name As String, value As Object) As SqliteParameter
+    Public Function MakeParameter(Of TParameter)(name As String, value As TParameter) As SqliteParameter
         Return New SqliteParameter(name, value)
     End Function
-    Sub ExecuteNonQuery(sql As String, ParamArray parameters() As SqliteParameter)
+    Public Sub ExecuteNonQuery(sql As String, ParamArray parameters() As SqliteParameter)
         Using command = CreateCommand(sql, parameters)
             command.ExecuteNonQuery()
         End Using
     End Sub
-    Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As SqliteParameter) As TResult?
+    Public Function ExecuteScalar(Of TResult As Structure)(query As String, ParamArray parameters() As SqliteParameter) As TResult?
         Using command = CreateCommand(query, parameters)
             Return ExecuteScalar(Of TResult)(command)
         End Using
     End Function
-    Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As SqliteParameter) As TResult
+    Private Function ExecuteScalar(Of TResult As Class)(transform As Func(Of Object, TResult), query As String, ParamArray parameters() As SqliteParameter) As TResult
         Using command = CreateCommand(query, parameters)
             Return transform(command.ExecuteScalar)
         End Using
     End Function
-    Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As SqliteParameter) As List(Of TResult)
+    Public Function ExecuteReader(Of TResult)(transform As Func(Of SqliteDataReader, TResult), query As String, ParamArray parameters() As SqliteParameter) As List(Of TResult)
         Using command = CreateCommand(query, parameters)
             Using reader = command.ExecuteReader
                 Dim result As New List(Of TResult)
@@ -67,7 +67,7 @@ Public Module Store
             End Using
         End Using
     End Function
-    ReadOnly Property LastInsertRowId() As Long
+    Public ReadOnly Property LastInsertRowId() As Long
         Get
             Using command = connection.CreateCommand()
                 command.CommandText = "SELECT last_insert_rowid();"
@@ -75,7 +75,7 @@ Public Module Store
             End Using
         End Get
     End Property
-    Function ExecuteScalar(Of TResult As Structure)(command As SqliteCommand) As TResult?
+    Private Function ExecuteScalar(Of TResult As Structure)(command As SqliteCommand) As TResult?
         Dim result = command.ExecuteScalar
         If result IsNot Nothing Then
             Return CType(result, TResult?)
@@ -128,7 +128,7 @@ Public Module Store
             MakeParameter($"@{idColumnName}", idColumnValue),
             MakeParameter($"@{columnName}", columnValue))
     End Sub
-    Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
+    Public Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
         Return ExecuteReader(
             Function(reader) CType(reader(outputColumnName), TOutputColumn),
@@ -136,7 +136,7 @@ Public Module Store
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
 
-    Function ReadRecordsWithColumnValue(
+    Public Function ReadRecordsWithColumnValue(
             Of TInputColumn,
                 TFirstOutputColumn,
                 TSecondOutputColumn)(
@@ -151,12 +151,12 @@ Public Module Store
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
 
-    Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnName As String, columnValue As TColumn)
+    Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnName As String, columnValue As TColumn)
         initializer()
         ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnName}]=@{columnName};", MakeParameter($"@{columnName}", columnValue))
     End Sub
 
-    Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
+    Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
         initializer()
         ExecuteNonQuery(
             $"DELETE FROM [{tableName}] WHERE [{firstColumnName}]=@{firstColumnName} AND [{secondColumnName}]=@{secondColumnName};",
@@ -164,7 +164,7 @@ Public Module Store
             MakeParameter($"@{secondColumnName}", secondColumnValue))
     End Sub
 
-    Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
+    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
         initializer()
         ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
@@ -181,7 +181,7 @@ Public Module Store
             MakeParameter($"@{secondColumnName}", secondColumnValue))
     End Sub
 
-    Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn)
+    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn)
         initializer()
         ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
@@ -201,7 +201,7 @@ Public Module Store
             MakeParameter($"@{thirdColumnName}", thirdColumnValue))
     End Sub
 
-    Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn, fourthColumnName As String, fourthColumnValue As TFourthColumn)
+    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn, fourthColumnName As String, fourthColumnValue As TFourthColumn)
         initializer()
         ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
@@ -223,7 +223,7 @@ Public Module Store
             MakeParameter($"@{thirdColumnName}", thirdColumnValue),
             MakeParameter($"@{fourthColumnName}", fourthColumnValue))
     End Sub
-    Sub ReplaceRecord(
+    Public Sub ReplaceRecord(
                      Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
@@ -260,7 +260,7 @@ Public Module Store
             MakeParameter($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2),
             MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2))
     End Sub
-    Sub ReplaceRecord(
+    Public Sub ReplaceRecord(
                      Of TFirstColumn,
                          TSecondColumn,
                          TThirdColumn,
@@ -302,19 +302,19 @@ Public Module Store
             MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2),
             MakeParameter($"@{sixthColumnValue.Item1}", sixthColumnValue.Item2))
     End Sub
-    Function CreateRecord(initializer As Action, tableName As String) As Long
+    Public Function CreateRecord(initializer As Action, tableName As String) As Long
         initializer()
         ExecuteNonQuery($"INSERT INTO [{tableName}] DEFAULT VALUES;")
         Return LastInsertRowId
     End Function
-    Function CreateRecord(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn)) As Long
+    Public Function CreateRecord(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn)) As Long
         initializer()
         ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{columnValue.Item1}]) VALUES(@{columnValue.Item1});",
             MakeParameter($"@{columnValue.Item1}", columnValue.Item2))
         Return LastInsertRowId
     End Function
-    Function CreateRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) As Long
+    Public Function CreateRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn)) As Long
         initializer()
         ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1});",
@@ -322,7 +322,7 @@ Public Module Store
             MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
         Return LastInsertRowId
     End Function
-    Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) As Long
+    Public Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn)) As Long
         initializer()
         ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}],[{thirdColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1},@{thirdColumnValue.Item1});",
@@ -331,7 +331,7 @@ Public Module Store
             MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2))
         Return LastInsertRowId
     End Function
-    Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn), fourthColumnValue As (String, TFourthColumn)) As Long
+    Public Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn), fourthColumnValue As (String, TFourthColumn)) As Long
         initializer()
         ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}],[{thirdColumnValue.Item1}],[{fourthColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1},@{thirdColumnValue.Item1}, @{fourthColumnValue.Item1});",
@@ -341,7 +341,7 @@ Public Module Store
             MakeParameter($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2))
         Return LastInsertRowId
     End Function
-    Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn, TFifthColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn), fourthColumnValue As (String, TFourthColumn), fifthColumnValue As (String, TFourthColumn)) As Long
+    Public Function CreateRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn, TFifthColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn), fourthColumnValue As (String, TFourthColumn), fifthColumnValue As (String, TFourthColumn)) As Long
         initializer()
         ExecuteNonQuery(
             $"INSERT INTO [{tableName}] ([{firstColumnValue.Item1}],[{secondColumnValue.Item1}],[{thirdColumnValue.Item1}],[{fourthColumnValue.Item1}],[{fifthColumnValue.Item1}]) VALUES(@{firstColumnValue.Item1},@{secondColumnValue.Item1},@{thirdColumnValue.Item1}, @{fourthColumnValue.Item1}, @{fifthColumnValue.Item1});",
@@ -352,7 +352,7 @@ Public Module Store
             MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2))
         Return LastInsertRowId
     End Function
-    Function ReadCountForColumnValue(Of TInputColumn)(initializer As Action, tableName As String, inputColumnValue As (String, TInputColumn)) As Long
+    Public Function ReadCountForColumnValue(Of TInputColumn)(initializer As Action, tableName As String, inputColumnValue As (String, TInputColumn)) As Long
         initializer()
         Return ExecuteScalar(Of Long)(
             $"SELECT 
