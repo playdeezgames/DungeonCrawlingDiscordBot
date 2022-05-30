@@ -260,10 +260,6 @@ Public Class Character
         End Get
     End Property
 
-    Public Function Create(characterType As CharacterType, level As Long, location As Location) As Character
-        Return New Character(CharacterData.Create(characterType.RandomName, characterType, level, location.Id))
-    End Function
-
     ReadOnly Property Equipment As Dictionary(Of EquipSlot, Item)
         Get
             Dim equippedItemIds As Dictionary(Of Long, Long) = CharacterEquipSlotData.ReadForCharacter(Id)
@@ -676,4 +672,8 @@ Public Class Character
         Dim newFatigue = If(CharacterStatisticData.Read(Id, StatisticType.Energy), 0) + fatigue
         CharacterStatisticData.Write(Id, StatisticType.Energy, If(newFatigue < 0, 0, newFatigue))
     End Sub
+
+    Public Shared Function Create(characterType As CharacterType, level As Long, location As Location) As Character
+        Return New Character(CharacterData.Create(characterType.RandomName, characterType, level, location.Id))
+    End Function
 End Class

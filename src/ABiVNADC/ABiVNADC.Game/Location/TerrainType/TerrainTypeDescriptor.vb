@@ -7,6 +7,7 @@
     End Sub
     MustOverride Function GeneratePerilThreshold() As Long
     MustOverride Function GeneratePeril() As Long
+    MustOverride Sub GenerateWanderingMonster(location As Location)
 End Class
 Module TerrainTypeDescriptorUtility
     Friend ReadOnly TerrainTypeDescriptors As New Dictionary(Of TerrainType, TerrainTypeDescriptor) From

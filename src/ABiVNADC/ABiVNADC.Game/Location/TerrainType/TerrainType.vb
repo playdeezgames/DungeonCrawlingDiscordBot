@@ -16,6 +16,10 @@ Public Module TerrainTypeExtensions
         End Get
     End Property
     <Extension>
+    Friend Sub GenerateWanderingMonster(terrainType As TerrainType, location As Location)
+        TerrainTypeDescriptors(terrainType).GenerateWanderingMonster(location)
+    End Sub
+    <Extension>
     Public Function Description(terrainType As TerrainType, character As Character) As String
         Return $"{character.FullName} is in {TerrainTypeDescriptors(terrainType).Description}."
     End Function

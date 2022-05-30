@@ -5,13 +5,6 @@
         Id = locationId
     End Sub
 
-    ReadOnly Property TerrainType As TerrainType?
-        Get
-            Dim result = OverworldLocationData.ReadTerrainType(Id)
-            Return If(result.HasValue, CType(result.Value, TerrainType), Nothing)
-        End Get
-    End Property
-
     ReadOnly Property CanClaim As Boolean
         Get
             Return HasFeature(FeatureType.ForSaleSign)
@@ -87,10 +80,12 @@
         End If
         Return location
     End Function
-
-    ReadOnly Property OverworldX As Long?
+    ReadOnly Property Overworld As Overworld
         Get
-            Return OverworldLocationData.ReadX(Id)
+            If LocationType = LocationType.Overworld Then
+                Return New Overworld(Id)
+            End If
+            Return Nothing
         End Get
     End Property
 
@@ -101,12 +96,6 @@
     ReadOnly Property QuestGiver As QuestGiver
         Get
             Return Features.SingleOrDefault(Function(x) x.FeatureType = FeatureType.QuestGiver)?.QuestGiver
-        End Get
-    End Property
-
-    ReadOnly Property OverworldY As Long?
-        Get
-            Return OverworldLocationData.ReadY(Id)
         End Get
     End Property
 
@@ -205,7 +194,7 @@
     End Function
 
     Friend Sub EnteredBy(character As Character)
-        If character.HasPlayer Then
+        If Not character.HasPlayer Then
             Return 'if this isn't a player... we don't care
         End If
         LocationType.HandleEnteredBy(character, Me)

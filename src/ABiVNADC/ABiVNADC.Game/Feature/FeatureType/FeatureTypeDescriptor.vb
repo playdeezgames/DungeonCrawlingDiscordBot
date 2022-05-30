@@ -100,8 +100,8 @@ Module FeatureTypeDescriptorUtility
                 New FeatureTypeDescriptor With
                 {
                     .FullName = Function(feature)
-                                    Dim x = feature.Location.OverworldX.Value
-                                    Dim y = feature.Location.OverworldY.Value
+                                    Dim x = feature.Location.Overworld.X
+                                    Dim y = feature.Location.Overworld.Y
                                     Return $"a sign that reads `For Sale {If(y < 0, $"[N]{-y}", $"[S]{y}")}{If(x < 0, $"[W]{-x}", $"[E]{x}")}`"
                                 End Function,
                     .OverworldGenerationWeight = 16,

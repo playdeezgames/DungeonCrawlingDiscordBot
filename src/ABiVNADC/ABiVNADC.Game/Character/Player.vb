@@ -274,10 +274,10 @@ Public Class Player
     Private Shared Sub OverworldMove(character As Character, direction As Direction, builder As StringBuilder)
         Dim walker = DirectionWalker(direction)
         Dim location = character.Location
-        Dim nextX = location.OverworldX.Value + walker.DeltaX
-        Dim nextY = location.OverworldY.Value + walker.DeltaY
+        Dim nextX = location.Overworld.X + walker.DeltaX
+        Dim nextY = location.Overworld.Y + walker.DeltaY
         character.Location = Location.AutogenerateOverworldXY(nextX, nextY)
-        character.NextTurn(builder)
+        character.ApplyEffects(builder)
     End Sub
 
     Private Shared Sub DungeonMove(character As Character, direction As Direction, builder As StringBuilder)
