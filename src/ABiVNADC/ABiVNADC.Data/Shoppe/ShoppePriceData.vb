@@ -57,6 +57,6 @@
     End Function
 
     Public Sub Write(shoppeId As Long, itemType As Long, buyPrice As Long, sellPrice As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, ItemTypeColumn, itemType, BuyPriceColumn, buyPrice, SellPriceColumn, sellPrice)
+        ReplaceRecord(AddressOf Initialize, TableName, (ShoppeIdColumn, shoppeId), (ItemTypeColumn, itemType), (BuyPriceColumn, buyPrice), (SellPriceColumn, sellPrice))
     End Sub
 End Module
