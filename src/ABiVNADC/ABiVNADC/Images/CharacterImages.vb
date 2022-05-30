@@ -181,6 +181,21 @@ Module CharacterImages
                                                 "..@.......@.",
                                                 "............"
                                             }))
+    Private ReadOnly Goose As New TextCanvas(Enhance(New List(Of String) From
+                                            {
+                                                "..@@........",
+                                                ".@ @@.......",
+                                                "@@@@@.......",
+                                                "...@@.......",
+                                                "...@@.......",
+                                                "...@@@@@....",
+                                                "....@@@@@@..",
+                                                "....@@ @@ @@",
+                                                "....@@@  @@.",
+                                                ".....@@@@@@.",
+                                                "........@...",
+                                                "......@@.@.."
+                                            }))
 
     Private ReadOnly GoblinSprite As New Sprite(Goblin, 16, 2, "."c)
     Private ReadOnly OrcSprite As New Sprite(Orc, 16, 2, "."c)
@@ -194,6 +209,7 @@ Module CharacterImages
     Private ReadOnly RatSprite As New Sprite(Rat, 16, 2, "."c)
     Private ReadOnly BatSprite As New Sprite(Bat, 16, 2, "."c)
     Private ReadOnly BugSprite As New Sprite(Bug, 16, 2, "."c)
+    Private ReadOnly GooseSprite As New Sprite(Goose, 16, 2, "."c)
     Private Function Enhance(lines As List(Of String)) As List(Of String)
         Dim result As New List(Of String)
         For Each line In lines
@@ -237,8 +253,10 @@ Module CharacterImages
                 Return BatSprite
             Case characterType.Snake
                 Return SnakeSprite
-            Case characterType.Bug
+            Case CharacterType.Bug
                 Return BugSprite
+            Case characterType.Goose
+                Return GooseSprite
             Case Else
                 Throw New NotImplementedException
         End Select

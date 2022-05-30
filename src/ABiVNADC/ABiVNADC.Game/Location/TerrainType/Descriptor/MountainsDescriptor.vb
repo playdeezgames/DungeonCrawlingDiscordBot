@@ -5,7 +5,7 @@
     End Sub
 
     Public Overrides Sub GenerateWanderingMonster(location As Location)
-        Character.Create(CharacterType.Orc, 0, location) 'TODO: make a new monster
+        Character.Create(CharacterType.Goose, 0, location) 'TODO: make a new monster
     End Sub
 
     Public Overrides Function GeneratePerilThreshold() As Long

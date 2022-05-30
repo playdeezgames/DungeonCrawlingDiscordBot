@@ -8,6 +8,7 @@ Public Enum Faction
     Fish
     Monster
     Vermin
+    WaterFowl
 End Enum
 Module FactionExtensions
     <Extension>

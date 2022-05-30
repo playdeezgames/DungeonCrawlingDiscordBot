@@ -1,4 +1,37 @@
 ﻿Friend Module Names
+    Friend ReadOnly Geese As New List(Of String) From
+        {
+            "Geewk",
+            "Sqroow",
+            "Kuath",
+            "Koruww",
+            "Qrashrat",
+            "Crabo",
+            "Ieceww",
+            "Qaroow",
+            "Crekisia",
+            "Cutiko",
+            "Kraiww",
+            "Kraith",
+            "Sqraiwk",
+            "Cronaw",
+            "Sceeraw",
+            "Utewk",
+            "Krinnith",
+            "Zeyooww",
+            "Skessoorriet",
+            "Qinneeccath",
+            "Creet",
+            "Khoow",
+            "Qhooth",
+            "Eciw",
+            "Ghocew",
+            "Rhateaw",
+            "Sciarro",
+            "Icuth",
+            "Zroobbishit",
+            "Sqeereissah"
+        }
     Friend ReadOnly Goblin As New List(Of String) From
         {
             "Gug",

@@ -2,6 +2,7 @@
     Private ReadOnly CommandAliases As New Dictionary(Of String, String) From
         {
             {"a", AroundText},
+            {"attack", FightText},
             {"drink", UseText},
             {"eat", UseText},
             {"enc", EncumbranceText},
@@ -11,6 +12,7 @@
             {"g", GroundText},
             {"i", InventoryText},
             {"in", EnterText},
+            {"hit", FightText},
             {"l", LeftText},
             {"m", MoveText},
             {"out", ExitText},

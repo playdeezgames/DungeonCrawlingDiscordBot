@@ -49,16 +49,16 @@ Public Class Player
             builder.AppendLine("You have no current character.")
             Return
         End If
-        If Not Character.Location.CanRest Then
-            builder.AppendLine($"{Character.FullName} cannot rest here.")
-            Return
-        End If
         If Not Character.NeedsRest Then
             builder.AppendLine($"{Character.FullName} is ready for action!")
             Return
         End If
         If InCombat Then
             CombatRest(builder)
+            Return
+        End If
+        If Not Character.Location.CanRest Then
+            builder.AppendLine($"{Character.FullName} cannot rest here.")
             Return
         End If
         Character.NonCombatRest(builder)

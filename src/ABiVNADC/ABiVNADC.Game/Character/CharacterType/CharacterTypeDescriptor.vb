@@ -73,6 +73,10 @@ Module CharacterTypeDescriptorUtility
                 New GoblinDescriptor
             },
             {
+                CharacterType.Goose,
+                New GooseDescriptor
+            },
+            {
                 CharacterType.MinionFish,
                 New MinionFishDescriptor
             },

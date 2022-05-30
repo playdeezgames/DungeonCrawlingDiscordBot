@@ -18,6 +18,7 @@ Module FactionDescriptorUtility
             {Faction.Monster, New MonsterFactionDescriptor},
             {Faction.Player, New PlayerFactionDescriptor},
             {Faction.Undead, New UndeadFactionDescriptor},
-            {Faction.Vermin, New VerminFactionDescriptor}
+            {Faction.Vermin, New VerminFactionDescriptor},
+            {Faction.WaterFowl, New WaterFowlFactionDescriptor}
         }
 End Module

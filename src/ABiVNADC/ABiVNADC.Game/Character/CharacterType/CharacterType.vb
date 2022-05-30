@@ -15,6 +15,7 @@ Public Enum CharacterType
     Bat
     Snake
     Bug
+    Goose
 End Enum
 Public Module CharacterTypeExtensions
     <Extension>
