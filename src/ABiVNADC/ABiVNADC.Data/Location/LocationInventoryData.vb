@@ -20,6 +20,6 @@
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, InventoryIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, InventoryIdColumn, (LocationIdColumn, locationId))
     End Function
 End Module

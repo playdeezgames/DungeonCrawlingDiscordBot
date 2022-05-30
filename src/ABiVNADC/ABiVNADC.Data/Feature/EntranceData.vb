@@ -13,7 +13,7 @@
             );")
     End Sub
     Public Function ReadForFeatureId(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, FeatureIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function ReadName(featureId As Long) As String

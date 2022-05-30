@@ -11,7 +11,7 @@
             );")
     End Sub
     Public Function Read(playerId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, PlayerIdColumn, playerId, IncentivePointsColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, IncentivePointsColumn, (PlayerIdColumn, playerId))
     End Function
 
     Public Sub Write(playerId As Long, incentivePoints As Long)

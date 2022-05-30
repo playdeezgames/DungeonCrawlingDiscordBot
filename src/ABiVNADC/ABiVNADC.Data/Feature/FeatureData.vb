@@ -21,7 +21,7 @@
     End Function
 
     Public Function ReadLocation(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, LocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function ReadCountForLocation(locationId As Long) As Long
@@ -36,7 +36,7 @@
     End Sub
 
     Public Function ReadFeatureType(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, FeatureTypeColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureTypeColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function Create(locationId As Long, featureType As Long) As Long

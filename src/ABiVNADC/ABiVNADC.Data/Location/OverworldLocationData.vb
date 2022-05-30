@@ -8,11 +8,11 @@
     Friend Const PerilColumn = "Peril"
 
     Public Function ReadPeril(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, PerilColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, PerilColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Function ReadPerilThreshold(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, PerilThresholdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, PerilThresholdColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Sub WritePeril(locationId As Long, peril As Long)
@@ -20,7 +20,7 @@
     End Sub
 
     Public Function ReadTerrainType(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, TerrainTypeColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, TerrainTypeColumn, (LocationIdColumn, locationId))
     End Function
 
     Friend Sub Initialize()
@@ -40,11 +40,11 @@
     End Sub
 
     Public Function ReadY(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, YColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, YColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Function ReadX(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, XColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, XColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Function ReadForXY(x As Long, y As Long) As Long?

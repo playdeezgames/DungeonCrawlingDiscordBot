@@ -56,15 +56,15 @@
     End Sub
 
     Public Function ReadCharacterType(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterTypeColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterTypeColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function ReadLevel(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterLevelColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function ReadLocation(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, LocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function ReadName(characterId As Long) As String
@@ -72,7 +72,7 @@
     End Function
 
     Public Function ReadExperience(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, ExperienceColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ExperienceColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Sub WriteExperience(characterId As Long, experience As Long)
@@ -88,7 +88,7 @@
     End Sub
 
     Public Function ReadCharacterLevel(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterLevelColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function ReadForLocation(locationId As Long) As IEnumerable(Of Long)

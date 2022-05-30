@@ -82,11 +82,11 @@ Public Module Store
         End If
         Return Nothing
     End Function
-    Public Function ReadColumnValue(Of TColumn As Structure)(initializer As Action, tableName As String, idColumnName As String, idColumnValue As Long, columnName As String) As TColumn?
+    Public Function ReadColumnValue(Of TInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, inputColumnValue As (String, TInputColumn)) As TOutputColumn?
         initializer()
-        Return ExecuteScalar(Of TColumn)(
-            $"SELECT [{columnName}] FROM [{tableName}] WHERE [{idColumnName}]=@{idColumnName};",
-            MakeParameter($"@{idColumnName}", idColumnValue))
+        Return ExecuteScalar(Of TOutputColumn)(
+            $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{inputColumnValue.Item1}]=@{inputColumnValue.Item1};",
+            MakeParameter($"@{inputColumnValue.Item1}", inputColumnValue.Item2))
     End Function
     Public Function ReadColumnValue(Of TFirstInputColumn, TSecondInputColumn, TOutputColumn As Structure)(initializer As Action, tableName As String, outputColumnName As String, firstColumnValue As (String, TFirstInputColumn), secondColumnValue As (String, TSecondInputColumn)) As TOutputColumn?
         initializer()

@@ -67,10 +67,10 @@
     End Function
 
     Public Function ReadDirection(playerId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, PlayerIdColumn, playerId, DirectionColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DirectionColumn, (PlayerIdColumn, playerId))
     End Function
 
     Public Function ReadForCharacter(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, PlayerIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, PlayerIdColumn, (CharacterIdColumn, characterId))
     End Function
 End Module

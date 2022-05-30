@@ -9,11 +9,11 @@
     End Function
 
     Public Function ReadInsideLocation(shoppeId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, InsideLocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, InsideLocationIdColumn, (ShoppeIdColumn, shoppeId))
     End Function
 
     Public Function ReadOutsideLocation(shoppeId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, OutsideLocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, OutsideLocationIdColumn, (ShoppeIdColumn, shoppeId))
     End Function
 
     Friend Const InsideLocationIdColumn = "InsideLocationId"

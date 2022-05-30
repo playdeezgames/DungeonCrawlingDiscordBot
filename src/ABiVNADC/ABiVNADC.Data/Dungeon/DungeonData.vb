@@ -26,11 +26,11 @@
     End Sub
 
     Public Function ReadStartingLocation(dungeonId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, StartingLocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, StartingLocationIdColumn, (DungeonIdColumn, dungeonId))
     End Function
 
     Public Function ReadOverworldLocation(dungeonId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, OverworldLocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, OverworldLocationIdColumn, (DungeonIdColumn, dungeonId))
     End Function
 
     Public Function Create(dungeonName As String, overworldLocationId As Long, startingLocationId As Long, difficulty As Long) As Long
@@ -42,6 +42,6 @@
     End Function
 
     Public Function ReadDifficulty(dungeonId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, DifficultyColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DifficultyColumn, (DungeonIdColumn, dungeonId))
     End Function
 End Module

@@ -15,7 +15,7 @@
             );")
     End Sub
     Public Function Read(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, CharacterIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Sub Write(locationId As Long, characterId As Long)

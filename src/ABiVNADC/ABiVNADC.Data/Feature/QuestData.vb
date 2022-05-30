@@ -20,15 +20,15 @@
     End Function
 
     Public Function ReadTargetQuantity(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, TargetItemQuantityColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, TargetItemQuantityColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function ReadRewardQuantity(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, RewardItemQuantityColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, RewardItemQuantityColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function ReadTargetItemType(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, TargetItemTypeColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, TargetItemTypeColumn, (FeatureIdColumn, featureId))
     End Function
 
     Friend Sub Initialize()
@@ -51,7 +51,7 @@
     End Sub
 
     Public Function ReadRewardItemType(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, RewardItemTypeColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, RewardItemTypeColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Sub Write(

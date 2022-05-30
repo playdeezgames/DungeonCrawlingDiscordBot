@@ -20,7 +20,7 @@
     End Sub
 
     Public Function ReadFeature(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FeatureIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, FeatureIdColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Sub Clear(characterId As Long)

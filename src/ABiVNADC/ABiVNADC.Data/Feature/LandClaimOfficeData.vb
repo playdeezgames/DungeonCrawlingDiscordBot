@@ -14,7 +14,7 @@
     End Sub
 
     Public Function Read(featureId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, FeatureIdColumn, featureId, ClaimPriceColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ClaimPriceColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Sub Write(featureId As Long, claimPrice As Long)

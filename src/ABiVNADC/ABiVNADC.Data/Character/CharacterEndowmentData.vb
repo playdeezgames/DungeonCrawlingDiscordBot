@@ -15,7 +15,7 @@
     End Sub
 
     Function Read(characterId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, characterId, SpentColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, SpentColumn, (CharacterIdColumn, characterId))
     End Function
 
     Sub Clear(characterId As Long)

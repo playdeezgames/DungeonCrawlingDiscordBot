@@ -25,6 +25,6 @@
 
     Public Function ReadForCharacter(CharacterId As Long) As Long?
         Initialize()
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, CharacterIdColumn, CharacterId, InventoryIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, InventoryIdColumn, (CharacterIdColumn, CharacterId))
     End Function
 End Module

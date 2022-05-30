@@ -6,11 +6,11 @@
     Friend Const DirectionColumn = "Direction"
 
     Public Function ReadDirection(routeId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, RouteIdColumn, routeId, DirectionColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DirectionColumn, (RouteIdColumn, routeId))
     End Function
 
     Public Function ReadToLocation(routeId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, RouteIdColumn, routeId, ToLocationIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ToLocationIdColumn, (RouteIdColumn, routeId))
     End Function
 
 

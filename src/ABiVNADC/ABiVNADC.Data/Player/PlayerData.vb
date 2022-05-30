@@ -13,7 +13,7 @@ Public Module PlayerData
             );")
     End Sub
     Public Function ReadCharacter(playerId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, PlayerIdColumn, playerId, CharacterIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, CharacterIdColumn, (PlayerIdColumn, playerId))
     End Function
 
     Public Sub Write(playerId As Long, characterId As Long)

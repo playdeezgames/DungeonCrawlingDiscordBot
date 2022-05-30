@@ -16,7 +16,7 @@
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, LocationIdColumn, locationId, DungeonIdColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, DungeonIdColumn, (LocationIdColumn, locationId))
     End Function
 
     Public Sub Write(dungeonId As Long, locationId As Long)

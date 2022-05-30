@@ -12,7 +12,7 @@
     End Sub
 
     Public Function ReadItemType(itemId As Long) As Long?
-        Return ReadColumnValue(Of Long)(AddressOf Initialize, TableName, ItemIdColumn, itemId, ItemTypeColumn)
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ItemTypeColumn, (ItemIdColumn, itemId))
     End Function
 
     Public Sub Clear(itemId As Long)
