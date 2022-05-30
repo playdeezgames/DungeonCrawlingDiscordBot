@@ -165,7 +165,6 @@ Public Module Store
             MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Sub
-
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn), thirdColumnValue As (String, TThirdColumn))
         initializer()
         ExecuteNonQuery(
@@ -185,28 +184,37 @@ Public Module Store
             MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
             MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2))
     End Sub
-
-    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn, TFourthColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn, fourthColumnName As String, fourthColumnValue As TFourthColumn)
+    Public Sub ReplaceRecord(Of
+                                 TFirstColumn,
+                                 TSecondColumn,
+                                 TThirdColumn,
+                                 TFourthColumn)(
+                                               initializer As Action,
+                                               tableName As String,
+                                               firstColumnValue As (String, TFirstColumn),
+                                               secondColumnValue As (String, TSecondColumn),
+                                               thirdColumnValue As (String, TThirdColumn),
+                                               fourthColumnValue As (String, TFourthColumn))
         initializer()
         ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
-                [{firstColumnName}],
-                [{secondColumnName}],
-                [{thirdColumnName}],
-                [{fourthColumnName}]
+                [{firstColumnValue.Item1}],
+                [{secondColumnValue.Item1}],
+                [{thirdColumnValue.Item1}],
+                [{fourthColumnValue.Item1}]
             ) 
             VALUES
             (
-                @{firstColumnName},
-                @{secondColumnName},
-                @{thirdColumnName},
-                @{fourthColumnName}
+                @{firstColumnValue.Item1},
+                @{secondColumnValue.Item1},
+                @{thirdColumnValue.Item1},
+                @{fourthColumnValue.Item1}
             );",
-            MakeParameter($"@{firstColumnName}", firstColumnValue),
-            MakeParameter($"@{secondColumnName}", secondColumnValue),
-            MakeParameter($"@{thirdColumnName}", thirdColumnValue),
-            MakeParameter($"@{fourthColumnName}", fourthColumnValue))
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
+            MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2),
+            MakeParameter($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2))
     End Sub
     Public Sub ReplaceRecord(
                      Of TFirstColumn,
