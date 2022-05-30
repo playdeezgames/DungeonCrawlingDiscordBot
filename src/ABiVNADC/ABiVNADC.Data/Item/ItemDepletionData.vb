@@ -27,8 +27,8 @@
         ReplaceRecord(
             AddressOf Initialize,
             TableName,
-            ItemIdColumn, itemId,
-            DurabilityTypeColumn, durabilityType,
-            DepletionColumn, depletion)
+            (ItemIdColumn, itemId),
+            (DurabilityTypeColumn, durabilityType),
+            (DepletionColumn, depletion))
     End Sub
 End Module

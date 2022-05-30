@@ -27,8 +27,8 @@
         ReplaceRecord(
             AddressOf Initialize,
             TableName,
-            CharacterIdColumn, characterId,
-            StatisticTypeColumn, statisticType,
-            AmountColumn, amount)
+            (CharacterIdColumn, characterId),
+            (StatisticTypeColumn, statisticType),
+            (AmountColumn, amount))
     End Sub
 End Module

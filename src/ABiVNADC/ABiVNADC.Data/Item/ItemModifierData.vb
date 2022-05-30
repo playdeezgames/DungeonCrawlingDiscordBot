@@ -16,7 +16,12 @@
             );")
     End Sub
     Public Sub Write(itemId As Long, modifierType As Long, level As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, ItemIdColumn, itemId, ModifierColumn, modifierType, LevelColumn, level)
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (ItemIdColumn, itemId),
+            (ModifierColumn, modifierType),
+            (LevelColumn, level))
     End Sub
 
     Friend Sub ClearForItem(itemId As Long)

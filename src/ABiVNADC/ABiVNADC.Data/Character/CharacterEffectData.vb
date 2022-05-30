@@ -24,7 +24,7 @@
     End Function
 
     Public Sub Write(characterId As Long, effectType As Long, duration As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, CharacterIdColumn, characterId, EffectTypeColumn, effectType, DurationColumn, duration)
+        ReplaceRecord(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (EffectTypeColumn, effectType), (DurationColumn, duration))
     End Sub
 
     Public Sub Clear(characterId As Long, effectType As Long)

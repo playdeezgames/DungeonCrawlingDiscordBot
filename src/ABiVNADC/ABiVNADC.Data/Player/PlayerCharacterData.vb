@@ -18,7 +18,12 @@
     End Sub
 
     Public Sub Write(playerId As Long, characterId As Long, direction As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, PlayerIdColumn, playerId, CharacterIdColumn, characterId, DirectionColumn, direction)
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (PlayerIdColumn, playerId),
+            (CharacterIdColumn, characterId),
+            (DirectionColumn, direction))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)

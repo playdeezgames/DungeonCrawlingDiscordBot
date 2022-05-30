@@ -26,6 +26,11 @@
     End Function
 
     Public Sub Write(playerId As Long, incentiveType As Long, level As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, PlayerIdColumn, playerId, IncentiveTypeColumn, incentiveType, LevelColumn, level)
+        ReplaceRecord(
+            AddressOf Initialize,
+            TableName,
+            (PlayerIdColumn, playerId),
+            (IncentiveTypeColumn, incentiveType),
+            (LevelColumn, level))
     End Sub
 End Module
