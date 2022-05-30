@@ -14,7 +14,7 @@
     End Sub
 
     Public Sub Write(locationId As Long, shoppeId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, LocationIdColumn, locationId)
+        ReplaceRecord(AddressOf Initialize, TableName, (ShoppeIdColumn, shoppeId), (LocationIdColumn, locationId))
     End Sub
 
     Public Function ReadForLocation(locationId As Long) As Long?

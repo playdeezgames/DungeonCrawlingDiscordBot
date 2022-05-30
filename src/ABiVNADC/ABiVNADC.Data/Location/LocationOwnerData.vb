@@ -19,7 +19,7 @@
     End Function
 
     Public Sub Write(locationId As Long, characterId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, LocationIdColumn, locationId, CharacterIdColumn, characterId)
+        ReplaceRecord(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (CharacterIdColumn, characterId))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Object)

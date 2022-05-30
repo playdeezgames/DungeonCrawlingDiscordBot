@@ -32,6 +32,6 @@
     End Sub
 
     Public Sub Write(featureId As Long, characterId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, FeatureIdColumn, featureId, CharacterIdColumn, characterId)
+        ReplaceRecord(AddressOf Initialize, TableName, (FeatureIdColumn, featureId), (CharacterIdColumn, characterId))
     End Sub
 End Module

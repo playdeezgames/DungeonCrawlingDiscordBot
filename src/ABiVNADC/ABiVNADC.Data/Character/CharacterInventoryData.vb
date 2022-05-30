@@ -16,7 +16,7 @@
     End Sub
 
     Public Sub Write(CharacterId As Long, inventoryId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, CharacterIdColumn, CharacterId, InventoryIdColumn, inventoryId)
+        ReplaceRecord(AddressOf Initialize, TableName, (CharacterIdColumn, CharacterId), (InventoryIdColumn, inventoryId))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)

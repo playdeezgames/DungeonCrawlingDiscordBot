@@ -138,28 +138,32 @@ Public Module Store
         initializer()
         ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnValue.Item1}]=@{columnValue.Item1};", MakeParameter($"@{columnValue.Item1}", columnValue.Item2))
     End Sub
-    Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
+    Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(
+                                                                   initializer As Action,
+                                                                   tableName As String,
+                                                                   firstColumnValue As (String, TFirstColumn),
+                                                                   secondColumnValue As (String, TSecondColumn))
         initializer()
         ExecuteNonQuery(
-            $"DELETE FROM [{tableName}] WHERE [{firstColumnName}]=@{firstColumnName} AND [{secondColumnName}]=@{secondColumnName};",
-            MakeParameter($"@{firstColumnName}", firstColumnValue),
-            MakeParameter($"@{secondColumnName}", secondColumnValue))
+            $"DELETE FROM [{tableName}] WHERE [{firstColumnValue.Item1}]=@{firstColumnValue.Item1} AND [{secondColumnValue.Item1}]=@{secondColumnValue.Item1};",
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Sub
-    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
+    Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn))
         initializer()
         ExecuteNonQuery(
             $"REPLACE INTO [{tableName}]
             (
-                [{firstColumnName}],
-                [{secondColumnName}]
+                [{firstColumnValue.Item1}],
+                [{secondColumnValue.Item1}]
             ) 
             VALUES
             (
-                @{firstColumnName},
-                @{secondColumnName}
+                @{firstColumnValue.Item1},
+                @{secondColumnValue.Item1}
             );",
-            MakeParameter($"@{firstColumnName}", firstColumnValue),
-            MakeParameter($"@{secondColumnName}", secondColumnValue))
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Sub
 
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn, TThirdColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn, thirdColumnName As String, thirdColumnValue As TThirdColumn)

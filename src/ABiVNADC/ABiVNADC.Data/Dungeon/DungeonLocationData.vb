@@ -20,7 +20,7 @@
     End Function
 
     Public Sub Write(dungeonId As Long, locationId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, LocationIdColumn, locationId)
+        ReplaceRecord(AddressOf Initialize, TableName, (DungeonIdColumn, dungeonId), (LocationIdColumn, locationId))
     End Sub
 
     Friend Sub ClearForDungeon(dungeonId As Long)

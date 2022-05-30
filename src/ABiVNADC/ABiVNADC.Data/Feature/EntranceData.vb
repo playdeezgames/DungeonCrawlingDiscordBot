@@ -21,7 +21,7 @@
     End Function
 
     Public Sub Write(featureId As Long, name As String)
-        ReplaceRecord(AddressOf Initialize, TableName, FeatureIdColumn, featureId, NameColumn, name)
+        ReplaceRecord(AddressOf Initialize, TableName, (FeatureIdColumn, featureId), (NameColumn, name))
     End Sub
 
     Friend Sub Clear(featureId As Long)

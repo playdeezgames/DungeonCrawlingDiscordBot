@@ -15,6 +15,6 @@
     End Function
 
     Public Sub Write(playerId As Long, incentivePoints As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, PlayerIdColumn, playerId, IncentivePointsColumn, incentivePoints)
+        ReplaceRecord(AddressOf Initialize, TableName, (PlayerIdColumn, playerId), (IncentivePointsColumn, incentivePoints))
     End Sub
 End Module

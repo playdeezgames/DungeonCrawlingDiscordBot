@@ -28,6 +28,6 @@
     End Function
 
     Public Sub Write(inventoryId As Long, itemId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, InventoryIdColumn, inventoryId, ItemIdColumn, itemId)
+        ReplaceRecord(AddressOf Initialize, TableName, (InventoryIdColumn, inventoryId), (ItemIdColumn, itemId))
     End Sub
 End Module

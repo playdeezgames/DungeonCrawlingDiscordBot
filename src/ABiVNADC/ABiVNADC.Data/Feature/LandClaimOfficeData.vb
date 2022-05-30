@@ -18,6 +18,6 @@
     End Function
 
     Public Sub Write(featureId As Long, claimPrice As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, FeatureIdColumn, featureId, ClaimPriceColumn, claimPrice)
+        ReplaceRecord(AddressOf Initialize, TableName, (FeatureIdColumn, featureId), (ClaimPriceColumn, claimPrice))
     End Sub
 End Module

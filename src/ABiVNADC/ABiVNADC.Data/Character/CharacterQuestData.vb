@@ -16,7 +16,7 @@
     End Sub
 
     Public Sub Write(characterId As Long, featureId As Long)
-        ReplaceRecord(AddressOf Initialize, TableName, CharacterIdColumn, characterId, FeatureIdColumn, featureId)
+        ReplaceRecord(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (FeatureIdColumn, featureId))
     End Sub
 
     Public Function ReadFeature(characterId As Long) As Long?

@@ -28,7 +28,7 @@
     End Sub
 
     Public Sub Clear(characterId As Long, effectType As Long)
-        ClearForColumnValues(AddressOf Initialize, TableName, CharacterIdColumn, characterId, EffectTypeColumn, effectType)
+        ClearForColumnValues(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (EffectTypeColumn, effectType))
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)

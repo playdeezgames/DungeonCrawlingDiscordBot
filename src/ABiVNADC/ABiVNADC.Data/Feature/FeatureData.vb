@@ -40,7 +40,7 @@
     End Function
 
     Public Function Create(locationId As Long, featureType As Long) As Long
-        ReplaceRecord(AddressOf Initialize, TableName, LocationIdColumn, locationId, FeatureTypeColumn, featureType)
+        ReplaceRecord(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (FeatureTypeColumn, featureType))
         Return LastInsertRowId
     End Function
 End Module
