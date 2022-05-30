@@ -20,7 +20,7 @@
     End Sub
 
     Friend Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
     End Sub
 
     Public Function ReadLevel(itemId As Long, modifierType As Long) As Long?

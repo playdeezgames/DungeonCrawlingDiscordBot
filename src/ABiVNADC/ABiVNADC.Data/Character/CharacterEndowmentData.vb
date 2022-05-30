@@ -19,6 +19,6 @@
     End Function
 
     Sub Clear(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
     End Sub
 End Module

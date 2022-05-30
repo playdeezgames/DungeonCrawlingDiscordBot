@@ -16,7 +16,7 @@
     End Sub
 
     Public Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
     End Sub
 
     Public Function ReadForInventory(inventoryId As Long) As IEnumerable(Of Long)

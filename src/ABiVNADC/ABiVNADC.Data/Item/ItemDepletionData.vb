@@ -20,7 +20,7 @@
     End Function
 
     Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
     End Sub
 
     Public Sub Write(itemId As Long, durabilityType As Long, depletion As Long)

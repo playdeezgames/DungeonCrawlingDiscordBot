@@ -5,7 +5,7 @@
     Friend Const CorpseNameColumn = "CorpseName"
 
     Public Function ReadName(corpseId As Long) As String
-        Return ReadColumnString(AddressOf Initialize, TableName, CorpseIdColumn, corpseId, CorpseNameColumn)
+        Return ReadColumnString(AddressOf Initialize, TableName, CorpseNameColumn, (CorpseIdColumn, corpseId))
     End Function
 
     Friend Sub Initialize()
@@ -29,6 +29,6 @@
     End Function
 
     Friend Sub Clear(featureId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (FeatureIdColumn, featureId))
     End Sub
 End Module

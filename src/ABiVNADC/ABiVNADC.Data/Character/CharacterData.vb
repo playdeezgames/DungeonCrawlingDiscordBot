@@ -22,7 +22,7 @@
     End Sub
 
     Public Sub WriteName(characterId As Long, newName As String)
-        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn, newName)
+        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (CharacterNameColumn, newName))
     End Sub
 
     Public Function Exists(characterId As Long) As Boolean
@@ -52,7 +52,7 @@
         CharacterStatisticData.ClearForCharacter(characterId)
         FeatureOwnerData.ClearForCharacter(characterId)
         CharacterPoisoningData.Clear(characterId)
-        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
     End Sub
 
     Public Function ReadCharacterType(characterId As Long) As Long?
@@ -68,7 +68,7 @@
     End Function
 
     Public Function ReadName(characterId As Long) As String
-        Return ReadColumnString(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterNameColumn)
+        Return ReadColumnString(AddressOf Initialize, TableName, CharacterNameColumn, (CharacterIdColumn, characterId))
     End Function
 
     Public Function ReadExperience(characterId As Long) As Long?
@@ -76,15 +76,15 @@
     End Function
 
     Public Sub WriteExperience(characterId As Long, experience As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, ExperienceColumn, experience)
+        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (ExperienceColumn, experience))
     End Sub
 
     Public Sub WriteCharacterLevel(characterId As Long, level As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, CharacterLevelColumn, level)
+        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (CharacterLevelColumn, level))
     End Sub
 
     Public Sub WriteLocation(characterId As Long, locationId As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId, LocationIdColumn, locationId)
+        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (LocationIdColumn, locationId))
     End Sub
 
     Public Function ReadCharacterLevel(characterId As Long) As Long?

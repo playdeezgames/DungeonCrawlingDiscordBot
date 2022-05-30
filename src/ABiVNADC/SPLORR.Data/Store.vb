@@ -1,29 +1,28 @@
 Imports Microsoft.Data.Sqlite
 Public Module Store
     Private connection As SqliteConnection
-    Sub Reset()
+    Public Sub Reset()
         ShutDown()
         connection = New SqliteConnection("Data Source=:memory:")
         connection.Open()
     End Sub
-    Sub ShutDown()
+    Public Sub ShutDown()
         If connection IsNot Nothing Then
             connection.Close()
             connection = Nothing
         End If
     End Sub
-    ReadOnly Property Exists As Boolean
+    Public ReadOnly Property Exists As Boolean
         Get
             Return connection IsNot Nothing
         End Get
     End Property
-
-    Sub Save(filename As String)
+    Public Sub Save(filename As String)
         Using saveConnection As New SqliteConnection($"Data Source={filename}")
             connection.BackupDatabase(saveConnection)
         End Using
     End Sub
-    Sub Load(filename As String)
+    Public Sub Load(filename As String)
         Reset()
         Using loadConnection As New SqliteConnection($"Data Source={filename}")
             loadConnection.Open()
@@ -95,38 +94,24 @@ Public Module Store
             MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
             MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Function
-    Public Function ReadColumnString(Of TColumn)(initializer As Action, tableName As String, idColumnName As String, idColumnValue As Long, otherColumnName As String, otherColumnValue As TColumn, outputColumnName As String) As String
+    Public Function ReadColumnString(initializer As Action, tableName As String, outputColumnName As String, inputColumnValue As (String, Long)) As String
         initializer()
         Return ExecuteScalar(
             Function(o) If(o Is Nothing OrElse TypeOf o Is DBNull, Nothing, CStr(o)),
-            $"SELECT 
-                [{outputColumnName}] 
-            FROM 
-                [{tableName}] 
-            WHERE 
-                [{idColumnName}]=@{idColumnName} AND
-                [{otherColumnName}]=@{otherColumnName};",
-            MakeParameter($"@{idColumnName}", idColumnValue),
-            MakeParameter($"@{otherColumnName}", otherColumnValue))
+            $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{inputColumnValue.Item1}]=@{inputColumnValue.Item1};",
+            MakeParameter($"@{inputColumnValue.Item1}", inputColumnValue.Item2))
     End Function
-    Public Function ReadColumnString(initializer As Action, tableName As String, idColumnName As String, idColumnValue As Long, columnName As String) As String
-        initializer()
-        Return ExecuteScalar(
-            Function(o) If(o Is Nothing OrElse TypeOf o Is DBNull, Nothing, CStr(o)),
-            $"SELECT [{columnName}] FROM [{tableName}] WHERE [{idColumnName}]=@{idColumnName};",
-            MakeParameter($"@{idColumnName}", idColumnValue))
-    End Function
-    Public Sub WriteColumnValue(Of TColumn)(initializer As Action, tableName As String, idColumnName As String, idColumnValue As Long, columnName As String, columnValue As TColumn)
+    Public Sub WriteColumnValue(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn))
         initializer()
         ExecuteNonQuery(
             $"UPDATE 
                 [{tableName}] 
             SET 
-                [{columnName}]=@{columnName} 
+                [{secondColumnValue.Item1}]=@{secondColumnValue.Item1} 
             WHERE 
-                [{idColumnName}]=@{idColumnName};",
-            MakeParameter($"@{idColumnName}", idColumnValue),
-            MakeParameter($"@{columnName}", columnValue))
+                [{firstColumnValue.Item1}]=@{firstColumnValue.Item1};",
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
     End Sub
     Public Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
@@ -135,7 +120,6 @@ Public Module Store
             $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
-
     Public Function ReadRecordsWithColumnValue(
             Of TInputColumn,
                 TFirstOutputColumn,
@@ -150,12 +134,10 @@ Public Module Store
             $"SELECT [{outputColumnNames.Item1}],[{outputColumnNames.Item2}] FROM [{tableName}] WHERE [{forColumnValue.Item1}]=@{forColumnValue.Item1};",
             MakeParameter($"@{forColumnValue.Item1}", forColumnValue.Item2))
     End Function
-
-    Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnName As String, columnValue As TColumn)
+    Public Sub ClearForColumnValue(Of TColumn)(initializer As Action, tableName As String, columnValue As (String, TColumn))
         initializer()
-        ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnName}]=@{columnName};", MakeParameter($"@{columnName}", columnValue))
+        ExecuteNonQuery($"DELETE FROM [{tableName}] WHERE [{columnValue.Item1}]=@{columnValue.Item1};", MakeParameter($"@{columnValue.Item1}", columnValue.Item2))
     End Sub
-
     Public Sub ClearForColumnValues(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
         initializer()
         ExecuteNonQuery(
@@ -163,7 +145,6 @@ Public Module Store
             MakeParameter($"@{firstColumnName}", firstColumnValue),
             MakeParameter($"@{secondColumnName}", secondColumnValue))
     End Sub
-
     Public Sub ReplaceRecord(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnName As String, firstColumnValue As TFirstColumn, secondColumnName As String, secondColumnValue As TSecondColumn)
         initializer()
         ExecuteNonQuery(

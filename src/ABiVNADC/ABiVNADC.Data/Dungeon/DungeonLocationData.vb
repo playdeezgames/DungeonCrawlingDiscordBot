@@ -24,6 +24,6 @@
     End Sub
 
     Friend Sub ClearForDungeon(dungeonId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (DungeonIdColumn, dungeonId))
     End Sub
 End Module

@@ -16,7 +16,7 @@
     End Function
 
     Public Function ReadName(featureId As Long) As String
-        Return ReadColumnString(AddressOf Initialize, TableName, FeatureIdColumn, featureId, QuestGiverNameColumn)
+        Return ReadColumnString(AddressOf Initialize, TableName, QuestGiverNameColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Function ReadTargetQuantity(featureId As Long) As Long?
@@ -47,7 +47,7 @@
     End Sub
 
     Public Sub WriteTargetQuantity(featureId As Long, quantity As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId, TargetItemQuantityColumn, quantity)
+        WriteColumnValue(AddressOf Initialize, TableName, (FeatureIdColumn, featureId), (TargetItemQuantityColumn, quantity))
     End Sub
 
     Public Function ReadRewardItemType(featureId As Long) As Long?

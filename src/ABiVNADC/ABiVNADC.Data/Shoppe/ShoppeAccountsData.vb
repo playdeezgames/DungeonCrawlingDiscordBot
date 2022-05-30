@@ -22,7 +22,7 @@
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
     End Sub
 
     Public Sub Write(shoppeId As Long, characterId As Long, balance As Long)

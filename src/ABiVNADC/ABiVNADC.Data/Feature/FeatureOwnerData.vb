@@ -20,7 +20,7 @@
     End Function
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
     End Sub
 
     Public Function ReadCharacter(featureId As Long) As Long?
@@ -28,7 +28,7 @@
     End Function
 
     Public Sub Clear(featureId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (FeatureIdColumn, featureId))
     End Sub
 
     Public Sub Write(featureId As Long, characterId As Long)

@@ -32,7 +32,7 @@
         CorpseData.Clear(featureId)
         EgressData.Clear(featureId)
         EntranceData.Clear(featureId)
-        ClearForColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (FeatureIdColumn, featureId))
     End Sub
 
     Public Function ReadFeatureType(featureId As Long) As Long?

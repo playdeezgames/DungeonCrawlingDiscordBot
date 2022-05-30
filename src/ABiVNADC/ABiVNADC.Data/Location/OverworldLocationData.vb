@@ -16,7 +16,7 @@
     End Function
 
     Public Sub WritePeril(locationId As Long, peril As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, LocationIdColumn, locationId, PerilColumn, peril)
+        WriteColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (PerilColumn, peril))
     End Sub
 
     Public Function ReadTerrainType(locationId As Long) As Long?

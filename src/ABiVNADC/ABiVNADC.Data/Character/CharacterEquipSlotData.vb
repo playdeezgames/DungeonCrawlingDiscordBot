@@ -31,7 +31,7 @@
     End Function
 
     Public Sub ClearForItem(itemId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
     End Sub
 
     Public Sub Write(characterId As Long, equipSlot As Long, itemId As Long)
@@ -39,7 +39,7 @@
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
     End Sub
 
     Public Function Read(characterId As Long, equipSlot As Long) As Long?

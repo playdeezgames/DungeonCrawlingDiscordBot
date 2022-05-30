@@ -17,7 +17,7 @@
     End Function
 
     Public Function ReadName(featureId As Long) As String
-        Return ReadColumnString(AddressOf Initialize, TableName, FeatureIdColumn, featureId, NameColumn)
+        Return ReadColumnString(AddressOf Initialize, TableName, NameColumn, (FeatureIdColumn, featureId))
     End Function
 
     Public Sub Write(featureId As Long, name As String)
@@ -25,6 +25,6 @@
     End Sub
 
     Friend Sub Clear(featureId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, FeatureIdColumn, featureId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (FeatureIdColumn, featureId))
     End Sub
 End Module

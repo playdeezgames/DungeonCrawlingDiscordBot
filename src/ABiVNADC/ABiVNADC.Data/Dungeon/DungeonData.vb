@@ -22,7 +22,7 @@
 
     Public Sub Clear(dungeonId As Long)
         DungeonLocationData.ClearForDungeon(dungeonId)
-        ClearForColumnValue(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (DungeonIdColumn, dungeonId))
     End Sub
 
     Public Function ReadStartingLocation(dungeonId As Long) As Long?
@@ -38,7 +38,7 @@
     End Function
 
     Public Function ReadName(dungeonId As Long) As String
-        Return ReadColumnString(AddressOf Initialize, TableName, DungeonIdColumn, dungeonId, DungeonNameColumn)
+        Return ReadColumnString(AddressOf Initialize, TableName, DungeonNameColumn, (DungeonIdColumn, dungeonId))
     End Function
 
     Public Function ReadDifficulty(dungeonId As Long) As Long?

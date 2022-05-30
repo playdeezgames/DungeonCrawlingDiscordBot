@@ -22,7 +22,7 @@
     End Sub
 
     Friend Sub ClearForCharacter(characterId As Long)
-        ClearForColumnValue(AddressOf Initialize, TableName, CharacterIdColumn, characterId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId))
     End Sub
 
     Public Function ReadForPlayerAndCharacterName(playerId As Long, characterName As String) As List(Of Long)
@@ -43,7 +43,7 @@
     End Function
 
     Public Sub WriteDirectionForPlayer(playerId As Long, direction As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, PlayerIdColumn, playerId, DirectionColumn, direction)
+        WriteColumnValue(AddressOf Initialize, TableName, (PlayerIdColumn, playerId), (DirectionColumn, direction))
     End Sub
 
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)

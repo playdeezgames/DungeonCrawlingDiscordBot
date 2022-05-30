@@ -5,7 +5,7 @@
     Friend Const OutsideLocationIdColumn = "OutsideLocationId"
 
     Public Function ReadShoppeName(shoppeId As Long) As String
-        Return ReadColumnString(AddressOf Initialize, TableName, ShoppeIdColumn, shoppeId, ShoppeNameColumn)
+        Return ReadColumnString(AddressOf Initialize, TableName, ShoppeNameColumn, (ShoppeIdColumn, shoppeId))
     End Function
 
     Public Function ReadInsideLocation(shoppeId As Long) As Long?

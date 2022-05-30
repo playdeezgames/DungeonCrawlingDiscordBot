@@ -20,7 +20,7 @@
         InventoryItemData.ClearForItem(itemId)
         CharacterEquipSlotData.ClearForItem(itemId)
         ItemModifierData.ClearForItem(itemId)
-        ClearForColumnValue(AddressOf Initialize, TableName, ItemIdColumn, itemId)
+        ClearForColumnValue(AddressOf Initialize, TableName, (ItemIdColumn, itemId))
     End Sub
 
     Public Function Create(itemType As Long) As Long
