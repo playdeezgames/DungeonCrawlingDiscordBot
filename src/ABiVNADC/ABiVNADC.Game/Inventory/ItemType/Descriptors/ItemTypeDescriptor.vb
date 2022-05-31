@@ -230,6 +230,10 @@ Module ItemTypeDescriptorUtility
                 New TrousersDescriptor
             },
             {
+                ItemType.Twine,
+                New TwineDescriptor
+            },
+            {
                 ItemType.ZombieTaint,
                 New ZombieTaintDescriptor
             }

@@ -5,6 +5,7 @@
     Friend Const AroundText = "around"
     Friend Const BribeText = "bribe"
     Friend Const BuyText = "buy"
+    Friend Const CraftText = "craft"
     Friend Const CreditText = "credit"
     Friend Const DeliverText = "deliver"
     Friend Const DropText = "drop"

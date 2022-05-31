@@ -43,6 +43,7 @@ Public Enum ItemType
     GooseEgg
     GoldenEgg
     PlantFiber
+    Twine
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

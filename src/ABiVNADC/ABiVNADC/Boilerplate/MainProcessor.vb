@@ -33,6 +33,7 @@
             {AroundText, AddressOf AroundProcessor.Run},
             {BuyText, AddressOf BuyProcessor.Run},
             {BribeText, AddressOf BribeProcessor.Run},
+            {CraftText, AddressOf CraftProcessor.Run},
             {CreditText, AddressOf CreditProcessor.Run},
             {DeliverText, AddressOf DeliverProcessor.Run},
             {DropText, AddressOf DropProcessor.Run},
