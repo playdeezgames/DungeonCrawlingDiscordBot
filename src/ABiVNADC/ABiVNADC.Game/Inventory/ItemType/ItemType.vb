@@ -39,6 +39,9 @@ Public Enum ItemType
     SleepScroll
     EscapeScroll
     FireScroll
+    GooseFeather
+    GooseEgg
+    GoldenEgg
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

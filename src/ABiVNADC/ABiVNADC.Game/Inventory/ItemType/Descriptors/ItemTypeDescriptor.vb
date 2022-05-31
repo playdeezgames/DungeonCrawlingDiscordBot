@@ -138,6 +138,18 @@ Module ItemTypeDescriptorUtility
                 New GoblinEarDescriptor
             },
             {
+                ItemType.GoldenEgg,
+                New GoldenEggDescriptor
+            },
+            {
+                ItemType.GooseEgg,
+                New GooseEggDescriptor
+            },
+            {
+                ItemType.GooseFeather,
+                New GooseFeatherDescriptor
+            },
+            {
                 ItemType.Helmet,
                 New HelmetDescriptor
             },

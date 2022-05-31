@@ -18,7 +18,12 @@
         DefendDice = "1d6/6+1d6/6+1d6/6+1d6/6"
         FightEnergyCost = 1
         CombatRestRoll = "1d2/2+1d2/2+1d2/2+1d2/2"
-        LootDrops = New Dictionary(Of ItemType, String) 'TODO: loot drop
+        LootDrops = New Dictionary(Of ItemType, String) From
+            {
+                {ItemType.GooseFeather, "1d2"},
+                {ItemType.GooseEgg, "1d10/10"},
+                {ItemType.GoldenEgg, "1d100/100"}
+            }
         ExperiencePointValue = 1
         ExperiencePointGoal = Function(x) 10 * (x + 1)
         ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
