@@ -182,6 +182,10 @@ Module ItemTypeDescriptorUtility
                 New OrcToothDescriptor
             },
             {
+                ItemType.PlantFiber,
+                New PlantFiberDescriptor
+            },
+            {
                 ItemType.PlateMail,
                 New PlateMailDescriptor
             },

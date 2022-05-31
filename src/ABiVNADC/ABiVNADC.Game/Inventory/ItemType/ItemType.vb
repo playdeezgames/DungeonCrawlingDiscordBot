@@ -42,6 +42,7 @@ Public Enum ItemType
     GooseFeather
     GooseEgg
     GoldenEgg
+    PlantFiber
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)
