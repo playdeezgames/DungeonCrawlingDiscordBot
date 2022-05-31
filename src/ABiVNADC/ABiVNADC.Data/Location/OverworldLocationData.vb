@@ -6,6 +6,7 @@
     Friend Const TerrainTypeColumn = "TerrainType"
     Friend Const PerilThresholdColumn = "PerilThreshold"
     Friend Const PerilColumn = "Peril"
+    Friend Const ForageDepletionColumn = "ForageDepletion"
 
     Public Function ReadPeril(locationId As Long) As Long?
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, PerilColumn, (LocationIdColumn, locationId))
@@ -23,6 +24,14 @@
         Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, TerrainTypeColumn, (LocationIdColumn, locationId))
     End Function
 
+    Public Function ReadForageDepletion(locationId As Long) As Long?
+        Return ReadColumnValue(Of Long, Long)(AddressOf Initialize, TableName, ForageDepletionColumn, (LocationIdColumn, locationId))
+    End Function
+
+    Public Sub WriteForageDeplection(locationId As Long, depletion As Long)
+        WriteColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (ForageDepletionColumn, depletion))
+    End Sub
+
     Friend Sub Initialize()
         LocationData.Initialize()
         ExecuteNonQuery(
@@ -34,6 +43,7 @@
                 [{TerrainTypeColumn}] INT NOT NULL,
                 [{PerilColumn}] INT NOT NULL,
                 [{PerilThresholdColumn}] INT NOT NULL,
+                [{ForageDepletionColumn}] INT NOT NULL,
                 UNIQUE([{XColumn}],[{YColumn}]),
                 FOREIGN KEY ([{LocationIdColumn}]) REFERENCES [{LocationData.TableName}]([{LocationData.LocationIdColumn}])
             );")
@@ -51,7 +61,7 @@
         Return ReadColumnValue(Of Long, Long, Long)(AddressOf Initialize, TableName, LocationIdColumn, (XColumn, x), (YColumn, y))
     End Function
 
-    Public Sub Write(locationId As Long, x As Long, y As Long, terrainType As Long, peril As Long, perilThreshold As Long)
+    Public Sub Write(locationId As Long, x As Long, y As Long, terrainType As Long, peril As Long, perilThreshold As Long, forageDepletion As Long)
         ReplaceRecord(
             AddressOf Initialize,
             TableName,
@@ -60,6 +70,7 @@
             (YColumn, y),
             (TerrainTypeColumn, terrainType),
             (PerilColumn, peril),
-            (PerilThresholdColumn, perilThreshold))
+            (PerilThresholdColumn, perilThreshold),
+            (ForageDepletionColumn, forageDepletion))
     End Sub
 End Module

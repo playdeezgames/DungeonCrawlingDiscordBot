@@ -5,6 +5,12 @@
         Id = locationId
     End Sub
 
+    ReadOnly Property CanForage As Boolean
+        Get
+            Return LocationType = LocationType.Overworld
+        End Get
+    End Property
+
     ReadOnly Property CanClaim As Boolean
         Get
             Return HasFeature(FeatureType.ForSaleSign)
@@ -36,6 +42,10 @@
         End Get
     End Property
 
+    Friend Function GenerateForage() As Dictionary(Of ItemType, Long)
+        Return Overworld.GenerateForage()
+    End Function
+
     Property Owner As Character
         Get
             Return Character.FromId(LocationOwnerData.Read(Id))
@@ -64,7 +74,7 @@
 
     Private Shared Function CreateOverworld(x As Long, y As Long, terrainType As TerrainType) As Location
         Dim location = New Location(LocationData.Create(LocationType.Overworld))
-        OverworldLocationData.Write(location.Id, x, y, terrainType, terrainType.GeneratePeril, terrainType.GeneratePerilThreshold)
+        OverworldLocationData.Write(location.Id, x, y, terrainType, terrainType.GeneratePeril, terrainType.GeneratePerilThreshold, 0)
         If x = 0 AndAlso y = 0 Then
             GenerateCrossRoads(location)
         ElseIf x = 0 Then

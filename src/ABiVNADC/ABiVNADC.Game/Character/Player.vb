@@ -15,6 +15,14 @@ Public Class Player
         End Get
     End Property
 
+    Public Sub Forage(builder As StringBuilder)
+        If Not HasCharacter Then
+            builder.AppendLine("You have no current character.")
+            Return
+        End If
+        Character.Forage(builder)
+    End Sub
+
     ReadOnly Property InCombat As Boolean
         Get
             Return If(Character?.InCombat, False)

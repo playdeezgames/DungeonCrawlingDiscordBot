@@ -15,4 +15,18 @@
     Public Overrides Function GeneratePeril() As Long
         Return RNG.RollDice("1d12")
     End Function
+
+    Public Overrides Function GenerateForage(depletion As Long) As Dictionary(Of ItemType, Long)
+        Dim generator As New Dictionary(Of ItemType, Integer) From
+            {
+                {ItemType.None, 10 + CInt(depletion)},
+                {ItemType.PlantFiber, 10}
+            }
+        Dim result As New Dictionary(Of ItemType, Long)
+        Dim generated = RNG.FromGenerator(generator)
+        If generated <> ItemType.None Then
+            result(generated) = 1
+        End If
+        Return result
+    End Function
 End Class

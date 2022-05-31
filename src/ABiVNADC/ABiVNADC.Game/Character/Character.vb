@@ -29,6 +29,32 @@ Public Class Character
         End Get
     End Property
 
+    Friend Sub Forage(builder As StringBuilder)
+        If InCombat Then
+            builder.AppendLine($"{FullName} cannot forage now!")
+            Return
+        End If
+        If Not Location.CanForage Then
+            builder.AppendLine($"{FullName} cannot forage here.")
+            Return
+        End If
+        Dim result As Dictionary(Of ItemType, Long) = Location.GenerateForage()
+        If Not result.Any Then
+            builder.AppendLine($"{FullName} forages and finds nothing.")
+            Return
+        End If
+        builder.Append($"{FullName} finds ")
+        builder.AppendJoin(", ", result.Select(Function(x) $"{x.Key.Name}(x{x.Value})"))
+        builder.AppendLine()
+        For Each entry In result
+            Dim quantity = entry.Value
+            While quantity > 0
+                quantity -= 1
+                Inventory.Add(Item.Create(entry.Key))
+            End While
+        Next
+    End Sub
+
     Friend Sub ApplyElementalDamage(elementalDamageType As ElementalDamageType, damage As Long, builder As StringBuilder)
         damage = CharacterType.ModifyElementalDamage(elementalDamageType, damage)
         builder.AppendLine($"{FullName} takes {damage} damage from {elementalDamageType.Name}.")

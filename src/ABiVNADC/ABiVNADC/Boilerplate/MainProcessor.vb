@@ -44,6 +44,7 @@
             {ExitText, AddressOf ExitProcessor.Run},
             {FeaturesText, AddressOf FeaturesProcessor.Run},
             {FightText, AddressOf FightProcessor.Run},
+            {ForageText, AddressOf ForageProcessor.Run},
             {GroundText, AddressOf GroundProcessor.Run},
             {HelpText, AddressOf HelpProcessor.Run},
             {IncentivesText, AddressOf IncentivesProcessor.Run},

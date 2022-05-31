@@ -31,4 +31,8 @@ Public Module TerrainTypeExtensions
     Public Function GeneratePerilThreshold(terrainType As TerrainType) As Long
         Return TerrainTypeDescriptors(terrainType).GeneratePerilThreshold
     End Function
+    <Extension>
+    Public Function GenerateForage(terrainType As TerrainType, depletion As Long) As Dictionary(Of ItemType, Long)
+        Return TerrainTypeDescriptors(terrainType).GenerateForage(depletion)
+    End Function
 End Module

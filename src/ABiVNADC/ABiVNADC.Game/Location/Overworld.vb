@@ -35,4 +35,19 @@
             Return OverworldLocationData.ReadY(Id).Value
         End Get
     End Property
+
+    Property ForageDepletion As Long
+        Get
+            Return OverworldLocationData.ReadForageDepletion(Id).Value
+        End Get
+        Set(value As Long)
+            OverworldLocationData.WriteForageDeplection(Id, value)
+        End Set
+    End Property
+
+    Friend Function GenerateForage() As Dictionary(Of ItemType, Long)
+        Dim result = TerrainType.GenerateForage(ForageDepletion)
+        ForageDepletion += result.Count
+        Return result
+    End Function
 End Class

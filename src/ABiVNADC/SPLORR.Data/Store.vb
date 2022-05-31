@@ -101,17 +101,17 @@ Public Module Store
             $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{inputColumnValue.Item1}]=@{inputColumnValue.Item1};",
             MakeParameter($"@{inputColumnValue.Item1}", inputColumnValue.Item2))
     End Function
-    Public Sub WriteColumnValue(Of TFirstColumn, TSecondColumn)(initializer As Action, tableName As String, firstColumnValue As (String, TFirstColumn), secondColumnValue As (String, TSecondColumn))
+    Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, whereColumn As (String, TWhereColumn), setColumn As (String, TSetColumn))
         initializer()
         ExecuteNonQuery(
             $"UPDATE 
                 [{tableName}] 
             SET 
-                [{secondColumnValue.Item1}]=@{secondColumnValue.Item1} 
+                [{setColumn.Item1}]=@{setColumn.Item1} 
             WHERE 
-                [{firstColumnValue.Item1}]=@{firstColumnValue.Item1};",
-            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
-            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2))
+                [{whereColumn.Item1}]=@{whereColumn.Item1};",
+            MakeParameter($"@{whereColumn.Item1}", whereColumn.Item2),
+            MakeParameter($"@{setColumn.Item1}", setColumn.Item2))
     End Sub
     Public Function ReadRecordsWithColumnValue(Of TInputColumn, TOutputColumn)(initializer As Action, tableName As String, outputColumnName As String, forColumnValue As (String, TInputColumn)) As List(Of TOutputColumn)
         initializer()
@@ -294,6 +294,53 @@ Public Module Store
             MakeParameter($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2),
             MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2),
             MakeParameter($"@{sixthColumnValue.Item1}", sixthColumnValue.Item2))
+    End Sub
+    Public Sub ReplaceRecord(
+                     Of TFirstColumn,
+                         TSecondColumn,
+                         TThirdColumn,
+                         TFourthColumn,
+                         TFifthColumn,
+                         TSixthColumn,
+                         TSeventhColumn)(
+                                      initializer As Action,
+                                      tableName As String,
+                                      firstColumnValue As (String, TFirstColumn),
+                                      secondColumnValue As (String, TSecondColumn),
+                                      thirdColumnValue As (String, TThirdColumn),
+                                      fourthColumnValue As (String, TFourthColumn),
+                                      fifthColumnValue As (String, TFifthColumn),
+                                      sixthColumnValue As (String, TSixthColumn),
+                                      seventhColumnValue As (String, TSeventhColumn))
+        initializer()
+        ExecuteNonQuery(
+            $"REPLACE INTO [{tableName}]
+            (
+                [{firstColumnValue.Item1}],
+                [{secondColumnValue.Item1}],
+                [{thirdColumnValue.Item1}],
+                [{fourthColumnValue.Item1}],
+                [{fifthColumnValue.Item1}],
+                [{sixthColumnValue.Item1}],
+                [{seventhColumnValue.Item1}]
+            ) 
+            VALUES
+            (
+                @{firstColumnValue.Item1},
+                @{secondColumnValue.Item1},
+                @{thirdColumnValue.Item1},
+                @{fourthColumnValue.Item1},
+                @{fifthColumnValue.Item1},
+                @{sixthColumnValue.Item1},
+                @{seventhColumnValue.Item1}
+            );",
+            MakeParameter($"@{firstColumnValue.Item1}", firstColumnValue.Item2),
+            MakeParameter($"@{secondColumnValue.Item1}", secondColumnValue.Item2),
+            MakeParameter($"@{thirdColumnValue.Item1}", thirdColumnValue.Item2),
+            MakeParameter($"@{fourthColumnValue.Item1}", fourthColumnValue.Item2),
+            MakeParameter($"@{fifthColumnValue.Item1}", fifthColumnValue.Item2),
+            MakeParameter($"@{sixthColumnValue.Item1}", sixthColumnValue.Item2),
+            MakeParameter($"@{seventhColumnValue.Item1}", seventhColumnValue.Item2))
     End Sub
     Public Function CreateRecord(initializer As Action, tableName As String) As Long
         initializer()

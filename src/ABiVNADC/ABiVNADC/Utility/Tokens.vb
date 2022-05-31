@@ -16,6 +16,7 @@
     Friend Const ExitText = "exit"
     Friend Const FeaturesText = "features"
     Friend Const FightText = "fight"
+    Friend Const ForageText = "forage"
     Friend Const GroundText = "ground"
     Friend Const HelpText = "help"
     Friend Const IncentivesText = "incentives"
