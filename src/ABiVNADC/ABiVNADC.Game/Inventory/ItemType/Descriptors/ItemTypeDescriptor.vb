@@ -242,6 +242,10 @@ Module ItemTypeDescriptorUtility
                 New StickDescriptor
             },
             {
+                ItemType.StoneSpear,
+                New StoneSpearDescriptor
+            },
+            {
                 ItemType.ThankYouNote,
                 New ThankYouNoteDescriptor
             },

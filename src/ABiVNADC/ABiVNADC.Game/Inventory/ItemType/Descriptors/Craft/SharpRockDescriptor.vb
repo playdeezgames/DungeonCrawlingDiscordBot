@@ -4,7 +4,7 @@
         MyBase.New(
             "sharp rock",
             False,
-            EquipSlot.None,
+            EquipSlot.Weapon,
             New List(Of Recipe) From
             {
                 New Recipe(
@@ -15,5 +15,6 @@
                         {ItemType.SharpRock, 1}
                     })
             })
+        AttackDice = Function(x) "1d2/2"
     End Sub
 End Class

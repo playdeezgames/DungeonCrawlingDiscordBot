@@ -5,5 +5,6 @@
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "50d1+2d50"
         InventoryEncumbrance = 1
+        IsTrophy = True
     End Sub
 End Class

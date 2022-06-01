@@ -48,6 +48,7 @@ Public Enum ItemType
     SharpRock
     Stick
     GoosePoop
+    StoneSpear
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

@@ -14,10 +14,10 @@
                       End Select
                   End Function
         NameTable = Names.Human
-        AttackDice = "1d3/3"
+        AttackDice = "1d6/6"
         DefendDice = "1d3/3+1d3/3"
         FightEnergyCost = 1
-        CombatRestRoll = "1d1+1d2/2"
+        CombatRestRoll = "1d1+1d2"
         LootDrops = New Dictionary(Of ItemType, String)
         ExperiencePointValue = 5
         ExperiencePointGoal = Function(x) 10 * (x + 1)

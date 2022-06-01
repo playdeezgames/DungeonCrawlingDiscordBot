@@ -6,5 +6,6 @@
         SellPriceDice = "1d3"
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"feather"}
+        IsTrophy = True
     End Sub
 End Class

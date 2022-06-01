@@ -1,0 +1,25 @@
+﻿Friend Class StoneSpearDescriptor
+    Inherits ItemTypeDescriptor
+    Sub New()
+        MyBase.New(
+            "stone spear",
+            False,
+            EquipSlot.Weapon,
+            New List(Of Recipe) From
+            {
+                New Recipe(
+                    New Dictionary(Of ItemType, Long) From
+                    {
+                        {ItemType.Stick, 1},
+                        {ItemType.Twine, 1},
+                        {ItemType.SharpRock, 1}
+                    },
+                    New Dictionary(Of ItemType, Long) From {{ItemType.StoneSpear, 1}})
+            })
+        AttackDice = Function(x) "1d3/3+1d3/3"
+        Durability = Function(x) If(x = DurabilityType.Weapon, 2, 0)
+        InventoryEncumbrance = 2
+        EquippedEncumbrance = 1
+        Aliases = New List(Of String) From {"spear"}
+    End Sub
+End Class
