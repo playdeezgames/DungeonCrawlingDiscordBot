@@ -1,7 +1,7 @@
 ﻿Friend Class BandageDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("bandage", False)
+        MyBase.New("bandage", False, EquipSlot.None)
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "10d1+2d10"
         IsTrophy = True

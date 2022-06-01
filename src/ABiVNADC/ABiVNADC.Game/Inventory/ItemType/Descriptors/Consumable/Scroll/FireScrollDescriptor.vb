@@ -12,7 +12,7 @@ Friend Class FireScrollDescriptor
         Next
     End Sub
     Sub New()
-        MyBase.New("fire scroll", True)
+        MyBase.New("fire scroll", True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "25d1+2d25"
         InventoryEncumbrance = 0

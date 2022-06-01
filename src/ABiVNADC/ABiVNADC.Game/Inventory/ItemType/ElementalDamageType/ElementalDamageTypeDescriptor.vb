@@ -5,7 +5,7 @@
     End Sub
 End Class
 Module ElementalDamageTypeDescriptorUtility
-    Friend ElementalDamageTypeDescriptors As New Dictionary(Of ElementalDamageType, ElementalDamageTypeDescriptor) From
+    Friend ReadOnly ElementalDamageTypeDescriptors As IReadOnlyDictionary(Of ElementalDamageType, ElementalDamageTypeDescriptor) = New Dictionary(Of ElementalDamageType, ElementalDamageTypeDescriptor) From
         {
             {
                 ElementalDamageType.Fire,

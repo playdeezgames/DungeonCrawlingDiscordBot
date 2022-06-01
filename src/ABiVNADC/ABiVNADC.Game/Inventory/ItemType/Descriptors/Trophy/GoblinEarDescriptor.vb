@@ -1,7 +1,7 @@
 ﻿Friend Class GoblinEarDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("goblin ear", False)
+        MyBase.New("goblin ear", False, EquipSlot.None)
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "2d1+2d2"
         IsTrophy = True

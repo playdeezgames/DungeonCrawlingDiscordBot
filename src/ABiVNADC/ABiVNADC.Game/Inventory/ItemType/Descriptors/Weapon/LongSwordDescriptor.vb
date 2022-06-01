@@ -1,8 +1,7 @@
 ﻿Friend Class LongSwordDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("long sword", False)
-        EquipSlot = EquipSlot.Weapon
+        MyBase.New("long sword", False, EquipSlot.Weapon)
         AttackDice = Function(x) "1d2/2+1d2/2+1d2/2"
         Durability = Function(x) If(x = DurabilityType.Weapon, 20, 0)
         CanBuyGenerator = MakeBooleanGenerator(49, 1)

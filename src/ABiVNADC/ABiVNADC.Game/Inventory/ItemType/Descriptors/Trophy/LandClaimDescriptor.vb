@@ -3,7 +3,7 @@
 Friend Class LandClaimDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("land claim", True)
+        MyBase.New("land claim", True, EquipSlot.None)
     End Sub
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         character.ClaimLand(item, builder)

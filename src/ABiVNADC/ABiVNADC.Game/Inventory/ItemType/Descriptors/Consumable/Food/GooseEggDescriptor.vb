@@ -10,7 +10,7 @@ Friend Class GooseEggDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New("goose egg", True)
+        MyBase.New("goose egg", True, EquipSlot.None)
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"egg"}
     End Sub

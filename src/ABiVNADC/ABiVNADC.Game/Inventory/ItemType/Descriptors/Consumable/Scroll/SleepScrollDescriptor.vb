@@ -16,7 +16,7 @@ Friend Class SleepScrollDescriptor
         Next
     End Sub
     Sub New()
-        MyBase.New("sleep scroll", True)
+        MyBase.New("sleep scroll", True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "25d1+2d25"
         InventoryEncumbrance = 0

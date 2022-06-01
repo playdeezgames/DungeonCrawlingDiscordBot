@@ -10,7 +10,7 @@ Friend Class FoodDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New("food", True)
+        MyBase.New("food", True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(1, 9)
         BuyPriceDice = "2d1+2d2"
         InventoryEncumbrance = 1

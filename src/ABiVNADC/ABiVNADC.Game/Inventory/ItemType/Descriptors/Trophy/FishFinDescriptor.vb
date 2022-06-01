@@ -1,7 +1,7 @@
 ﻿Friend Class FishFinDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("fish fin", False)
+        MyBase.New("fish fin", False, EquipSlot.None)
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "40d1+2d40"
         IsTrophy = True

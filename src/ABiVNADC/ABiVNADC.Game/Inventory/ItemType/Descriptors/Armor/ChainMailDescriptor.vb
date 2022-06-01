@@ -1,8 +1,7 @@
 ﻿Friend Class ChainMailDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("chain mail", False)
-        EquipSlot = EquipSlot.Body
+        MyBase.New("chain mail", False, EquipSlot.Body)
         DefendDice = Function(x) "1d3/3"
         Durability = Function(x) If(x = DurabilityType.Armor, 20, 0)
         CanBuyGenerator = MakeBooleanGenerator(19, 1)

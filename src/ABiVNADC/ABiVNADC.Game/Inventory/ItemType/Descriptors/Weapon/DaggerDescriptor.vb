@@ -7,8 +7,7 @@ Friend Class DaggerDescriptor
         character.Destroy(False)
     End Sub
     Sub New()
-        MyBase.New("dagger", True)
-        EquipSlot = EquipSlot.Weapon
+        MyBase.New("dagger", True, EquipSlot.Weapon)
         AttackDice = Function(x) "1d2/2"
         Durability = Function(x) If(x = DurabilityType.Weapon, 5, 0)
         CanBuyGenerator = MakeBooleanGenerator(4, 1)

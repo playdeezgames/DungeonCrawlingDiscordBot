@@ -1,8 +1,7 @@
 ﻿Friend Class PlateMailDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("plate mail", False)
-        EquipSlot = EquipSlot.Body
+        MyBase.New("plate mail", False, EquipSlot.Body)
         DefendDice = Function(x) "1d3/3+1d3/3"
         Durability = Function(x) If(x = DurabilityType.Armor, 35, 0)
         CanBuyGenerator = MakeBooleanGenerator(49, 1)

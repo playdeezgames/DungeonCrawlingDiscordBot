@@ -1,7 +1,7 @@
 ﻿Friend Class JoolsDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("jools", False)
+        MyBase.New("jools", False, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(0, 1)
         CanSellGenerator = MakeBooleanGenerator(0, 1)
         BuyPriceDice = "100d1"

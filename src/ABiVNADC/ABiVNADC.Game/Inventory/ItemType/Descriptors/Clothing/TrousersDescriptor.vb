@@ -1,8 +1,7 @@
 ﻿Friend Class TrousersDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("trousers", False)
-        EquipSlot = EquipSlot.Legs
+        MyBase.New("trousers", False, EquipSlot.Legs)
         Durability = Function(x) If(x = DurabilityType.Armor, 1, 0)
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "50d1+2d50"

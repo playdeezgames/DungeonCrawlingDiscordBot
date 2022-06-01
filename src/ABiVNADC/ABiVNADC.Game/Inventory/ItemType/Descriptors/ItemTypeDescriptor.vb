@@ -3,10 +3,10 @@
 Public Class ItemTypeDescriptor
     ReadOnly Property Name As String
     ReadOnly Property CanUse As Boolean
+    ReadOnly Property EquipSlot As EquipSlot
     Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
 
     End Sub
-    Property EquipSlot As EquipSlot
     Property AttackDice As Func(Of Item, String)
     Property DefendDice As Func(Of Item, String)
     Property Durability As Func(Of DurabilityType, Long)
@@ -26,11 +26,12 @@ Public Class ItemTypeDescriptor
     Property Modifier As Func(Of StatisticType, Item, Long)
     Property HealthModifier As Func(Of Item, Long)
     Property EnergyModifier As Func(Of Item, Long)
-    Sub New(name As String, canUse As Boolean)
+    Sub New(name As String, canUse As Boolean, equipSlot As EquipSlot)
         Me.Name = name
         Me.CanUse = canUse
+        Me.EquipSlot = equipSlot
+
         Modifier = Function(s, i) 0
-        EquipSlot = EquipSlot.None
         AttackDice = Function(x) "0d1"
         DefendDice = Function(x) "0d1"
         Durability = Function(x) 0
