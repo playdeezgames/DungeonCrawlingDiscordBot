@@ -3,7 +3,7 @@
 Friend Class AmuletDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New("amulet", True, EquipSlot.Neck)
+        MyBase.New(True, EquipSlot.Neck)
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
         BuyPriceDice = "200d1+2d200"
         CanSellGenerator = MakeBooleanGenerator(4, 1)
@@ -55,5 +55,9 @@ Friend Class AmuletDescriptor
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "amulet"
     End Function
 End Class

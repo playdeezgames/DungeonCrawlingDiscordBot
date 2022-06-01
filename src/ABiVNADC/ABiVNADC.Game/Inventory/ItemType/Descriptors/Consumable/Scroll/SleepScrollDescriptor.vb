@@ -2,6 +2,7 @@
 
 Friend Class SleepScrollDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} uses the sleep scroll")
         item.Destroy()
@@ -16,10 +17,14 @@ Friend Class SleepScrollDescriptor
         Next
     End Sub
     Sub New()
-        MyBase.New("sleep scroll", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "25d1+2d25"
         InventoryEncumbrance = 0
         Aliases = New List(Of String) From {"scroll"}
     End Sub
+
+    Public Overrides Function GetName() As String
+        Return "sleep scroll"
+    End Function
 End Class

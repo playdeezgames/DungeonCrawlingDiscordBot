@@ -1,7 +1,8 @@
 ﻿Friend Class ChainMailDescriptor
     Inherits ItemTypeDescriptor
+
     Sub New()
-        MyBase.New("chain mail", False, EquipSlot.Body)
+        MyBase.New(False, EquipSlot.Body)
         DefendDice = Function(x) "1d3/3"
         Durability = Function(x) If(x = DurabilityType.Armor, 20, 0)
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
@@ -26,5 +27,9 @@
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "chain mail"
     End Function
 End Class

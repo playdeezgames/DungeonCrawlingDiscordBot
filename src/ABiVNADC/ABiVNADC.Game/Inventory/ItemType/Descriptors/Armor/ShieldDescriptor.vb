@@ -1,7 +1,8 @@
 ﻿Friend Class ShieldDescriptor
     Inherits ItemTypeDescriptor
+
     Sub New()
-        MyBase.New("shield", False, EquipSlot.Shield)
+        MyBase.New(False, EquipSlot.Shield)
         DefendDice = Function(x) "1d3/3"
         Durability = Function(x) If(x = DurabilityType.Armor, 10, 0)
         CanBuyGenerator = MakeBooleanGenerator(9, 1)
@@ -26,5 +27,9 @@
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "shield"
     End Function
 End Class

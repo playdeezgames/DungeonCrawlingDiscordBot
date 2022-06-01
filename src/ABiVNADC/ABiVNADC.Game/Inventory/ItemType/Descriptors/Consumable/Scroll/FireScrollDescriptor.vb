@@ -2,6 +2,7 @@
 
 Friend Class FireScrollDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} uses the fire scroll")
         item.Destroy()
@@ -12,10 +13,14 @@ Friend Class FireScrollDescriptor
         Next
     End Sub
     Sub New()
-        MyBase.New("fire scroll", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "25d1+2d25"
         InventoryEncumbrance = 0
         Aliases = New List(Of String) From {"scroll"}
     End Sub
+
+    Public Overrides Function GetName() As String
+        Return "fire scroll"
+    End Function
 End Class

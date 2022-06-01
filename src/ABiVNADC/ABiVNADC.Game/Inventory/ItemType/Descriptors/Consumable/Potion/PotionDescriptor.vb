@@ -2,6 +2,7 @@
 
 Friend Class PotionDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         Const PotionWoundRecovery As Long = 4
         builder.AppendLine($"{character.FullName} drinks a potion")
@@ -10,7 +11,7 @@ Friend Class PotionDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New("potion", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(1, 4)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 1
@@ -32,5 +33,9 @@ Friend Class PotionDescriptor
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "potion"
     End Function
 End Class

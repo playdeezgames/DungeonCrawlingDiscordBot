@@ -2,12 +2,13 @@
 
 Friend Class DaggerDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} commits seppuku")
         character.Destroy(False)
     End Sub
     Sub New()
-        MyBase.New("dagger", True, EquipSlot.Weapon)
+        MyBase.New(True, EquipSlot.Weapon)
         AttackDice = Function(x) "1d2/2"
         Durability = Function(x) If(x = DurabilityType.Weapon, 5, 0)
         CanBuyGenerator = MakeBooleanGenerator(4, 1)
@@ -32,6 +33,10 @@ Friend Class DaggerDescriptor
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "dagger"
     End Function
 
     Public Overrides ReadOnly Property CanThrow As Boolean

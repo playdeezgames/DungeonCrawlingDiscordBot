@@ -2,6 +2,7 @@
 
 Friend Class RottenFoodDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         Const FoodFatigueRecovery As Long = 4
         builder.AppendLine($"{character.FullName} eats rotten food")
@@ -14,7 +15,7 @@ Friend Class RottenFoodDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New("rotten food", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"rf"}
     End Sub
@@ -34,5 +35,9 @@ Friend Class RottenFoodDescriptor
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "rotten food"
     End Function
 End Class

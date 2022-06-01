@@ -2,6 +2,7 @@
 
 Friend Class FoodDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         Const FoodFatigueRecovery As Long = 4
         builder.AppendLine($"{character.FullName} eats food")
@@ -10,7 +11,7 @@ Friend Class FoodDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New("food", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(1, 9)
         BuyPriceDice = "2d1+2d2"
         InventoryEncumbrance = 1
@@ -32,5 +33,9 @@ Friend Class FoodDescriptor
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "food"
     End Function
 End Class

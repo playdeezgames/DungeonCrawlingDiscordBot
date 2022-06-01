@@ -1,7 +1,9 @@
 ﻿Imports System.Text
 
-Public Class ItemTypeDescriptor
-    ReadOnly Property Name As String
+Public MustInherit Class ItemTypeDescriptor
+
+    Public MustOverride Function GetName() As String
+
     ReadOnly Property CanUse As Boolean
     ReadOnly Property EquipSlot As EquipSlot
     ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
@@ -33,8 +35,7 @@ Public Class ItemTypeDescriptor
         End Get
     End Property
 
-    Sub New(name As String, canUse As Boolean, equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
-        Me.Name = name
+    Sub New(canUse As Boolean, equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
         Me.CanUse = canUse
         Me.EquipSlot = equipSlot
         Me.Recipes = If(recipes, New List(Of Recipe))

@@ -63,7 +63,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function Name(itemType As ItemType) As String
-        Return ItemTypeDescriptors(itemType).Name
+        Return ItemTypeDescriptors(itemType).GetName()
     End Function
     <Extension>
     Function CanUse(itemType As ItemType) As Boolean

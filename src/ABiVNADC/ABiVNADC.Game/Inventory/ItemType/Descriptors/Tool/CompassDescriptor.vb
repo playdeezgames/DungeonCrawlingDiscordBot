@@ -2,8 +2,9 @@
 
 Friend Class CompassDescriptor
     Inherits ItemTypeDescriptor
+
     Sub New()
-        MyBase.New("compass", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(49, 1)
         BuyPriceDice = "500d1+2d500"
         InventoryEncumbrance = 1
@@ -13,4 +14,8 @@ Friend Class CompassDescriptor
         builder.AppendLine($"{character.FullName} looks at their compass")
         builder.AppendLine($"{character.FullName} is facing {character.Player.AheadDirection.Value.Name}")
     End Sub
+
+    Public Overrides Function GetName() As String
+        Return "compass"
+    End Function
 End Class

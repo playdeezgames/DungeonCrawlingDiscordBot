@@ -2,8 +2,9 @@
 
 Friend Class HomeStoneDescriptor
     Inherits ItemTypeDescriptor
+
     Sub New()
-        MyBase.New("home stone", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(25, 1)
         BuyPriceDice = "1000d1+2d1000"
         InventoryEncumbrance = 50
@@ -21,4 +22,8 @@ Friend Class HomeStoneDescriptor
         HomeStone.Create(character.Location, character)
         builder.AppendLine($"{character.FullName} places a home stone.")
     End Sub
+
+    Public Overrides Function GetName() As String
+        Return "home stone"
+    End Function
 End Class

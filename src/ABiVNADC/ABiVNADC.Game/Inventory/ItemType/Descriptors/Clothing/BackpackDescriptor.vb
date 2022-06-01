@@ -1,7 +1,8 @@
 ﻿Friend Class BackpackDescriptor
     Inherits ItemTypeDescriptor
+
     Sub New()
-        MyBase.New("backpack", False, EquipSlot.Back)
+        MyBase.New(False, EquipSlot.Back)
         Durability = Function(x) If(x = DurabilityType.Armor, 10, 0)
         CanBuyGenerator = MakeBooleanGenerator(9, 1)
         BuyPriceDice = "200d1+2d200"
@@ -27,4 +28,7 @@
         Return result
     End Function
 
+    Public Overrides Function GetName() As String
+        Return "backpack"
+    End Function
 End Class

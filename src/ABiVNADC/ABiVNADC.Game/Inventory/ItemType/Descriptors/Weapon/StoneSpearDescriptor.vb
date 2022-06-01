@@ -1,8 +1,8 @@
 ﻿Friend Class StoneSpearDescriptor
     Inherits ItemTypeDescriptor
+
     Sub New()
         MyBase.New(
-            "stone spear",
             False,
             EquipSlot.Weapon,
             New List(Of Recipe) From
@@ -27,4 +27,8 @@
             Return True
         End Get
     End Property
+
+    Public Overrides Function GetName() As String
+        Throw New NotImplementedException()
+    End Function
 End Class

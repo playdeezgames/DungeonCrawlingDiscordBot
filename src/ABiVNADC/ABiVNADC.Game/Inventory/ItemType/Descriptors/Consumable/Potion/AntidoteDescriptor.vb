@@ -2,13 +2,14 @@
 
 Friend Class AntidoteDescriptor
     Inherits ItemTypeDescriptor
+
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         builder.AppendLine($"{character.FullName} drinks the antidote!")
         character.PurgePoisons()
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New("antidote", True, EquipSlot.None)
+        MyBase.New(True, EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(1, 1)
         BuyPriceDice = "5d1+2d5"
         InventoryEncumbrance = 1
@@ -30,5 +31,9 @@ Friend Class AntidoteDescriptor
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function GetName() As String
+        Return "antidote"
     End Function
 End Class
