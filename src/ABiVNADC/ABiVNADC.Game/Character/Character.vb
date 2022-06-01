@@ -29,6 +29,23 @@ Public Class Character
         End Get
     End Property
 
+    Friend Sub Craft(itemType As ItemType, quantity As Long, builder As StringBuilder)
+        If Not itemType.CanCraft Then
+            builder.AppendLine($"{FullName} does not know how to craft {itemType.Name}")
+            Return
+        End If
+        Dim craftCount As Long = 0
+        While craftCount < quantity
+            Dim recipe = itemType.FindValidRecipe(Inventory)
+            If recipe Is Nothing Then
+                Exit While
+            End If
+            Inventory.CraftRecipe(recipe)
+            craftCount += 1
+        End While
+        builder.AppendLine($"{FullName} crafts {craftCount} {itemType.Name}.")
+    End Sub
+
     Friend Sub Forage(builder As StringBuilder)
         If InCombat Then
             builder.AppendLine($"{FullName} cannot forage now!")

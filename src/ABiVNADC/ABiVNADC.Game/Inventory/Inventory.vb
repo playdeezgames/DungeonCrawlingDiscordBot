@@ -1,4 +1,6 @@
-﻿Public Class Inventory
+﻿Imports System.Text
+
+Public Class Inventory
     ReadOnly Property Id As Long
     Sub New(inventoryId As Long)
         Id = inventoryId
@@ -46,6 +48,23 @@
         End Get
     End Property
 
+    Friend Sub CraftRecipe(recipe As Recipe)
+        If HasIngredients(recipe) Then
+            For Each input In recipe.Inputs
+                For Each item In Items.Where(Function(x) x.ItemType = input.Key).Take(CInt(input.Value))
+                    item.Destroy()
+                Next
+            Next
+            For Each output In recipe.Outputs
+                Dim count = output.Value
+                While count > 0
+                    Add(Item.Create(output.Key))
+                    count -= 1
+                End While
+            Next
+        End If
+    End Sub
+
     Function HasItem(itemType As ItemType) As Boolean
         Return Items.Any(Function(x) x.ItemType = itemType)
     End Function
@@ -56,5 +75,13 @@
 
     Function FindItemsByName(name As String) As IEnumerable(Of Item)
         Return Items.Where(Function(x) x.FullName = name OrElse x.ItemType.Name = name OrElse x.ItemType.Aliases.Contains(name))
+    End Function
+
+    Private Function ItemCount(itemType As ItemType) As Long
+        Return Items.Count(Function(x) x.ItemType = itemType)
+    End Function
+
+    Friend Function HasIngredients(recipe As Recipe) As Boolean
+        Return recipe.Inputs.All(Function(x) ItemCount(x.Key) >= x.Value)
     End Function
 End Class

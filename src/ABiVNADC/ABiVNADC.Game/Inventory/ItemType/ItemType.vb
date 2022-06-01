@@ -181,4 +181,12 @@ Public Module ItemTypeExtensions
     Function SpawnLocations(itemType As ItemType, difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Return ItemTypeDescriptors(itemType).SpawnLocations(difficulty, theme, locations)
     End Function
+    <Extension>
+    Function CanCraft(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).Recipes.Any
+    End Function
+    <Extension>
+    Function FindValidRecipe(itemType As ItemType, inventory As Inventory) As Recipe
+        Return ItemTypeDescriptors(itemType).Recipes.FirstOrDefault(Function(x) inventory.HasIngredients(x))
+    End Function
 End Module

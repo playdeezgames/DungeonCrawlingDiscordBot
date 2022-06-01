@@ -4,6 +4,7 @@ Public Class ItemTypeDescriptor
     ReadOnly Property Name As String
     ReadOnly Property CanUse As Boolean
     ReadOnly Property EquipSlot As EquipSlot
+    ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
     Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
 
     End Sub
@@ -26,10 +27,12 @@ Public Class ItemTypeDescriptor
     Property Modifier As Func(Of StatisticType, Item, Long)
     Property HealthModifier As Func(Of Item, Long)
     Property EnergyModifier As Func(Of Item, Long)
-    Sub New(name As String, canUse As Boolean, equipSlot As EquipSlot)
+
+    Sub New(name As String, canUse As Boolean, equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
         Me.Name = name
         Me.CanUse = canUse
         Me.EquipSlot = equipSlot
+        Me.Recipes = If(recipes, New List(Of Recipe))
 
         Modifier = Function(s, i) 0
         AttackDice = Function(x) "0d1"

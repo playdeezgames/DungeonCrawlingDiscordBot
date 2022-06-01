@@ -15,6 +15,14 @@ Public Class Player
         End Get
     End Property
 
+    Public Sub Craft(itemType As ItemType, quantity As Long, builder As StringBuilder)
+        If Not HasCharacter Then
+            builder.AppendLine("You have no current character.")
+            Return
+        End If
+        Character.Craft(itemType, quantity, builder)
+    End Sub
+
     Public Sub Forage(builder As StringBuilder)
         If Not HasCharacter Then
             builder.AppendLine("You have no current character.")
