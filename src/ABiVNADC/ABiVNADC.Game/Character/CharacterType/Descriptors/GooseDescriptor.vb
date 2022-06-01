@@ -21,6 +21,7 @@
         LootDrops = New Dictionary(Of ItemType, String) From
             {
                 {ItemType.GooseFeather, "1d2"},
+                {ItemType.GoosePoop, "2d3"},
                 {ItemType.GooseEgg, "1d10/10"},
                 {ItemType.GoldenEgg, "1d100/100"}
             }

@@ -44,6 +44,10 @@ Public Enum ItemType
     GoldenEgg
     PlantFiber
     Twine
+    Rock
+    SharpRock
+    Stick
+    GoosePoop
 End Enum
 Public Module ItemTypeExtensions
     Public ReadOnly Property AllItemTypes As IEnumerable(Of ItemType)

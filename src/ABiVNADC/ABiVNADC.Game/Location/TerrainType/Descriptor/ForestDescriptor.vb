@@ -20,7 +20,8 @@
         Dim generator As New Dictionary(Of ItemType, Integer) From
             {
                 {ItemType.None, 10 + CInt(depletion)},
-                {ItemType.PlantFiber, 10}
+                {ItemType.PlantFiber, 5},
+                {ItemType.Stick, 5}
             }
         Dim result As New Dictionary(Of ItemType, Long)
         Dim generated = RNG.FromGenerator(generator)

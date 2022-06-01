@@ -154,6 +154,10 @@ Module ItemTypeDescriptorUtility
                 New GooseFeatherDescriptor
             },
             {
+                ItemType.GoosePoop,
+                New GoosePoopDescriptor
+            },
+            {
                 ItemType.Helmet,
                 New HelmetDescriptor
             },
@@ -202,8 +206,16 @@ Module ItemTypeDescriptorUtility
                 New RatTailDescriptor
             },
             {
+                ItemType.Rock,
+                New RockDescriptor
+            },
+            {
                 ItemType.RottenFood,
                 New RottenFoodDescriptor
+            },
+            {
+                ItemType.SharpRock,
+                New SharpRockDescriptor
             },
             {
                 ItemType.Shield,
@@ -224,6 +236,10 @@ Module ItemTypeDescriptorUtility
             {
                 ItemType.SnakeFang,
                 New SnakeFangDescriptor
+            },
+            {
+                ItemType.Stick,
+                New StickDescriptor
             },
             {
                 ItemType.ThankYouNote,
