@@ -37,6 +37,7 @@
     Friend Const StartText = "start"
     Friend Const StatusText = "status"
     Friend Const TakeText = "take"
+    Friend Const ThrowText = "throw"
     Friend Const TrophiesText = "trophies"
     Friend Const UnequipText = "unequip"
     Friend Const UseText = "use"

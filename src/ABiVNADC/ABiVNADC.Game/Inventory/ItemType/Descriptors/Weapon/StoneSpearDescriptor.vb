@@ -22,4 +22,9 @@
         EquippedEncumbrance = 1
         Aliases = New List(Of String) From {"spear"}
     End Sub
+    Public Overrides ReadOnly Property CanThrow As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 End Class

@@ -33,4 +33,10 @@ Friend Class DaggerDescriptor
         End While
         Return result
     End Function
+
+    Public Overrides ReadOnly Property CanThrow As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 End Class

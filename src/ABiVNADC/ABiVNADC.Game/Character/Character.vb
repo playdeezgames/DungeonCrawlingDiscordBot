@@ -29,6 +29,21 @@ Public Class Character
         End Get
     End Property
 
+    Friend Sub ThrowWeapon(builder As StringBuilder)
+        If Not Equipment.ContainsKey(EquipSlot.Weapon) Then
+            builder.AppendLine($"{FullName} has no weapon equipped!")
+            Return
+        End If
+        Dim item = Equipment(EquipSlot.Weapon)
+        If Not item.CanThrow Then
+            builder.AppendLine($"{FullName} cannot throw {item.FullName}")
+            Return
+        End If
+        'TODO: drop or destroy?
+        'TODO: effect of throwing the item?
+        Throw New NotImplementedException()
+    End Sub
+
     Friend Sub Craft(itemType As ItemType, quantity As Long, builder As StringBuilder)
         If Not itemType.CanCraft Then
             builder.AppendLine($"{FullName} does not know how to craft {itemType.Name}")

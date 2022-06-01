@@ -194,4 +194,8 @@ Public Module ItemTypeExtensions
     Function FindValidRecipe(itemType As ItemType, inventory As Inventory) As Recipe
         Return ItemTypeDescriptors(itemType).Recipes.FirstOrDefault(Function(x) inventory.HasIngredients(x))
     End Function
+    <Extension>
+    Function CanThrow(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).CanThrow
+    End Function
 End Module

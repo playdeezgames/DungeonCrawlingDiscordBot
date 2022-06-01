@@ -13,6 +13,12 @@
         Return ItemType.Modifier(statisticType, Me)
     End Function
 
+    ReadOnly Property CanThrow As Boolean
+        Get
+            Return ItemType.CanThrow
+        End Get
+    End Property
+
     ReadOnly Property CanUse As Boolean
         Get
             Return ItemType.CanUse

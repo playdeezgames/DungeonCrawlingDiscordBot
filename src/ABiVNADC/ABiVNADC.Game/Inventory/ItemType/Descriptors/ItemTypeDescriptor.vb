@@ -27,6 +27,11 @@ Public Class ItemTypeDescriptor
     Property Modifier As Func(Of StatisticType, Item, Long)
     Property HealthModifier As Func(Of Item, Long)
     Property EnergyModifier As Func(Of Item, Long)
+    Overridable ReadOnly Property CanThrow As Boolean
+        Get
+            Return False
+        End Get
+    End Property
 
     Sub New(name As String, canUse As Boolean, equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
         Me.Name = name

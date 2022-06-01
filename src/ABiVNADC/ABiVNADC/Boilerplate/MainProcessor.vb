@@ -65,6 +65,7 @@
             {StartText, AddressOf StartProcessor.Run},
             {StatusText, AddressOf StatusProcessor.Run},
             {TakeText, AddressOf TakeProcessor.Run},
+            {ThrowText, AddressOf ThrowProcessor.Run},
             {UnequipText, AddressOf UnequipProcessor.Run},
             {UseText, AddressOf UseProcessor.Run}
         }
