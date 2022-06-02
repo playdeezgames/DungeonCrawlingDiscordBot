@@ -11,7 +11,11 @@ Public MustInherit Class ItemTypeDescriptor
     End Property
 
     ReadOnly Property EquipSlot As EquipSlot
-    ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
+    Overridable ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
+        Get
+            Return New List(Of Recipe)
+        End Get
+    End Property
     Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
 
     End Sub
@@ -44,9 +48,8 @@ Public MustInherit Class ItemTypeDescriptor
         End Get
     End Property
 
-    Sub New(equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
+    Sub New(equipSlot As EquipSlot)
         Me.EquipSlot = equipSlot
-        Me.Recipes = If(recipes, New List(Of Recipe))
 
         Modifier = Function(s, i) 0
         Durability = Function(x) 0

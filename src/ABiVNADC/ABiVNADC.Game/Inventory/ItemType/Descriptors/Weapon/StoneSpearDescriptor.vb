@@ -5,8 +5,17 @@ Friend Class StoneSpearDescriptor
 
     Sub New()
         MyBase.New(
-            EquipSlot.Weapon,
-            New List(Of Recipe) From
+            EquipSlot.Weapon
+            )
+        Durability = Function(x) If(x = DurabilityType.Weapon, 2, 0)
+        InventoryEncumbrance = 2
+        EquippedEncumbrance = 1
+        Aliases = New List(Of String) From {"spear"}
+    End Sub
+
+    Public Overrides ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
+        Get
+            Return New List(Of Recipe) From
             {
                 New Recipe(
                     New Dictionary(Of ItemType, Long) From
@@ -16,12 +25,9 @@ Friend Class StoneSpearDescriptor
                         {ItemType.SharpRock, 1}
                     },
                     New Dictionary(Of ItemType, Long) From {{ItemType.StoneSpear, 1}})
-            })
-        Durability = Function(x) If(x = DurabilityType.Weapon, 2, 0)
-        InventoryEncumbrance = 2
-        EquippedEncumbrance = 1
-        Aliases = New List(Of String) From {"spear"}
-    End Sub
+            }
+        End Get
+    End Property
     Public Overrides Function AttackDice(item As Item) As String
         Return "1d3/3+1d3/3"
     End Function
