@@ -5,8 +5,12 @@ Friend Class RockDescriptor
 
     Sub New()
         MyBase.New(False, EquipSlot.Weapon)
-        AttackDice = Function(x) "1d3/3"
     End Sub
+
+    Public Overrides Function AttackDice(item As Item) As String
+        Return "1d3/3"
+    End Function
+
     Public Overrides ReadOnly Property CanThrow As Boolean
         Get
             Return True

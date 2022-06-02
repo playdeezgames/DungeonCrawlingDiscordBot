@@ -15,8 +15,11 @@
                         {ItemType.SharpRock, 1}
                     })
             })
-        AttackDice = Function(x) "1d2/2"
     End Sub
+
+    Public Overrides Function AttackDice(item As Item) As String
+        Return "1d2/2"
+    End Function
 
     Public Overrides Function GetName() As String
         Return "sharp rock"
