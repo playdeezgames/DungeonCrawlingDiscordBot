@@ -1,4 +1,6 @@
-﻿Friend Class StickDescriptor
+﻿Imports System.Text
+
+Friend Class StickDescriptor
     Inherits ItemTypeDescriptor
 
     Sub New()
@@ -14,4 +16,10 @@
     Public Overrides Function GetName() As String
         Return "stick"
     End Function
+
+    Public Overrides Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
+        CharacterEquipSlotData.ClearForItem(item.Id)
+        location.Inventory.Add(item)
+        builder.AppendLine($"{character.FullName} throws the stick. It falls onto the floor.")
+    End Sub
 End Class

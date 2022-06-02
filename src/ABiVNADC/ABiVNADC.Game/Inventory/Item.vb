@@ -1,4 +1,6 @@
-﻿Public Class Item
+﻿Imports System.Text
+
+Public Class Item
     ReadOnly Property Id As Long
     Sub New(itemId As Long)
         Id = itemId
@@ -48,6 +50,10 @@
             Return ItemType.InventoryEncumbrance
         End Get
     End Property
+
+    Friend Sub OnThrow(character As Character, location As Location, builder As StringBuilder)
+        ItemType.OnThrow(character, Me, location, builder)
+    End Sub
 
     Friend Sub Destroy()
         ItemData.Clear(Id)

@@ -198,4 +198,8 @@ Public Module ItemTypeExtensions
     Function CanThrow(itemType As ItemType) As Boolean
         Return ItemTypeDescriptors(itemType).CanThrow
     End Function
+    <Extension>
+    Sub OnThrow(itemType As ItemType, character As Character, item As Item, location As Location, builder As StringBuilder)
+        ItemTypeDescriptors(itemType).OnThrow(character, item, location, builder)
+    End Sub
 End Module

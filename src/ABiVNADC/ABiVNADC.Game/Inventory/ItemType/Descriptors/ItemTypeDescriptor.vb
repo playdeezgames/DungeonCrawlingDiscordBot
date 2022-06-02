@@ -65,6 +65,10 @@ Public MustInherit Class ItemTypeDescriptor
     Overridable Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Return New List(Of Location)
     End Function
+
+    Overridable Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
+        'by default, do nothing!
+    End Sub
 End Class
 Module ItemTypeDescriptorUtility
     Friend ReadOnly Property QuestTargetGenerator As Dictionary(Of ItemType, Integer)

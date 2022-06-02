@@ -21,6 +21,7 @@ Public Class Player
             Return
         End If
         Character.ThrowWeapon(builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub Craft(itemType As ItemType, quantity As Long, builder As StringBuilder)
@@ -29,6 +30,7 @@ Public Class Player
             Return
         End If
         Character.Craft(itemType, quantity, builder)
+        Character.NextTurn(builder)
     End Sub
 
     Public Sub Forage(builder As StringBuilder)
@@ -37,6 +39,7 @@ Public Class Player
             Return
         End If
         Character.Forage(builder)
+        Character.NextTurn(builder)
     End Sub
 
     ReadOnly Property InCombat As Boolean

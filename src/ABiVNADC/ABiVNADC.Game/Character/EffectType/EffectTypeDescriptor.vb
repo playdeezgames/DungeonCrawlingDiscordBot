@@ -50,6 +50,20 @@ Module EffectTypeDescriptorUtility
                     .AttackDice = "-1d2/2",
                     .DefendDice = "-1d3/2"
                 }
+            },
+            {
+                EffectType.Shrapnel,
+                New EffectTypeDescriptor With
+                {
+                    .Name = "shrapnel",
+                    .ApplyOn = Sub(character, builder)
+                                   Dim damage = RNG.RollDice("1d2/2")
+                                   character.AddWounds(damage)
+                                   builder.AppendLine($"{character.FullName} takes {damage} points of shrapnel damage.")
+                               End Sub,
+                    .AttackDice = "-1d2/2",
+                    .DefendDice = "-1d3/2"
+                }
             }
         }
 End Module

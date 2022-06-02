@@ -39,9 +39,7 @@ Public Class Character
             builder.AppendLine($"{FullName} cannot throw {item.FullName}")
             Return
         End If
-        'TODO: drop or destroy?
-        'TODO: effect of throwing the item?
-        Throw New NotImplementedException()
+        item.OnThrow(Me, Location, builder)
     End Sub
 
     Friend Sub Craft(itemType As ItemType, quantity As Long, builder As StringBuilder)

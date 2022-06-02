@@ -6,6 +6,7 @@ Public Enum EffectType
     Nausea
     Infection
     Groggy
+    Shrapnel
 End Enum
 Public Module EffectTypeExtensions
     <Extension>
