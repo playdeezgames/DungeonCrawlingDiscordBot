@@ -3,7 +3,7 @@
 
     Sub New()
         MyBase.New()
-        CanSellGenerator = MakeBooleanGenerator(1, 1)
+        GenerateCanSell = MakeBooleanGenerator(1, 1)
         SellPriceDice = "20d1+2d20"
         IsTrophy = True
     End Sub

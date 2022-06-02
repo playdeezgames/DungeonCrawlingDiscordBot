@@ -3,7 +3,7 @@
 
     Sub New()
         MyBase.New()
-        CanSellGenerator = MakeBooleanGenerator(0, 1)
+        GenerateCanSell = MakeBooleanGenerator(0, 1)
         BuyPriceDice = "100d1"
         SellPriceDice = "95d1"
         InventoryEncumbrance = 1

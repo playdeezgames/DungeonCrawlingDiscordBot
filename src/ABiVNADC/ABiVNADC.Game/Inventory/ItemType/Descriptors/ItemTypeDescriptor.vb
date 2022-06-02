@@ -39,7 +39,7 @@ Public MustInherit Class ItemTypeDescriptor
     Overridable Function GenerateCanBuy() As Boolean
         Return False
     End Function
-    Property CanSellGenerator As Dictionary(Of Boolean, Integer)
+    Property GenerateCanSell As Dictionary(Of Boolean, Integer)
     Property BuyPriceDice As String
     Property SellPriceDice As String
     Property QuestTargetWeight As Integer
@@ -63,7 +63,7 @@ Public MustInherit Class ItemTypeDescriptor
     Sub New()
 
         Modifier = Function(s, i) 0
-        CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
+        GenerateCanSell = RNG.MakeBooleanGenerator(1, 0)
         BuyPriceDice = "0d1"
         SellPriceDice = "0d1"
         QuestTargetWeight = 0

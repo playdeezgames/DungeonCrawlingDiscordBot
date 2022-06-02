@@ -139,7 +139,7 @@ Public Module ItemTypeExtensions
 
     <Extension>
     Function CanSellGenerator(itemType As ItemType) As Dictionary(Of Boolean, Integer)
-        Return ItemTypeDescriptors(itemType).CanSellGenerator
+        Return ItemTypeDescriptors(itemType).GenerateCanSell
     End Function
 
     <Extension>

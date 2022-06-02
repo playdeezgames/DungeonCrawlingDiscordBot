@@ -3,7 +3,7 @@
 
     Sub New()
         MyBase.New()
-        CanSellGenerator = MakeBooleanGenerator(1, 1)
+        GenerateCanSell = MakeBooleanGenerator(1, 1)
         SellPriceDice = "1d3"
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"feather"}
