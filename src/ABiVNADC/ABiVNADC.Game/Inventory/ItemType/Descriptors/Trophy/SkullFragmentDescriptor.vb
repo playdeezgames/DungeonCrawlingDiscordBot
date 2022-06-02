@@ -1,7 +1,7 @@
 ﻿Friend Class SkullFragmentDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New(False, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "5d1+2d5"
         IsTrophy = True

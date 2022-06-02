@@ -9,12 +9,17 @@ Friend Class AntidoteDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New(True, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(1, 1)
         BuyPriceDice = "5d1+2d5"
         InventoryEncumbrance = 1
         Aliases = New List(Of String)
     End Sub
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) x \ 4},

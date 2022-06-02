@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(False, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         Aliases = New List(Of String) From {"fiber"}
     End Sub
 

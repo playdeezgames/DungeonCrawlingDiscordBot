@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(False, EquipSlot.Body)
+        MyBase.New(EquipSlot.Body)
         Durability = Function(x) If(x = DurabilityType.Armor, 20, 0)
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
         BuyPriceDice = "75d1+2d75"

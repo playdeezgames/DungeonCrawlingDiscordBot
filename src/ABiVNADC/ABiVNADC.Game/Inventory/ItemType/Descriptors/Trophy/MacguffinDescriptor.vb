@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(False, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         QuestTargetWeight = 1
         QuestTargetQuantityDice = "1d1"
         IsTrophy = True

@@ -3,7 +3,6 @@
 
     Sub New()
         MyBase.New(
-            False,
             EquipSlot.None,
             New List(Of Recipe) From
             {

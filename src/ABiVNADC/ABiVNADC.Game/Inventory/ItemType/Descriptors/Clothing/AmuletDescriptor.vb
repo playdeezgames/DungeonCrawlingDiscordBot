@@ -3,7 +3,7 @@
 Friend Class AmuletDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New(True, EquipSlot.Neck)
+        MyBase.New(EquipSlot.Neck)
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
         BuyPriceDice = "200d1+2d200"
         CanSellGenerator = MakeBooleanGenerator(4, 1)
@@ -25,6 +25,11 @@ Friend Class AmuletDescriptor
                          End If
                      End Sub
     End Sub
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
     Public Overrides Sub OnUse(character As Character, item As Item, builder As StringBuilder)
         If Not item.Modifiers.Any Then
             builder.AppendLine($"{item.FullName} has no power to confer.")

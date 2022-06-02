@@ -11,12 +11,17 @@ Friend Class FoodDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New(True, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(1, 9)
         BuyPriceDice = "2d1+2d2"
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"f"}
     End Sub
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) x \ 2},

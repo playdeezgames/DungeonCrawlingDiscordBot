@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(False, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         QuestRewardWeight = 1
         QuestRewardQuantityDice = "1d1"
         InventoryEncumbrance = -5

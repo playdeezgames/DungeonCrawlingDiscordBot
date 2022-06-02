@@ -4,7 +4,7 @@ Friend Class StickDescriptor
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(False, EquipSlot.Weapon)
+        MyBase.New(EquipSlot.Weapon)
     End Sub
 
     Public Overrides Function AttackDice(item As Item) As String

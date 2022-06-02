@@ -13,12 +13,17 @@ Friend Class FireScrollDescriptor
         Next
     End Sub
     Sub New()
-        MyBase.New(True, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "25d1+2d25"
         InventoryEncumbrance = 0
         Aliases = New List(Of String) From {"scroll"}
     End Sub
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 
     Public Overrides Function GetName() As String
         Return "fire scroll"

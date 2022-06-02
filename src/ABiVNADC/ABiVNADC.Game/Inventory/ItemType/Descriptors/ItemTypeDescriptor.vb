@@ -4,7 +4,12 @@ Public MustInherit Class ItemTypeDescriptor
 
     Public MustOverride Function GetName() As String
 
-    ReadOnly Property CanUse As Boolean
+    Public Overridable ReadOnly Property CanUse As Boolean
+        Get
+            Return False
+        End Get
+    End Property
+
     ReadOnly Property EquipSlot As EquipSlot
     ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
     Overridable Sub OnUse(character As Character, item As Item, builder As StringBuilder)
@@ -39,8 +44,7 @@ Public MustInherit Class ItemTypeDescriptor
         End Get
     End Property
 
-    Sub New(canUse As Boolean, equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
-        Me.CanUse = canUse
+    Sub New(equipSlot As EquipSlot, Optional recipes As IReadOnlyList(Of Recipe) = Nothing)
         Me.EquipSlot = equipSlot
         Me.Recipes = If(recipes, New List(Of Recipe))
 

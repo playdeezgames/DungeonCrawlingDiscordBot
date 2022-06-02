@@ -19,12 +19,17 @@ Friend Class HomeScrollDescriptor
         builder.AppendLine($"{character.FullName} uses the home scroll to transport themselves instantly to one of their home stones.")
     End Sub
     Sub New()
-        MyBase.New(True, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 0
         Aliases = New List(Of String) From {"hs", "scroll"}
     End Sub
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 
     Public Overrides Function GetName() As String
         Return "home scroll"

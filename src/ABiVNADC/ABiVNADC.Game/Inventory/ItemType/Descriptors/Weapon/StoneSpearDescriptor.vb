@@ -5,7 +5,6 @@ Friend Class StoneSpearDescriptor
 
     Sub New()
         MyBase.New(
-            False,
             EquipSlot.Weapon,
             New List(Of Recipe) From
             {

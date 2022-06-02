@@ -11,10 +11,15 @@ Friend Class GooseEggDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New(True, EquipSlot.None)
+        MyBase.New(EquipSlot.None)
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"egg"}
     End Sub
+    Public Overrides ReadOnly Property CanUse As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 
     Public Overrides Function GetName() As String
         Return "goose egg"
