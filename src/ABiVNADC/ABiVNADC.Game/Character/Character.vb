@@ -621,6 +621,7 @@ Public Class Character
         Next
         Dim damageRoll = If(attackRoll > defendRoll, attackRoll - defendRoll, 0)
         If damageRoll > 0 Then
+            'TODO: decision point... arseholes or health
             defender.AddWounds(damageRoll)
             builder.AppendLine($"{FullName} hits!")
             builder.AppendLine($"{defender.FullName} takes {damageRoll} damage!")
