@@ -5,11 +5,13 @@ Friend Class CompassDescriptor
 
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(49, 1)
         BuyPriceDice = "500d1+2d500"
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"c"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(49, 1))
+    End Function
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

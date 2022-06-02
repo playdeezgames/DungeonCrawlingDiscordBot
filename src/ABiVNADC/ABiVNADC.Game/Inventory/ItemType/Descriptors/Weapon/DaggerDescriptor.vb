@@ -9,12 +9,14 @@ Friend Class DaggerDescriptor
     End Sub
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(4, 1)
         BuyPriceDice = "12d1+2d12"
         InventoryEncumbrance = 1
         EquippedEncumbrance = 0
         Aliases = New List(Of String) From {"d"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(4, 1))
+    End Function
     Public Overrides Function Durability(durabilityType As DurabilityType) As Long
         Return If(durabilityType = DurabilityType.Weapon, 5, 0)
     End Function

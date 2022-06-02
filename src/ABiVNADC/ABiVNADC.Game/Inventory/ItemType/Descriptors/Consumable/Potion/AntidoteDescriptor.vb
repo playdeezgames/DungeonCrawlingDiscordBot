@@ -10,11 +10,13 @@ Friend Class AntidoteDescriptor
     End Sub
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(1, 1)
         BuyPriceDice = "5d1+2d5"
         InventoryEncumbrance = 1
         Aliases = New List(Of String)
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(1, 1))
+    End Function
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

@@ -3,12 +3,14 @@
 
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(49, 1)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 10
         EquippedEncumbrance = 5
         Aliases = New List(Of String) From {"ls"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(49, 1))
+    End Function
     Public Overrides Function Durability(durabilityType As DurabilityType) As Long
         Return If(durabilityType = DurabilityType.Weapon, 20, 0)
     End Function

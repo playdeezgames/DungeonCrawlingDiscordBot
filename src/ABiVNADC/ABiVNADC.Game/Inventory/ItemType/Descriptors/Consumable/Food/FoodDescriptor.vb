@@ -12,11 +12,13 @@ Friend Class FoodDescriptor
     End Sub
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(1, 9)
         BuyPriceDice = "2d1+2d2"
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"f"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(1, 9))
+    End Function
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

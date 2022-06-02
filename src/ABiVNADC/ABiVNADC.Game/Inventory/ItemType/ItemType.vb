@@ -128,8 +128,8 @@ Public Module ItemTypeExtensions
     End Function
 
     <Extension>
-    Function CanBuyGenerator(itemType As ItemType) As Dictionary(Of Boolean, Integer)
-        Return ItemTypeDescriptors(itemType).CanBuyGenerator
+    Function GenerateCanBuy(itemType As ItemType) As Boolean
+        Return ItemTypeDescriptors(itemType).GenerateCanBuy()
     End Function
 
     <Extension>

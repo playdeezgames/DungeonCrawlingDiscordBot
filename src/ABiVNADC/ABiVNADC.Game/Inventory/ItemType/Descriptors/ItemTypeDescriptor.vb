@@ -36,8 +36,9 @@ Public MustInherit Class ItemTypeDescriptor
     Overridable Function Durability(durabilityType As DurabilityType) As Long
         Return 0
     End Function
-
-    Property CanBuyGenerator As Dictionary(Of Boolean, Integer)
+    Overridable Function GenerateCanBuy() As Boolean
+        Return False
+    End Function
     Property CanSellGenerator As Dictionary(Of Boolean, Integer)
     Property BuyPriceDice As String
     Property SellPriceDice As String
@@ -62,7 +63,6 @@ Public MustInherit Class ItemTypeDescriptor
     Sub New()
 
         Modifier = Function(s, i) 0
-        CanBuyGenerator = RNG.MakeBooleanGenerator(1, 0)
         CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
         BuyPriceDice = "0d1"
         SellPriceDice = "0d1"

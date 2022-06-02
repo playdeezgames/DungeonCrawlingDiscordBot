@@ -12,11 +12,13 @@ Friend Class PotionDescriptor
     End Sub
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(1, 4)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"p", "pot"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(1, 4))
+    End Function
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

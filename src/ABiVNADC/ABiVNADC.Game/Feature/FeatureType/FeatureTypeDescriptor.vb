@@ -205,7 +205,7 @@ Module FeatureTypeDescriptorUtility
                                      Route.Create(toLocation, Direction.Outward, fromLocation)
                                      For Each itemType In AllItemTypes
                                          Dim sellPrice As Long = If(RNG.FromGenerator(itemType.CanSellGenerator), RNG.RollDice(itemType.SellPriceDice), 0)
-                                         Dim buyPrice As Long = If(RNG.FromGenerator(itemType.CanBuyGenerator), RNG.RollDice(itemType.BuyPriceDice), 0)
+                                         Dim buyPrice As Long = If(itemType.GenerateCanBuy(), RNG.RollDice(itemType.BuyPriceDice), 0)
                                          ShoppePriceData.Write(shoppe.Id, itemType, buyPrice, sellPrice)
                                      Next
                                      Return New Feature(result.Id)

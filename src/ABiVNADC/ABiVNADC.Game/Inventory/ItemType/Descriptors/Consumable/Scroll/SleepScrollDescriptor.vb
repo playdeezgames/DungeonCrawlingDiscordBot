@@ -18,11 +18,13 @@ Friend Class SleepScrollDescriptor
     End Sub
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "25d1+2d25"
         InventoryEncumbrance = 0
         Aliases = New List(Of String) From {"scroll"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(3, 1))
+    End Function
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

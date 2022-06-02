@@ -5,11 +5,13 @@ Friend Class HomeStoneDescriptor
 
     Sub New()
         MyBase.New()
-        CanBuyGenerator = MakeBooleanGenerator(25, 1)
         BuyPriceDice = "1000d1+2d1000"
         InventoryEncumbrance = 50
         Aliases = New List(Of String) From {"stone"}
     End Sub
+    Public Overrides Function GenerateCanBuy() As Boolean
+        Return RNG.FromGenerator(MakeBooleanGenerator(25, 1))
+    End Function
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True
