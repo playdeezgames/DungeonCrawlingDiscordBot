@@ -3,7 +3,6 @@
 
     Sub New()
         MyBase.New(False, EquipSlot.Body)
-        DefendDice = Function(x) "1d3/3"
         Durability = Function(x) If(x = DurabilityType.Armor, 20, 0)
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
         BuyPriceDice = "75d1+2d75"
@@ -11,6 +10,9 @@
         EquippedEncumbrance = 15
         Aliases = New List(Of String) From {"cm", "chain"}
     End Sub
+    Public Overrides Function DefendDice(item As Item) As String
+        Return "1d3/3"
+    End Function
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) 0},

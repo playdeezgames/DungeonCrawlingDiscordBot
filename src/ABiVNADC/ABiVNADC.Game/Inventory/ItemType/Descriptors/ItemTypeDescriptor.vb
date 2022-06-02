@@ -13,7 +13,9 @@ Public MustInherit Class ItemTypeDescriptor
     Overridable Function AttackDice(item As Item) As String
         Return "0d1"
     End Function
-    Property DefendDice As Func(Of Item, String)
+    Overridable Function DefendDice(item As Item) As String
+        Return "0d1"
+    End Function
     Property Durability As Func(Of DurabilityType, Long)
     Property CanBuyGenerator As Dictionary(Of Boolean, Integer)
     Property CanSellGenerator As Dictionary(Of Boolean, Integer)
@@ -43,7 +45,6 @@ Public MustInherit Class ItemTypeDescriptor
         Me.Recipes = If(recipes, New List(Of Recipe))
 
         Modifier = Function(s, i) 0
-        DefendDice = Function(x) "0d1"
         Durability = Function(x) 0
         CanBuyGenerator = RNG.MakeBooleanGenerator(1, 0)
         CanSellGenerator = RNG.MakeBooleanGenerator(1, 0)
