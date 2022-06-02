@@ -5,11 +5,13 @@ Friend Class StoneSpearDescriptor
 
     Sub New()
         MyBase.New()
-        Durability = Function(x) If(x = DurabilityType.Weapon, 2, 0)
         InventoryEncumbrance = 2
         EquippedEncumbrance = 1
         Aliases = New List(Of String) From {"spear"}
     End Sub
+    Public Overrides Function Durability(durabilityType As DurabilityType) As Long
+        Return If(durabilityType = DurabilityType.Weapon, 2, 0)
+    End Function
     Public Overrides ReadOnly Property EquipSlot As EquipSlot
         Get
             Return EquipSlot.Weapon

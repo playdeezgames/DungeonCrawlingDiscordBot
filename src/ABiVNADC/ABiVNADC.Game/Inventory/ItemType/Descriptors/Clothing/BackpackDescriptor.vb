@@ -3,13 +3,16 @@
 
     Sub New()
         MyBase.New()
-        Durability = Function(x) If(x = DurabilityType.Armor, 10, 0)
         CanBuyGenerator = MakeBooleanGenerator(9, 1)
         BuyPriceDice = "200d1+2d200"
         InventoryEncumbrance = 1
         EquippedEncumbrance = -20
         Aliases = New List(Of String) From {"pack"}
     End Sub
+
+    Public Overrides Function Durability(durabilityType As DurabilityType) As Long
+        Return If(durabilityType = DurabilityType.Armor, 10, 0)
+    End Function
     Public Overrides ReadOnly Property EquipSlot As EquipSlot
         Get
             Return EquipSlot.Back
