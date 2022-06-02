@@ -3,7 +3,7 @@
 Friend Class AmuletDescriptor
     Inherits ItemTypeDescriptor
     Sub New()
-        MyBase.New(EquipSlot.Neck)
+        MyBase.New()
         CanBuyGenerator = MakeBooleanGenerator(19, 1)
         BuyPriceDice = "200d1+2d200"
         CanSellGenerator = MakeBooleanGenerator(4, 1)
@@ -25,6 +25,11 @@ Friend Class AmuletDescriptor
                          End If
                      End Sub
     End Sub
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.Neck
+        End Get
+    End Property
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

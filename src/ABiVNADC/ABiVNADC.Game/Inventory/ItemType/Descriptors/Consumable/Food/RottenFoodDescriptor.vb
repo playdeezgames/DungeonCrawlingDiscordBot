@@ -15,7 +15,7 @@ Friend Class RottenFoodDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         InventoryEncumbrance = 1
         Aliases = New List(Of String) From {"rf"}
     End Sub

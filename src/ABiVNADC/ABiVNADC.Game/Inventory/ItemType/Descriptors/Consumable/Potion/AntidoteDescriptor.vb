@@ -9,7 +9,7 @@ Friend Class AntidoteDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         CanBuyGenerator = MakeBooleanGenerator(1, 1)
         BuyPriceDice = "5d1+2d5"
         InventoryEncumbrance = 1

@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         CanSellGenerator = MakeBooleanGenerator(1, 1)
         SellPriceDice = "50d1+2d50"
         InventoryEncumbrance = 1

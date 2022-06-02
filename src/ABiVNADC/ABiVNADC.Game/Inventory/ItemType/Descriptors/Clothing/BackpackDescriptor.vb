@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(EquipSlot.Back)
+        MyBase.New()
         Durability = Function(x) If(x = DurabilityType.Armor, 10, 0)
         CanBuyGenerator = MakeBooleanGenerator(9, 1)
         BuyPriceDice = "200d1+2d200"
@@ -10,6 +10,11 @@
         EquippedEncumbrance = -20
         Aliases = New List(Of String) From {"pack"}
     End Sub
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.Back
+        End Get
+    End Property
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) 1},

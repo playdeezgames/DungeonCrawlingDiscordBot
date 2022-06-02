@@ -8,7 +8,7 @@ Friend Class DaggerDescriptor
         character.Destroy(False)
     End Sub
     Sub New()
-        MyBase.New(EquipSlot.Weapon)
+        MyBase.New()
         Durability = Function(x) If(x = DurabilityType.Weapon, 5, 0)
         CanBuyGenerator = MakeBooleanGenerator(4, 1)
         BuyPriceDice = "12d1+2d12"
@@ -16,6 +16,11 @@ Friend Class DaggerDescriptor
         EquippedEncumbrance = 0
         Aliases = New List(Of String) From {"d"}
     End Sub
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.Weapon
+        End Get
+    End Property
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
             Return True

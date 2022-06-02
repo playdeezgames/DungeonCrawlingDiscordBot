@@ -4,7 +4,7 @@ Friend Class HomeStoneDescriptor
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         CanBuyGenerator = MakeBooleanGenerator(25, 1)
         BuyPriceDice = "1000d1+2d1000"
         InventoryEncumbrance = 50

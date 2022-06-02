@@ -4,14 +4,17 @@ Friend Class StoneSpearDescriptor
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(
-            EquipSlot.Weapon
-            )
+        MyBase.New()
         Durability = Function(x) If(x = DurabilityType.Weapon, 2, 0)
         InventoryEncumbrance = 2
         EquippedEncumbrance = 1
         Aliases = New List(Of String) From {"spear"}
     End Sub
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.Weapon
+        End Get
+    End Property
 
     Public Overrides ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
         Get

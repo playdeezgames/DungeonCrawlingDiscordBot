@@ -2,9 +2,13 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(
-            EquipSlot.Weapon)
+        MyBase.New()
     End Sub
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.Weapon
+        End Get
+    End Property
     Public Overrides ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
         Get
             Return New List(Of Recipe) From

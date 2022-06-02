@@ -19,7 +19,7 @@ Friend Class HomeScrollDescriptor
         builder.AppendLine($"{character.FullName} uses the home scroll to transport themselves instantly to one of their home stones.")
     End Sub
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         CanBuyGenerator = MakeBooleanGenerator(3, 1)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 0

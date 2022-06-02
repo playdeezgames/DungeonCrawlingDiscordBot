@@ -10,7 +10,12 @@ Public MustInherit Class ItemTypeDescriptor
         End Get
     End Property
 
-    ReadOnly Property EquipSlot As EquipSlot
+    Public Overridable ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.None
+        End Get
+    End Property
+
     Overridable ReadOnly Property Recipes As IReadOnlyList(Of Recipe)
         Get
             Return New List(Of Recipe)
@@ -48,8 +53,7 @@ Public MustInherit Class ItemTypeDescriptor
         End Get
     End Property
 
-    Sub New(equipSlot As EquipSlot)
-        Me.EquipSlot = equipSlot
+    Sub New()
 
         Modifier = Function(s, i) 0
         Durability = Function(x) 0

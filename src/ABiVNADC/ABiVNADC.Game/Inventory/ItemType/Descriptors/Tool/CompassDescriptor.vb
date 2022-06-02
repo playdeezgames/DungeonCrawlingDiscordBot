@@ -4,7 +4,7 @@ Friend Class CompassDescriptor
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         CanBuyGenerator = MakeBooleanGenerator(49, 1)
         BuyPriceDice = "500d1+2d500"
         InventoryEncumbrance = 1

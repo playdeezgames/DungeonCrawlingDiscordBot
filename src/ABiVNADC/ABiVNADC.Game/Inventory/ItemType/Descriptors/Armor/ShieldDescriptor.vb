@@ -2,7 +2,7 @@
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(EquipSlot.Shield)
+        MyBase.New()
         Durability = Function(x) If(x = DurabilityType.Armor, 10, 0)
         CanBuyGenerator = MakeBooleanGenerator(9, 1)
         BuyPriceDice = "25d1+2d25"
@@ -10,6 +10,12 @@
         EquippedEncumbrance = 7
         Aliases = New List(Of String) From {"sh"}
     End Sub
+
+    Public Overrides ReadOnly Property EquipSlot As EquipSlot
+        Get
+            Return EquipSlot.Shield
+        End Get
+    End Property
     Public Overrides Function DefendDice(item As Item) As String
         Return "1d3/3"
     End Function

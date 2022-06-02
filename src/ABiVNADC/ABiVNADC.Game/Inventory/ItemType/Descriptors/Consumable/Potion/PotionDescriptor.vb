@@ -11,7 +11,7 @@ Friend Class PotionDescriptor
         item.Destroy()
     End Sub
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
         CanBuyGenerator = MakeBooleanGenerator(1, 4)
         BuyPriceDice = "50d1+2d50"
         InventoryEncumbrance = 1

@@ -4,7 +4,7 @@ Friend Class LandClaimDescriptor
     Inherits ItemTypeDescriptor
 
     Sub New()
-        MyBase.New(EquipSlot.None)
+        MyBase.New()
     End Sub
     Public Overrides ReadOnly Property CanUse As Boolean
         Get
