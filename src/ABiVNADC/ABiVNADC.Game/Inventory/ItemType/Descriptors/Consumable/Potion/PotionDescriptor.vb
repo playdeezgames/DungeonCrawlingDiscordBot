@@ -40,7 +40,9 @@ Friend Class PotionDescriptor
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "potion"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "potion"
+        End Get
+    End Property
 End Class

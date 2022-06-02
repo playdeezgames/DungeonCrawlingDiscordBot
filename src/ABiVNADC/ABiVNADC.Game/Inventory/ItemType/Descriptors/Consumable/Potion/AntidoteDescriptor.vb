@@ -38,7 +38,9 @@ Friend Class AntidoteDescriptor
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "antidote"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "antidote"
+        End Get
+    End Property
 End Class

@@ -25,7 +25,9 @@ Friend Class FireScrollDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "fire scroll"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "fire scroll"
+        End Get
+    End Property
 End Class

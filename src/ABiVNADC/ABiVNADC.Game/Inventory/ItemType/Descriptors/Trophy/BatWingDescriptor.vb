@@ -8,7 +8,9 @@
         IsTrophy = True
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "bat wing"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "bat wing"
+        End Get
+    End Property
 End Class

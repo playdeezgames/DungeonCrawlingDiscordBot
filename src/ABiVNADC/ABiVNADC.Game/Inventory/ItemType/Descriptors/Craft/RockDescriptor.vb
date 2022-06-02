@@ -23,9 +23,11 @@ Friend Class RockDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "rock"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "rock"
+        End Get
+    End Property
 
     Public Overrides Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
         Dim enemy = location.Enemies(character).FirstOrDefault

@@ -36,7 +36,9 @@
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "backpack"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "backpack"
+        End Get
+    End Property
 End Class

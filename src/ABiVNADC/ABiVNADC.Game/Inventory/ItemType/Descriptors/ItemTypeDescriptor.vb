@@ -2,7 +2,7 @@
 
 Public MustInherit Class ItemTypeDescriptor
 
-    Public MustOverride Function GetName() As String
+    Public MustOverride ReadOnly Property Name As String
 
     Public Overridable ReadOnly Property CanUse As Boolean
         Get

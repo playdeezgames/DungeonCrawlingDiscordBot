@@ -15,7 +15,9 @@ Friend Class LandClaimDescriptor
         character.ClaimLand(item, builder)
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "land claim"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "land claim"
+        End Get
+    End Property
 End Class

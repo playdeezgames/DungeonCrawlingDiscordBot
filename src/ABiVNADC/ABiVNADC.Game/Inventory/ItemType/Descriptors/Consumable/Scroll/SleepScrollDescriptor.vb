@@ -29,7 +29,9 @@ Friend Class SleepScrollDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "sleep scroll"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "sleep scroll"
+        End Get
+    End Property
 End Class

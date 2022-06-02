@@ -27,7 +27,9 @@
         Return "1d2/2"
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "sharp rock"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "sharp rock"
+        End Get
+    End Property
 End Class

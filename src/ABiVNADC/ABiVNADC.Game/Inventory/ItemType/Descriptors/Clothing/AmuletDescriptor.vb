@@ -67,7 +67,9 @@ Friend Class AmuletDescriptor
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "amulet"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "amulet"
+        End Get
+    End Property
 End Class

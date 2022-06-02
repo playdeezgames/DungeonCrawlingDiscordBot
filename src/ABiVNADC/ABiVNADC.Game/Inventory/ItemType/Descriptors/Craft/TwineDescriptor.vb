@@ -15,7 +15,9 @@
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "twine"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "twine"
+        End Get
+    End Property
 End Class

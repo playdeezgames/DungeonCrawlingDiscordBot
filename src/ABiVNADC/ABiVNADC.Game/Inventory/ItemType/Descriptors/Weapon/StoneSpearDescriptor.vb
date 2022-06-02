@@ -42,9 +42,11 @@ Friend Class StoneSpearDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "stone spear"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "stone spear"
+        End Get
+    End Property
 
     Public Overrides Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
         Dim enemy = location.Enemies(character).FirstOrDefault

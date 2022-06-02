@@ -8,7 +8,9 @@
         IsTrophy = True
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "orc tooth"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "orc tooth"
+        End Get
+    End Property
 End Class

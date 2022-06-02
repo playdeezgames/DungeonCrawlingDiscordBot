@@ -8,7 +8,9 @@
         IsTrophy = True
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "fish scale"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "fish scale"
+        End Get
+    End Property
 End Class

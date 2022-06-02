@@ -49,9 +49,11 @@ Friend Class DaggerDescriptor
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "dagger"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "dagger"
+        End Get
+    End Property
 
     Public Overrides ReadOnly Property CanThrow As Boolean
         Get

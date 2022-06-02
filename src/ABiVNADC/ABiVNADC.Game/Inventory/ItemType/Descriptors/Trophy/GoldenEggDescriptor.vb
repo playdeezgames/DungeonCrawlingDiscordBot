@@ -9,7 +9,9 @@
         IsTrophy = True
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "golden egg"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "golden egg"
+        End Get
+    End Property
 End Class

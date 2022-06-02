@@ -28,7 +28,9 @@ Friend Class HomeStoneDescriptor
         builder.AppendLine($"{character.FullName} places a home stone.")
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "home stone"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "home stone"
+        End Get
+    End Property
 End Class

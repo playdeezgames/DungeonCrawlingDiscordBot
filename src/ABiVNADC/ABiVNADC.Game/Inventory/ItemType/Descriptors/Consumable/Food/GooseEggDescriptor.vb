@@ -21,7 +21,9 @@ Friend Class GooseEggDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "goose egg"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "goose egg"
+        End Get
+    End Property
 End Class

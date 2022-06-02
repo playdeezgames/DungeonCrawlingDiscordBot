@@ -13,7 +13,9 @@
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "goose poop"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "goose poop"
+        End Get
+    End Property
 End Class

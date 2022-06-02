@@ -30,7 +30,9 @@ Friend Class EscapeScrollDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "escape scroll"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "escape scroll"
+        End Get
+    End Property
 End Class

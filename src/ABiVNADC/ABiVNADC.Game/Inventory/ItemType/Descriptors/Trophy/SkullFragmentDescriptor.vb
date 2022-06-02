@@ -7,7 +7,9 @@
         IsTrophy = True
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "skull fragment"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "skull fragment"
+        End Get
+    End Property
 End Class

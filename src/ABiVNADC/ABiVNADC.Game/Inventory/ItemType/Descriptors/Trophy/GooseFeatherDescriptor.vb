@@ -10,7 +10,9 @@
         IsTrophy = True
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "goose feather"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "goose feather"
+        End Get
+    End Property
 End Class

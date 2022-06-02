@@ -42,7 +42,9 @@ Friend Class RottenFoodDescriptor
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "rotten food"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "rotten food"
+        End Get
+    End Property
 End Class

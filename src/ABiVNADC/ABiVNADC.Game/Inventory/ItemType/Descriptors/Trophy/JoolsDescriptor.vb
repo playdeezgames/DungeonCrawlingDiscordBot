@@ -11,7 +11,9 @@
         Aliases = New List(Of String) From {"j", "$"}
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "jools"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "jools"
+        End Get
+    End Property
 End Class

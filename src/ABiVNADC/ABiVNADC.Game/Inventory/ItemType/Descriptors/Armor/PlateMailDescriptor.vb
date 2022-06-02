@@ -40,7 +40,9 @@
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "plate mail"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "plate mail"
+        End Get
+    End Property
 End Class

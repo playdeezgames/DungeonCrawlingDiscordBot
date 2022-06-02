@@ -20,7 +20,9 @@ Friend Class CompassDescriptor
         builder.AppendLine($"{character.FullName} is facing {character.Player.AheadDirection.Value.Name}")
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "compass"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "compass"
+        End Get
+    End Property
 End Class

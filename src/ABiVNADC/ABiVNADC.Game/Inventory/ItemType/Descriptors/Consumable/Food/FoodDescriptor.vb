@@ -40,7 +40,9 @@ Friend Class FoodDescriptor
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "food"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "food"
+        End Get
+    End Property
 End Class

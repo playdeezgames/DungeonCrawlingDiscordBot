@@ -8,7 +8,9 @@
         InventoryEncumbrance = -5
     End Sub
 
-    Public Overrides Function GetName() As String
-        Return "thank you note"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "thank you note"
+        End Get
+    End Property
 End Class

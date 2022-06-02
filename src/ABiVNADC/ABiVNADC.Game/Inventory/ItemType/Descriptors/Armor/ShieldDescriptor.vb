@@ -40,7 +40,9 @@
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "shield"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "shield"
+        End Get
+    End Property
 End Class

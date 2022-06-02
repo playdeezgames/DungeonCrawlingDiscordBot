@@ -38,7 +38,9 @@
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "short sword"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "short sword"
+        End Get
+    End Property
 End Class

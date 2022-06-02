@@ -39,7 +39,9 @@
         Return result
     End Function
 
-    Public Overrides Function GetName() As String
-        Return "chain mail"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "chain mail"
+        End Get
+    End Property
 End Class

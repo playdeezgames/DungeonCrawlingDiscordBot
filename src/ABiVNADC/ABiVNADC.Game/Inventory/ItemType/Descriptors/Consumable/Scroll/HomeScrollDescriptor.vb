@@ -31,7 +31,9 @@ Friend Class HomeScrollDescriptor
         End Get
     End Property
 
-    Public Overrides Function GetName() As String
-        Return "home scroll"
-    End Function
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return "home scroll"
+        End Get
+    End Property
 End Class
