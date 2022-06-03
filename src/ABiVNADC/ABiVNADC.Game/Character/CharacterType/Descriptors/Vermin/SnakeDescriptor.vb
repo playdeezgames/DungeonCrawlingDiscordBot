@@ -1,18 +1,9 @@
 ﻿Friend Class SnakeDescriptor
     Inherits CharacterTypeDescriptor
+
     Sub New()
         MyBase.New(Faction.Vermin, "1d3/3")
         Name = "giant snake"
-        Maximum = Function(s, c)
-                      Select Case s
-                          Case StatisticType.Energy
-                              Return c.Level + 5
-                          Case StatisticType.Health
-                              Return c.Level + 1
-                          Case Else
-                              Return 0
-                      End Select
-                  End Function
         NameTable = Names.Snake
         AttackDice = "1d3/3"
         DefendDice = "1d6/6"
@@ -55,5 +46,16 @@
         Else
             Return CombatActionType.Rest
         End If
+    End Function
+
+    Public Overrides Function Maximum(statisticType As StatisticType, character As Character) As Long
+        Select Case statisticType
+            Case StatisticType.Energy
+                Return character.Level + 5
+            Case StatisticType.Health
+                Return character.Level + 1
+            Case Else
+                Return 0
+        End Select
     End Function
 End Class

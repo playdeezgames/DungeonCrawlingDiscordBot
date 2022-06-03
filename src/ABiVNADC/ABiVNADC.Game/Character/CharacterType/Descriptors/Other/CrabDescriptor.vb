@@ -1,18 +1,9 @@
 ﻿Friend Class CrabDescriptor
     Inherits CharacterTypeDescriptor
+
     Sub New()
         MyBase.New(Faction.Monster, "0d1")
         Name = "crab"
-        Maximum = Function(s, c)
-                      Select Case s
-                          Case StatisticType.Energy
-                              Return 1
-                          Case StatisticType.Health
-                              Return c.Level + 9
-                          Case Else
-                              Return 0
-                      End Select
-                  End Function
         NameTable = Names.Crab
         AttackDice = "1d3/3+1d3/3+1d3/3+1d3/3"
         DefendDice = "1d6/6+1d6/6+1d6/6+1d6/6+1d6/6"
@@ -34,6 +25,18 @@
     Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
         Return 0
     End Function
+
+    Public Overrides Function Maximum(statisticType As StatisticType, character As Character) As Long
+        Select Case statisticType
+            Case StatisticType.Energy
+                Return 1
+            Case StatisticType.Health
+                Return character.Level + 9
+            Case Else
+                Return 0
+        End Select
+    End Function
+
     Friend Overrides Function ModifyElementalDamage(elementalDamageType As ElementalDamageType, damage As Long) As Long
         Select Case elementalDamageType
             Case ElementalDamageType.Fire

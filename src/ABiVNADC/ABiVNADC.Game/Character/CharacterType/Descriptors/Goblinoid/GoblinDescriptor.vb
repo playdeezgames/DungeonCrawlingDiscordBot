@@ -1,18 +1,9 @@
 ﻿Friend Class GoblinDescriptor
     Inherits CharacterTypeDescriptor
+
     Sub New()
         MyBase.New(Faction.Goblinoids, "0d1")
         Name = "goblin"
-        Maximum = Function(s, c)
-                      Select Case s
-                          Case StatisticType.Energy
-                              Return c.Level + 10
-                          Case StatisticType.Health
-                              Return c.Level + 1
-                          Case Else
-                              Return 0
-                      End Select
-                  End Function
         NameTable = Names.Goblin
         AttackDice = "1d3/3+1d3/3"
         DefendDice = "1d6/6"
@@ -44,5 +35,16 @@
             result.Add(RNG.FromEnumerable(candidates))
         End While
         Return result
+    End Function
+
+    Public Overrides Function Maximum(statisticType As StatisticType, character As Character) As Long
+        Select Case statisticType
+            Case StatisticType.Energy
+                Return character.Level + 10
+            Case StatisticType.Health
+                Return character.Level + 1
+            Case Else
+                Return 0
+        End Select
     End Function
 End Class

@@ -1,8 +1,8 @@
-﻿Friend Class CharacterTypeDescriptor
+﻿Friend MustInherit Class CharacterTypeDescriptor
+    MustOverride Function Maximum(statisticType As StatisticType, character As Character) As Long
     ReadOnly Property Faction As Faction
     ReadOnly Property PoisonDice As String
     Friend Name As String
-    Friend Maximum As Func(Of StatisticType, Character, Long)
     Friend NameTable As List(Of String)
     Friend AttackDice As String
     Friend DefendDice As String
@@ -38,7 +38,6 @@
         MaximumExperienceLevel = Long.MaxValue
         MaximumEncumbrance = 0
         CombatEndowmentRecoveryDice = "0d1"
-        Maximum = Function(s, c) 0
         InfectionDice = "0d1"
     End Sub
     Function IsEnemy(candidate As Character) As Boolean

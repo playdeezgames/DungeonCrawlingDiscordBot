@@ -1,18 +1,9 @@
 ﻿Friend Class N00bDescriptor
     Inherits CharacterTypeDescriptor
+
     Sub New()
         MyBase.New(Faction.Player, "0d1")
         Name = "n00b"
-        Maximum = Function(s, c)
-                      Select Case s
-                          Case StatisticType.Energy
-                              Return c.Level \ 2 + 7
-                          Case StatisticType.Health
-                              Return (c.Level + 1) \ 2 + 3
-                          Case Else
-                              Return 0
-                      End Select
-                  End Function
         NameTable = Names.Human
         AttackDice = "1d6/6"
         DefendDice = "1d3/3+1d3/3"
@@ -27,5 +18,16 @@
     Public Overrides Function IncentiveValue(character As Character) As Long
         Dim level = character.Level
         Return (level + 1) * (level + 2) \ 2
+    End Function
+
+    Public Overrides Function Maximum(statisticType As StatisticType, character As Character) As Long
+        Select Case statisticType
+            Case StatisticType.Energy
+                Return character.Level \ 2 + 7
+            Case StatisticType.Health
+                Return (character.Level + 1) \ 2 + 3
+            Case Else
+                Return 0
+        End Select
     End Function
 End Class

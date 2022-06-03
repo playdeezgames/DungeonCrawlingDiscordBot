@@ -1,16 +1,9 @@
 ﻿Friend Class MummyDescriptor
     Inherits CharacterTypeDescriptor
+
     Sub New()
         MyBase.New(Faction.Undead, "0d1")
         Name = "mummy"
-        Maximum = Function(s, c)
-                      Select Case s
-                          Case StatisticType.Health
-                              Return c.Level + 2
-                          Case Else
-                              Return 0
-                      End Select
-                  End Function
         NameTable = Names.Human
         AttackDice = "1d3/3+1d3/3+1d3/3"
         DefendDice = "1d6/6+1d6/6+1d6/6+1d6/6"
@@ -61,6 +54,15 @@
                 Return damage * 2
             Case Else
                 Return damage
+        End Select
+    End Function
+
+    Public Overrides Function Maximum(statisticType As StatisticType, character As Character) As Long
+        Select Case statisticType
+            Case StatisticType.Health
+                Return character.Level + 2
+            Case Else
+                Return 0
         End Select
     End Function
 End Class

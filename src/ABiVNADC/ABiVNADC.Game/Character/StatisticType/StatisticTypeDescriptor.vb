@@ -5,6 +5,13 @@ Friend Module StatisticTypeDescriptorUtility
     Friend ReadOnly StatisticTypeDescriptors As New Dictionary(Of StatisticType, StatisticTypeDescriptor) From
         {
             {
+                StatisticType.Arseholes,
+                New Game.StatisticTypeDescriptor With
+                {
+                    .Name = "Arseholes"
+                }
+            },
+            {
                 StatisticType.Energy,
                 New Game.StatisticTypeDescriptor With
                 {

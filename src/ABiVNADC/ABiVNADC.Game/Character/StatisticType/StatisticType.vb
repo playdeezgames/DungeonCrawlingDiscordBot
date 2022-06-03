@@ -8,6 +8,7 @@ Public Enum StatisticType
     Guile
     Might
     Spirit
+    Arseholes
 End Enum
 Public Module StatisticTypeExtensions
     <Extension>
