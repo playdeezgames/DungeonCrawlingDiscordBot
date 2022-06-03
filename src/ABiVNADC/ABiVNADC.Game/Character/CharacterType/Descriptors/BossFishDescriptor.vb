@@ -37,6 +37,15 @@
             {Difficulty.Difficult, 2},
             {Difficulty.Too, 4}
         }
+    Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
+        Select Case effectType
+            Case EffectType.Nausea
+                Return 0
+            Case Else
+                Return duration
+        End Select
+    End Function
+
     Public Overrides Function SpawnLocations(difficulty As Difficulty, theme As DungeonTheme, locations As IEnumerable(Of Location)) As IEnumerable(Of Location)
         Dim result As New List(Of Location)
         Dim count = Faction.AdjustSpawnCountForTheme(theme, SpawnCountTable(difficulty))

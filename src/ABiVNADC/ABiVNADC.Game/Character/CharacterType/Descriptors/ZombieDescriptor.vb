@@ -26,7 +26,7 @@
         SortOrder = 50
     End Sub
     Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
-        Return If(effectType = EffectType.Groggy, 0, duration)
+        Return If(effectType = EffectType.Groggy OrElse effectType = EffectType.Nausea, 0, duration)
     End Function
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {

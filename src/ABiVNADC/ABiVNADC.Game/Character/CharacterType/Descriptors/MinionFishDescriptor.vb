@@ -27,6 +27,15 @@
         ValidBribes = New HashSet(Of ItemType) From {ItemType.Food, ItemType.Potion, ItemType.Jools}
         SortOrder = 20
     End Sub
+    Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
+        Select Case effectType
+            Case EffectType.Nausea
+                Return 0
+            Case Else
+                Return duration
+        End Select
+    End Function
+
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) x * 1 \ 8},

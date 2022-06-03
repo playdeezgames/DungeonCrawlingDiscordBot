@@ -31,6 +31,9 @@
         End If
         Return result
     End Function
+    Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
+        Return 0
+    End Function
     Friend Overrides Function ModifyElementalDamage(elementalDamageType As ElementalDamageType, damage As Long) As Long
         Select Case elementalDamageType
             Case ElementalDamageType.Fire
