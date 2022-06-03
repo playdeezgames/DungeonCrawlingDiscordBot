@@ -28,7 +28,6 @@ Friend Class StickDescriptor
     End Property
 
     Public Overrides Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
-        CharacterEquipSlotData.ClearForItem(item.Id)
         location.Inventory.Add(item)
         builder.AppendLine($"{character.FullName} throws the stick. It falls onto the floor.")
     End Sub

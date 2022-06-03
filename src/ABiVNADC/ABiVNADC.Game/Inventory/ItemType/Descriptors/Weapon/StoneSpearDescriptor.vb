@@ -51,7 +51,6 @@ Friend Class StoneSpearDescriptor
     Public Overrides Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
         Dim enemy = location.Enemies(character).FirstOrDefault
         If enemy Is Nothing Then
-            CharacterEquipSlotData.ClearForItem(item.Id)
             location.Inventory.Add(item)
             builder.AppendLine($"{character.FullName} throws the stone spear. It falls to the floor.")
             Return
@@ -59,12 +58,10 @@ Friend Class StoneSpearDescriptor
         Dim attackRoll = character.RollAttack()
         Dim defendRoll = enemy.RollDefend()
         If attackRoll <= defendRoll Then
-            CharacterEquipSlotData.ClearForItem(item.Id)
             location.Inventory.Add(item)
             builder.AppendLine($"{character.FullName} throws the stone spear at {enemy.FullName}. It misses falls to the floor.")
             Return
         End If
-        CharacterEquipSlotData.ClearForItem(item.Id)
         enemy.Inventory.Add(item)
         enemy.ChangeEffectDuration(EffectType.Shrapnel, 100)
         builder.AppendLine($"{character.FullName} throws the stone spear at {enemy.FullName}. It hits and lodges in their body.")

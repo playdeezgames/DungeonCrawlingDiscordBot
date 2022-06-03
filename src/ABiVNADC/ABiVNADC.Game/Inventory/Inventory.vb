@@ -6,6 +6,7 @@ Public Class Inventory
         Id = inventoryId
     End Sub
     Sub Add(item As Item)
+        CharacterEquipSlotData.ClearForItem(item.Id)
         InventoryItemData.Write(Id, item.Id)
     End Sub
     ReadOnly Property IsEmpty As Boolean

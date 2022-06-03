@@ -33,13 +33,13 @@ Friend Class RockDescriptor
         Dim enemy = location.Enemies(character).FirstOrDefault
         If enemy Is Nothing Then
             builder.AppendLine($"{character.FullName} throws a rock. It lands on the floor.")
-            CharacterEquipSlotData.ClearForItem(item.Id)
             location.Inventory.Add(item)
             Return
         End If
         builder.AppendLine($"{character.FullName} throws a rock at {enemy.FullName}.")
+        Dim highRoll = RNG.RollDice("1d3")
+        enemy.ChangeEffectDuration(EffectType.Groggy, highRoll)
         character.Attack(enemy, builder)
         location.Inventory.Add(item)
-        CharacterEquipSlotData.ClearForItem(item.Id)
     End Sub
 End Class

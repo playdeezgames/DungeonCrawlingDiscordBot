@@ -72,12 +72,10 @@ Friend Class DaggerDescriptor
         Dim attackRoll = character.RollAttack()
         Dim defendRoll = enemy.RollDefend()
         If attackRoll <= defendRoll Then
-            CharacterEquipSlotData.ClearForItem(item.Id)
             location.Inventory.Add(item)
             builder.AppendLine($"{character.FullName} throws the dagger at {enemy.FullName}. It misses falls to the floor.")
             Return
         End If
-        CharacterEquipSlotData.ClearForItem(item.Id)
         enemy.Inventory.Add(item)
         enemy.ChangeEffectDuration(EffectType.Shrapnel, 100)
         builder.AppendLine($"{character.FullName} throws the dagger at {enemy.FullName}. It hits and lodges in their body.")

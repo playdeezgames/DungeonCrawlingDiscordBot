@@ -30,7 +30,6 @@ Friend Class GoosePoopDescriptor
     Public Overrides Sub OnThrow(character As Character, item As Item, location As Location, builder As StringBuilder)
         Dim enemy = location.Enemies(character).FirstOrDefault
         If enemy Is Nothing Then
-            CharacterEquipSlotData.ClearForItem(item.Id)
             location.Inventory.Add(item)
             builder.AppendLine($"{character.FullName} throws the goose poop, and it hits the floor.")
             Return

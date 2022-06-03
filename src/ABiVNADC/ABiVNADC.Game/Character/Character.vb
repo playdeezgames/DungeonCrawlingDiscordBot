@@ -342,7 +342,6 @@ Public Class Character
     End Function
 
     Public Sub Unequip(item As Item, builder As StringBuilder)
-        CharacterEquipSlotData.ClearForItem(item.Id)
         Inventory.Add(item)
         builder.AppendLine($"{FullName} unequips {item.FullName}")
     End Sub
@@ -378,7 +377,6 @@ Public Class Character
         Dim equipSlot = item.ItemType.EquipSlot
         Dim equippedItem As Item = GetEquippedItem(equipSlot)
         If equippedItem IsNot Nothing Then
-            CharacterEquipSlotData.ClearForItem(equippedItem.Id)
             Inventory.Add(equippedItem)
         End If
         Inventory.Remove(item)
