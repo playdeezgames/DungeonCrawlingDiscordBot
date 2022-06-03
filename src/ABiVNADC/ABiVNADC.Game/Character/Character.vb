@@ -302,6 +302,7 @@ Public Class Character
     End Sub
 
     Friend Sub ChangeEffectDuration(effectType As EffectType, delta As Long)
+        delta = CharacterType.AdjustEffectDuration(Me, effectType, delta)
         Dim duration = If(CharacterEffectData.Read(Id, effectType), 0) + delta
         If duration > 0 Then
             CharacterEffectData.Write(Id, effectType, duration)

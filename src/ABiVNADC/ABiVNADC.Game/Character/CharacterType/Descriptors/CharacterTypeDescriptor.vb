@@ -48,6 +48,10 @@
     Overridable Function IncentiveValue(character As Character) As Long
         Return 0
     End Function
+
+    Overridable Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
+        Return duration
+    End Function
 End Class
 Module CharacterTypeDescriptorUtility
     Friend ReadOnly CharacterTypeDescriptors As New Dictionary(Of CharacterType, CharacterTypeDescriptor) From

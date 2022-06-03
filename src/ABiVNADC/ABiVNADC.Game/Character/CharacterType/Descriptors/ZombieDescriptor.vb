@@ -25,6 +25,9 @@
         ValidBribes = New HashSet(Of ItemType)
         SortOrder = 50
     End Sub
+    Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
+        Return If(effectType = EffectType.Groggy, 0, duration)
+    End Function
     Private ReadOnly SpawnCountTable As New Dictionary(Of Difficulty, Func(Of Long, Long)) From
         {
             {Difficulty.Yermom, Function(x) x * 1 \ 6},

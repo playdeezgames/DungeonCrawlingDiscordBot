@@ -27,6 +27,9 @@
         SortOrder = 10
         InfectionDice = "1d6"
     End Sub
+    Public Overrides Function AdjustEffectDuration(character As Character, effectType As EffectType, duration As Long) As Long
+        Return If(effectType = EffectType.Groggy, 0, duration)
+    End Function
     Private Shared combatActionTable As New Dictionary(Of CombatActionType, Integer) From
                                                  {
                                                     {CombatActionType.Attack, 4},

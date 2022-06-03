@@ -129,4 +129,8 @@ Public Module CharacterTypeExtensions
     Function IncentiveValue(characterType As CharacterType, character As Character) As Long
         Return CharacterTypeDescriptors(characterType).IncentiveValue(character)
     End Function
+    <Extension>
+    Function AdjustEffectDuration(characterType As CharacterType, character As Character, effectType As EffectType, duration As Long) As Long
+        Return CharacterTypeDescriptors(characterType).AdjustEffectDuration(character, effectType, duration)
+    End Function
 End Module
