@@ -36,6 +36,10 @@ Public Module CharacterTypeExtensions
     Function Maximum(characterType As CharacterType, statisticType As StatisticType, character As Character) As Long
         Return CharacterTypeDescriptors(characterType).Maximum(statisticType, character)
     End Function
+    <Extension>
+    Function Initial(characterType As CharacterType, statisticType As StatisticType) As Long
+        Return CharacterTypeDescriptors(characterType).Initial(statisticType)
+    End Function
 
     Public Function AllCharacterTypes() As IEnumerable(Of CharacterType)
         Return CharacterTypeDescriptors.Keys

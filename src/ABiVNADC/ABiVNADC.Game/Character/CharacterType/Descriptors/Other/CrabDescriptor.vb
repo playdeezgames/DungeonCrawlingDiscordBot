@@ -32,6 +32,8 @@
                 Return 1
             Case StatisticType.Health
                 Return character.Level + 9
+            Case StatisticType.Arseholes
+                Return Long.MaxValue
             Case Else
                 Return 0
         End Select
@@ -41,8 +43,6 @@
         Select Case elementalDamageType
             Case ElementalDamageType.Fire
                 Return 0
-            Case StatisticType.Arseholes
-                Return Long.MaxValue
             Case Else
                 Return damage
         End Select

@@ -441,7 +441,7 @@ Public Class Character
     End Sub
 
     Public Sub AddWounds(damage As Long)
-        Dim newWounds = Math.Max(0, Math.Min(If(CharacterStatisticData.Read(Id, StatisticType.Health), 0) + damage, Maximum(StatisticType.Health)))
+        Dim newWounds = Math.Max(0, Math.Min(Statistic(StatisticType.Health) + damage, Maximum(StatisticType.Health)))
         CharacterStatisticData.Write(Id, StatisticType.Health, newWounds)
     End Sub
 
@@ -600,7 +600,7 @@ Public Class Character
     End Property
 
     Function Statistic(statisticType As StatisticType) As Long
-        Return Maximum(statisticType) - If(CharacterStatisticData.Read(Id, statisticType), 0)
+        Return Maximum(statisticType) - If(CharacterStatisticData.Read(Id, statisticType), CharacterType.Initial(statisticType))
     End Function
 
     Function Maximum(statisticType As StatisticType) As Long
@@ -727,7 +727,7 @@ Public Class Character
     End Function
 
     Public Sub AddFatigue(fatigue As Long)
-        Dim newFatigue = If(CharacterStatisticData.Read(Id, StatisticType.Energy), 0) + fatigue
+        Dim newFatigue = Statistic(StatisticType.Energy) + fatigue
         CharacterStatisticData.Write(Id, StatisticType.Energy, If(newFatigue < 0, 0, newFatigue))
     End Sub
 

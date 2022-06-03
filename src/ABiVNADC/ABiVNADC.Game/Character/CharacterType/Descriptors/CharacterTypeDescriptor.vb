@@ -1,5 +1,13 @@
 ﻿Friend MustInherit Class CharacterTypeDescriptor
     MustOverride Function Maximum(statisticType As StatisticType, character As Character) As Long
+    Overridable Function Initial(statisticType As StatisticType) As Long
+        Select Case statisticType
+            Case StatisticType.Arseholes
+                Return Long.MaxValue - 1
+            Case Else
+                Return 0
+        End Select
+    End Function
     ReadOnly Property Faction As Faction
     ReadOnly Property PoisonDice As String
     Friend Name As String
