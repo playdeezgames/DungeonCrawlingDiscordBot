@@ -41,6 +41,8 @@
         Select Case elementalDamageType
             Case ElementalDamageType.Fire
                 Return 0
+            Case StatisticType.Arseholes
+                Return Long.MaxValue
             Case Else
                 Return damage
         End Select

@@ -26,6 +26,8 @@
                 Return character.Level \ 2 + 7
             Case StatisticType.Health
                 Return (character.Level + 1) \ 2 + 3
+            Case StatisticType.Arseholes
+                Return Long.MaxValue
             Case Else
                 Return 0
         End Select

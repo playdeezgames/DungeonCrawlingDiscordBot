@@ -54,6 +54,8 @@
                 Return character.Level + 5
             Case StatisticType.Health
                 Return character.Level + 1
+            Case StatisticType.Arseholes
+                Return Long.MaxValue
             Case Else
                 Return 0
         End Select
