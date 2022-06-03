@@ -19,7 +19,7 @@
                 builder.AppendLine($"Class: {character.CharacterType.Name}(level {character.Level})")
                 builder.AppendLine($"Experience: {character.Experience}/{character.ExperienceGoal}")
                 For Each entry In character.Statistics
-                    builder.AppendLine($"{entry.Key.Name}: {entry.Value}/{character.Maximum(entry.Key)}")
+                    builder.AppendLine($"{entry.Key.Name}: {entry.Key.Format(entry.Value, character.Maximum(entry.Key))}")
                 Next
                 ShowEncumbrance(builder, character)
                 If character.IsPoisoned Then

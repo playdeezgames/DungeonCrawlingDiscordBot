@@ -15,4 +15,8 @@ Public Module StatisticTypeExtensions
     Function Name(statisticType As StatisticType) As String
         Return StatisticTypeDescriptors(statisticType).Name
     End Function
+    <Extension>
+    Function Format(statisticType As StatisticType, current As Long, maximum As Long) As String
+        Return StatisticTypeDescriptors(statisticType).Format(current, maximum)
+    End Function
 End Module
