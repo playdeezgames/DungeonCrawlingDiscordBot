@@ -101,7 +101,7 @@ Public Module Store
             $"SELECT [{outputColumnName}] FROM [{tableName}] WHERE [{inputColumnValue.Item1}]=@{inputColumnValue.Item1};",
             MakeParameter($"@{inputColumnValue.Item1}", inputColumnValue.Item2))
     End Function
-    Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, whereColumn As (String, TWhereColumn), setColumn As (String, TSetColumn))
+    Public Sub WriteColumnValue(Of TWhereColumn, TSetColumn)(initializer As Action, tableName As String, setColumn As (String, TSetColumn), whereColumn As (String, TWhereColumn))
         initializer()
         ExecuteNonQuery(
             $"UPDATE 

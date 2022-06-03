@@ -22,7 +22,7 @@
     End Sub
 
     Public Sub WriteName(characterId As Long, newName As String)
-        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (CharacterNameColumn, newName))
+        WriteColumnValue(AddressOf Initialize, TableName, (CharacterNameColumn, newName), (CharacterIdColumn, characterId))
     End Sub
 
     Public Function Exists(characterId As Long) As Boolean
@@ -76,15 +76,15 @@
     End Function
 
     Public Sub WriteExperience(characterId As Long, experience As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (ExperienceColumn, experience))
+        WriteColumnValue(AddressOf Initialize, TableName, (ExperienceColumn, experience), (CharacterIdColumn, characterId))
     End Sub
 
     Public Sub WriteCharacterLevel(characterId As Long, level As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (CharacterLevelColumn, level))
+        WriteColumnValue(AddressOf Initialize, TableName, (CharacterLevelColumn, level), (CharacterIdColumn, characterId))
     End Sub
 
     Public Sub WriteLocation(characterId As Long, locationId As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (CharacterIdColumn, characterId), (LocationIdColumn, locationId))
+        WriteColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (CharacterIdColumn, characterId))
     End Sub
 
     Public Function ReadCharacterLevel(characterId As Long) As Long?

@@ -17,7 +17,7 @@
     End Function
 
     Public Sub WritePeril(locationId As Long, peril As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (PerilColumn, peril))
+        WriteColumnValue(AddressOf Initialize, TableName, (PerilColumn, peril), (LocationIdColumn, locationId))
     End Sub
 
     Public Function ReadTerrainType(locationId As Long) As Long?
@@ -29,7 +29,7 @@
     End Function
 
     Public Sub WriteForageDeplection(locationId As Long, depletion As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (LocationIdColumn, locationId), (ForageDepletionColumn, depletion))
+        WriteColumnValue(AddressOf Initialize, TableName, (ForageDepletionColumn, depletion), (LocationIdColumn, locationId))
     End Sub
 
     Friend Sub Initialize()

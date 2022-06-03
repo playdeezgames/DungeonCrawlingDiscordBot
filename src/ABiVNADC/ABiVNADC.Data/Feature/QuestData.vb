@@ -47,7 +47,7 @@
     End Sub
 
     Public Sub WriteTargetQuantity(featureId As Long, quantity As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (FeatureIdColumn, featureId), (TargetItemQuantityColumn, quantity))
+        WriteColumnValue(AddressOf Initialize, TableName, (TargetItemQuantityColumn, quantity), (FeatureIdColumn, featureId))
     End Sub
 
     Public Function ReadRewardItemType(featureId As Long) As Long?

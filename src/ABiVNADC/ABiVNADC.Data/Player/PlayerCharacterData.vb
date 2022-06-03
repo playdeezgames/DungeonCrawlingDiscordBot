@@ -48,7 +48,7 @@
     End Function
 
     Public Sub WriteDirectionForPlayer(playerId As Long, direction As Long)
-        WriteColumnValue(AddressOf Initialize, TableName, (PlayerIdColumn, playerId), (DirectionColumn, direction))
+        WriteColumnValue(AddressOf Initialize, TableName, (DirectionColumn, direction), (PlayerIdColumn, playerId))
     End Sub
 
     Public Function ReadForPlayer(playerId As Long) As IEnumerable(Of Long)
